@@ -1,0 +1,19 @@
+defaults : &defaults
+  adapter: mysql
+  encoding: utf8
+  username: vestibule
+  password:
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *defaults
+  database: vestibule_development
+
+test:
+  <<: *defaults
+  database: vestibule_test
+
+production:
+  <<: *defaults
+  database: vestibule_production
