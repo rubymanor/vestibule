@@ -20,6 +20,10 @@ class TalksControllerTest < ActionController::TestCase
       get :index
       assert_in_order assigns['talks'], talk_2, talk_3, talk_4, talk_1
     end
+    
+    should "respond to '/'" do
+      assert_recognizes({:controller => 'talks', :action => 'index'}, '/')
+    end
   end
 
   context "the show action" do
