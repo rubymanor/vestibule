@@ -4,3 +4,27 @@
   <li class="action"><%= link_to 'Provide more detail', edit_talk_path(@talk) %></li>
   <li class="action"><%= link_to 'Back to talks', talks_path %></li>
 </ul>
+
+<div id="abstract">
+  <%- if @talk.abstract.present? -%>
+  <p><%= @talk.abstract %></p>
+  <%- else -%>
+  <p class="missing">No abstract has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
+  <%- end -%>
+</div>
+
+<div id="outline">
+  <%- if @talk.outline.present? -%>
+  <p><%= @talk.outline %></p>
+  <%- else -%>
+  <p class="missing">No outline has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
+  <%- end -%>
+</div>
+
+<div id="why_its_interesting">
+  <%- if @talk.why_its_interesting.present? -%>
+  <p><%= @talk.why_its_interesting %></p>
+  <%- else -%>
+  <p class="missing">Nothing about why this talk is interesting has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
+  <%- end -%>
+</div>
