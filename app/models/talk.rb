@@ -1,5 +1,5 @@
 class Talk < ActiveRecord::Base
-  has_many :feedbacks
+  has_many :feedbacks, :dependent => :destroy
 
   validates :title, :presence => true, :length => {:within => 5..300}
 

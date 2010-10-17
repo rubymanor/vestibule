@@ -3,7 +3,9 @@ Vestibule::Application.routes.draw do
 
   resource :account, :only => [:edit, :update, :show]
 
-  resources :talks, :except => [:destroy]
+  resources :talks, :except => [:destroy] do
+    resources :feedbacks, :only => [:create]
+  end
 
   root :to => "talks#index"
 end

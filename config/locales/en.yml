@@ -7,6 +7,8 @@ en:
         why_its_interesting: "Why it's interesting?"
   helpers:
     submit:
+      feedback:
+        create: 'Leave feedback'
       talk:
         create: "Suggest"
         update: "Update suggestion"

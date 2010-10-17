@@ -28,3 +28,20 @@
   <p class="missing">Nothing about why this talk is interesting has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
   <%- end -%>
 </div>
+
+<div id="feedback">
+  <div id="feedback_items">
+    <%= render @talk.feedbacks.order('created_at') %>
+  </div>
+  <div id="feedback_actions">
+    <%- if current_user -%>
+    <%= simple_form_for [@talk, @new_feedback] do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :content %>
+      <%= f.button :submit %>
+    <% end %>
+    <%- else -%>
+    <p>Sorry, you have to be logged in to leave feedback on talks.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %>?</p>
+    <%- end -%>
+  </div>
+</div>
