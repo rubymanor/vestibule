@@ -11,6 +11,7 @@ class IntegrationTestCase < ActiveSupport::TestCase
 
   setup do
     Capybara.default_selector = :css
+    Capybara.save_and_open_page_path = File.join(Rails.root, 'tmp')
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.start

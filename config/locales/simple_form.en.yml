@@ -1,0 +1,29 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Some errors were found, please take a look:"
+    # Labels and hints examples
+    # labels:
+    #   password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail para efetuar o sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   username: 'User name to sign in.'
+    #   password: 'No special characters, please.'
+    hints:
+      talk:
+        title: 'This is all we need from you for your suggestion.  Think of something snappy.'
+        abstract: 'A general description of what this talk is about.  The sort of thing that might appear in a conference program or schedule to give a bit more context than just the title alone.'
+        outline: 'A much more in-depth description of the exact topics this talk will cover.  This could be as detailed as a full slide plan.'
+        why_its_interesting: 'Finally, tell us why you think this talk will be interesting.'

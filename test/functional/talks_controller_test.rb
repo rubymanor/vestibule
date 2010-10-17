@@ -20,7 +20,7 @@ class TalksControllerTest < ActionController::TestCase
       get :index
       assert_in_order assigns['talks'], talk_2, talk_3, talk_4, talk_1
     end
-    
+
     should "respond to '/'" do
       assert_recognizes({:controller => 'talks', :action => 'index'}, '/')
     end
@@ -44,6 +44,58 @@ class TalksControllerTest < ActionController::TestCase
     should "fetch the requested talk" do
       get :show, :id => @talk
       assert_equal @talk, assigns['talk']
+    end
+  end
+
+  context "the new action" do
+    should "respond scuccessfully" do
+      get :new
+      assert_response :success
+    end
+
+    should "render the talks/new template" do
+      get :new
+      assert_template 'talks/new'
+    end
+
+    should "prepare a fresh, unsaved talk object" do
+      get :new
+      assert assigns['talk'].new_record?
+    end
+  end
+
+  context "the create action" do
+    setup do
+      @some_params = {'what' => 'ever'}
+      @talk = Factory.build(:talk)
+      Talk.expects(:new).with(@some_params).returns(@talk)
+    end
+
+    context "when valid data is provided" do
+      setup do
+        @talk.expects(:save).returns(true)
+      end
+
+      should "redirect to the index page" do
+        post :create, :talk => @some_params
+        assert_redirected_to talks_path
+      end
+    end
+
+    context "when invalid data is provided" do
+      setup do
+        @talk.expects(:save).returns(false)
+      end
+
+      should "render the talks/new template" do
+        post :create, :talk => @some_params
+        assert_template 'talks/new'
+      end
+
+      should "make the invalid talk object available as @talk" do
+        post :create, :talk => @some_params
+        assert_equal @talk, assigns['talk']
+      end
     end
   end
 end

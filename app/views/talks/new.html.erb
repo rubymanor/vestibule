@@ -1,0 +1,13 @@
+<%= page_title 'Suggest a new talk' %>
+
+<%= simple_form_for @talk do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= field_set_tag 'Optional' do %>
+    <p class="hint">We'd really love it if you could fill in these too.  However, you don't need to do it now.  You can come back to fill them in later.</p>
+    <%= f.input :abstract %>
+    <%= f.input :outline %>
+    <%= f.input :why_its_interesting %>
+  <% end %>
+  <%= f.button :submit %>
+<% end %>

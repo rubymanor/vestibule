@@ -1,5 +1,9 @@
 <%= page_title 'Talks' %>
 
+<div class="actions">
+  <%= link_to 'Suggest a new talk', new_talk_path %>
+</div>
+
 <ul id="talks">
   <%= render @talks %>
 </ul>
