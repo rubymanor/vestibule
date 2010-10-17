@@ -10,6 +10,10 @@ class TalkTest < ActiveSupport::TestCase
       assert @talk.save
     end
 
+    should "have no feedback yet" do
+      assert @talk.feedback.empty?
+    end
+
     should "require a title" do
       ['', nil].each do |missing_title|
         @talk.title = missing_title
@@ -39,7 +43,6 @@ class TalkTest < ActiveSupport::TestCase
       assert !@talk.valid?
       assert_not_nil @talk.errors['title']
     end
-
 
     [:abstract, :outline, :why_its_interesting].each do |optional_text_attribute|
       should "not require the #{optional_text_attribute} to be present" do
