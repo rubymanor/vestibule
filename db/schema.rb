@@ -13,7 +13,10 @@
 ActiveRecord::Schema.define(:version => 20101016151554) do
 
   create_table "talks", :force => true do |t|
-    t.string   "title",      :limit => 300, :null => false
+    t.string   "title",               :limit => 300, :null => false
+    t.text     "abstract"
+    t.text     "outline"
+    t.text     "why_its_interesting"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
