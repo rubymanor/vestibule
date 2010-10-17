@@ -27,45 +27,45 @@ class ViewingTalksTest < IntegrationTestCase
 
     the_page_has_title @talk_1.title
 
-    within('#abstract') do
-      assert page.has_content?('No abstract has been provided yet.')
+    this_section_of_the_talk_page_is_empty 'abstract'
+    i_follow_the_link_in_this_section_and_fill_out_the_missing_detail 'abstract', :with => 'This talk will cover why I think ruby is a joyful language.'
+    this_section_of_the_talk_page_is_not_empty 'abstract', :with_content => 'This talk will cover why I think ruby is a joyful language.'
+
+    this_section_of_the_talk_page_is_empty 'outline'
+    i_follow_the_link_in_this_section_and_fill_out_the_missing_detail 'outline', :with => 'The first slides will cover my "Aw yeah!" moment with Ruby. The next slides will be the same thing from some other rubyists. It\'ll finish up with ways you can help other programmers experience their own "Aw yeah!" moments when they first experience ruby.'
+    this_section_of_the_talk_page_is_not_empty 'outline', :with_content => 'The first slides will cover my "Aw yeah!" moment with Ruby. The next slides will be the same thing from some other rubyists. It\'ll finish up with ways you can help other programmers experience their own "Aw yeah!" moments when they first experience ruby.'
+
+    this_section_of_the_talk_page_is_empty 'why_its_interesting', :with_missing_content_message => 'Nothing about why this talk is interesting has been provided yet.'
+    i_follow_the_link_in_this_section_and_fill_out_the_missing_detail 'why_its_interesting', :with => 'Day to day programming can be dull and enterprisey. We need reminding of why we\'ve chosen Ruby. And we need to be able to pass on that excitement to others.'
+    this_section_of_the_talk_page_is_not_empty 'why_its_interesting', :with_content => 'Day to day programming can be dull and enterprisey. We need reminding of why we\'ve chosen Ruby. And we need to be able to pass on that excitement to others.'
+  end
+
+  def this_section_of_the_talk_page_is_empty(which_section, options = {})
+    within("##{which_section}") do
+      assert page.has_content?(options[:with_missing_content_message] || "No #{which_section} has been provided yet.")
       assert page.has_link?('Why don\'t you fill it in?')
+    end
+  end
+
+  def i_follow_the_link_in_this_section_and_fill_out_the_missing_detail(which_section, options = {})
+    within("##{which_section}") do
       click 'Why don\'t you fill it in?'
     end
 
     i_am_on edit_talk_path(@talk_1)
-    fill_in "Abstract", :with => 'This talk will cover why I think ruby is a joyful language.'
+
+    new_value = (options[:with] || 'Some long bit of text that fleshes out this part of the talk')
+    label = (options[:via_form] || Talk.human_attribute_name(which_section))
+
+    fill_in label, :with => new_value
     click_button 'Update suggestion'
-    within('#abstract') do
-      assert page.has_content?('This talk will cover why I think ruby is a joyful language.')
-      assert page.has_no_link?('Why don\'t you fill it in?')
-    end
+  end
 
-    within('#outline') do
-      assert page.has_content?('No outline has been provided yet.')
-      assert page.has_link?('Why don\'t you fill it in?')
-      click 'Why don\'t you fill it in?'
-    end
+  def this_section_of_the_talk_page_is_not_empty(which_section, options={})
+    non_empty_value = (options[:with_content] || 'Some long bit of text that fleshes out this part of the talk')
 
-    i_am_on edit_talk_path(@talk_1)
-    fill_in "Outline", :with => 'The first slides will cover my "Aw yeah!" moment with Ruby. The next slides will be the same thing from some other rubyists. It\'ll finish up with ways you can help other programmers experience their own "Aw yeah!" moments when they first experience ruby.'
-    click_button 'Update suggestion'
-    within('#outline') do
-      assert page.has_content?('The first slides will cover my "Aw yeah!" moment with Ruby. The next slides will be the same thing from some other rubyists. It\'ll finish up with ways you can help other programmers experience their own "Aw yeah!" moments when they first experience ruby.')
-      assert page.has_no_link?('Why don\'t you fill it in?')
-    end
-
-    within('#why_its_interesting') do
-      assert page.has_content?('Nothing about why this talk is interesting has been provided yet.')
-      assert page.has_link?('Why don\'t you fill it in?')
-      click 'Why don\'t you fill it in?'
-    end
-
-    i_am_on edit_talk_path(@talk_1)
-    fill_in "Why it's interesting?", :with => 'Day to day programming can be dull and enterprisey. We need reminding of why we\'ve chosen Ruby. And we need to be able to pass on that excitement to others.'
-    click_button 'Update suggestion'
-    within('#why_its_interesting') do
-      assert page.has_content?('Day to day programming can be dull and enterprisey. We need reminding of why we\'ve chosen Ruby. And we need to be able to pass on that excitement to others.')
+    within("##{which_section}") do
+      assert page.has_content?(non_empty_value)
       assert page.has_no_link?('Why don\'t you fill it in?')
     end
   end
