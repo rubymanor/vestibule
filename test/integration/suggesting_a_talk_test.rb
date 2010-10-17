@@ -31,7 +31,7 @@ class SuggestingATalkTest < IntegrationTestCase
     assert_equal how_many_talks + 1, Talk.count
     i_am_on talks_path
 
-    within '#talks li:first-child' do
+    within '#talks .talk:first-child' do
       assert page.has_content?('The best little rubyhouse in Texas')
     end
   end

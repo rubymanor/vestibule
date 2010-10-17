@@ -14,7 +14,7 @@ class ViewingTalksTest < IntegrationTestCase
     the_page_has_title 'Talks'
 
     within('#talks') do
-      assert_in_order all('li.talk').map {|li| li.text}, @talk_2.title, @talk_3.title, @talk_4.title, @talk_1.title
+      assert_in_order all('.talk').map {|li| li.text}, @talk_2.title, @talk_3.title, @talk_4.title, @talk_1.title
     end
 
     click @talk_1.title
