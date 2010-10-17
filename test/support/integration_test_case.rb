@@ -31,4 +31,12 @@ class IntegrationTestCase < ActiveSupport::TestCase
       end
     end
   end
+
+  class << self
+    alias :scenario :should
+  end
+end
+
+Shoulda::Context.class_eval do
+  alias :scenario :should
 end

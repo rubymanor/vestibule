@@ -8,7 +8,7 @@ class ViewingTalksTest < IntegrationTestCase
     @talk_4 = Factory.create(:talk, :title => 'To Ruby or not to Ruby', :created_at => 4.days.ago)
   end
 
-  test "I can visit the talks index and see a list of talks that link to individual talk pages" do
+  scenario "I can visit the talks index and see a list of talks that link to individual talk pages" do
     visit '/'
 
     the_page_has_title 'Talks'
