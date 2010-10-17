@@ -11,7 +11,7 @@ class TalkTest < ActiveSupport::TestCase
     end
 
     should "have no feedback yet" do
-      assert @talk.feedback.empty?
+      assert @talk.feedbacks.empty?
     end
 
     should "require a title" do
