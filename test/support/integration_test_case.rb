@@ -36,9 +36,13 @@ class IntegrationTestCase < ActiveSupport::TestCase
 
   def sign_in(user = Factory(:user))
     visit "/users/sign_in"
-    fill_in "Email", :with => user.email
-    fill_in "Password", :with => user.password
-    click_button "Sign in"
+    # hit wierd issue never had before where sub-context setups seem to be signed in from parent context
+    # when writing reason_test.rb
+    unless has_content?(user.email)
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
+      click_button "Sign in"
+    end
   end
 
   class << self

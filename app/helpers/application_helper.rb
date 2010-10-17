@@ -9,4 +9,8 @@ module ApplicationHelper
     end
     content_tag :h1, new_page_title
   end
+
+  def remind_user_for_signup_reason
+    current_user && !current_user.account.signup_reason.present? && !request.path[/account/]
+  end
 end
