@@ -10,6 +10,7 @@ class IntegrationTestCase < ActiveSupport::TestCase
   self.use_transactional_fixtures = false
 
   setup do
+    ActionMailer::Base.deliveries.clear
     Capybara.default_selector = :css
     Capybara.save_and_open_page_path = File.join(Rails.root, 'tmp')
     DatabaseCleaner.strategy = :truncation
@@ -31,6 +32,13 @@ class IntegrationTestCase < ActiveSupport::TestCase
         assert page.has_content?(expected_title), %Q{Expected "#{expected_title}" within CSS selector '#{title_selector}', but it's not there}
       end
     end
+  end
+
+  def sign_in(user = Factory(:user))
+    visit "/users/sign_in"
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
+    click_button "Sign in"
   end
 
   class << self

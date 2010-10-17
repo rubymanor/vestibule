@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<div id="header">
+  <div id="user_nav">
+    <% if user_signed_in? -%>
+      <span><%= current_user.email %></span>
+      <span><%= link_to "Sign out", destroy_user_session_path %></span>
+    <% else -%>
+      <span><%= link_to "Sign up", new_user_registration_path %></span>
+      <span><%= link_to "Sign in", new_user_session_path %></span>
+    <% end -%>
+  </div>
+</div>
+
+<%= render :partial => "shared/notices" %>
+
 <%= yield %>
 
 </body>
