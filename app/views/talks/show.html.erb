@@ -1,1 +1,6 @@
 <%= page_title @talk.title %>
+
+<ul class="actions">
+  <li class="action"><%= link_to 'Provide more detail', edit_talk_path(@talk) %></li>
+  <li class="action"><%= link_to 'Back to talks', talks_path %></li>
+</ul>

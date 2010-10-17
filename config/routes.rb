@@ -1,5 +1,5 @@
 Vestibule::Application.routes.draw do
-  resources :talks, :only => [:index, :show, :new, :create]
+  resources :talks, :except => [:destroy]
 
   root :to => "talks#index"
 end
