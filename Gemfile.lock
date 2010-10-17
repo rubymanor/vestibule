@@ -42,6 +42,7 @@ GEM
     childprocess (0.0.9)
       ffi (~> 0.6.3)
     columnize (0.3.1)
+    configuration (1.1.0)
     culerity (0.2.12)
     database_cleaner (0.5.2)
     erubis (2.6.6)
@@ -54,6 +55,9 @@ GEM
       rake (>= 0.8.7)
     i18n (0.4.1)
     json_pure (1.4.6)
+    launchy (0.3.7)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
     linecache19 (0.5.11)
       ruby_core_source (>= 0.1.4)
     mail (2.2.7)
@@ -61,6 +65,8 @@ GEM
       mime-types
       treetop (>= 1.4.5)
     mime-types (1.16)
+    mocha (0.9.8)
+      rake
     mysql (2.8.1)
     nokogiri (1.4.3.1)
     polyglot (0.3.1)
@@ -100,6 +106,7 @@ GEM
       json_pure
       rubyzip
     shoulda (2.11.3)
+    simple_form (1.2.2)
     thor (0.14.3)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -112,7 +119,10 @@ DEPENDENCIES
   capybara (= 0.3.9)
   database_cleaner (= 0.5.2)
   factory_girl_rails (= 1.0)
+  launchy
+  mocha (= 0.9.8)
   mysql (= 2.8.1)
   rails (= 3.0.1)
   ruby-debug19
   shoulda (= 2.11.3)
+  simple_form (= 1.2.2)
