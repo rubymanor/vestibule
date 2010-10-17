@@ -1,10 +1,11 @@
 class TalksController < ApplicationController
+  before_filter :fetch_talk, :only => [:show, :edit, :update]
+
   def index
     @talks = Talk.order('updated_at DESC')
   end
 
   def show
-    @talk = Talk.find(params[:id])
   end
 
   def new
@@ -21,16 +22,20 @@ class TalksController < ApplicationController
   end
 
   def edit
-    @talk = Talk.find(params[:id])
   end
 
   def update
-    @talk = Talk.find(params[:id])
     @talk.attributes = params[:talk]
     if @talk.save
       redirect_to talk_path(@talk)
     else
       render :action => 'edit'
     end
+  end
+  
+  protected
+  
+  def fetch_talk
+    @talk = Talk.find(params[:id])
   end
 end
