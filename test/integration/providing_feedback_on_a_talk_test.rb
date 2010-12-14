@@ -51,14 +51,4 @@ class ProvidingFeedbackOnATalkTest < IntegrationTestCase
     assert page.has_field?('Feedback')
     assert page.has_button?('Leave feedback')
   end
-
-  def there_are_signup_or_login_links
-    assert page.has_link?('sign up')
-    assert page.has_link?('login')
-  end
-
-  def there_are_no_signup_or_login_links
-    assert page.has_no_link?('sign up')
-    assert page.has_no_link?('login')
-  end
 end

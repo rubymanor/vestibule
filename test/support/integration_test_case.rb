@@ -22,27 +22,9 @@ class IntegrationTestCase < ActiveSupport::TestCase
     DatabaseCleaner.clean
   end
 
-  def i_am_on(expected_path)
-    assert_equal expected_path, current_path
-  end
-
-  def the_page_has_title(expected_title)
-    ['h1', 'title'].each do |title_selector|
-      within(title_selector) do
-        assert page.has_content?(expected_title), %Q{Expected "#{expected_title}" within CSS selector '#{title_selector}', but it's not there}
-      end
-    end
-  end
-
-  def sign_in(user = Factory(:user))
-    visit "/users/sign_in"
-    # hit wierd issue never had before where sub-context setups seem to be signed in from parent context
-    # when writing reason_test.rb
-    unless has_content?(user.email)
-      fill_in "Email", :with => user.email
-      fill_in "Password", :with => user.password
-      click_button "Sign in"
-    end
+  Dir["#{Rails.root}/test/support/integration_steps/*.rb"].each do |hotfix|
+    load hotfix
+    include const_get(File.basename(hotfix).gsub(/\.rb$/,'').camelcase)
   end
 
   class << self
