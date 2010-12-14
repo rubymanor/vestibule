@@ -1,7 +1,11 @@
 <%= page_title @talk.title %>
 
 <ul class="actions">
+  <%- if current_user -%>
   <li class="action"><%= link_to 'Provide more detail', edit_talk_path(@talk) %></li>
+  <%- else -%>
+  <li>Sorry, you have to be logged in to provide more detail on talks.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>?</li>
+  <%- end -%>
   <li class="action"><%= link_to 'Back to talks', talks_path %></li>
 </ul>
 
@@ -9,7 +13,13 @@
   <%- if @talk.abstract.present? -%>
   <p><%= @talk.abstract %></p>
   <%- else -%>
-  <p class="missing">No abstract has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
+  <p class="missing">No abstract has been provided yet.  <%-
+    if current_user
+    -%><%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %><%-
+    else
+    -%>Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> so you can fill it in?<%-
+    end
+  -%></p>
   <%- end -%>
 </div>
 
@@ -17,7 +27,13 @@
   <%- if @talk.outline.present? -%>
   <p><%= @talk.outline %></p>
   <%- else -%>
-  <p class="missing">No outline has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
+  <p class="missing">No outline has been provided yet.  <%-
+    if current_user
+    -%><%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %><%-
+    else
+    -%>Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> so you can fill it in?<%-
+    end
+  -%></p>
   <%- end -%>
 </div>
 
@@ -25,7 +41,13 @@
   <%- if @talk.why_its_interesting.present? -%>
   <p><%= @talk.why_its_interesting %></p>
   <%- else -%>
-  <p class="missing">Nothing about why this talk is interesting has been provided yet.  <%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %></p>
+  <p class="missing">Nothing about why this talk is interesting has been provided yet.  <%-
+    if current_user
+    -%><%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %><%-
+    else
+    -%>Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> so you can fill it in?<%-
+    end
+  -%></p>
   <%- end -%>
 </div>
 
@@ -41,7 +63,7 @@
       <%= f.button :submit %>
     <% end %>
     <%- else -%>
-    <p>Sorry, you have to be logged in to leave feedback on talks.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %>?</p>
+    <p>Sorry, you have to be logged in to leave feedback on talks.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>?</p>
     <%- end -%>
   </div>
 </div>
