@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/stympy/faker.git
+  revision: 84c205d168d25aaa0bb4b4ce8c0e09e147d0f951
+  specs:
+    faker (0.3.2.ish)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -55,7 +61,6 @@ GEM
     factory_girl_rails (1.0)
       factory_girl (~> 1.3)
       rails (>= 3.0.0.beta4)
-    faker (0.3.1)
     ffi (0.6.3)
       rake (>= 0.8.7)
     i18n (0.4.1)
@@ -127,7 +132,7 @@ DEPENDENCIES
   database_cleaner (= 0.5.2)
   devise (= 1.1.3)
   factory_girl_rails (= 1.0)
-  faker (= 0.3.1)
+  faker (= 0.3.2.ish)!
   launchy
   mocha (= 0.9.8)
   mysql (= 2.8.1)

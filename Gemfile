@@ -11,7 +11,7 @@ group :test do
   gem "capybara", "0.3.9"
   gem "database_cleaner", "0.5.2"
   gem "mocha", "0.9.8", :require => false
-  gem "faker", "0.3.1"
+  gem "faker", "0.3.2.ish", :git => 'git://github.com/stympy/faker.git'
 
   # Things that aren't *required*, but you might need as you go.
   gem "ruby-debug19"
