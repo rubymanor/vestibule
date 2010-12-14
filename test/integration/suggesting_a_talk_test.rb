@@ -24,12 +24,7 @@ class SuggestingATalkTest < IntegrationTestCase
         there_are_signup_or_login_links
       end
 
-      within ".missing" do
-        there_are_signup_or_login_links
-      end
-
       assert page.has_no_link?('Provide more detail')
-      assert page.has_no_link?('Why don\'t you fill it in?')
     end
   end
 
