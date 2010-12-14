@@ -7,7 +7,7 @@ class ReasonTest < IntegrationTestCase
     end
 
     should "tell the user that they haven't stated a reason for siging up" do
-      assert has_content?("You haven't provided a reason on why you signing up yet.")
+      assert has_content?("You haven't provided a reason on why you signed up yet.")
     end
 
     context "be able to provide a reason now" do
@@ -16,7 +16,7 @@ class ReasonTest < IntegrationTestCase
       end
 
       should "not show the you haven't added a reason message" do
-        assert !has_content?("You haven't provided a reason on why you signing up yet.")
+        assert !has_content?("You haven't provided a reason on why you signed up yet.")
       end
 
       context "be able to update the sign up reason" do
