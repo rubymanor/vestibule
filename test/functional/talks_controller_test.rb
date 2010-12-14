@@ -54,53 +54,86 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   context "the new action" do
-    should "respond scuccessfully" do
-      get :new
-      assert_response :success
+    context "when not signed in" do
+      should "redirect to the sign in page" do
+        get :new
+        assert_redirected_to new_user_session_path
+      end
     end
 
-    should "render the talks/new template" do
-      get :new
-      assert_template 'talks/new'
-    end
+    context "when logged in" do
+      setup do
+        @user = Factory(:user)
+        sign_in @user
+      end
 
-    should "prepare a fresh, unsaved talk object" do
-      get :new
-      assert assigns['talk'].new_record?
+      should "respond scuccessfully" do
+        get :new
+        assert_response :success
+      end
+
+      should "render the talks/new template" do
+        get :new
+        assert_template 'talks/new'
+      end
+
+      should "prepare a fresh, unsaved talk object" do
+        get :new
+        assert assigns['talk'].new_record?
+      end
     end
   end
 
   context "the create action" do
     setup do
       @some_params = {'what' => 'ever'}
-      @talk = Factory.build(:talk)
-      Talk.expects(:new).with(@some_params).returns(@talk)
     end
 
-    context "when valid data is provided" do
-      setup do
-        @talk.expects(:save).returns(true)
+    context "when not logged in" do
+      should "redirect to the sign in page" do
+        post :create, :talk => @some_params
+        assert_redirected_to new_user_session_path
       end
 
-      should "redirect to the index page" do
+      should "not try to build a new Talk" do
+        Talk.expects(:new).with(@some_params).never
         post :create, :talk => @some_params
-        assert_redirected_to talks_path
       end
     end
 
-    context "when invalid data is provided" do
+    context "when logged in" do
       setup do
-        @talk.expects(:save).returns(false)
+        @talk = Factory.build(:talk)
+        Talk.expects(:new).with(@some_params).returns(@talk)
+        @user = Factory(:user)
+        sign_in @user
       end
 
-      should "render the talks/new template" do
-        post :create, :talk => @some_params
-        assert_template 'talks/new'
+      context "when valid data is provided" do
+        setup do
+          @talk.expects(:save).returns(true)
+        end
+
+        should "redirect to the index page" do
+          post :create, :talk => @some_params
+          assert_redirected_to talks_path
+        end
       end
 
-      should "make the invalid talk object available as @talk" do
-        post :create, :talk => @some_params
-        assert_equal @talk, assigns['talk']
+      context "when invalid data is provided" do
+        setup do
+          @talk.expects(:save).returns(false)
+        end
+
+        should "render the talks/new template" do
+          post :create, :talk => @some_params
+          assert_template 'talks/new'
+        end
+
+        should "make the invalid talk object available as @talk" do
+          post :create, :talk => @some_params
+          assert_equal @talk, assigns['talk']
+        end
       end
     end
   end
@@ -110,19 +143,33 @@ class TalksControllerTest < ActionController::TestCase
       @talk = Factory.create(:talk)
     end
 
-    should "respond successfully" do
-      get :edit, :id => @talk.to_param
-      assert_response :success
+    context "when not logged in" do
+      should "redirect to the sign in page" do
+        get :edit, :id => @talk.to_param
+        assert_redirected_to new_user_session_path
+      end
     end
 
-    should "render the talks/show template" do
-      get :edit, :id => @talk.to_param
-      assert_template 'talks/edit'
-    end
+    context "when logged in" do
+      setup do
+        @user = Factory(:user)
+        sign_in @user
+      end
 
-    should "fetch the requested talk" do
-      get :edit, :id => @talk.to_param
-      assert_equal @talk, assigns['talk']
+      should "respond successfully" do
+        get :edit, :id => @talk.to_param
+        assert_response :success
+      end
+
+      should "render the talks/show template" do
+        get :edit, :id => @talk.to_param
+        assert_template 'talks/edit'
+      end
+
+      should "fetch the requested talk" do
+        get :edit, :id => @talk.to_param
+        assert_equal @talk, assigns['talk']
+      end
     end
   end
 
@@ -130,34 +177,58 @@ class TalksControllerTest < ActionController::TestCase
     setup do
       @some_params = {'what' => 'ever'}
       @talk = Factory.create(:talk)
-      @talk.expects(:attributes=).with(@some_params)
-      Talk.expects(:find).with(@talk.to_param.to_s).returns(@talk)
+      Talk.stubs(:find).with(@talk.to_param.to_s).returns(@talk)
     end
 
-    context "when valid data is provided" do
-      setup do
-        @talk.expects(:save).returns(true)
+    context "when not logged in" do
+      should "redirect to the sign in page" do
+        put :update, :id => @talk.id, :talk => @some_params
+        assert_redirected_to new_user_session_path
       end
 
-      should "redirect to the show page for the talk" do
-        put :update, :id => @talk.to_param, :talk => @some_params
-        assert_redirected_to talk_path(@talk)
+      should "not try to update the attributes of the talk" do
+        @talk.expects(:attributes=).with(@some_params).never
+        put :update, :id => @talk.id, :talk => @some_params
+      end
+
+      should "not try to save the talk" do
+        @talk.expects(:save).never
+        put :update, :id => @talk.id, :talk => @some_params
       end
     end
 
-    context "when invalid data is provided" do
+    context "when logged in" do
       setup do
-        @talk.expects(:save).returns(false)
+        @talk.expects(:attributes=).with(@some_params)
+        @user = Factory(:user)
+        sign_in @user
       end
 
-      should "render the talks/edit template" do
-        put :update, :id => @talk.to_param, :talk => @some_params
-        assert_template 'talks/edit'
+      context "when valid data is provided" do
+        setup do
+          @talk.expects(:save).returns(true)
+        end
+
+        should "redirect to the show page for the talk" do
+          put :update, :id => @talk.to_param, :talk => @some_params
+          assert_redirected_to talk_path(@talk)
+        end
       end
 
-      should "make the invalid talk object available as @talk" do
-        put :update, :id => @talk.to_param, :talk => @some_params
-        assert_equal @talk, assigns['talk']
+      context "when invalid data is provided" do
+        setup do
+          @talk.expects(:save).returns(false)
+        end
+
+        should "render the talks/edit template" do
+          put :update, :id => @talk.to_param, :talk => @some_params
+          assert_template 'talks/edit'
+        end
+
+        should "make the invalid talk object available as @talk" do
+          put :update, :id => @talk.to_param, :talk => @some_params
+          assert_equal @talk, assigns['talk']
+        end
       end
     end
   end

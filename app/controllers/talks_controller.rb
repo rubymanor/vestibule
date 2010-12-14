@@ -1,4 +1,5 @@
 class TalksController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :create, :edit, :update]
   before_filter :fetch_talk, :only => [:show, :edit, :update]
 
   def index
