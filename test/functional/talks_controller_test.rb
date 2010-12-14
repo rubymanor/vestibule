@@ -54,17 +54,21 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   context "the new action" do
-    context "when not signed in" do
+    context "when the user is not signed in" do
+      setup do
+        sign_out :user
+      end
+
       should "redirect to the sign in page" do
         get :new
         assert_redirected_to new_user_session_path
       end
     end
 
-    context "when logged in" do
+    context "when the user is signed in" do
       setup do
-        @user = Factory(:user)
-        sign_in @user
+        @user = Factory.create(:user)
+        sign_in :user, @user
       end
 
       should "respond scuccessfully" do
@@ -89,7 +93,11 @@ class TalksControllerTest < ActionController::TestCase
       @some_params = {'what' => 'ever'}
     end
 
-    context "when not logged in" do
+    context "when the user is not signed in" do
+      setup do
+        sign_out :user
+      end
+
       should "redirect to the sign in page" do
         post :create, :talk => @some_params
         assert_redirected_to new_user_session_path
@@ -101,12 +109,12 @@ class TalksControllerTest < ActionController::TestCase
       end
     end
 
-    context "when logged in" do
+    context "when the user is signed in" do
       setup do
+        @user = Factory.create(:user)
+        sign_in :user, @user
         @talk = Factory.build(:talk)
         Talk.expects(:new).with(@some_params).returns(@talk)
-        @user = Factory(:user)
-        sign_in @user
       end
 
       context "when valid data is provided" do
@@ -143,17 +151,21 @@ class TalksControllerTest < ActionController::TestCase
       @talk = Factory.create(:talk)
     end
 
-    context "when not logged in" do
+    context "when the user is not signed in" do
+      setup do
+        sign_out :user
+      end
+
       should "redirect to the sign in page" do
         get :edit, :id => @talk.to_param
         assert_redirected_to new_user_session_path
       end
     end
 
-    context "when logged in" do
+    context "when the user is signed in" do
       setup do
-        @user = Factory(:user)
-        sign_in @user
+        @user = Factory.create(:user)
+        sign_in :user, @user
       end
 
       should "respond successfully" do
@@ -180,7 +192,11 @@ class TalksControllerTest < ActionController::TestCase
       Talk.stubs(:find).with(@talk.to_param.to_s).returns(@talk)
     end
 
-    context "when not logged in" do
+    context "when the user is not signed in" do
+      setup do
+        sign_out :user
+      end
+
       should "redirect to the sign in page" do
         put :update, :id => @talk.id, :talk => @some_params
         assert_redirected_to new_user_session_path
@@ -197,11 +213,11 @@ class TalksControllerTest < ActionController::TestCase
       end
     end
 
-    context "when logged in" do
+    context "when the user is signed in" do
       setup do
+        @user = Factory.create(:user)
+        sign_in :user, @user
         @talk.expects(:attributes=).with(@some_params)
-        @user = Factory(:user)
-        sign_in @user
       end
 
       context "when valid data is provided" do
@@ -232,5 +248,4 @@ class TalksControllerTest < ActionController::TestCase
       end
     end
   end
-
 end
