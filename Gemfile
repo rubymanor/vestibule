@@ -16,4 +16,5 @@ group :test do
   # Things that aren't *required*, but you might need as you go.
   gem "ruby-debug19"
   gem "launchy"
+  gem "escape_utils", "0.1.9"
 end
