@@ -1,7 +1,7 @@
 <%= page_title 'Talks' %>
 
 <div class="actions">
-  <%- if current_user -%>
+  <%- if user_signed_in? -%>
   <%= link_to 'Suggest a new talk', new_talk_path %>
   <%- else -%>
   <p>Sorry, you have to be logged in to leave suggest a new talk.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>?</p>

@@ -1,7 +1,7 @@
 <%= page_title @talk.title %>
 
 <ul class="actions">
-  <%- if current_user -%>
+  <%- if user_signed_in? -%>
   <li class="action"><%= link_to 'Provide more detail', edit_talk_path(@talk) %></li>
   <%- else -%>
   <li>Sorry, you have to be logged in to provide more detail on talks.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>?</li>
@@ -14,7 +14,7 @@
   <p><%= @talk.abstract %></p>
   <%- else -%>
   <p class="missing">No abstract has been provided yet.  <%-
-    if current_user
+    if user_signed_in?
     -%><%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %><%-
     else
     -%>Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> so you can fill it in?<%-
@@ -28,7 +28,7 @@
   <p><%= @talk.outline %></p>
   <%- else -%>
   <p class="missing">No outline has been provided yet.  <%-
-    if current_user
+    if user_signed_in?
     -%><%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %><%-
     else
     -%>Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> so you can fill it in?<%-
@@ -42,7 +42,7 @@
   <p><%= @talk.why_its_interesting %></p>
   <%- else -%>
   <p class="missing">Nothing about why this talk is interesting has been provided yet.  <%-
-    if current_user
+    if user_signed_in?
     -%><%= link_to 'Why don\'t you fill it in?', edit_talk_path(@talk) %><%-
     else
     -%>Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> so you can fill it in?<%-
@@ -56,7 +56,7 @@
     <%= render @talk.feedbacks.order('created_at') %>
   </div>
   <div id="feedback_actions">
-    <%- if current_user -%>
+    <%- if user_signed_in? -%>
     <%= simple_form_for [@talk, @new_feedback] do |f| %>
       <%= f.error_notification %>
       <%= f.input :content %>
