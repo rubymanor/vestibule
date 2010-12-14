@@ -11,7 +11,7 @@ class SuggestingATalkTest < IntegrationTestCase
       visit '/talks'
 
       within ".actions" do
-        there_are_signup_or_login_links
+        there_are_sign_up_and_sign_in_links
       end
 
       assert page.has_no_link?('Suggest a new talk')
@@ -21,7 +21,7 @@ class SuggestingATalkTest < IntegrationTestCase
       visit talk_path(@talk_1)
 
       within ".actions" do
-        there_are_signup_or_login_links
+        there_are_sign_up_and_sign_in_links
       end
 
       assert page.has_no_link?('Provide more detail')

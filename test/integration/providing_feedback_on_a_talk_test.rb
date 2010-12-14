@@ -16,7 +16,7 @@ class ProvidingFeedbackOnATalkTest < IntegrationTestCase
       assert page.has_content?(@feedback_2.content)
       assert page.has_content?(@feedback_3.content)
       there_is_no_feedback_form
-      there_are_signup_or_login_links
+      there_are_sign_up_and_sign_in_links
     end
   end
 
@@ -29,7 +29,7 @@ class ProvidingFeedbackOnATalkTest < IntegrationTestCase
       assert page.has_content?(@feedback_1.content)
       assert page.has_content?(@feedback_2.content)
       assert page.has_content?(@feedback_3.content)
-      there_are_no_signup_or_login_links
+      there_are_no_sign_up_and_sign_in_links
       there_is_a_feedback_form
 
       fill_in "Feedback", :with => 'This talk sounds really good so far. I\'d like to know if the presenter is going to cover some of the pain points that newbie sometimes feel when getting up and running, and how we might address those?'

@@ -10,12 +10,12 @@ module AuthenticationSteps
     end
   end
 
-  def there_are_signup_or_login_links
+  def there_are_sign_up_and_sign_in_links
     assert page.has_link?('sign up')
     assert page.has_link?('sign in')
   end
 
-  def there_are_no_signup_or_login_links
+  def there_are_no_sign_up_and_sign_in_links
     assert page.has_no_link?('sign up')
     assert page.has_no_link?('sign in')
   end

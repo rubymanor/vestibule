@@ -104,7 +104,7 @@ class ViewingTalksTest < IntegrationTestCase
 
   def i_am_prompted_to_sign_up_or_sign_in_to_fill_out_section(which_section)
     within "##{which_section}" do
-      there_are_signup_or_login_links
+      there_are_sign_up_and_sign_in_links
     end
   end
 end
