@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
     if @account.update_attributes(params[:account])
       flash[:notice] = "Succesfully updated account."
     end
-    redirect_to @account
+    redirect_to account_path
   end
 
   protected
