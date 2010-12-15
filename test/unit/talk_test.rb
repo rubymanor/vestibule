@@ -62,5 +62,16 @@ class TalkTest < ActiveSupport::TestCase
         assert @talk.valid?
       end
     end
+
+    should 'require an original suggester' do
+      @talk.suggester = nil
+      assert !@talk.valid?
+      assert_not_nil @talk.errors['suggester']
+    end
+  end
+
+  should 'list the suggester as one of the contributors' do
+    talk = Factory.create(:talk)
+    assert talk.contributors.include?(talk.suggester)
   end
 end
