@@ -58,4 +58,7 @@ Vestibule::Application.configure do
     :password             => ENV['GMAIL_SMTP_PASSWORD'],
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
+  
+  # heroku logging will log anything spat to STDOUT so let's do that  
+  config.action_controller.logger = Logger.new(STDOUT)
 end
