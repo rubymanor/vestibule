@@ -16,10 +16,22 @@ class IntegrationTestCase < ActiveSupport::TestCase
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.start
+
+    # You'd get this by including Warden::Test:Helpers, but I don't want
+    # the other methods it provides.
+    ::Warden::test_mode!
+    # NOTE: The following 2 lines are the contents of the Warden::Test::Helpers#logout
+    # method. I don't want it polluting my namespace though, so I've copied it manually.
+    # Tell warden to clear up any old logins at the start of the test
+    # EVEN THOUGH you'd think that's what test_reset! might do.
+    ::Warden.on_next_request do |proxy|
+      proxy.logout
+    end
   end
 
   teardown do
     DatabaseCleaner.clean
+    Warden.test_reset!
   end
 
   Dir["#{Rails.root}/test/support/integration_steps/*.rb"].each do |hotfix|
