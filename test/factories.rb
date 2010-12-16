@@ -25,7 +25,7 @@ end
 Factory.define :contribution do |c|
   c.association :talk
   c.association :user
-  c.kind 'extra detail provide'
+  c.kind 'provide extra detail'
 end
 
 Factory.define :suggestion, :parent => :contribution do |s|
@@ -33,5 +33,5 @@ Factory.define :suggestion, :parent => :contribution do |s|
 end
 
 Factory.define :extra_detail_provision, :parent => :contribution do |edp|
-  edp.kind 'extra detail provide'
+  edp.kind 'provide extra detail'
 end

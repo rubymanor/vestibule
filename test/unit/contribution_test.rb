@@ -30,14 +30,14 @@ class ContributionTest < ActiveSupport::TestCase
       end
     end
 
-    should 'be valid if the kind is \'suggest\' or \'extra detail provide\'' do
-      ['suggest', 'extra detail provide'].each do |valid_kind|
+    should 'be valid if the kind is \'suggest\' or \'provide extra detail\'' do
+      ['suggest', 'provide extra detail'].each do |valid_kind|
         @contribution.kind = valid_kind
         assert @contribution.valid?
       end
     end
-    should 'not be valid if the kind is not \'suggest\' or \'extra detail provide\'' do
-      ['extra_detail_provide', 'other kinds of contributions', '1234'].each do |invalid_kind|
+    should 'not be valid if the kind is not \'suggest\' or \'provide extra detail\'' do
+      ['provide_extra_detail', 'other kinds of contributions', '1234'].each do |invalid_kind|
         @contribution.kind = invalid_kind
         assert !@contribution.valid?
       end
