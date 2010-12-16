@@ -23,8 +23,8 @@
 <%= render :partial => "shared/notices" %>
 
 <% if remind_user_for_signup_reason -%>
-  <P>You haven't provided a reason on why you signed up yet.</P>
-  <P><%= link_to "Provide one now", edit_account_path %>
+  <p>You haven't provided a reason on why you signed up yet.</p>
+  <p><%= link_to "Provide one now", edit_account_path %></p>
 <% end -%>
 
 <%= yield %>
