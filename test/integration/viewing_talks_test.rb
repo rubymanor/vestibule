@@ -22,7 +22,7 @@ class ViewingTalksTest < IntegrationTestCase
     i_am_on talk_path(@talk_1)
   end
 
-  context "As a logged in user" do
+  context "As a signed in user" do
     setup do
       sign_in
     end
