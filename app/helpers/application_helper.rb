@@ -1,6 +1,9 @@
 module ApplicationHelper
   def render_page_title
-    %Q{#{content_for(:page_title) || 'Welcome'} :: Vestibule}
+    page_title = content_for(:page_title)
+    page_title = 'Welcome' if page_title.blank?
+    # using content_for to set :page_title means it's already been escaped.
+    %Q{#{page_title} :: Vestibule}.html_safe
   end
 
   def page_title(new_page_title)
