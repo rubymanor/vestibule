@@ -2,8 +2,10 @@ class Contribution < ActiveRecord::Base
   belongs_to :talk
   belongs_to :user
 
-  validates :talk, :user, :presence => true
+  validates :talk, :presence => true
   validates :kind, :inclusion => ['suggest', 'provide extra detail']
+  validates :user_id, :presence => true,
+                      :uniqueness => {:scope => [:talk_id, :kind], :message => 'only needs to be listed once per talk for a contribution type'}
 
   scope :providing_extra_detail, where(:kind => 'provide extra detail')
   scope :suggestions, where(:kind => 'suggest')

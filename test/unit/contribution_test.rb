@@ -40,7 +40,25 @@ class ContributionTest < ActiveSupport::TestCase
       ['provide_extra_detail', 'other kinds of contributions', '1234'].each do |invalid_kind|
         @contribution.kind = invalid_kind
         assert !@contribution.valid?
+        assert_not_nil @contribution.errors['kind']
       end
+    end
+
+    should 'be invalid if a user tries to be listed as the same kind of contributer on the same talk multiple times' do
+      other_contribution = Factory.create(:contribution, :talk => @contribution.talk, :user => @contribution.user, :kind => @contribution.kind)
+      assert !@contribution.valid?
+      assert_not_nil @contribution.errors['user_id']
+    end
+
+    should "be valid if a user is listed as a different kind of contributer on the same talk multiple times" do
+      other_contribution = Factory.create(:contribution, :talk => @contribution.talk, :user => @contribution.user, :kind => 'suggest')
+      @contribution.kind = 'provide extra detail'
+      assert @contribution.valid?
+    end
+
+    should "be valid if a user is listed as the same kind of contributer on a different talk multiple times" do
+      other_contribution = Factory.create(:contribution, :talk => Factory.create(:talk), :user => @contribution.user, :kind => @contribution.kind)
+      assert @contribution.valid?
     end
   end
 
