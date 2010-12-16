@@ -13,4 +13,12 @@ module ApplicationHelper
   def remind_user_for_signup_reason
     current_user && !current_user.account.signup_reason.present? && !request.path[/account/]
   end
+
+  def output_extra_detail_providers(for_talk)
+    return if for_talk.extra_detail_providers.empty?
+    providers = for_talk.extra_detail_providers.map do |edp|
+      content_tag :li, edp.email, :class => "user"
+    end.join
+    content_tag :ul, providers, :class => 'users'
+  end
 end
