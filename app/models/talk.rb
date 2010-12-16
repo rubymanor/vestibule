@@ -1,7 +1,16 @@
 class Talk < ActiveRecord::Base
   has_many :feedbacks, :dependent => :destroy
-  has_many :contributions, :dependent => :destroy
+  has_many :contributions, :dependent => :destroy do
+    def build_providing_extra_detail(args = {})
+      build({:kind => 'provide extra detail'}.merge(args))
+    end
+
+    def create_providing_extra_detail(args = {})
+      create({:kind => 'provide extra detail'}.merge(args))
+    end
+  end
   has_many :contributors, :through => :contributions, :source => :user
+  has_many :extra_detail_providers, :through => :contributions, :source => :user, :conditions => {:contributions => {:kind => 'provide extra detail'}}
   has_one :suggestion, :class_name => 'Contribution', :conditions => {:kind => 'suggest'}
   has_one :suggester, :through => :suggestion, :source => :user
 
@@ -14,7 +23,7 @@ class Talk < ActiveRecord::Base
 
   def add_extra_detail_provider(user)
     if contributions.providing_extra_detail.by_user(user).empty?
-      contributions.build(:user => user, :kind => 'provide extra detail')
+      contributions.build_providing_extra_detail(:user => user)
     end
   end
 
