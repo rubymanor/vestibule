@@ -126,6 +126,11 @@ class TalksControllerTest < ActionController::TestCase
           post :create, :talk => @some_params
           assert_redirected_to talks_path
         end
+
+        should "set the user as the suggester of the talk" do
+          @talk.expects(:suggester=).with(@user)
+          post :create, :talk => @some_params
+        end
       end
 
       context "when invalid data is provided" do
@@ -228,6 +233,16 @@ class TalksControllerTest < ActionController::TestCase
         should "redirect to the show page for the talk" do
           put :update, :id => @talk.to_param, :talk => @some_params
           assert_redirected_to talk_path(@talk)
+        end
+
+        should "not try to set the user as the suggester of the talk" do
+          @talk.expects(:suggester=).with(@user).never
+          put :update, :id => @talk.to_param, :talk => @some_params
+        end
+
+        should "try to add the user to the list of extra_detail_providers of the talk" do
+          @talk.expects(:add_extra_detail_provider).with(@user)
+          put :update, :id => @talk.to_param, :talk => @some_params
         end
       end
 

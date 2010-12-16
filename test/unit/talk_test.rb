@@ -74,4 +74,37 @@ class TalkTest < ActiveSupport::TestCase
     talk = Factory.create(:talk)
     assert talk.contributors.include?(talk.suggester)
   end
+
+  context "add_extra_detail_provider" do
+    setup do
+      @talk = Factory.create(:talk)
+      @user = Factory.create(:user)
+    end
+
+    should "build a new contribution of the kind 'provide extra detail' to the talk for the user" do
+      new_extra_detail_provider = @talk.add_extra_detail_provider(@user)
+      assert_not_nil new_extra_detail_provider
+      assert new_extra_detail_provider.new_record?
+      assert_equal @user, new_extra_detail_provider.user
+      assert_equal 'provide extra detail', new_extra_detail_provider.kind
+      assert_not_nil @talk.contributions.detect { |c| c == new_extra_detail_provider }
+    end
+
+    should "create a new contribution of the kind 'provide extra detail' to the talk for the user when called with a bang" do
+      @talk.add_extra_detail_provider!(@user)
+      assert_not_nil @talk.contributions.select { |c| c.user == @user && c.kind = 'provide extra detail' && !c.new_record? }
+    end
+
+    should "not build a new contribution when the user is already an extra detail provider" do
+      @talk.add_extra_detail_provider!(@user)
+      assert_nil @talk.add_extra_detail_provider(@user)
+      assert_equal 1, @talk.contributions.select { |c| c.user == @user && c.kind = 'provide extra detail' }.size
+    end
+
+    should "not create a new contribution when the user is already an extra detail provider" do
+      @talk.add_extra_detail_provider!(@user)
+      @talk.add_extra_detail_provider!(@user)
+      assert_equal 1, @talk.contributions.select { |c| c.user == @user && c.kind = 'provide extra detail' }.size
+    end
+  end
 end
