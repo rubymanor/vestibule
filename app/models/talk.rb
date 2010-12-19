@@ -19,6 +19,7 @@ class Talk < ActiveRecord::Base
   end
   has_many :contributors, :through => :contributions, :source => :user
   has_many :extra_detail_providers, :through => :contributions, :source => :user, :conditions => {:contributions => {:kind => 'provide extra detail'}}
+  has_many :discussers, :through => :contributions, :source => :user, :conditions => {:contributions => {:kind => 'discuss'}}
   has_one :suggestion, :class_name => 'Contribution', :conditions => {:kind => 'suggest'}
   has_one :suggester, :through => :suggestion, :source => :user
 

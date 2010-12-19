@@ -140,6 +140,10 @@ class ViewingTalksTest < IntegrationTestCase
       within '.extra_detail_providers' do
         assert page.has_content?(@extra_detail_provider.email)
       end
+
+      within '.discussers' do
+        assert page.has_content?(@discusser.email)
+      end
     end
   end
 end

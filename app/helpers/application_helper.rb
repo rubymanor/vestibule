@@ -18,9 +18,17 @@ module ApplicationHelper
   end
 
   def output_extra_detail_providers(for_talk)
-    return if for_talk.extra_detail_providers.empty?
+    output_users(for_talk, :extra_detail_providers)
+  end
+
+  def output_discussers(for_talk)
+    output_users(for_talk, :discussers)
+  end
+
+  def output_users(for_talk, of_kind)
+    return if for_talk.send(of_kind).empty?
     content_tag :ul, :class => 'users' do
-      providers = for_talk.extra_detail_providers.map do |edp|
+      providers = for_talk.send(of_kind).map do |edp|
         content_tag :li, edp.email, :class => "user"
       end.join
     end

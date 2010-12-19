@@ -33,10 +33,11 @@ class ProvidingFeedbackOnATalkTest < IntegrationTestCase
 
   context "As a signed in user" do
     setup do
-      sign_in
+      @me = Factory.create(:user)
+      sign_in @me
     end
 
-    scenario "When I visit a talk page I can see existing feedback and leave some of my own, which appears at the bottom of the list of feedback" do
+    scenario "When I visit a talk page I can see existing feedback and leave some of my own, which appears at the bottom of the list of feedback and adds my name to the list of discussers" do
       visit talk_path(@talk)
 
       within('#feedback') do
@@ -57,6 +58,9 @@ class ProvidingFeedbackOnATalkTest < IntegrationTestCase
         within('#feedback_items .feedback:last-child') do
           assert page.has_content?('This talk sounds really good so far. I\'d like to know if the presenter is going to cover some of the pain points that newbie sometimes feel when getting up and running, and how we might address those?')
         end
+      end
+      within('.contributors .discussers') do
+        assert page.has_content?(@me.email)
       end
     end
 
