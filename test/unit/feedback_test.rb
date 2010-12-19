@@ -40,4 +40,33 @@ class FeedbackTest < ActiveSupport::TestCase
       assert @feedback.valid?
     end
   end
+
+  context "when the user hasn't contributed as a discusser to the talk before" do
+    setup do
+      @feedback = Factory.build(:feedback)
+      @user = @feedback.user
+      @talk = @feedback.talk
+    end
+
+    should 'add a new \'discuss\' contribution to the talk for the user when created' do
+      assert_equal 0, @talk.contributions.discussions.by_user(@user).size
+      @feedback.save!
+      assert_equal 1, @talk.contributions.discussions.by_user(@user).size
+    end
+  end
+
+  context "when the user has already contributed as a discusser to the talk" do
+    setup do
+      @feedback = Factory.build(:feedback)
+      @user = @feedback.user
+      @talk = @feedback.talk
+      Factory.create(:contribution, :talk => @talk, :user => @user, :kind => 'discuss')
+    end
+
+    should 'not add another \'discuss\' contribution to the talk for the user when created' do
+      assert_equal 1, @talk.contributions.discussions.by_user(@user).size
+      @feedback.save!
+      assert_equal 1, @talk.contributions.discussions.by_user(@user).size
+    end
+  end
 end

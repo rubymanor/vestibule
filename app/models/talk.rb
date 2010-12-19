@@ -8,6 +8,14 @@ class Talk < ActiveRecord::Base
     def create_providing_extra_detail(args = {})
       create({:kind => 'provide extra detail'}.merge(args))
     end
+
+    def build_discussion(args = {})
+      build({:kind => 'discuss'}.merge(args))
+    end
+
+    def create_discuss(args = {})
+      create({:kind => 'discuss'}.merge(args))
+    end
   end
   has_many :contributors, :through => :contributions, :source => :user
   has_many :extra_detail_providers, :through => :contributions, :source => :user, :conditions => {:contributions => {:kind => 'provide extra detail'}}
@@ -30,5 +38,16 @@ class Talk < ActiveRecord::Base
   def add_extra_detail_provider!(user)
     new_extra_detail_provider = add_extra_detail_provider(user)
     new_extra_detail_provider.save unless new_extra_detail_provider.nil?
+  end
+
+  def add_discusser(user)
+    if contributions.discussions.by_user(user).empty?
+      contributions.build_discussion(:user => user)
+    end
+  end
+
+  def add_discusser!(user)
+    new_discusser = add_discusser(user)
+    new_discusser.save unless new_discusser.nil?
   end
 end

@@ -107,4 +107,37 @@ class TalkTest < ActiveSupport::TestCase
       assert_equal 1, @talk.contributions.select { |c| c.user == @user && c.kind = 'provide extra detail' }.size
     end
   end
+
+  context "add_discusser" do
+    setup do
+      @talk = Factory.create(:talk)
+      @user = Factory.create(:user)
+    end
+
+    should "build a new contribution of the kind 'discuss' to the talk for the user" do
+      new_discusser = @talk.add_discusser(@user)
+      assert_not_nil new_discusser
+      assert new_discusser.new_record?
+      assert_equal @user, new_discusser.user
+      assert_equal 'discuss', new_discusser.kind
+      assert_not_nil @talk.contributions.detect { |c| c == new_discusser }
+    end
+
+    should "create a new contribution of the kind 'discuss' to the talk for the user when called with a bang" do
+      @talk.add_discusser!(@user)
+      assert_not_nil @talk.contributions.select { |c| c.user == @user && c.kind = 'discuss' && !c.new_record? }
+    end
+
+    should "not build a new contribution when the user is already a discusser" do
+      @talk.add_discusser!(@user)
+      assert_nil @talk.add_discusser(@user)
+      assert_equal 1, @talk.contributions.select { |c| c.user == @user && c.kind = 'discuss' }.size
+    end
+
+    should "not create a new contribution when the user is already a discusser" do
+      @talk.add_discusser!(@user)
+      @talk.add_discusser!(@user)
+      assert_equal 1, @talk.contributions.select { |c| c.user == @user && c.kind = 'discuss' }.size
+    end
+  end
 end
