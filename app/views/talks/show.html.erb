@@ -1,5 +1,10 @@
 <%= page_title @talk.title %>
 
+<div id="whos_involved">
+  <h2>Who's involved?</h2>
+  <%= render '/talks/contributors', :talk => @talk %>
+</div>
+
 <ul class="actions">
   <%- if user_signed_in? -%>
   <li class="action"><%= link_to 'Provide more detail', edit_talk_path(@talk) %></li>
@@ -52,6 +57,7 @@
 </div>
 
 <div id="feedback">
+  <%= render '/talks/feedback_info', :talk => @talk %>
   <div id="feedback_items">
     <%= render @talk.feedbacks.order('created_at') %>
   </div>

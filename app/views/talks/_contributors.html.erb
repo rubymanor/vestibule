@@ -1,0 +1,6 @@
+<ul class="contributors">
+  <li class="suggester"><h3>Originally suggested by</h3><p class="user"><%= talk.suggester.email %></p></li>
+  <% unless talk.extra_detail_providers.empty? %>
+  <li class="extra_detail_providers"><h3>Extra detail provided by</h3><%= output_extra_detail_providers(talk) %></li>
+  <% end %>
+</ul>
