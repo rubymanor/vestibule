@@ -30,13 +30,13 @@ class ContributionTest < ActiveSupport::TestCase
       end
     end
 
-    should 'be valid if the kind is \'suggest\' or \'provide extra detail\'' do
-      ['suggest', 'provide extra detail'].each do |valid_kind|
+    should 'be valid if the kind is \'suggest\', \'provide extra detail\' or \'discuss\'' do
+      ['suggest', 'provide extra detail', 'discuss'].each do |valid_kind|
         @contribution.kind = valid_kind
         assert @contribution.valid?
       end
     end
-    should 'not be valid if the kind is not \'suggest\' or \'provide extra detail\'' do
+    should 'not be valid if the kind is not \'suggest\', \'provide extra detail\' or \'discuss\'' do
       ['provide_extra_detail', 'other kinds of contributions', '1234'].each do |invalid_kind|
         @contribution.kind = invalid_kind
         assert !@contribution.valid?
@@ -62,23 +62,55 @@ class ContributionTest < ActiveSupport::TestCase
     end
   end
 
+  context "discussions" do
+    setup do
+      @c1 = Factory.create(:contribution, :kind => 'discuss')
+      @c2 = Factory.create(:contribution, :kind => 'suggest')
+      @c3 = Factory.create(:contribution, :kind => 'provide extra detail')
+      @c4 = Factory.create(:contribution, :kind => 'discuss')
+    end
+
+    should 'not return any contributions that are of kind \'suggest\'' do
+      assert !Contribution.discussions.include?(@c2)
+    end
+
+    should 'not return any contributions that are of kind \'provide extra detail\'' do
+      assert !Contribution.discussions.include?(@c3)
+    end
+
+    should 'return all contributions that are of kind \'provide extra detail\'' do
+      assert Contribution.discussions.include?(@c1)
+      assert Contribution.discussions.include?(@c4)
+    end
+
+    should 'be empty when there are no discussions' do
+      Contribution.delete_all(:kind => 'discuss')
+      assert_empty Contribution.discussions
+    end
+  end
+
   context "providing_extra_detail" do
     setup do
       @c1 = Factory.create(:contribution, :kind => 'provide extra detail')
       @c2 = Factory.create(:contribution, :kind => 'suggest')
-      @c3 = Factory.create(:contribution, :kind => 'provide extra detail')
+      @c3 = Factory.create(:contribution, :kind => 'discuss')
+      @c4 = Factory.create(:contribution, :kind => 'provide extra detail')
     end
 
     should 'not return any contributions that are of kind \'suggest\'' do
       assert !Contribution.providing_extra_detail.include?(@c2)
     end
 
-    should 'return all contributions that are of kind \'provide extra detail\'' do
-      assert Contribution.providing_extra_detail.include?(@c1)
-      assert Contribution.providing_extra_detail.include?(@c3)
+    should 'not return any contributions that are of kind \'discuss\'' do
+      assert !Contribution.providing_extra_detail.include?(@c3)
     end
 
-    should 'be empty when there are no suggestions' do
+    should 'return all contributions that are of kind \'provide extra detail\'' do
+      assert Contribution.providing_extra_detail.include?(@c1)
+      assert Contribution.providing_extra_detail.include?(@c4)
+    end
+
+    should 'be empty when there are no extra details being provided' do
       Contribution.delete_all(:kind => 'provide extra detail')
       assert_empty Contribution.providing_extra_detail
     end
@@ -88,16 +120,21 @@ class ContributionTest < ActiveSupport::TestCase
     setup do
       @c1 = Factory.create(:contribution, :kind => 'suggest')
       @c2 = Factory.create(:contribution, :kind => 'provide extra detail')
-      @c3 = Factory.create(:contribution, :kind => 'suggest')
+      @c3 = Factory.create(:contribution, :kind => 'discuss')
+      @c4 = Factory.create(:contribution, :kind => 'suggest')
     end
 
     should 'not return any contributions that are of kind \'provide extra detail\'' do
       assert !Contribution.suggestions.include?(@c2)
     end
 
+    should 'not return any contributions that are of kind \'discuss\'' do
+      assert !Contribution.providing_extra_detail.include?(@c3)
+    end
+
     should 'return all contributions that are of kind \'suggest\'' do
       assert Contribution.suggestions.include?(@c1)
-      assert Contribution.suggestions.include?(@c3)
+      assert Contribution.suggestions.include?(@c4)
     end
 
     should 'be empty when there are no suggestions' do
