@@ -1,3 +1,5 @@
+require 'gravatar'
+
 module ApplicationHelper
   def render_page_title
     page_title = content_for(:page_title)
@@ -32,5 +34,9 @@ module ApplicationHelper
         content_tag :li, edp.email, :class => "user"
       end.join
     end
+  end
+
+  def gravatar_url(for_user)
+    Gravatar.gravatar_url(for_user, :size => 50, :default => 'monsterid')
   end
 end
