@@ -135,14 +135,17 @@ class ViewingTalksTest < IntegrationTestCase
     within '.contributors' do
       within '.suggester' do
         assert page.has_content?(@suggester.email)
+        i_can_see_the_gravatar_for_user(@suggester)
       end
 
       within '.extra_detail_providers' do
         assert page.has_content?(@extra_detail_provider.email)
+        i_can_see_the_gravatar_for_user(@extra_detail_provider)
       end
 
       within '.discussers' do
         assert page.has_content?(@discusser.email)
+        i_can_see_the_gravatar_for_user(@discusser)
       end
     end
   end

@@ -48,6 +48,12 @@ class UserAuthenticationTest < IntegrationTestCase
       assert has_content?("Signed in successfully.")
       assert has_css?("#user_nav", :text => @user.email)
     end
+
+    should "show the user a 50x50 version of their gravatar in the main user area" do
+      within('#user_nav') do
+        i_can_see_the_gravatar_for_user(@user)
+      end
+    end
   end
 
   context "When signed in" do

@@ -11,7 +11,7 @@
 <div id="header">
   <div id="user_nav">
     <% if user_signed_in? -%>
-      <span><%= current_user.email %></span>
+      <%= render 'shared/user', :user => current_user %>
       <span><%= link_to "Sign out", destroy_user_session_path %></span>
     <% else -%>
       <span><%= link_to "Sign up", new_user_registration_path %></span>

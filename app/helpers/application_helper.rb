@@ -31,8 +31,10 @@ module ApplicationHelper
     return if for_talk.send(of_kind).empty?
     content_tag :ul, :class => 'users' do
       providers = for_talk.send(of_kind).map do |edp|
-        content_tag :li, edp.email, :class => "user"
-      end.join
+        content_tag :li, :class => "user" do
+          render 'shared/user', :user => edp
+        end
+      end.join.html_safe
     end
   end
 
