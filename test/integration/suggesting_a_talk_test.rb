@@ -62,15 +62,6 @@ class SuggestingATalkTest < IntegrationTestCase
       end
     end
 
-    scenario "When I suggest a new talk, I am listed as the original suggester on the index page" do
-      visit new_talk_path
-      i_fill_in_and_suggest_a_talk with_title: 'The best little rubyhouse in Texas',
-                                   with_abstract: 'Ever wondered what it would be like to live in a house where everything is programmable via ruby?'
-      within '#talks .talk:first-child .suggester' do
-        assert page.has_content?(@me.email)
-      end
-    end
-
     scenario "When I view the page about a talk I am able to edit it to flesh out some of the details that the original suggester left blank, and this pushes the talk to the top of the list" do
       visit talk_path(@talk_1)
 
@@ -89,47 +80,6 @@ class SuggestingATalkTest < IntegrationTestCase
 
       within '#talks .talk:first-child' do
         assert page.has_content? @talk_1.title
-      end
-    end
-
-    scenario "When I provide more detail on a talk, I am listed as a person who provided more detail on the index page" do
-      visit edit_talk_path(@talk_1)
-      i_provde_more_detail_for_a_talk with_abstract: 'A whirlwind journey through why Ruby is so amazing.  I guarantee that by the end you\'ll be jumping with joy!',
-                                      with_why_its_interesting: 'Everyone is obsessed with technical details and performance of VMs etc.  I want to get back to the simple joys of why we all chose ruby in the first place.  We all had that "Oh yeah!" moment when learning Ruby, I want to remind you of it.'
-      click 'Back to talks'
-      within '#talks .talk:first-child .extra_detail_providers' do
-        assert page.has_content?(@me.email)
-      end
-    end
-
-    scenario "When I provide more detail on a talk, and I was the original suggester I am listed as both the suggester and as a person who provided more detail on the index page" do
-      @talk_1.suggester = @me
-      visit edit_talk_path(@talk_1)
-      i_provde_more_detail_for_a_talk with_abstract: 'A whirlwind journey through why Ruby is so amazing.  I guarantee that by the end you\'ll be jumping with joy!',
-                                      with_why_its_interesting: 'Everyone is obsessed with technical details and performance of VMs etc.  I want to get back to the simple joys of why we all chose ruby in the first place.  We all had that "Oh yeah!" moment when learning Ruby, I want to remind you of it.'
-      click 'Back to talks'
-      within '#talks .talk:first-child' do
-        within '.suggester' do
-          assert page.has_content?(@me.email)
-        end
-        within '.extra_detail_providers' do
-          assert page.has_content?(@me.email)
-        end
-      end
-    end
-
-    scenario "When I provide more detail on a talk, I am listed alongside other people who provided more detail on the index page" do
-      other_helpful_user = Factory(:user)
-      @talk_1.add_extra_detail_provider!(other_helpful_user)
-      visit edit_talk_path(@talk_1)
-      i_provde_more_detail_for_a_talk with_abstract: 'A whirlwind journey through why Ruby is so amazing.  I guarantee that by the end you\'ll be jumping with joy!',
-                                      with_why_its_interesting: 'Everyone is obsessed with technical details and performance of VMs etc.  I want to get back to the simple joys of why we all chose ruby in the first place.  We all had that "Oh yeah!" moment when learning Ruby, I want to remind you of it.'
-      click 'Back to talks'
-      within '#talks .talk:first-child' do
-        within '.extra_detail_providers' do
-          assert page.has_content?(@me.email)
-          assert page.has_content?(other_helpful_user.email)
-        end
       end
     end
 

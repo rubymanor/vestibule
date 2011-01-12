@@ -7,7 +7,6 @@ class FeedbacksControllerTest < ActionController::TestCase
       @valid_params = {:content => Faker::Lorem.paragraph}
       @invalid_params =  {:content => 's'}
       @talk.feedbacks.clear
-      @talk.contributions.discussions.clear
     end
 
     context "when the user is not signed in" do
@@ -37,12 +36,6 @@ class FeedbacksControllerTest < ActionController::TestCase
           post :create, :talk_id => @talk.to_param, :feedback => @valid_params
           new_feedback = @talk.feedbacks(true).first
           assert_equal @user, new_feedback.user
-        end
-
-        should "add a new 'discuss' contribution to the talk in question for the user" do
-          post :create, :talk_id => @talk.to_param, :feedback => @valid_params
-          new_contribution = @talk.contributions.discussions(true).first
-          assert_equal @user, new_contribution.user
         end
 
         should "ignore a talk_id param in the feedback params" do

@@ -1,9 +1,0 @@
-<ul class="contributors">
-  <li class="suggester"><h3>Originally suggested by</h3><p class="user"><%= render 'shared/user', :user => talk.suggester %></p></li>
-  <% unless talk.extra_detail_providers.empty? %>
-  <li class="extra_detail_providers"><h3>Extra detail provided by</h3><%= output_extra_detail_providers(talk) %></li>
-  <% end %>
-  <% unless talk.discussers.empty? %>
-  <li class="discussers"><h3>Discussed by</h3><%= output_discussers(talk) %></li>
-  <% end %>
-</ul>

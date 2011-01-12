@@ -16,7 +16,6 @@ class TalksController < ApplicationController
 
   def create
     @talk = Talk.new(params[:talk])
-    @talk.suggester= current_user
     if @talk.save
       redirect_to talks_path
     else
@@ -29,7 +28,6 @@ class TalksController < ApplicationController
 
   def update
     @talk.attributes = params[:talk]
-    @talk.add_extra_detail_provider(current_user)
     if @talk.save
       redirect_to talk_path(@talk)
     else

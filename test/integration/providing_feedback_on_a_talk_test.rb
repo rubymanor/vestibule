@@ -59,9 +59,6 @@ class ProvidingFeedbackOnATalkTest < IntegrationTestCase
           assert page.has_content?('This talk sounds really good so far. I\'d like to know if the presenter is going to cover some of the pain points that newbie sometimes feel when getting up and running, and how we might address those?')
         end
       end
-      within('.contributors .discussers') do
-        assert page.has_content?(@me.email)
-      end
     end
 
     scenario "When I visit the talks index, I can see at a glance how much feedback it has" do
