@@ -12,7 +12,6 @@
   <div id="user_nav">
     <% if user_signed_in? -%>
       <%= render 'shared/user', :user => current_user %>
-      <span><%= link_to 'Suggest a new talk', new_talk_path %></span>
       <span><%= link_to "Sign out", destroy_user_session_path %></span>
     <% else -%>
       <span><%= link_to "Sign up", new_user_registration_path %></span>

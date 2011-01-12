@@ -54,13 +54,6 @@ class UserAuthenticationTest < IntegrationTestCase
         i_can_see_the_gravatar_for_user(@user)
       end
     end
-
-    should "be invited to suggest a new talk" do
-      within('#user_nav') do
-        click_link "Suggest a new talk"
-        i_am_on new_talk_path
-      end
-    end
   end
 
   context "When signed in" do

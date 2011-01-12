@@ -19,15 +19,6 @@ ActiveRecord::Schema.define(:version => 20101017164103) do
     t.datetime "updated_at"
   end
 
-  create_table "talks", :force => true do |t|
-    t.string   "title",               :limit => 300, :null => false
-    t.text     "abstract"
-    t.text     "outline"
-    t.text     "why_its_interesting"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
