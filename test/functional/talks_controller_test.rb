@@ -45,12 +45,6 @@ class TalksControllerTest < ActionController::TestCase
       get :show, :id => @talk.to_param
       assert_equal @talk, assigns['talk']
     end
-
-    should "prepare a fresh feedback object as @new_feedback owned by this talk" do
-      get :show, :id => @talk.to_param
-      assert assigns['new_feedback'].new_record?
-      assert_equal @talk, assigns['new_feedback'].talk
-    end
   end
 
   context "the new action" do

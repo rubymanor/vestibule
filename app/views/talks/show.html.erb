@@ -50,21 +50,3 @@
   -%></p>
   <%- end -%>
 </div>
-
-<div id="feedback">
-  <%= render '/talks/feedback_info', :talk => @talk %>
-  <div id="feedback_items">
-    <%= render @talk.feedbacks.order('created_at') %>
-  </div>
-  <div id="feedback_actions">
-    <%- if user_signed_in? -%>
-    <%= simple_form_for [@talk, @new_feedback] do |f| %>
-      <%= f.error_notification %>
-      <%= f.input :content %>
-      <%= f.button :submit %>
-    <% end %>
-    <%- else -%>
-    <p>Sorry, you have to be logged in to leave feedback on talks.  Why not <%= link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>?</p>
-    <%- end -%>
-  </div>
-</div>

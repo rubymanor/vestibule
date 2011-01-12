@@ -7,7 +7,6 @@ class TalksController < ApplicationController
   end
 
   def show
-    @new_feedback = @talk.feedbacks.build
   end
 
   def new

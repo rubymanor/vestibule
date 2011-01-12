@@ -10,10 +10,6 @@ class TalkTest < ActiveSupport::TestCase
       assert @talk.save
     end
 
-    should "have no feedback yet" do
-      assert @talk.feedbacks.empty?
-    end
-
     should "require a title" do
       ['', nil].each do |missing_title|
         @talk.title = missing_title
