@@ -19,25 +19,6 @@ module ApplicationHelper
     current_user && !current_user.account.signup_reason.present? && !request.path[/account/]
   end
 
-  def output_extra_detail_providers(for_talk)
-    output_users(for_talk, :extra_detail_providers)
-  end
-
-  def output_discussers(for_talk)
-    output_users(for_talk, :discussers)
-  end
-
-  def output_users(for_talk, of_kind)
-    return if for_talk.send(of_kind).empty?
-    content_tag :ul, :class => 'users' do
-      providers = for_talk.send(of_kind).map do |edp|
-        content_tag :li, :class => "user" do
-          render 'shared/user', :user => edp
-        end
-      end.join.html_safe
-    end
-  end
-
   def gravatar_url(for_user)
     Gravatar.gravatar_url(for_user, :size => 50, :default => 'monsterid')
   end
