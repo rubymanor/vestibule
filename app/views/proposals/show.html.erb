@@ -11,7 +11,7 @@
 <ul class="suggestions">
   <% @proposal.suggestions.each do |suggestion| %>
     <%= content_tag_for(:li, suggestion) do %>
-      <p class="author"><%= render 'shared/account', :account => suggestion.author.account %></p>
+      <p class="author"><%= render 'shared/account', :account => suggestion.author %></p>
       <p class="body"><%= suggestion.body %></p>
     <% end %>
   <% end %>
