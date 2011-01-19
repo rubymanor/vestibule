@@ -22,8 +22,8 @@ en:
     #   username: 'User name to sign in.'
     #   password: 'No special characters, please.'
     labels:
-      feedback:
-        content: 'Feedback'
+      suggestion:
+        body: 'Suggestion'
     hints:
       proposal:
         title: 'This is all we need from you for your suggestion.  Think of something snappy.'

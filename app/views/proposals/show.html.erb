@@ -7,3 +7,18 @@
 <% if @proposal.proposed_by?(current_account) %>
   <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
 <% end %>
+
+<ul class="suggestions">
+  <% @proposal.suggestions.each do |suggestion| %>
+    <%= content_tag_for(:li, suggestion) do %>
+      <p class="author"><%= render 'shared/account', :account => suggestion.author.account %></p>
+      <p class="body"><%= suggestion.body %></p>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= simple_form_for [@proposal, @proposal.suggestions.build] do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :body %>
+  <%= f.submit %>
+<% end %>
