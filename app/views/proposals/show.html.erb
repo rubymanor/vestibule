@@ -3,3 +3,7 @@
   <p><%= @proposal.description %></p>
   <p><%= @proposal.proposer.email %></p>
 </div>
+
+<% if @proposal.proposed_by?(current_account) %>
+  <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
+<% end %>

@@ -24,4 +24,10 @@ module SimpleSteps
       assert page.has_content?(message)
     end
   end
+
+  def i_am_alerted(message)
+    within ".alert" do
+      assert page.has_content?(message)
+    end
+  end
 end

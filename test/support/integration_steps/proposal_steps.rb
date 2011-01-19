@@ -7,7 +7,7 @@ module ProposalSteps
 
     fill_in "Title", :with => options[:title]
     fill_in "Description", :with => options[:description]
-    click_button "Propose"
+    click_button "Create Proposal"
   end
 
   def assert_page_has_proposal(options)
