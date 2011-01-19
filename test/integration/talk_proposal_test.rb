@@ -15,15 +15,18 @@ class TalkProposalTest < IntegrationTestCase
   end
 
   context "Given I am logged in" do
-    setup { sign_in }
+    setup do
+      @account = Factory(:account, :email => 'tom@example.com')
+      sign_in(@account)
+    end
 
     context "and I propose a talk with all the required details" do
       setup { propose_talk :title => "My Amazing Talk" }
 
-      should "be able to see the proposal on the site" do
+      should "be able to see my proposal on the site" do
         visit talks_path
         click_link "My Amazing Talk"
-        assert_page_has_talk :title => "My Amazing Talk"
+        assert_page_has_talk :title => "My Amazing Talk", :proposer => 'tom@example.com'
       end
     end
   end

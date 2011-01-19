@@ -14,8 +14,7 @@ class TalksController < ApplicationController
   end
 
   def create
-    @talk = Talk.new(params[:talk])
-    @talk.save!
+    @talk = current_account.talks.create!(params[:talk])
     redirect_to talks_path
   end
 end
