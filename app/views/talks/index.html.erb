@@ -1,0 +1,9 @@
+<h1>Talks</h1>
+
+<ul>
+  <% for talk in @talks %>
+    <li><%= link_to talk.title, talk %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Propose talk", new_talk_path %>
