@@ -6,4 +6,6 @@
   <% end %>
 </ul>
 
-<%= link_to "Propose talk", new_talk_path %>
+<% if account_signed_in? %>
+  <%= link_to "Propose talk", new_talk_path %>
+<% end %>

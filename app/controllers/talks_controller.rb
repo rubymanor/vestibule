@@ -1,4 +1,6 @@
-class TalksController < ActionController::Base
+class TalksController < ApplicationController
+  before_filter :authenticate_account!
+
   def index
     @talks = Talk.all
   end

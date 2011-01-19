@@ -10,4 +10,11 @@ module SimpleSteps
       end
     end
   end
+
+  def i_am_asked_to_sign_in
+    assert_equal new_account_session_path, current_path
+    within ".alert" do
+      assert page.has_content?("You need to sign in or sign up before continuing.")
+    end
+  end
 end

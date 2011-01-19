@@ -3,7 +3,15 @@ require "test_helper"
 class TalkProposalTest < IntegrationTestCase
   
   context "As a visitor to the site" do
-    should "not be able to propose a talk"
+    should "not see a link to propose a talk" do
+      visit talks_path
+      assert !page.has_content?("Propose talk"), "link to propose talk should not be present!"
+    end
+
+    should "not be able to propose a talk" do
+      visit new_talk_path
+      i_am_asked_to_sign_in
+    end
   end
 
   context "Given I am logged in" do

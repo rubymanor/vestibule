@@ -1,5 +1,7 @@
 module TalkSteps
-  def propose_talk(options)
+  def propose_talk(options = {})
+    options = options.reverse_merge(:title => 'A talk')
+
     visit talks_path
     click_link "Propose talk"
 
