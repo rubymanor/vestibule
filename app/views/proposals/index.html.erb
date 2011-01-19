@@ -1,0 +1,11 @@
+<h1>Talk proposals</h1>
+
+<ul class="proposals">
+  <% for proposal in @proposals %>
+    <li><%= link_to proposal.title, proposal %></li>
+  <% end %>
+</ul>
+
+<% if account_signed_in? %>
+  <%= link_to "Propose talk", new_proposal_path %>
+<% end %>

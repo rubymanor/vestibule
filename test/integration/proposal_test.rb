@@ -1,32 +1,32 @@
 require "test_helper"
 
-class TalkProposalTest < IntegrationTestCase
+class ProposalTest < IntegrationTestCase
   
   context "As a visitor to the site" do
     should "not see a link to propose a talk" do
-      visit talks_path
+      visit proposals_path
       assert !page.has_content?("Propose talk"), "link to propose talk should not be present!"
     end
 
     should "not be able to propose a talk" do
-      visit new_talk_path
+      visit new_proposal_path
       i_am_asked_to_sign_in
     end
 
-    context "given a talk already exists" do
+    context "given a proposal already exists" do
       setup do
-        Factory(:talk, :title => "Ruby Muby Schmuby")
+        Factory(:proposal, :title => "Ruby Muby Schmuby")
       end
 
       should "be able to see the list of proposals" do
-        visit talks_path
-        assert page.has_css?('ul.talks')
+        visit proposals_path
+        assert page.has_css?('ul.proposals')
       end
 
       should "be able to read individual proposals" do
-        visit talks_path
+        visit proposals_path
         click_link "Ruby Muby Schmuby"
-        assert_page_has_talk :title => "Ruby Muby Schmuby"
+        assert_page_has_proposal :title => "Ruby Muby Schmuby"
       end
     end
   end
@@ -41,9 +41,9 @@ class TalkProposalTest < IntegrationTestCase
       setup { propose_talk :title => "My Amazing Talk" }
 
       should "be able to see my proposal on the site" do
-        visit talks_path
+        visit proposals_path
         click_link "My Amazing Talk"
-        assert_page_has_talk :title => "My Amazing Talk", :proposer => 'tom@example.com'
+        assert_page_has_proposal :title => "My Amazing Talk", :proposer => 'tom@example.com'
       end
     end
   end
