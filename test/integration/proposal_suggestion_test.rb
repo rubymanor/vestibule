@@ -39,8 +39,18 @@ class ProposalSuggestionTest < IntegrationTestCase
         click_button "Create Suggestion"
         i_am_warned_about Suggestion, :body, "can't be blank"
       end
+
+      should "not be able to make a '+1' suggestion" do
+        fill_in "Suggestion", :with => "+1"
+        click_button "Create Suggestion"
+        i_am_warned_about Suggestion, :body, "should contain some concrete suggestions about how to develop this proposal"
+      end
+
+      should "not be able to make a '-1' suggestion" do
+        fill_in "Suggestion", :with => "-1"
+        click_button "Create Suggestion"
+        i_am_warned_about Suggestion, :body, "should contain some concrete suggestions about how to develop this proposal"
+      end
     end
-
   end
-
 end
