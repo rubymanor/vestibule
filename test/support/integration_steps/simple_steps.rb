@@ -17,4 +17,11 @@ module SimpleSteps
       assert page.has_content?("You need to sign in or sign up before continuing.")
     end
   end
+
+  def i_am_warned_about(klass, attribute, message)
+    id = [klass.name.underscore, attribute].join("_")
+    within "\##{id} + span.error" do
+      assert page.has_content?(message)
+    end
+  end
 end

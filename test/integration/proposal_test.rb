@@ -49,6 +49,14 @@ class ProposalTest < IntegrationTestCase
           :proposer     => 'tom@example.com'
       end
     end
+
+    context "and I propose a talk without a title" do
+      setup { propose_talk :title => nil }
+
+      should "alert me that the title is required" do
+        i_am_warned_about Proposal, :title, "can't be blank"
+      end
+    end
   end
 
 end

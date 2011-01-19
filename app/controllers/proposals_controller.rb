@@ -14,7 +14,11 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    @proposal = current_account.proposals.create!(params[:proposal])
-    redirect_to proposals_path
+    @proposal = current_account.proposals.new(params[:proposal])
+    if @proposal.save
+      redirect_to proposals_path
+    else
+      render :new
+    end
   end
 end
