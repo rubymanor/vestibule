@@ -12,7 +12,7 @@ module TalkSteps
   def assert_page_has_talk(options)
     within(".talk") do
       assert page.has_content?(options[:title])
-      assert page.has_content?(options[:proposer])
+      assert page.has_content?(options[:proposer]) if options[:proposer]
     end
   end
 end

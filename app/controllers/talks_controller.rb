@@ -1,5 +1,5 @@
 class TalksController < ApplicationController
-  before_filter :authenticate_account!
+  before_filter :authenticate_account!, :except => [:index, :show]
 
   def index
     @talks = Talk.all

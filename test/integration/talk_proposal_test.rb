@@ -12,6 +12,23 @@ class TalkProposalTest < IntegrationTestCase
       visit new_talk_path
       i_am_asked_to_sign_in
     end
+
+    context "given a talk already exists" do
+      setup do
+        Factory(:talk, :title => "Ruby Muby Schmuby")
+      end
+
+      should "be able to see the list of proposals" do
+        visit talks_path
+        assert page.has_css?('ul.talks')
+      end
+
+      should "be able to read individual proposals" do
+        visit talks_path
+        click_link "Ruby Muby Schmuby"
+        assert_page_has_talk :title => "Ruby Muby Schmuby"
+      end
+    end
   end
 
   context "Given I am logged in" do

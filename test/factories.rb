@@ -9,3 +9,8 @@ Factory.define(:user) do |f|
   f.signup_reason "I want to get involved with the content of the conference day"
   f.association :account
 end
+
+Factory.define(:talk) do |f|
+  f.title "My Wonderous Pontifications"
+  f.association :proposer, :factory => :user
+end
