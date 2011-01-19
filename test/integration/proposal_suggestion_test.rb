@@ -9,7 +9,13 @@ class ProposalSuggestionTest < IntegrationTestCase
     end
 
     context "a visitor viewing the proposal" do
-      should "not be able to suggest anything"
+      setup do
+        visit proposal_path(@proposal)
+      end
+
+      should "not be able to suggest anything" do
+        refute page.has_css?("form[action='#{proposal_suggestions_path(@proposal)}']")
+      end
     end
 
     context "a logged in user viewing the proposal" do

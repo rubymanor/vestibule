@@ -17,8 +17,10 @@
   <% end %>
 </ul>
 
-<%= simple_form_for [@proposal, @proposal.suggestions.build] do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :body %>
-  <%= f.submit %>
+<% if account_signed_in? %>
+  <%= simple_form_for [@proposal, @proposal.suggestions.build] do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :body %>
+    <%= f.submit %>
+  <% end %>
 <% end %>
