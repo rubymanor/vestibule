@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_one :user
-  delegate :proposals, :to => :user
+  delegate :proposals, :suggestions, :to => :user
 
   after_create :create_user
 

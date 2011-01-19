@@ -34,6 +34,11 @@ class ProposalSuggestionTest < IntegrationTestCase
           assert page.has_content?("I think you should focus on the first bit")
         end
       end
+
+      should "not be able to make an empty suggestion" do
+        click_button "Create Suggestion"
+        i_am_warned_about Suggestion, :body, "can't be blank"
+      end
     end
 
   end
