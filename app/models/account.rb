@@ -9,9 +9,4 @@ class Account < ActiveRecord::Base
   delegate :proposals, :suggestions, :to => :user
 
   after_create :create_user
-
-  protected
-  def create_user
-    User.create!(:account_id => self.id)
-  end
 end
