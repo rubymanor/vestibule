@@ -38,12 +38,15 @@ class ProposalTest < IntegrationTestCase
     end
 
     context "and I propose a talk with all the required details" do
-      setup { propose_talk :title => "My Amazing Talk" }
+      setup { propose_talk :title => "My Amazing Talk", :description => 'This talk is amazing.' }
 
       should "be able to see my proposal on the site" do
         visit proposals_path
         click_link "My Amazing Talk"
-        assert_page_has_proposal :title => "My Amazing Talk", :proposer => 'tom@example.com'
+        assert_page_has_proposal \
+          :title        => "My Amazing Talk",
+          :description  => 'This talk is amazing.',
+          :proposer     => 'tom@example.com'
       end
     end
   end
