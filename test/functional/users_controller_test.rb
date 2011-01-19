@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class AccountsControllerTest < ActionController::TestCase
+class UsersControllerTest < ActionController::TestCase
   context "When logged in" do
     setup do
-      @user = Factory(:user)
-      sign_in @user
+      @account = Factory(:account)
+      sign_in @account
     end
 
     [:show, :edit].each do |action|
@@ -13,19 +13,19 @@ class AccountsControllerTest < ActionController::TestCase
           get action
         end
 
-        should assign_to(:account) { @user.account }
+        should assign_to(:user) { @account.user }
         should render_template(action)
       end
     end
 
     context "on #PUT to update with a signup_reason" do
       setup do
-        put :update, :account => {:signup_reason => "Because I want to learn"}
+        put :update, :user => {:signup_reason => "Because I want to learn"}
       end
-      should set_the_flash.to("Succesfully updated account.")
+      should set_the_flash.to("Successfully updated user.")
 
       should "update the signup reason" do
-        assert_equal "Because I want to learn", @user.account.reload.signup_reason
+        assert_equal "Because I want to learn", @account.user.reload.signup_reason
       end
     end
   end

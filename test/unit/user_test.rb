@@ -1,22 +1,17 @@
-require 'test_helper'
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  context "A user" do
+  context "An account" do
     setup do
-      @user = Factory(:user)
+      @user = Factory(:user, :account => Factory(:account))
     end
-    subject { @user }
 
     should "be valid" do
       assert @user.valid?
     end
 
-    should "create an account" do
-      assert @user.account.present?
-    end
-
-    should allow_value("bob@example.com").for(:email)
-    should_not allow_value("bob").for(:email)
-    should have_one(:account)
+    should belong_to(:account)
+    should validate_presence_of(:account_id)
   end
+
 end

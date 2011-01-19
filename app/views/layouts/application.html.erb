@@ -9,22 +9,22 @@
 <body>
 
 <div id="header">
-  <div id="user_nav">
-    <% if user_signed_in? -%>
-      <%= render 'shared/user', :user => current_user %>
-      <span><%= link_to "Sign out", destroy_user_session_path %></span>
+  <div id="account_nav">
+    <% if account_signed_in? -%>
+      <%= render 'shared/account', :account => current_account %>
+      <span><%= link_to "Sign out", destroy_account_session_path %></span>
     <% else -%>
-      <span><%= link_to "Sign up", new_user_registration_path %></span>
-      <span><%= link_to "Sign in", new_user_session_path %></span>
+      <span><%= link_to "Sign up", new_account_registration_path %></span>
+      <span><%= link_to "Sign in", new_account_session_path %></span>
     <% end -%>
   </div>
 </div>
 
 <%= render :partial => "shared/notices" %>
 
-<% if remind_user_for_signup_reason -%>
+<% if remind_account_for_signup_reason -%>
   <p>You haven't provided a reason on why you signed up yet.</p>
-  <p><%= link_to "Provide one now", edit_account_path %></p>
+  <p><%= link_to "Provide one now", edit_user_path %></p>
 <% end -%>
 
 <%= yield %>

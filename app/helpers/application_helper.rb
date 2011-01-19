@@ -15,11 +15,11 @@ module ApplicationHelper
     content_tag :h1, new_page_title
   end
 
-  def remind_user_for_signup_reason
-    current_user && !current_user.account.signup_reason.present? && !request.path[/account/]
+  def remind_account_for_signup_reason
+    current_account && !current_account.user.signup_reason.present? && !request.path[/user/]
   end
 
-  def gravatar_url(for_user)
-    Gravatar.gravatar_url(for_user, :size => 50, :default => 'monsterid')
+  def gravatar_url(for_account)
+    Gravatar.gravatar_url(for_account, :size => 50, :default => 'monsterid')
   end
 end

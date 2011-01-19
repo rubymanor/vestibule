@@ -22,7 +22,7 @@ class ReasonTest < IntegrationTestCase
       context "be able to update the sign up reason" do
         setup do
           fill_in "Signup reason", :with => "I have signed up because I want to help shape the content"
-          click_button "Update Account"
+          click_button "Update User"
         end
 
         should "show new sign up reason" do

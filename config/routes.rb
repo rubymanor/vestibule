@@ -1,7 +1,7 @@
 Vestibule::Application.routes.draw do
-  devise_for :users
+  devise_for :accounts
 
-  resource :account, :only => [:edit, :update, :show]
+  resource :user, :only => [:edit, :update, :show]
 
-  root :to => "accounts#show"
+  root :to => "users#show"
 end
