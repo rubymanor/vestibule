@@ -25,8 +25,6 @@ en:
       feedback:
         content: 'Feedback'
     hints:
-      talk:
+      proposal:
         title: 'This is all we need from you for your suggestion.  Think of something snappy.'
-        abstract: 'A general description of what this talk is about.  The sort of thing that might appear in a conference program or schedule to give a bit more context than just the title alone.'
-        outline: 'A much more in-depth description of the exact topics this talk will cover.  This could be as detailed as a full slide plan.'
-        why_its_interesting: 'Finally, tell us why you think this talk will be interesting.'
+        description: 'Tell everyone a bit more about what your talk is about. The community will help you develop this into a description of exactly what to expect from your talk.'
