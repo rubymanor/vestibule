@@ -4,7 +4,21 @@ class Proposal < ActiveRecord::Base
 
   validates :title, :presence => true
 
+  scope :without_suggestions_from, lambda { |user|
+    if user.suggestions.any?
+      where('id NOT IN (?)', user.suggestions.map{ |s| s.proposal_id }.uniq)
+    end
+  }
+
+  scope :not_proposed_by, lambda { |user|
+    where('id NOT IN (?)', user.proposal_ids)
+  }
+
   def proposed_by?(account)
     proposer.account == account
+  end
+
+  def new_suggestions
+    suggestions.after(self.updated_at)
   end
 end

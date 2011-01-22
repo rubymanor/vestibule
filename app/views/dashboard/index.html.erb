@@ -1,0 +1,25 @@
+<h2>Your proposals</h2>
+<ul id="your-proposals">
+  <% @your_proposals.each do |proposal| %>
+  <%= content_tag_for(:li, proposal) do%>
+    <%= link_to proposal.title, proposal %>
+    <% if proposal.new_suggestions.any? %>
+      <%= pluralize proposal.new_suggestions.count, "new suggestion" %>
+    <% end %>
+  <% end %>
+  <% end %>
+</ul>
+
+<h2>You should consider giving some suggestions about these proposals</h2>
+<ul id="you-should-look-at-these">
+  <% @proposals_you_should_look_at.each do |proposal| %>
+  <li><%= link_to proposal.title, proposal %></li>
+  <% end %>
+</ul>
+
+<h2>These proposals have been updated since you last made a suggestion</h2>
+<ul id="things-have-changed">
+  <% @proposals_that_have_changed.each do |proposal| %>
+  <li><%= link_to proposal.title, proposal %></li>
+  <% end %>
+</ul>

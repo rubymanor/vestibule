@@ -6,5 +6,7 @@ Vestibule::Application.routes.draw do
     resources :suggestions, :only => [:create]
   end
 
-  root :to => "users#show"
+  match "/dashboard", :to => "dashboard#index"
+
+  root :to => "proposals#index"
 end

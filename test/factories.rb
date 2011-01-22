@@ -11,6 +11,12 @@ Factory.define(:user) do |f|
 end
 
 Factory.define(:proposal) do |f|
-  f.title "My Wonderous Pontifications"
+  f.sequence(:title) { |n| Faker::Lorem.sentence + " #{n}" }
   f.association :proposer, :factory => :user
+end
+
+Factory.define(:suggestion) do |f|
+  f.association :proposal
+  f.association :author, :factory => :user
+  f.body { Faker::Lorem.paragraph }
 end
