@@ -40,7 +40,7 @@ class DashboardTest < IntegrationTestCase
         end
 
         should "show in the list that there are new suggestions" do
-          within("#your-proposals ##{ActionController::RecordIdentifier.dom_id(@my_proposal)}") do
+          within_object("#your-proposals", @my_proposal) do
             assert page.has_content?("2 new suggestions"), "proposal should indicate it has new suggestions"
           end
         end
@@ -53,7 +53,7 @@ class DashboardTest < IntegrationTestCase
           end
 
           should "show in the list that there are no new suggestions" do
-            within("#your-proposals ##{ActionController::RecordIdentifier.dom_id(@my_proposal)}") do
+            within_object("#your-proposals", @my_proposal) do
               assert !page.has_content?('new suggestions'), "proposal should not appear to have new suggestions"
             end
           end

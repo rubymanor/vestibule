@@ -39,6 +39,11 @@ class IntegrationTestCase < ActiveSupport::TestCase
     include const_get(File.basename(hotfix).gsub(/\.rb$/,'').camelcase)
   end
 
+  def within_object(*args, &block)
+    selector = args.map { |a| a.is_a?(String) ? a : "##{ActionController::RecordIdentifier.dom_id(a)}" }.join(" ")
+    within(selector, &block)
+  end
+
   class << self
     alias :scenario :should
   end
