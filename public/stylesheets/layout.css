@@ -1,0 +1,27 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#header, #notices, #content {
+  padding: 0.5em 1em;
+}
+
+#header {
+  background-color: #999;
+  font-size: 80%;
+  overflow: auto;
+}
+
+#header #site_title {
+  float: left;
+}
+
+#header #account_nav {
+  float: right;
+}
+
+#notices {
+  background-color: #ccc;
+  font-size: 90%;
+}

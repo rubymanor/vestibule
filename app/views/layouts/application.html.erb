@@ -9,6 +9,7 @@
 <body>
 
 <div id="header">
+  <h1 id="site_title">Vestibule</h1>
   <div id="account_nav">
     <% if account_signed_in? -%>
       <%= render 'shared/account', :account => current_account %>
@@ -20,14 +21,17 @@
   </div>
 </div>
 
-<%= render :partial => "shared/notices" %>
+<div id="notices">
+  <%= render :partial => "shared/notices" %>
 
-<% if remind_account_for_signup_reason -%>
-  <p>You haven't provided a reason on why you signed up yet.</p>
-  <p><%= link_to "Provide one now", edit_user_path %></p>
-<% end -%>
+  <% if remind_account_for_signup_reason -%>
+    <p>You haven't provided a reason on why you signed up yet. <%= link_to "Provide one now", edit_user_path %></p>
+  <% end -%>
+</div>
 
-<%= yield %>
+<div id="content">
+  <%= yield %>
+</div>
 
 </body>
 </html>
