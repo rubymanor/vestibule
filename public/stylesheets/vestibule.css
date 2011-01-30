@@ -9,3 +9,13 @@ span.avatar {
   display: inline-block;
   vertical-align: middle;
 }
+
+#proposal {
+  float: left;
+  width: 45%;
+}
+
+#suggestions {
+  float: right;
+  width: 45%;
+}

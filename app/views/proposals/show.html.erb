@@ -1,26 +1,33 @@
-<div class="proposal">
-  <h1><%= @proposal.title %></h1>
-  <div class="description"><%= markdown @proposal.description %></div>
-  <p><%= @proposal.proposer.email %></p>
+<div id="proposal">
+  <div class="proposal">
+    <h1><%= @proposal.title %></h1>
+    <div class="description"><%= markdown @proposal.description %></div>
+    <p>Proposed by: <%= @proposal.proposer.email %></p>
+  </div>
+
+  <% if @proposal.proposed_by?(current_account) %>
+    <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
+  <% end %>
 </div>
 
-<% if @proposal.proposed_by?(current_account) %>
-  <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
-<% end %>
+<div id="suggestions">
+  <h2>Suggestions</h2>
+  <ul class="suggestions">
+    <% @proposal.suggestions.each do |suggestion| %>
+      <%= content_tag_for(:li, suggestion) do %>
+        <p class="author"><%= render 'shared/account', :account => suggestion.author %></p>
+        <p class="body"><%= suggestion.body %></p>
+      <% end %>
+    <% end %>
+  </ul>
 
-<ul class="suggestions">
-  <% @proposal.suggestions.each do |suggestion| %>
-    <%= content_tag_for(:li, suggestion) do %>
-      <p class="author"><%= render 'shared/account', :account => suggestion.author %></p>
-      <p class="body"><%= suggestion.body %></p>
+  <% if account_signed_in? %>
+    <p>Help <%= @proposal.proposer.email %> develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
+
+    <%= simple_form_for [@proposal, @suggestion] do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :body %>
+      <%= f.submit %>
     <% end %>
   <% end %>
-</ul>
-
-<% if account_signed_in? %>
-  <%= simple_form_for [@proposal, @suggestion] do |f| %>
-    <%= f.error_notification %>
-    <%= f.input :body %>
-    <%= f.submit %>
-  <% end %>
-<% end %>
+</div>
