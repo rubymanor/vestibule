@@ -9,7 +9,7 @@
 <body>
 
 <div id="header">
-  <h1 id="site_title">Vestibule</h1>
+  <h1 id="site_title"><%= link_to "Vestibule", "/" %></h1>
   <div id="account_nav">
     <% if account_signed_in? -%>
       <%= render 'shared/account', :account => current_account %>
