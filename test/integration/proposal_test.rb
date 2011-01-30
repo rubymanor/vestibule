@@ -98,6 +98,27 @@ class ProposalTest < IntegrationTestCase
       end
     end
 
+    context "and I propose a talk with markdown-formatted description" do
+      setup do
+        propose_talk :title => "My Amazing Talk", :description => %{
+# A moment in time
+
+blah blah blah
+        }.strip
+      end
+
+      should "be able to see my proposal with a formatted description" do
+        visit proposals_path
+        click_link "My Amazing Talk"
+        within_proposal do
+          within(".description") do
+            page.has_content?("<h1>A moment in time</h1>")
+            page.has_content?("<p>blah blah blah</p>")
+          end
+        end
+      end
+    end
+
     context "and I propose a talk without a title" do
       setup { propose_talk :title => nil }
 

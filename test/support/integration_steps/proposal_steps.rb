@@ -10,9 +10,13 @@ module ProposalSteps
     click_button "Create Proposal"
   end
 
+  def within_proposal(&block)
+    within(".proposal", &block)
+  end
+
   def assert_page_has_proposal(options)
-    within(".proposal") do
-      assert page.has_content?(options[:title])
+    within_proposal do
+      assert page.has_content?(options[:title]) if options[:title]
       assert page.has_content?(options[:proposer]) if options[:proposer]
       assert page.has_content?(options[:description]) if options[:description]
     end

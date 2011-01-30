@@ -1,4 +1,5 @@
 require 'gravatar'
+require 'rdiscount'
 
 module ApplicationHelper
   def render_page_title
@@ -21,5 +22,14 @@ module ApplicationHelper
 
   def gravatar_url(for_account)
     Gravatar.gravatar_url(for_account, :size => 50, :default => 'monsterid')
+  end
+
+  def markdown(text)
+    if text
+      markdown = RDiscount.new(text)
+      markdown.to_html.html_safe
+    else
+      nil
+    end
   end
 end

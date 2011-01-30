@@ -1,6 +1,6 @@
 <div class="proposal">
   <h1><%= @proposal.title %></h1>
-  <p><%= @proposal.description %></p>
+  <div class="description"><%= markdown @proposal.description %></div>
   <p><%= @proposal.proposer.email %></p>
 </div>
 
