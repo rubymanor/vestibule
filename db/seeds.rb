@@ -13,8 +13,11 @@ def account(name)
 end
 
 def suggestions_for(proposal, suggestions)
+  now = Time.now
+
   suggestions.each do |(author, body)|
-    proposal.suggestions.create :author => author.user, :body => body
+    proposal.suggestions.create :author => author.user, :body => body, :created_at => now, :updated_at => now
+    now += 30.minutes
   end
 end
 
