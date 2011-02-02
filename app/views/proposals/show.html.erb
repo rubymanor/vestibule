@@ -12,15 +12,6 @@
 
 <div id="suggestions">
   <h2>Suggestions</h2>
-  <ul class="suggestions">
-    <% @proposal.suggestions.each do |suggestion| %>
-      <%= content_tag_for(:li, suggestion) do %>
-        <p class="author"><%= render 'shared/account', :account => suggestion.author %></p>
-        <p class="body"><%= suggestion.body %></p>
-      <% end %>
-    <% end %>
-  </ul>
-
   <% if account_signed_in? %>
     <p>Help <%= @proposal.proposer.email %> develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
 
@@ -30,4 +21,13 @@
       <%= f.submit %>
     <% end %>
   <% end %>
+
+  <ul class="suggestions">
+    <% @proposal.suggestions.each do |suggestion| %>
+      <%= content_tag_for(:li, suggestion) do %>
+        <p class="author"><%= render 'shared/account', :account => suggestion.author %></p>
+        <p class="body"><%= suggestion.body %></p>
+      <% end %>
+    <% end %>
+  </ul>
 </div>
