@@ -8,5 +8,5 @@ Vestibule::Application.routes.draw do
 
   match "/dashboard", :to => "dashboard#index"
 
-  root :to => "proposals#index"
+  root :to => "home#index"
 end
