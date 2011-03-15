@@ -91,9 +91,18 @@ class DashboardTest < IntegrationTestCase
           end
         end
 
-        should "not see that talk in my list of proposals with recent activity" do
-          within('#things-have-changed') do
-            assert !page.has_content?(@proposal1.title), "proposal1 shouldn't be in the changed list"
+        context "and I have made suggestions for other talks with recent activity" do
+          setup do
+            Factory(:suggestion, :author => @me.user, :proposal => @proposal2)
+            Timecop.travel 10.minutes
+            @proposal2.update_attributes! :description => 'Now more interesting than before.'
+            visit '/dashboard'
+          end
+
+          should "not see that talk in my list of proposals with recent activity" do
+            within('#things-have-changed') do
+              assert !page.has_content?(@proposal1.title), "proposal1 shouldn't be in the changed list"
+            end
           end
         end
 
