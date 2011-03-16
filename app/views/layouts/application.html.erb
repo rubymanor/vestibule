@@ -26,7 +26,7 @@
 </header>
 
 <section id="notices">
-  <%= render :partial => "shared/notices" %>
+  <%= render "shared/notices" %>
 
   <% if remind_account_for_signup_reason -%>
     <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path %></p>
