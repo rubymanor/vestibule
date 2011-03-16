@@ -32,6 +32,7 @@ class IntegrationTestCase < ActiveSupport::TestCase
   teardown do
     DatabaseCleaner.clean
     Warden.test_reset!
+    Timecop.return
   end
 
   Dir["#{Rails.root}/test/support/integration_steps/*.rb"].each do |hotfix|
