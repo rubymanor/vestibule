@@ -3,22 +3,22 @@ body {
   margin: 0 0 2em 0;
 }
 
-#header, #notices, #content {
+header, #notices, #content {
   padding: 0.5em 1em;
 }
 
-#header {
+header {
   background-color: #999;
   font-size: 80%;
   overflow: auto;
 }
 
-#header #site_title {
+header #site_title {
   float: left;
   font-family: 'Lobster', arial, serif;
 }
 
-#header #account_nav {
+header nav {
   float: right;
 }
 

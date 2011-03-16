@@ -29,7 +29,7 @@ class AccountAuthenticationTest < IntegrationTestCase
 
       should "confirm the account and sign in user" do
         assert page.has_content?("Your account was successfully confirmed. You are now signed in.")
-        assert page.has_css?("#account_nav", :text => "john@example.com")
+        assert page.has_css?("header nav", :text => "john@example.com")
       end
     end
   end
@@ -46,11 +46,11 @@ class AccountAuthenticationTest < IntegrationTestCase
 
     should "sign in and tell the user" do
       assert has_content?("Signed in successfully.")
-      assert has_css?("#account_nav", :text => @account.email)
+      assert has_css?("header nav", :text => @account.email)
     end
 
     should "show the user a 50x50 version of their gravatar in the main user area" do
-      within('#account_nav') do
+      within('header nav') do
         i_can_see_the_gravatar_for_account(@account)
       end
     end
@@ -64,7 +64,7 @@ class AccountAuthenticationTest < IntegrationTestCase
     should "be able to sign out" do
       visit "/"
       click_link "Sign out"
-      assert page.has_css?("#account_nav", :text => "Sign in")
+      assert page.has_css?("header nav", :text => "Sign in")
     end
   end
 

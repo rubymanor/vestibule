@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<div id="header">
+<header>
   <h1 id="site_title"><%= link_to "Vestibule", "/" %></h1>
-  <div id="account_nav">
+  <nav>
     <% if account_signed_in? -%>
       <%= render 'shared/account', :account => current_account %>
       <span><%= link_to "Sign out", destroy_account_session_path %></span>
@@ -22,20 +22,20 @@
       <span><%= link_to "Sign up", new_account_registration_path %></span>
       <span><%= link_to "Sign in", new_account_session_path %></span>
     <% end -%>
-  </div>
-</div>
+  </nav>
+</header>
 
-<div id="notices">
+<section id="notices">
   <%= render :partial => "shared/notices" %>
 
   <% if remind_account_for_signup_reason -%>
     <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path %></p>
   <% end -%>
-</div>
+</section>
 
-<div id="content">
+<section id="content">
   <%= yield %>
-</div>
+</section>
 
 </body>
 </html>
