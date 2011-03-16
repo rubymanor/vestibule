@@ -15,6 +15,7 @@ body {
 
 #header #site_title {
   float: left;
+  font-family: 'Lobster', arial, serif;
 }
 
 #header #account_nav {
