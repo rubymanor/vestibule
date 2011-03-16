@@ -13,14 +13,14 @@
 <body>
 
 <header>
-  <h1 id="site_title"><%= link_to "Vestibule", "/" %></h1>
+  <h1><%= link_to "Vestibule", root_path %></h1>
   <nav>
     <% if account_signed_in? -%>
       <%= render 'shared/account', :account => current_account %>
-      <span><%= link_to "Sign out", destroy_account_session_path %></span>
+      <%= link_to "Sign out", destroy_account_session_path %>
     <% else -%>
-      <span><%= link_to "Sign up", new_account_registration_path %></span>
-      <span><%= link_to "Sign in", new_account_session_path %></span>
+      <%= link_to "Sign up", new_account_registration_path %>
+      <%= link_to "Sign in", new_account_session_path %>
     <% end -%>
   </nav>
 </header>

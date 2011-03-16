@@ -13,7 +13,7 @@ header {
   overflow: auto;
 }
 
-header #site_title {
+header h1 {
   float: left;
   font-family: 'Lobster', arial, serif;
 }
