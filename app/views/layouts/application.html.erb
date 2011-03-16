@@ -13,27 +13,31 @@
 <body>
 
 <header>
-  <h1><%= link_to "Vestibule", root_path %></h1>
-  <nav>
-    <% if account_signed_in? -%>
-      <%= render 'shared/account', :account => current_account %>
-      <%= link_to "Sign out", destroy_account_session_path %>
-    <% else -%>
-      <%= link_to "Sign up", new_account_registration_path %>
-      <%= link_to "Sign in", new_account_session_path %>
-    <% end -%>
-  </nav>
+  <div class="container">
+    <h1><%= link_to "Vestibule", root_path %></h1>
+    <nav>
+      <% if account_signed_in? -%>
+        <%= render 'shared/account', :account => current_account %>
+        <%= link_to "Sign out", destroy_account_session_path %>
+      <% else -%>
+        <%= link_to "Sign up", new_account_registration_path %>
+        <%= link_to "Sign in", new_account_session_path %>
+      <% end -%>
+    </nav>
+  </div>
 </header>
 
 <section id="notices">
-  <%= render "shared/notices" %>
+  <div class="container">
+    <%= render "shared/notices" %>
 
-  <% if remind_account_for_signup_reason -%>
-    <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path %></p>
-  <% end -%>
+    <% if remind_account_for_signup_reason -%>
+      <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path %></p>
+    <% end -%>
+  </div>
 </section>
 
-<section id="content">
+<section id="content" class="container">
   <%= yield %>
 </section>
 
