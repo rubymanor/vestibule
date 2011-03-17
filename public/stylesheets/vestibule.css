@@ -5,13 +5,3 @@ img.gravatar {
   background-image: url('/images/gravatar_frame.png');
   vertical-align: middle;
 }
-
-#proposal {
-  float: left;
-  width: 45%;
-}
-
-#suggestions {
-  float: right;
-  width: 45%;
-}

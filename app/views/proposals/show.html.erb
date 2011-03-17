@@ -1,4 +1,4 @@
-<div id="proposal">
+<div id="proposal" class="span-12">
   <div class="proposal">
     <h1><%= @proposal.title %></h1>
     <div class="description"><%= markdown @proposal.description %></div>
@@ -10,7 +10,7 @@
   <% end %>
 </div>
 
-<div id="suggestions">
+<div id="suggestions" class="push-2 span-10 last">
   <h2>Suggestions</h2>
   <% if account_signed_in? %>
     <p>Help <%= @proposal.proposer.email %> develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
