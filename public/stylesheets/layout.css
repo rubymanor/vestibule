@@ -1,33 +1,24 @@
-body {
-  padding: 0;
-  margin: 0 0 2em 0;
+header, section {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-header, #notices, #content {
-  padding: 0.5em 1em;
+header, #notices {
+  font-size: 0.8em;
 }
 
 header {
   background-color: #999;
-  font-size: 80%;
-  overflow: auto;
 }
 
 header h1 {
-  float: left;
   font-family: 'Lobster', arial, serif;
-}
-
-header nav {
-  float: right;
 }
 
 #notices {
   background-color: #ccc;
-  font-size: 90%;
 }
 
-#content {
-  overflow: auto;
-  padding-bottom: 2em;
+#notices p:last-child {
+  margin-bottom: 0;
 }

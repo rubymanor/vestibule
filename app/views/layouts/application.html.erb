@@ -14,8 +14,8 @@
 
 <header>
   <div class="container">
-    <h1><%= link_to "Vestibule", root_path %></h1>
-    <nav>
+    <h1 class="span-8"><%= link_to "Vestibule", root_path %></h1>
+    <nav class="right">
       <% if account_signed_in? -%>
         <%= render 'shared/account', :account => current_account %>
         <%= link_to "Sign out", destroy_account_session_path %>
