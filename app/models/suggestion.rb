@@ -7,13 +7,15 @@ class Suggestion < ActiveRecord::Base
   scope :after, lambda { |timestamp| where('updated_at > ?', timestamp) }
 
   validates :body, :presence => true
-  validate :not_a_plus_one
+  validate :is_a_meaningful_contribution
 
   private
 
-  def not_a_plus_one
+  def is_a_meaningful_contribution
     if %w(+1 -1).include?(body.strip)
       errors["body"] << "should contain some concrete suggestions about how to develop this proposal"
+    elsif body.length < 50
+      errors["body"] << "should be a meaningful contribution or criticism (i.e. at least 50 characters)"
     end
   end
 end

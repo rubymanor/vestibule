@@ -26,7 +26,7 @@ class ProposalSuggestionTest < IntegrationTestCase
       end
 
       should "be able to make a suggestion about the proposal" do
-        suggest "I think you should focus on the first bit"
+        suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
 
         within ".suggestions" do
           i_can_see_the_gravatar_for_account @account
@@ -37,6 +37,11 @@ class ProposalSuggestionTest < IntegrationTestCase
       should "not be able to make an empty suggestion" do
         suggest ""
         i_am_warned_about Suggestion, :body, "can't be blank"
+      end
+
+      should "be required to provide a substantial suggestion" do
+        suggest "x"*49
+        i_am_warned_about Suggestion, :body, "should be a meaningful contribution or criticism (i.e. at least 50 characters)"
       end
 
       should "not be able to make a '+1' suggestion" do
