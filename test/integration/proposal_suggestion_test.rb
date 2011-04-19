@@ -26,8 +26,7 @@ class ProposalSuggestionTest < IntegrationTestCase
       end
 
       should "be able to make a suggestion about the proposal" do
-        fill_in "Suggestion", :with => "I think you should focus on the first bit"
-        click_button "Create Suggestion"
+        suggest "I think you should focus on the first bit"
 
         within ".suggestions" do
           i_can_see_the_gravatar_for_account @account
@@ -36,21 +35,24 @@ class ProposalSuggestionTest < IntegrationTestCase
       end
 
       should "not be able to make an empty suggestion" do
-        click_button "Create Suggestion"
+        suggest ""
         i_am_warned_about Suggestion, :body, "can't be blank"
       end
 
       should "not be able to make a '+1' suggestion" do
-        fill_in "Suggestion", :with => "+1"
-        click_button "Create Suggestion"
+        suggest "+1"
         i_am_warned_about Suggestion, :body, "should contain some concrete suggestions about how to develop this proposal"
       end
 
       should "not be able to make a '-1' suggestion" do
-        fill_in "Suggestion", :with => "-1"
-        click_button "Create Suggestion"
+        suggest "-1"
         i_am_warned_about Suggestion, :body, "should contain some concrete suggestions about how to develop this proposal"
       end
     end
+  end
+
+  def suggest(body)
+    fill_in "suggestion[body]", :with => body
+    click_button "Go"
   end
 end

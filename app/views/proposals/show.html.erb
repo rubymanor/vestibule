@@ -17,8 +17,8 @@
 
     <%= simple_form_for [@proposal, @suggestion] do |f| %>
       <%= f.error_notification %>
-      <%= f.input :body %>
-      <%= f.submit %>
+      <%= f.input :body, :label => "What would make this proposal better?" %>
+      <%= f.submit "Go" %>
     <% end %>
   <% end %>
 
