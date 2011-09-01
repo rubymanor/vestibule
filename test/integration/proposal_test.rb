@@ -45,8 +45,8 @@ class ProposalTest < IntegrationTestCase
 
   context "Given I am logged in" do
     setup do
-      user = Factory(:user)
-      sign_in user
+      @user = Factory(:user)
+      sign_in @user
     end
 
     context "and I propose a talk with all the required details" do
@@ -58,7 +58,7 @@ class ProposalTest < IntegrationTestCase
         assert_page_has_proposal \
           :title        => "My Amazing Talk",
           :description  => 'This talk is amazing.',
-          :proposer     => 'tom@example.com'
+          :proposer     => @user.name
       end
 
       context "and then edit my proposal" do
@@ -81,7 +81,7 @@ class ProposalTest < IntegrationTestCase
             assert_page_has_proposal \
               :title        => "My Even More Amazing Talk",
               :description  => 'This talk is wildly amazing.',
-              :proposer     => 'tom@example.com'
+              :proposer     => @user.name
           end
         end
 
