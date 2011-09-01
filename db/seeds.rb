@@ -6,25 +6,23 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-def account(name)
-  account = Account.create(:email => "#{name}@example.com", :password => "testing", :password_confirmation => "testing")
-  account.update_attribute(:confirmed_at, 10.minutes.ago)
-  account
+def user(name)
+  User.create!(:name => name)
 end
 
 def suggestions_for(proposal, suggestions)
   now = Time.now
 
   suggestions.reverse.each do |(author, body)|
-    proposal.suggestions.create :author => author.user, :body => body, :created_at => now, :updated_at => now
+    proposal.suggestions.create :author => author, :body => body, :created_at => now, :updated_at => now
     now -= 30.minutes
   end
 end
 
-alice = account("alice")
-bob = account("bob")
-charlie = account("charlie")
-daniel = account("daniel")
+alice = user("alice")
+bob = user("bob")
+charlie = user("charlie")
+daniel = user("daniel")
 
 a = alice.proposals.create :title => "Fake it till you make it", :description => <<-EOS
 I've written a few things recently which work against 3rd party HTTP API's recently. 
