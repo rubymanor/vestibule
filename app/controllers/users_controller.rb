@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_account!
+  before_filter :authenticate_user!
   before_filter :load_user
 
   def show
@@ -9,15 +9,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if current_user.update_attributes(params[:user])
       flash[:notice] = "Successfully updated user."
     end
     redirect_to user_path
   end
 
-  protected
-  def load_user
-    @user = current_account.user
-  end
+  private
 
+  def load_user
+    @user = current_user
+  end
 end

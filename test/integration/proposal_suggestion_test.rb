@@ -4,8 +4,8 @@ class ProposalSuggestionTest < IntegrationTestCase
 
   context "Given a talk proposal" do
     setup do
-      @proposer = Factory(:account)
-      @proposal = Factory(:proposal, :proposer => @proposer.user)
+      @proposer = Factory(:user)
+      @proposal = Factory(:proposal, :proposer => @proposer)
     end
 
     context "a visitor viewing the proposal" do
@@ -20,8 +20,7 @@ class ProposalSuggestionTest < IntegrationTestCase
 
     context "a logged in user viewing the proposal" do
       setup do
-        @account = Factory(:account)
-        sign_in @account
+        sign_in
         visit proposal_path(@proposal)
       end
 
@@ -29,7 +28,7 @@ class ProposalSuggestionTest < IntegrationTestCase
         suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
 
         within ".suggestions" do
-          i_can_see_the_gravatar_for_account @account
+          i_can_see_the_avatar_for_user @proposer
           assert page.has_content?("I think you should focus on the first bit")
         end
       end

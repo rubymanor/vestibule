@@ -3,8 +3,8 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   context "When logged in" do
     setup do
-      @account = Factory(:account)
-      sign_in @account
+      @user = Factory(:user)
+      session[:user_id] = @user.id
     end
 
     [:show, :edit].each do |action|
@@ -13,7 +13,7 @@ class UsersControllerTest < ActionController::TestCase
           get action
         end
 
-        should assign_to(:user) { @account.user }
+        should assign_to(:user) { @user }
         should render_template(action)
       end
     end
@@ -25,7 +25,7 @@ class UsersControllerTest < ActionController::TestCase
       should set_the_flash.to("Successfully updated user.")
 
       should "update the signup reason" do
-        assert_equal "Because I want to learn", @account.user.reload.signup_reason
+        assert_equal "Because I want to learn", @user.reload.signup_reason
       end
     end
   end
@@ -37,7 +37,7 @@ class UsersControllerTest < ActionController::TestCase
           get action
         end
         should respond_with(:redirect)
-        should set_the_flash.to(/You need to sign in or sign up before continuing./)
+        should set_the_flash.to(/You need to sign in/)
       end
     end
   end

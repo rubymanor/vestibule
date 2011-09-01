@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem "rails", "3.0.3"
 gem "mysql", "2.8.1"
 gem "simple_form", "1.2.2"
-gem "devise", "1.1.3"
+gem "omniauth", "0.2.6"
 gem "paper_trail", "1.6.4"
 gem "rdiscount", "1.6.8"
 

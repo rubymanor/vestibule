@@ -14,8 +14,8 @@ class Proposal < ActiveRecord::Base
     where('id NOT IN (?)', user.proposal_ids)
   }
 
-  def proposed_by?(account)
-    proposer.account == account
+  def proposed_by?(user)
+    proposer == user
   end
 
   def new_suggestions

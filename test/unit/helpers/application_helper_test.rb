@@ -1,19 +1,13 @@
 require 'test_helper'
 
 class ApplicationHelperTest < ActionView::TestCase
-  context "gravatar_url" do
+  context "avatar_url" do
     setup do
-      @account = Factory(:account)
+      @user = Factory(:user, :twitter_nickname => "lazyatom")
     end
 
-    should "ask Gravatar.gravatar_url for a 50x50 image of the user using monsterid as the default" do
-      Gravatar.expects(:gravatar_url).with(@account, has_entries(:default => 'monsterid', :size => 50))
-      gravatar_url(@account)
-    end
-
-    should "return what Gravatar.gravatar_url returns" do
-      Gravatar.stubs(:gravatar_url).returns(:whatever)
-      assert_equal :whatever, gravatar_url(@account)
+    should "construct a URL using twitterimag.es" do
+      assert_equal "http://img.tweetimag.es/i/lazyatom_n", avatar_url(@user)
     end
   end
 end

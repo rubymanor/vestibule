@@ -1,9 +1,9 @@
 class SuggestionsController < ApplicationController
-  before_filter :authenticate_account!
+  before_filter :authenticate_user!
 
   def create
     @proposal = Proposal.find(params[:proposal_id])
-    @suggestion = current_account.suggestions.build(params[:suggestion].merge(:proposal => @proposal))
+    @suggestion = current_user.suggestions.build(params[:suggestion].merge(:proposal => @proposal))
     if @suggestion.save
       redirect_to proposal_path(@proposal)
     else

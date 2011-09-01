@@ -1,13 +1,6 @@
 module AuthenticationSteps
-  def sign_in(account = Factory(:account))
-    visit "/accounts/sign_in"
-    # hit wierd issue never had before where sub-context setups seem to be signed in from parent context
-    # when writing reason_test.rb
-    unless has_content?(account.email)
-      fill_in "Email", :with => account.email
-      fill_in "Password", :with => account.password
-      click_button "Sign in"
-    end
+  def sign_in
+    visit "/auth/twitter"
   end
 
   def there_are_sign_up_and_sign_in_links

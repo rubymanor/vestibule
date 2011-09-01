@@ -1,4 +1,3 @@
-require 'gravatar'
 require 'rdiscount'
 
 module ApplicationHelper
@@ -17,11 +16,12 @@ module ApplicationHelper
   end
 
   def remind_account_for_signup_reason
-    current_account && !current_account.user.signup_reason.present? && !request.path[/user/]
+    current_user && !current_user.signup_reason.present? && !request.path[/user/]
   end
 
-  def gravatar_url(for_account)
-    Gravatar.gravatar_url(for_account, :size => 50, :default => 'monsterid')
+  def avatar_url(user)
+    size = "n"
+    "http://img.tweetimag.es/i/#{user.twitter_nickname}_#{size}"
   end
 
   def markdown(text)

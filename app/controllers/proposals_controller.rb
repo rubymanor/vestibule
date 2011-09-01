@@ -1,5 +1,5 @@
 class ProposalsController < ApplicationController
-  before_filter :authenticate_account!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
     @proposals = Proposal.all
@@ -15,7 +15,7 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    @proposal = current_account.proposals.new(params[:proposal])
+    @proposal = current_user.proposals.new(params[:proposal])
     if @proposal.save
       redirect_to proposals_path
     else
@@ -39,7 +39,7 @@ class ProposalsController < ApplicationController
   private
 
   def load_proposal_for_editing
-    @proposal = current_account.proposals.find_by_id(params[:id])
+    @proposal = current_user.proposals.find_by_id(params[:id])
     if @proposal.nil?
       flash[:alert] = "You cannot edit proposals that are owned by other users"
       redirect_to :action => :show

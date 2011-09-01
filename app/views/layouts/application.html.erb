@@ -16,12 +16,11 @@
   <div class="container">
     <h1 class="span-8"><%= link_to "Vestibule", root_path %></h1>
     <nav class="right">
-      <% if account_signed_in? -%>
-        <%= render 'shared/account', :account => current_account %>
-        <%= link_to "Sign out", destroy_account_session_path %>
+      <% if user_signed_in? -%>
+        <%= render 'shared/user', :user => current_user %>
+        <%= link_to "Sign out", logout_path %>
       <% else -%>
-        <%= link_to "Sign up", new_account_registration_path %>
-        <%= link_to "Sign in", new_account_session_path %>
+        <%= link_to "Sign in with Twitter", "/auth/twitter" %>
       <% end -%>
     </nav>
   </div>

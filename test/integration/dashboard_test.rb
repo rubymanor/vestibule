@@ -4,13 +4,13 @@ class DashboardTest < IntegrationTestCase
 
   context "Given a bunch of proposals with varying amounts of feedback" do
     setup do
-      @me = Factory(:account)
+      @me = Factory(:user, :twitter_nickname => "a_dawg", :twitter_uid => "123456")
 
       @proposal1 = Factory(:proposal)
       @proposal2 = Factory(:proposal)
       @proposal3 = Factory(:proposal)
 
-      @my_proposal = Factory(:proposal, :proposer => @me.user)
+      @my_proposal = Factory(:proposal, :proposer => @me)
 
       Factory(:suggestion, :proposal => @proposal2)
       Factory(:suggestion, :proposal => @proposal2)
@@ -21,7 +21,7 @@ class DashboardTest < IntegrationTestCase
 
     context "When I visit my dashboard" do
       setup do
-        sign_in @me
+        sign_in
         visit "/dashboard"
       end
 
@@ -81,7 +81,7 @@ class DashboardTest < IntegrationTestCase
 
       context "And I have made suggestions for one of the talks" do
         setup do
-          Factory(:suggestion, :author => @me.user, :proposal => @proposal1)
+          Factory(:suggestion, :proposal => @proposal1)
           visit '/dashboard'
         end
 
@@ -93,7 +93,7 @@ class DashboardTest < IntegrationTestCase
 
         context "and I have made suggestions for other talks with recent activity" do
           setup do
-            Factory(:suggestion, :author => @me.user, :proposal => @proposal2)
+            Factory(:suggestion, :author => @me, :proposal => @proposal2)
             Timecop.travel 10.minutes
             @proposal2.update_attributes! :description => 'Now more interesting than before.'
             visit '/dashboard'
