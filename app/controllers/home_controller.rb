@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    flash[:notice] = flash[:notice]
+    flash.keep
     if user_signed_in?
       redirect_to dashboard_path
     else
