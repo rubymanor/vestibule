@@ -1,7 +1,7 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  context "An account" do
+  context "A user" do
     setup do
       @user = Factory(:user)
     end
