@@ -20,7 +20,7 @@ class ProposalSuggestionTest < IntegrationTestCase
 
     context "a logged in user viewing the proposal" do
       setup do
-        sign_in
+        sign_in Factory(:user)
         visit proposal_path(@proposal)
       end
 
