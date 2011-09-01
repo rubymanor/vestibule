@@ -81,7 +81,7 @@ class DashboardTest < IntegrationTestCase
 
       context "And I have made suggestions for one of the talks" do
         setup do
-          Factory(:suggestion, :proposal => @proposal1)
+          Factory(:suggestion, :proposal => @proposal1, :author => @me)
           visit '/dashboard'
         end
 
