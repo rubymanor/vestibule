@@ -3,7 +3,7 @@ require 'test_helper'
 class ReasonTest < IntegrationTestCase
   context "When signing in after registering" do
     setup do
-      sign_in
+      sign_in Factory(:user)
     end
 
     should "tell the user that they haven't stated a reason for siging up" do
