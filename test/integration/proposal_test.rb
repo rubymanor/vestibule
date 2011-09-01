@@ -45,7 +45,8 @@ class ProposalTest < IntegrationTestCase
 
   context "Given I am logged in" do
     setup do
-      sign_in
+      user = Factory(:user)
+      sign_in user
     end
 
     context "and I propose a talk with all the required details" do

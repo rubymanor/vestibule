@@ -11,8 +11,7 @@ class NavigationTest < IntegrationTestCase
 
   context "When logged in" do
     setup do
-      Factory(:user, :twitter_nickname => "a_dawg", :twitter_uid => "123456")
-      sign_in
+      sign_in Factory(:user)
     end
 
     should "be sent to your dashboard when logged in" do

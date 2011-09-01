@@ -4,7 +4,7 @@ class DashboardTest < IntegrationTestCase
 
   context "Given a bunch of proposals with varying amounts of feedback" do
     setup do
-      @me = Factory(:user, :twitter_nickname => "a_dawg", :twitter_uid => "123456")
+      @me = Factory(:user)
 
       @proposal1 = Factory(:proposal)
       @proposal2 = Factory(:proposal)
@@ -21,7 +21,7 @@ class DashboardTest < IntegrationTestCase
 
     context "When I visit my dashboard" do
       setup do
-        sign_in
+        sign_in @me
         visit "/dashboard"
       end
 

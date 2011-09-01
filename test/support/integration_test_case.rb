@@ -13,6 +13,7 @@ class IntegrationTestCase < ActiveSupport::TestCase
     ActionMailer::Base.deliveries.clear
     Capybara.default_selector = :css
     Capybara.save_and_open_page_path = File.join(Rails.root, 'tmp')
+    Capybara.reset_sessions!
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
     DatabaseCleaner.start

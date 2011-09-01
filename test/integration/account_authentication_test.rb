@@ -4,8 +4,8 @@ class AccountAuthenticationTest < IntegrationTestCase
 
   context "A registered user signing in" do
     setup do
-      @user = Factory(:user, :twitter_nickname => "a_dawg", :twitter_uid => "123456")
-      sign_in
+      @user = Factory(:user)
+      sign_in @user
     end
 
     should "sign in and tell the user" do
@@ -17,12 +17,6 @@ class AccountAuthenticationTest < IntegrationTestCase
       within('header nav') do
         i_can_see_the_avatar_for_user(@user)
       end
-    end
-  end
-
-  context "When signed in" do
-    setup do
-      sign_in
     end
 
     should "be able to sign out" do
