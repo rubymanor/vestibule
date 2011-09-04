@@ -1,3 +1,2 @@
-<%= link_to image_tag(avatar_url(user), :class => "avatar"), dashboard_path %>
-<%= link_to user.name, dashboard_path %>
-<%= link_to "All proposals", proposals_path %>
+<%= link_to image_tag(avatar_url(user), :class => "avatar"), user_path(user.to_param) %>
+<%= link_to "Profile", user_path(user.to_param) %>

@@ -10,7 +10,7 @@ class AccountAuthenticationTest < IntegrationTestCase
 
     should "sign in and tell the user" do
       assert has_content?("Signed in successfully.")
-      assert has_css?("header nav", :text => @user.name)
+      assert has_css?("header nav a", :text => "Sign out")
     end
 
     should "show the user a 50x50 version of their avatar in the main user area" do

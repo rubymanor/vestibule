@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
       user.twitter_nickname = auth["user_info"]["nickname"]
     end
   end
+
+  def to_param
+    twitter_nickname
+  end
 end

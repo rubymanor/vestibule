@@ -19,6 +19,8 @@
     <nav class="right">
       <% if user_signed_in? -%>
         <%= render 'shared/user', :user => current_user %>
+        <%= link_to "Dashboard", dashboard_path %>
+        <%= link_to "All proposals", proposals_path %>
         <%= link_to "Sign out", logout_path %>
       <% else -%>
         <%= link_to "Sign in with Twitter", "/auth/twitter" %>
@@ -32,7 +34,7 @@
     <%= render "shared/notices" %>
 
     <% if remind_account_for_signup_reason -%>
-      <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path %></p>
+      <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
     <% end -%>
   </div>
 </section>
