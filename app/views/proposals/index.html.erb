@@ -9,3 +9,7 @@
 <% if user_signed_in? %>
   <%= link_to "Propose talk", new_proposal_path %>
 <% end %>
+
+<% content_for :head do %>
+  <%= auto_discovery_link_tag :rss, :format => :rss %>
+<% end %>

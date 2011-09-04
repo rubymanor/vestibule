@@ -1,8 +1,11 @@
 class ProposalsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
+  respond_to :html
+  respond_to :rss, :only => [:index]
+
   def index
-    @proposals = Proposal.all
+    respond_with @proposals = Proposal.order('created_at desc').all
   end
 
   def show

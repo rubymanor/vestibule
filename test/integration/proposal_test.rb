@@ -2,7 +2,7 @@
 require "test_helper"
 
 class ProposalTest < IntegrationTestCase
-  
+
   context "As a visitor to the site" do
     should "not see a link to propose a talk" do
       visit proposals_path
@@ -22,6 +22,14 @@ class ProposalTest < IntegrationTestCase
       should "be able to see the list of proposals" do
         visit proposals_path
         assert page.has_css?('ul.proposals')
+      end
+
+      should "be able to subscribe to the rss feed of proposals" do
+        visit proposals_path
+        assert page.has_css?("link[rel='alternate'][type='application/rss+xml'][href$='#{proposals_path(:format => :rss)}']")
+        visit proposals_path(:format => :rss)
+        assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
+        assert page.has_xpath?('.//item/title', :text => %{"#{@proposal.title}" by #{@proposal.proposer.name} (@#{@proposal.proposer.twitter_nickname})})
       end
 
       should "be able to read individual proposals" do
@@ -141,6 +149,30 @@ blah blah blah
       should "not be able to edit that proposal" do
         visit edit_proposal_path(@other_persons_proposal)
         i_am_alerted "You cannot edit proposals that are owned by other users"
+      end
+    end
+
+    context "and there are some proposals (mine and others)" do
+      setup do
+        propose_talk :title => "My Amazing Talk", :description => %{
+# A moment in time
+
+blah blah blah
+        }.strip
+        @other_persons_proposal = Factory(:proposal, :title => "Another talk", :created_at => 3.days.ago)
+      end
+
+      should "be able to subscribe to the rss feed of proposals" do
+        visit proposals_path
+        assert page.has_css?("link[rel='alternate'][type='application/rss+xml'][href$='#{proposals_path(:format => :rss)}']")
+        visit proposals_path(:format => :rss)
+        assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
+      end
+
+      should 'have my talk and the other talk in the feed, in newest first order' do
+        visit proposals_path(:format => :rss)
+        assert page.has_xpath?('.//item[position() = 2]/title', :text => %{"#{@other_persons_proposal.title}" by #{@other_persons_proposal.proposer.name} (@#{@other_persons_proposal.proposer.twitter_nickname})})
+        assert page.has_xpath?('.//item[position() = 1]/title', :text => %{"My Amazing Talk" by #{@user.name} (@#{@user.twitter_nickname})})
       end
     end
   end

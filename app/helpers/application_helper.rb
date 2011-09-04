@@ -32,4 +32,12 @@ module ApplicationHelper
       nil
     end
   end
+
+  def proposal_title_for_rss(for_proposal)
+    %{"#{h for_proposal.title}" by #{proposer_name_for_rss(for_proposal.proposer)}}.html_safe
+  end
+
+  def proposer_name_for_rss(for_proposer)
+    %{#{h for_proposer.name} (@#{h for_proposer.twitter_nickname})}.html_safe
+  end
 end
