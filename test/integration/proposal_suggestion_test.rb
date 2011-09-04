@@ -20,7 +20,8 @@ class ProposalSuggestionTest < IntegrationTestCase
 
     context "a logged in user viewing the proposal" do
       setup do
-        sign_in Factory(:user)
+        @me = Factory(:user)
+        sign_in @me
         visit proposal_path(@proposal)
       end
 
@@ -28,7 +29,7 @@ class ProposalSuggestionTest < IntegrationTestCase
         suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
 
         within ".suggestions" do
-          i_can_see_the_avatar_for_user @proposer
+          i_can_see_the_avatar_for_user @me
           assert page.has_content?("I think you should focus on the first bit")
         end
       end

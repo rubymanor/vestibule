@@ -1,8 +1,8 @@
 Factory.define(:user) do |f|
   f.signup_reason "I want to get involved with the content of the conference day"
-  f.name "Alice"
-  f.twitter_uid "123456"
-  f.twitter_nickname "a_dawg"
+  f.name { Faker::Name.name }
+  f.sequence(:twitter_uid) { |n| "#{n}123456" }
+  f.twitter_nickname { Faker::Lorem.words(2).join('_') }
 end
 
 Factory.define(:proposal) do |f|
