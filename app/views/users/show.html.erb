@@ -1,5 +1,23 @@
-<%= page_title "Your account" %>
+<%= page_title "#{possessive} account" %>
 
 <div id="user">
+  <% if @user.signup_reason.present? %>
   <p id="signup_reason"><%= @user.signup_reason %></p>
+  <% else %>
+  <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
+  <% end %>
 </div>
+
+<hr />
+
+<h2><%= possessive %> proposals</h2>
+
+<% if @user.proposals.any? %>
+  <ul>
+  <% @user.proposals.each do |proposal| %>
+    <li><%= link_to proposal.title, proposal %></li>
+  <% end %>
+  </ul>
+<% else %>
+  <p><%= user_name %> has no proposals.</p>
+<% end %>

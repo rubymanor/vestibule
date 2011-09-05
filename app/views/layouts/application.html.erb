@@ -31,11 +31,13 @@
 
 <section id="notices">
   <div class="container">
-    <%= render "shared/notices" %>
+    <div class="span-24 last">
+      <%= render "shared/notices" %>
 
-    <% if remind_account_for_signup_reason -%>
-      <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
-    <% end -%>
+      <% if remind_account_for_signup_reason -%>
+        <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
+      <% end -%>
+    </div>
   </div>
 </section>
 

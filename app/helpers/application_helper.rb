@@ -44,4 +44,12 @@ module ApplicationHelper
   def user_name_for_rss(for_user)
     %{#{h for_user.name} (@#{h for_user.twitter_nickname})}.html_safe
   end
+
+  def user_name
+    @user == current_user ? "You" : @user.name
+  end
+
+  def possessive
+    @user == current_user ? "Your" : "#{@user.name}'s"
+  end
 end

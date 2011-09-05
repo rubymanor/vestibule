@@ -2,7 +2,7 @@
   <div class="proposal">
     <h1><%= @proposal.title %></h1>
     <div class="description"><%= markdown @proposal.description %></div>
-    <p>Proposed by: <%= @proposal.proposer.name %></p>
+    <p>Proposed by: <%= link_to @proposal.proposer.name, @proposal.proposer %></p>
   </div>
 
   <% if @proposal.proposed_by?(current_user) %>
