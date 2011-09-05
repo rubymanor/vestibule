@@ -3,10 +3,6 @@ header, section {
   padding-bottom: 10px;
 }
 
-header, #notices {
-  font-size: 0.8em;
-}
-
 header {
   background-color: #999;
 }
