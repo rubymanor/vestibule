@@ -16,6 +16,13 @@ class ProposalSuggestionTest < IntegrationTestCase
       should "not be able to suggest anything" do
         refute page.has_css?("form[action='#{proposal_suggestions_path(@proposal)}']")
       end
+
+      should "be able to subscribe to the rss feed of suggestions to the proposal" do
+        visit proposal_path(@proposal)
+        assert page.has_css?("link[rel='alternate'][type='application/rss+xml'][href$='#{proposal_path(@proposal, :format => :rss)}']")
+        visit proposal_path(@proposal, :format => :rss)
+        assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
+      end
     end
 
     context "a logged in user viewing the proposal" do
@@ -25,12 +32,48 @@ class ProposalSuggestionTest < IntegrationTestCase
         visit proposal_path(@proposal)
       end
 
+      should "be able to subscribe to the rss feed of suggestions to the proposal" do
+        assert page.has_css?("link[rel='alternate'][type='application/rss+xml'][href$='#{proposal_path(@proposal, :format => :rss)}']")
+        visit proposal_path(@proposal, :format => :rss)
+        assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
+      end
+
       should "be able to make a suggestion about the proposal" do
         suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
 
         within ".suggestions" do
           i_can_see_the_avatar_for_user @me
           assert page.has_content?("I think you should focus on the first bit")
+        end
+      end
+
+      context 'when there are some suggestions already' do
+        setup do
+          @other_suggestion = Factory(:suggestion, :proposal => @proposal, :created_at => 2.days.ago, :updated_at => 2.days.ago)
+        end
+
+        should "be able to subscribe to the rss feed of suggestions to the proposal" do
+          assert page.has_css?("link[rel='alternate'][type='application/rss+xml'][href$='#{proposal_path(@proposal, :format => :rss)}']")
+          visit proposal_path(@proposal, :format => :rss)
+          assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
+        end
+
+        should 'see the existing suggestions in the feed' do
+          visit proposal_path(@proposal, :format => :rss)
+          assert page.has_xpath?('.//item/title', :text => "Suggestion from #{@other_suggestion.author.name} (@#{@other_suggestion.author.twitter_nickname})")
+          assert page.has_xpath?('.//item/description', :text => @other_suggestion.body)
+        end
+
+        should 'be able to add a new suggestion and see it in the feed at the top' do
+          suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
+
+          visit proposal_path(@proposal, :format => :rss)
+
+          assert page.has_xpath?('.//item[position() = 2]/title', :text => "Suggestion from #{@other_suggestion.author.name} (@#{@other_suggestion.author.twitter_nickname})")
+          assert page.has_xpath?('.//item[position() = 2]/description', :text => @other_suggestion.body)
+
+          assert page.has_xpath?('.//item[position() = 1]/title', :text => "Suggestion from #{@me.name} (@#{@me.twitter_nickname})")
+          assert page.has_xpath?('.//item[position() = 1]/description', :text => "I think you should focus on the first bit, because that's going to be more interesting to newbies.")
         end
       end
 

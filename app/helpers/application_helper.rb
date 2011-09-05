@@ -34,10 +34,14 @@ module ApplicationHelper
   end
 
   def proposal_title_for_rss(for_proposal)
-    %{"#{h for_proposal.title}" by #{proposer_name_for_rss(for_proposal.proposer)}}.html_safe
+    %{"#{h for_proposal.title}" by #{user_name_for_rss(for_proposal.proposer)}}.html_safe
   end
 
-  def proposer_name_for_rss(for_proposer)
-    %{#{h for_proposer.name} (@#{h for_proposer.twitter_nickname})}.html_safe
+  def suggestion_title_for_rss(for_suggestion)
+    %{Suggestion from #{user_name_for_rss(for_suggestion.author)}}.html_safe
+  end
+
+  def user_name_for_rss(for_user)
+    %{#{h for_user.name} (@#{h for_user.twitter_nickname})}.html_safe
   end
 end

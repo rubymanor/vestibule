@@ -2,15 +2,15 @@ class ProposalsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   respond_to :html
-  respond_to :rss, :only => [:index]
+  respond_to :rss, :only => [:index, :show]
 
   def index
     respond_with @proposals = Proposal.order('created_at desc').all
   end
 
   def show
-    @proposal = Proposal.find(params[:id])
     @suggestion = Suggestion.new
+    respond_with @proposal = Proposal.find(params[:id])
   end
 
   def new
