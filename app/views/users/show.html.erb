@@ -7,7 +7,11 @@
     <% if @user == current_user %><aside><%= link_to 'Edit your reason', edit_user_path(current_user) %></aside><% end %>
   </section>
   <% else %>
-  <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
+    <% if @user == current_user %>
+      <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
+    <% else %>
+      <p><%= user_name%> hasn't said why they hope to get out of Ruby Manor yet.</p>
+    <% end %>
   <% end %>
 </div>
 
@@ -23,6 +27,6 @@
     <% end %>
     </ul>
   <% else %>
-    <p><%= user_name %> has no proposals.</p>
+    <p><%= to_have %> no proposals.</p>
   <% end %>
 </div>

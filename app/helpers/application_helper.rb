@@ -52,4 +52,8 @@ module ApplicationHelper
   def possessive
     @user == current_user ? "Your" : "#{@user.name}'s"
   end
+
+  def to_have
+    %{#{possessive} #{@user == current_user ? 'have' : 'has'}}
+  end
 end
