@@ -3,8 +3,8 @@ require 'test_helper'
 class ReasonTest < IntegrationTestCase
   context "When signing in after registering without having supplied a reason" do
     setup do
-      user = Factory(:user, :signup_reason => nil)
-      sign_in user
+      @user = Factory(:user, :signup_reason => nil)
+      sign_in @user
     end
 
     should "tell the user that they haven't stated a reason for siging up" do
@@ -16,11 +16,11 @@ class ReasonTest < IntegrationTestCase
         click_link "Tell them now"
       end
 
-      should "not show the you haven't added a reason message" do
+      should %Q{not show the "you haven't added a reason" message} do
         assert !has_content?("Other attendees are wondering what you hope to get out of Ruby Manor.")
       end
 
-      context "be able to update the sign up reason" do
+      context "be able to provide their sign up reason" do
         setup do
           fill_in "About you", :with => "I have signed up because I want to help shape the content"
           click_button "Update User"
@@ -31,7 +31,7 @@ class ReasonTest < IntegrationTestCase
         end
       end
 
-      context "be able to update the sign up reason and preserve markdown syntax" do
+      context "be able to provide their sign up reason and preserve markdown syntax" do
         setup do
           fill_in "About you", :with => %{
 ## Me
@@ -52,6 +52,12 @@ I want to make sure that the talks cover something *other* than rails!!
             assert page.has_css?('h2', :text => "Why I've signed up")
             assert page.has_css?('p', :text => 'I want to make sure that the talks cover something other than rails!!')
           end
+        end
+
+        should "allow the user to go back and edit their reason" do
+          click_link 'Edit your reason'
+
+          i_am_on edit_user_path(@user)
         end
       end
     end

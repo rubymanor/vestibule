@@ -2,7 +2,10 @@
 
 <div id="user">
   <% if @user.signup_reason.present? %>
-  <section id="signup_reason"><%= markdown @user.signup_reason %></section>
+  <section id="signup_reason">
+    <%= markdown @user.signup_reason %>
+    <% if @user == current_user %><aside><%= link_to 'Edit your reason', edit_user_path(current_user) %></aside><% end %>
+  </section>
   <% else %>
   <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
   <% end %>
@@ -10,14 +13,16 @@
 
 <hr />
 
-<h2><%= possessive %> proposals</h2>
+<div id="proposals">
+  <h2><%= possessive %> proposals</h2>
 
-<% if @user.proposals.any? %>
-  <ul>
-  <% @user.proposals.each do |proposal| %>
-    <li><%= link_to proposal.title, proposal %></li>
+  <% if @user.proposals.any? %>
+    <ul>
+    <% @user.proposals.each do |proposal| %>
+      <li><%= link_to proposal.title, proposal %></li>
+    <% end %>
+    </ul>
+  <% else %>
+    <p><%= user_name %> has no proposals.</p>
   <% end %>
-  </ul>
-<% else %>
-  <p><%= user_name %> has no proposals.</p>
-<% end %>
+</div>
