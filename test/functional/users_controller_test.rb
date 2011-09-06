@@ -44,7 +44,17 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   context "When not logged in" do
-    [:show, :edit, :update].each do |action|
+    [:show].each do |action|
+      context "on #GET to #{action.to_s}" do
+        setup do
+          get action, :id => @user.to_param
+        end
+
+        should assign_to(:user) { @user }
+        should render_template(action)
+      end
+    end
+    [:edit, :update].each do |action|
       context "on #GET to #{action.to_s}" do
         setup do
           get action, :id => @user.to_param
