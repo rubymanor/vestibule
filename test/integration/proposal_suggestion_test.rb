@@ -47,6 +47,22 @@ class ProposalSuggestionTest < IntegrationTestCase
         end
       end
 
+      should "be able to make a suggestion about the proposal and preserve the markdown content when displaying it" do
+        suggest %{
+1. change the title - it's not really clear
+2. put more emphasis on how you'd test your approach
+
+Other than that, sounds great!
+          }
+
+        within ".suggestions" do
+          i_can_see_the_avatar_for_user @me
+          assert page.has_css?("ol li", :text => "change the title - it's not really clear")
+          assert page.has_css?("ol li", :text => "put more emphasis on how you'd test your approach")
+          assert page.has_css?("p", :text => "Other than that, sounds great!")
+        end
+      end
+
       context 'when there are some suggestions already' do
         setup do
           @other_suggestion = Factory(:suggestion, :proposal => @proposal, :created_at => 2.days.ago, :updated_at => 2.days.ago)

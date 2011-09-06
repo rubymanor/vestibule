@@ -26,7 +26,7 @@
     <% @proposal.suggestions.latest.each do |suggestion| %>
       <%= content_tag_for(:li, suggestion) do %>
         <p class="author"><%= render 'shared/user', :user => suggestion.author %></p>
-        <p class="body"><%= suggestion.body %></p>
+        <section class="body"><%= markdown suggestion.body %></section>
       <% end %>
     <% end %>
   </ul>
