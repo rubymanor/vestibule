@@ -30,6 +30,30 @@ class ReasonTest < IntegrationTestCase
           assert has_css?("#signup_reason", :text => "I have signed up because I want to help shape the content")
         end
       end
+
+      context "be able to update the sign up reason and preserve markdown syntax" do
+        setup do
+          fill_in "About you", :with => %{
+## Me
+
+I like hacking on non-rails ruby stuff
+
+## Why I've signed up
+
+I want to make sure that the talks cover something *other* than rails!!
+}
+          click_button "Update User"
+        end
+
+        should "show new sign up reason" do
+          within("#signup_reason") do
+            assert page.has_css?('h2', :text => "Me")
+            assert page.has_css?('p', :text => 'I like hacking on non-rails ruby stuff')
+            assert page.has_css?('h2', :text => "Why I've signed up")
+            assert page.has_css?('p', :text => 'I want to make sure that the talks cover something other than rails!!')
+          end
+        end
+      end
     end
   end
 
