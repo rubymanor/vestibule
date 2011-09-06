@@ -10,7 +10,7 @@
     <% if @user == current_user %>
       <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
     <% else %>
-      <p><%= user_name%> hasn't said why they hope to get out of Ruby Manor yet.</p>
+      <p><%= user_name %> hasn't said what they hope to get out of Ruby Manor yet.</p>
     <% end %>
   <% end %>
 </div>
