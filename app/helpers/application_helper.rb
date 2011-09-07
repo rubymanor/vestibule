@@ -54,6 +54,6 @@ module ApplicationHelper
   end
 
   def to_have
-    %{#{possessive} #{@user == current_user ? 'have' : 'has'}}
+    %{#{user_name} #{@user == current_user ? 'have' : 'has'}}
   end
 end
