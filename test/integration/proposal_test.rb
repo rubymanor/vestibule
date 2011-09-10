@@ -120,8 +120,8 @@ blah blah blah
         click_link "My Amazing Talk"
         within_proposal do
           within(".description") do
-            page.has_content?("<h1>A moment in time</h1>")
-            page.has_content?("<p>blah blah blah</p>")
+            assert page.has_css?('h1', :text => 'A moment in time')
+            assert page.has_css?('p', :text => 'blah blah blah')
           end
         end
       end
