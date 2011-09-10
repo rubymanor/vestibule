@@ -49,8 +49,16 @@ module ApplicationHelper
     @user == current_user ? "You" : @user.name
   end
 
-  def possessive
-    @user == current_user ? "Your" : "#{@user.name}'s"
+  def possessive(start_sentence = true)
+    if @user == current_user
+      if start_sentence
+        "Your"
+      else
+        "your"
+      end
+    else
+      "#{@user.name}'#{@user.name == 's' ? '' : 's' }"
+    end
   end
 
   def to_have
