@@ -1,10 +1,19 @@
 require 'test_helper'
 
 class ProfileTest < IntegrationTestCase
+  setup do
+    @user = Factory(:user)
+    @proposal = Factory(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @user)
+    @involved_proposal = Factory(:proposal, :title => 'All about rubygems: what the hell is going on?')
+    Factory(:suggestion, :body => 'Can you talk about the alternatives to rubygems? Maybe even RAA, even though I know it is a blast from the past.', :author => @user, :proposal => @involved_proposal)
+    @uninvolved_proposal = Factory(:proposal, :title => 'JSON and the gem-o-nauts')
+    @especially_involved_proposal = Factory(:proposal, :title => 'What price modularity: a discussion on include & extend')
+    Factory(:suggestion, :body => 'I do not want this to be all about rails, but will this cover ActiveSupport::Concern?', :author => @user, :proposal => @especially_involved_proposal)
+    Factory(:suggestion, :body => 'Thanks for the update! This all sounds great; just what I want the guys on my team to hear!', :author => @user, :proposal => @especially_involved_proposal)
+  end
+
   context "When viewing a user's profile when not logged in" do
     setup do
-      @user = Factory(:user)
-      @proposal = Factory(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @user)
       visit user_path(@user)
     end
 
@@ -42,34 +51,43 @@ class ProfileTest < IntegrationTestCase
       assert page.has_css? 'h1', :text => "#{@user.name}'s account"
       assert page.has_css? 'h2', :text => "#{@user.name}'s proposals"
     end
+
+    should 'see a list of other proposals, but only ones that the user is involved with via their suggestions' do
+      within('#involvement') do
+        assert_page_has_link_to_proposal(@involved_proposal)
+        assert_page_has_link_to_proposal(@especially_involved_proposal)
+        assert_page_has_no_link_to_proposal(@uninvolved_proposal)
+      end
+    end
+
+    should 'not see proposals more than once if the user has made multiple suggestions' do
+      within('#involvement') do
+        assert page.has_css?("a[href='#{proposal_path(@especially_involved_proposal)}']", :count => 1)
+      end
+    end
   end
 
   context 'When logged in' do
-    setup do
-      @user = Factory(:user)
-      sign_in @user
-    end
-
     context 'and viewing a different user profile' do
       setup do
-        @other_user = Factory(:user)
-        @proposal = Factory(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @other_user)
-        visit user_path(@other_user)
+        @me = Factory(:user)
+        sign_in @me
+        visit user_path(@user)
       end
 
       context "and they don't have a signup reason" do
         setup do
-          @other_user.signup_reason = nil
-          @other_user.save
-          visit user_path(@other_user)
+          @user.signup_reason = nil
+          @user.save
+          visit user_path(@user)
         end
 
         should 'not be invited to edit their reason' do
-          assert !page.has_css?("a[href$='#{edit_user_path(@other_user)}']")
+          assert !page.has_css?("a[href$='#{edit_user_path(@user)}']")
         end
 
         should 'not be invited to edit my reason' do
-          assert !page.has_css?("a[href$='#{edit_user_path(@user)}']")
+          assert !page.has_css?("a[href$='#{edit_user_path(@me)}']")
         end
       end
 
@@ -81,25 +99,40 @@ class ProfileTest < IntegrationTestCase
 
       should 'see their reason for signing up' do
         within('#signup_reason') do
-          assert page.has_content? @other_user.signup_reason
+          assert page.has_content? @user.signup_reason
         end
       end
 
       should 'not be prompted to edit their reason' do
         within('#signup_reason') do
-          assert !page.has_css?("a[href$='#{edit_user_path(@other_user)}']")
+          assert !page.has_css?("a[href$='#{edit_user_path(@user)}']")
         end
       end
 
       should 'put the user name into the heading text' do
-        assert page.has_css? 'h1', :text => "#{@other_user.name}'s account"
-        assert page.has_css? 'h2', :text => "#{@other_user.name}'s proposals"
+        assert page.has_css? 'h1', :text => "#{@user.name}'s account"
+        assert page.has_css? 'h2', :text => "#{@user.name}'s proposals"
+        assert page.has_css? 'h2', :text => "Other proposals #{@user.name} is involved with"
+      end
+
+      should 'see a list of other proposals, but only ones that the user is involved with via their suggestions' do
+        within('#involvement') do
+          assert_page_has_link_to_proposal(@involved_proposal)
+          assert_page_has_link_to_proposal(@especially_involved_proposal)
+          assert_page_has_no_link_to_proposal(@uninvolved_proposal)
+        end
+      end
+
+      should 'not see proposals more than once if the user has made multiple suggestions' do
+        within('#involvement') do
+          assert page.has_css?("a[href='#{proposal_path(@especially_involved_proposal)}']", :count => 1)
+        end
       end
     end
 
     context "and viewing my own user profile" do
       setup do
-        @proposal = Factory(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @user)
+        sign_in @user
         visit user_path(@user)
       end
 
@@ -124,6 +157,21 @@ class ProfileTest < IntegrationTestCase
       should 'refer to the user as "you" in the heading text' do
         assert page.has_css? 'h1', :text => "Your account"
         assert page.has_css? 'h2', :text => "Your proposals"
+        assert page.has_css? 'h2', :text => "Other proposals you are involved with"
+      end
+
+      should 'see a list of other proposals, but only ones that I am involved with via their suggestions' do
+        within('#involvement') do
+          assert_page_has_link_to_proposal(@involved_proposal)
+          assert_page_has_link_to_proposal(@especially_involved_proposal)
+          assert_page_has_no_link_to_proposal(@uninvolved_proposal)
+        end
+      end
+
+      should 'not see proposals more than once if I have made multiple suggestions' do
+        within('#involvement') do
+          assert page.has_css?("a[href='#{proposal_path(@especially_involved_proposal)}']", :count => 1)
+        end
       end
     end
   end

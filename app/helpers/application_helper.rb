@@ -45,8 +45,16 @@ module ApplicationHelper
     %{#{h for_user.name} (@#{h for_user.twitter_nickname})}.html_safe
   end
 
-  def user_name
-    @user == current_user ? "You" : @user.name
+  def user_name(start_sentence = true)
+    if @user == current_user
+      if start_sentence
+        "You"
+      else
+        "you"
+      end
+    else
+      @user.name
+    end
   end
 
   def possessive(start_sentence = true)
@@ -61,7 +69,11 @@ module ApplicationHelper
     end
   end
 
-  def to_have
-    %{#{user_name} #{@user == current_user ? 'have' : 'has'}}
+  def to_have(start_sentence = true)
+    %{#{user_name(start_sentence)} #{@user == current_user ? 'have' : 'has'}}
+  end
+
+  def to_be(start_sentence = true)
+    %{#{user_name(start_sentence)} #{@user == current_user ? 'are' : 'is'}}
   end
 end

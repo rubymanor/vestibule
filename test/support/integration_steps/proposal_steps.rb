@@ -29,6 +29,10 @@ module ProposalSteps
     assert page.has_css?("a[href$='#{proposal_path(proposal)}']", :text => proposal.title)
   end
 
+  def assert_page_has_no_link_to_proposal(proposal)
+    assert !page.has_css?("a[href$='#{proposal_path(proposal)}']", :text => proposal.title)
+  end
+
   def assert_page_has_suggestion(options)
     within(".suggestions") do
       if options[:author]

@@ -1,11 +1,11 @@
 <%= page_title "#{possessive} account" %>
 
-<div id="user">
+<section id="user">
   <% if @user.signup_reason.present? %>
-  <section id="signup_reason">
+  <article id="signup_reason">
     <%= markdown @user.signup_reason %>
     <% if @user == current_user %><aside><%= link_to 'Edit your reason', edit_user_path(current_user) %></aside><% end %>
-  </section>
+  </article>
   <% else %>
     <% if @user == current_user %>
       <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
@@ -13,11 +13,11 @@
       <p><%= user_name %> hasn't said what they hope to get out of Ruby Manor yet.</p>
     <% end %>
   <% end %>
-</div>
+</section>
 
 <hr />
 
-<div id="proposals">
+<section id="proposals" class="span-12">
   <h2><%= possessive %> proposals</h2>
 
   <% if @user.proposals.any? %>
@@ -29,4 +29,18 @@
   <% else %>
     <p><%= to_have %> no proposals.</p>
   <% end %>
-</div>
+</section>
+
+<section id="involvement" class="span-12 last">
+  <h2>Other proposals <%= to_be(false) %> involved with</h2>
+
+  <% if @user.proposals_of_interest.any? %>
+    <ul>
+    <% @user.proposals_of_interest.each do |proposal| %>
+      <li><%= link_to proposal.title, proposal %></li>
+    <% end %>
+    </ul>
+  <% else %>
+    <p><%= to_be %> not involved with any body else's proposals.</p>
+  <% end %>
+</section>
