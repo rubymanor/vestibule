@@ -66,7 +66,7 @@ class ProposalTest < IntegrationTestCase
         assert_page_has_proposal \
           :title        => "My Amazing Talk",
           :description  => 'This talk is amazing.',
-          :proposer     => @user.name
+          :proposer     => @user
       end
 
       context "and then edit my proposal" do
@@ -89,7 +89,7 @@ class ProposalTest < IntegrationTestCase
             assert_page_has_proposal \
               :title        => "My Even More Amazing Talk",
               :description  => 'This talk is wildly amazing.',
-              :proposer     => @user.name
+              :proposer     => @user
           end
         end
 

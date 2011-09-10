@@ -41,10 +41,8 @@ class ProposalSuggestionTest < IntegrationTestCase
       should "be able to make a suggestion about the proposal" do
         suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
 
-        within ".suggestions" do
-          i_can_see_the_avatar_for_user @me
-          assert page.has_content?("I think you should focus on the first bit")
-        end
+        assert_page_has_suggestion :body => "I think you should focus on the first bit, because that's going to be more interesting to newbies.",
+                                   :author => @me
       end
 
       should "be able to make a suggestion about the proposal and preserve the markdown content when displaying it" do
@@ -56,7 +54,6 @@ Other than that, sounds great!
           }
 
         within ".suggestions" do
-          i_can_see_the_avatar_for_user @me
           assert page.has_css?("ol li", :text => "change the title - it's not really clear")
           assert page.has_css?("ol li", :text => "put more emphasis on how you'd test your approach")
           assert page.has_css?("p", :text => "Other than that, sounds great!")
