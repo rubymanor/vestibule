@@ -65,7 +65,7 @@ module ApplicationHelper
         "your"
       end
     else
-      "#{@user.name}'#{@user.name == 's' ? '' : 's' }"
+      "#{@user.name}'#{@user.name.last == 's' ? '' : 's' }"
     end
   end
 
