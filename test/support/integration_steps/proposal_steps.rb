@@ -25,7 +25,7 @@ module ProposalSteps
     end
   end
 
-  def asset_page_has_link_to_proposal(proposal)
+  def assert_page_has_link_to_proposal(proposal)
     assert page.has_css?("a[href$='#{proposal_path(proposal)}']", :text => proposal.title)
   end
 

@@ -22,7 +22,7 @@ class ProfileTest < IntegrationTestCase
 
     should 'see a list of their proposals' do
       within('#proposals') do
-        asset_page_has_link_to_proposal(@proposal)
+        assert_page_has_link_to_proposal(@proposal)
       end
     end
 
@@ -75,7 +75,7 @@ class ProfileTest < IntegrationTestCase
 
       should 'see a list of their proposals' do
         within('#proposals') do
-          asset_page_has_link_to_proposal(@proposal)
+          assert_page_has_link_to_proposal(@proposal)
         end
       end
 
@@ -105,7 +105,7 @@ class ProfileTest < IntegrationTestCase
 
       should 'see a list of my proposals' do
         within('#proposals') do
-          asset_page_has_link_to_proposal(@proposal)
+          assert_page_has_link_to_proposal(@proposal)
         end
       end
 
