@@ -114,6 +114,6 @@ Other than that, sounds great!
 
   def suggest(body)
     fill_in "suggestion[body]", :with => body
-    click_button "Go"
+    click_button "Make your suggestion"
   end
 end
