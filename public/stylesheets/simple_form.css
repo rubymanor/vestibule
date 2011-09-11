@@ -5,21 +5,16 @@
 
 .simple_form label {
   float: left;
-  width: 100px;
   text-align: right;
-  margin: 2px 10px;
 }
 
 .simple_form input.string,
 .simple_form textarea {
-  width: 30em;
   float: left;
 }
 
 .simple_form .hint {
   float: left;
-  width: 20em;
-  margin-left: 1em;
   font-size: 80%;
   color: #555;
   display: block;
@@ -27,12 +22,10 @@
 }
 
 .simple_form input[type='submit'] {
-  margin-left: 120px;
 }
 
 .simple_form .error {
   clear: left;
-  margin-left: 120px;
   font-size: 12px;
   color: #D00;
   display: block;

@@ -41,5 +41,7 @@ module Vestibule
 
     require "oa-oauth"
     config.middleware.use OmniAuth::Strategies::Twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+
+    require 'blueprint_forms'
   end
 end

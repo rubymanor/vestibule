@@ -15,9 +15,9 @@
   <% if user_signed_in? %>
     <p>Help <%= @proposal.proposer.name %> develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
 
-    <%= simple_form_for [@proposal, @suggestion] do |f| %>
+    <%= blueprint_form_for [@proposal, @suggestion], :blueprint_size => 10 do |f| %>
       <%= f.error_notification %>
-      <%= f.input :body, :label => "What would make this proposal better?" %>
+      <%= f.input :body, :label => "What would make this proposal better?", :blueprint_error_wrapper_html => {:class => 'span-10'} %>
       <%= f.button :submit, "Make your suggestion" %>
     <% end %>
   <% end %>
