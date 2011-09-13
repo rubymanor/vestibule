@@ -2,7 +2,10 @@
 
 <ul class="proposals">
   <% for proposal in @proposals %>
-    <li><%= link_to proposal_title_with_modification_time(proposal), proposal %></li>
+    <li>
+      <%= link_to proposal.title, proposal %>
+      <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+    </li>
   <% end %>
 </ul>
 

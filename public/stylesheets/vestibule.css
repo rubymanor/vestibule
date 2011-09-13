@@ -6,6 +6,11 @@ img.avatar {
   vertical-align: middle;
 }
 
+.age {
+  padding-left: 0.5em;
+  color: #ccc;
+}
+
 #suggestions label {
   margin: 0;
   text-align: left;
