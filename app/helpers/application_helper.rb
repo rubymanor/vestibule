@@ -33,6 +33,10 @@ module ApplicationHelper
     end
   end
 
+  def proposal_title_with_modification_time(for_proposal)
+    %{#{h(for_proposal.title)} [Last modified: #{h(for_proposal.last_modified.to_s(:db))}]}
+  end
+
   def proposal_title_for_rss(for_proposal)
     %{"#{h for_proposal.title}" by #{user_name_for_rss(for_proposal.proposer)}}.html_safe
   end
