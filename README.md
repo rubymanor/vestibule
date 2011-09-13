@@ -12,5 +12,10 @@ How to contribute
 Fork, patch, test, send a pull request. Apologies that the code and design are bit rough. Perhaps you can make it better?
 
 
+Build Status
+------------
+
+[![Build Status](https://secure.travis-ci.org/h-lame/vestibule.png)](http://travis-ci.org/h-lame/vestibule)
+
 [Ruby Manor 3]: http://rubymanor.org/3
 [plus-ones]: http://interblah.net/regarding-plus-ones
