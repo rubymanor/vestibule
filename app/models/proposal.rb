@@ -14,6 +14,10 @@ class Proposal < ActiveRecord::Base
     where('id NOT IN (?)', user.proposal_ids)
   }
 
+  def last_modified
+    new_suggestions.any? ? new_suggestions.map(&:updated_at).max : updated_at
+  end
+
   def proposed_by?(user)
     proposer == user
   end
