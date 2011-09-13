@@ -3,7 +3,8 @@
   <ul id="your-proposals">
     <% @your_proposals.each do |proposal| %>
       <%= content_tag_for(:li, proposal) do%>
-        <%= link_to proposal_title_with_modification_time(proposal), proposal %>
+        <%= link_to proposal.title, proposal %>
+        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
         <% if proposal.new_suggestions.any? %>
           <%= pluralize proposal.new_suggestions.count, "new suggestion" %>
         <% end %>
@@ -18,7 +19,10 @@
   <h2>You should consider giving some suggestions about these proposals</h2>
   <ul id="you-should-look-at-these">
     <% @proposals_you_should_look_at.each do |proposal| %>
-      <li><%= link_to proposal_title_with_modification_time(proposal), proposal %></li>
+      <li>
+        <%= link_to proposal.title, proposal %>
+        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+      </li>
     <% end %>
   </ul>
 <% end %>
@@ -27,7 +31,10 @@
   <h2>These proposals have been updated since you last made a suggestion</h2>
   <ul id="things-have-changed">
     <% @proposals_that_have_changed.each do |proposal| %>
-      <li><%= link_to proposal_title_with_modification_time(proposal), proposal %></li>
+      <li>
+        <%= link_to proposal.title, proposal %>
+        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+      </li>
     <% end %>
   </ul>
 <% end %>
