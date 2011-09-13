@@ -1,1 +1,3 @@
 rvm: 1.9.2
+before_script:
+  - "cp config/database.travis.yml config/database.yml"

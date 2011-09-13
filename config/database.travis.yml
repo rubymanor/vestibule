@@ -1,0 +1,8 @@
+test:
+  adapter: mysql
+  encoding: utf8
+  username:
+  password:
+  pool: 5
+  timeout: 5000
+  database: vestibule_test
