@@ -30,6 +30,14 @@ class ProposalTest < ActiveSupport::TestCase
         assert_equal Time.parse("Sep 3 2011"), @proposal.last_modified
       end
 
+      should "be last modified when last suggestion was added by proposer" do
+        Timecop.freeze(Time.parse("Sep 1 2011")) { @proposal = Factory(:proposal) }
+        Timecop.freeze(Time.parse("Sep 3 2011")) { Factory(:suggestion, :proposal => @proposal) }
+        Timecop.freeze(Time.parse("Sep 5 2011")) { Factory(:suggestion, :proposal => @proposal, :author => @proposal.proposer) }
+
+        assert_equal Time.parse("Sep 5 2011"), @proposal.last_modified
+      end
+
       should "be last modified when it was last updated" do
         assert_equal @proposal.updated_at, @proposal.last_modified
       end
