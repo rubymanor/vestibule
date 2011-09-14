@@ -15,7 +15,7 @@ class Proposal < ActiveRecord::Base
   }
 
   def last_modified
-    new_suggestions.any? ? new_suggestions.map(&:updated_at).max : updated_at
+    new_suggestions.any? ? new_suggestions.maximum(:updated_at) : updated_at
   end
 
   def proposed_by?(user)
