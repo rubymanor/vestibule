@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   end
 
   def proposals_that_have_changed
-    proposals_of_interest.select { |p| p.updated_at > p.suggestions.by(self).latest.first.updated_at }
+    proposals_of_interest.not_proposed_by(self).select { |p| p.updated_at > p.suggestions.by(self).latest.first.updated_at }
   end
 
   def self.create_with_omniauth(auth)

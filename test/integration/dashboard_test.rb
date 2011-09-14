@@ -59,6 +59,10 @@ class DashboardTest < IntegrationTestCase
               assert !page.has_content?('new suggestions'), "proposal should not appear to have new suggestions"
             end
           end
+
+          should "not show my proposal as changed" do
+            assert !page.has_css?("#things-have-changed"), "my proposal shouldn't be in the changed list"
+          end
         end
       end
 
