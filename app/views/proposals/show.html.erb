@@ -2,7 +2,7 @@
   <div class="proposal">
     <h1><%= @proposal.title %></h1>
     <div class="description"><%= markdown @proposal.description %></div>
-    <p class="proposer">Proposed by: <%= render 'shared/user', :user => @proposal.proposer %></p>
+    <p class="proposer">Proposed by: <%= render 'shared/user', :user => @proposal.proposer %> <span class="age">updated <%= time_ago_in_words @proposal.updated_at %> ago</span></p>
   </div>
 
   <% if @proposal.proposed_by?(current_user) %>
@@ -25,7 +25,7 @@
   <ul class="suggestions">
     <% @proposal.suggestions.latest.each do |suggestion| %>
       <%= content_tag_for(:li, suggestion) do %>
-        <p class="author"><%= render 'shared/user', :user => suggestion.author %> suggests:</p>
+        <p class="author"><%= render 'shared/user', :user => suggestion.author %> suggests: <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span></p>
         <section class="body"><%= markdown suggestion.body %></section>
       <% end %>
     <% end %>
