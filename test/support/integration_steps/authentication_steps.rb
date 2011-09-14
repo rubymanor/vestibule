@@ -3,7 +3,7 @@ module AuthenticationSteps
     OmniAuth.config.mock_auth[:twitter] = {
       "provider" => "twitter",
       "uid" => user.twitter_uid,
-      "user_info" => {"name" => user.name, "nickname" => user.twitter_nickname}
+      "user_info" => {"name" => user.name, "nickname" => user.twitter_nickname, "image" => user.twitter_image}
     }
     visit "/auth/twitter"
   end

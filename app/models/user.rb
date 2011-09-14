@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
       user.name = auth["user_info"]["name"]
       user.twitter_uid = auth["uid"]
       user.twitter_nickname = auth["user_info"]["nickname"]
+      user.twitter_image = auth["user_info"]["image"]
     end
   end
 
