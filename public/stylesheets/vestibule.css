@@ -20,3 +20,6 @@ img.avatar {
   width: 378px;
   height: 100px;
 }
+#suggestions li.suggestion {
+  list-style: none;
+}
