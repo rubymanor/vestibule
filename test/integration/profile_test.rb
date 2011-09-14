@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProfileTest < IntegrationTestCase
   setup do
-    @user = Factory(:user)
+    @user = Factory(:user, :name => "Dave Smith")
     @proposal = Factory(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @user)
     @involved_proposal = Factory(:proposal, :title => 'All about rubygems: what the hell is going on?')
     Factory(:suggestion, :body => 'Can you talk about the alternatives to rubygems? Maybe even RAA, even though I know it is a blast from the past.', :author => @user, :proposal => @involved_proposal)
