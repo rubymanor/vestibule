@@ -4,6 +4,9 @@ Vestibule::Application.routes.draw do
     resources :suggestions, :only => [:create]
   end
 
+  match "/motivation", :to => "home#motivation", :as => "motivation"
+  match "/about", :to => "home#about", :as => "about"
+
   match "/dashboard", :to => "dashboard#index"
 
   match "/auth/twitter/callback", :to => "twitter_authentication#callback"

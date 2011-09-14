@@ -16,7 +16,11 @@
 
 <header>
   <div class="container">
-    <h1 class="span-8"><%= link_to "Vestibule", root_path %></h1>
+    <h1 class="span-7"><%= link_to "Vestibule", root_path %></h1>
+    <ul class="background span-2">
+      <li><%= link_to "About", about_path %></li>
+      <li><%= link_to "Motivations", motivation_path %></li>
+    </ul>
     <nav class="right">
       <% if user_signed_in? -%>
         <%= render 'shared/user', :user => current_user %>

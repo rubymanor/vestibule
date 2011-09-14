@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   has_many :suggestions, :foreign_key => :author_id
   has_many :proposals_of_interest, :through => :suggestions, :source => :proposal, :uniq => true
 
+  scope :with_signup_reasons, where("signup_reason IS NOT NULL")
+  scope :without_signup_reasons, where(:signup_reason => nil)
+
   def proposals_you_should_look_at
     Proposal.without_suggestions_from(self).not_proposed_by(self)
   end

@@ -7,4 +7,9 @@ class HomeController < ApplicationController
       redirect_to proposals_path
     end
   end
+
+  def motivation
+    @users = User.with_signup_reasons.shuffle
+    @losers = User.without_signup_reasons.shuffle
+  end
 end
