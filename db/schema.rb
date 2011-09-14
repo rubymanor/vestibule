@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901211528) do
+ActiveRecord::Schema.define(:version => 20110914210706) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20110901211528) do
     t.string   "name"
     t.string   "twitter_uid"
     t.string   "twitter_nickname"
+    t.string   "twitter_image"
   end
 
 end
