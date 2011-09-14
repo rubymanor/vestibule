@@ -15,7 +15,7 @@ class Proposal < ActiveRecord::Base
   }
 
   def last_modified
-    [suggestions.maximum(:updated_at), updated_at].compact.max
+    new_suggestions.any? ? new_suggestions.maximum(:updated_at) : last_modified_by_proposer
   end
 
   def proposed_by?(user)
@@ -23,6 +23,12 @@ class Proposal < ActiveRecord::Base
   end
 
   def new_suggestions
-    suggestions.after([suggestions.by(proposer).maximum(:updated_at), updated_at].compact.max)
+    suggestions.after(last_modified_by_proposer)
+  end
+
+  private
+
+  def last_modified_by_proposer
+    [suggestions.by(proposer).maximum(:updated_at), updated_at].compact.max
   end
 end
