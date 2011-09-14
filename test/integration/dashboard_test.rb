@@ -36,13 +36,15 @@ class DashboardTest < IntegrationTestCase
           Timecop.travel 5.minutes.from_now
           Factory(:suggestion, :proposal => @my_proposal)
           Factory(:suggestion, :proposal => @my_proposal, :author => @me)
+          Timecop.travel 5.minutes.from_now
+          Factory(:suggestion, :proposal => @my_proposal)
           Factory(:suggestion, :proposal => @my_proposal)
           visit "/dashboard"
         end
 
         should "show in the list that there are new suggestions" do
           within_object("#your-proposals", @my_proposal) do
-            assert page.has_content?("3 new suggestions"), "proposal should indicate it has new suggestions"
+            assert page.has_content?("2 new suggestions"), "proposal should indicate it has new suggestions"
           end
         end
 
@@ -62,6 +64,20 @@ class DashboardTest < IntegrationTestCase
 
           should "not show my proposal as changed" do
             assert !page.has_css?("#things-have-changed"), "my proposal shouldn't be in the changed list"
+          end
+        end
+
+        context "but I've added a suggestion to my proposal since" do
+          setup do
+            Timecop.travel 5.minutes.from_now
+            Factory(:suggestion, :proposal => @my_proposal, :author => @me)
+            visit "/dashboard"
+          end
+
+          should "show in the list that there are no new suggestions" do
+            within_object("#your-proposals", @my_proposal) do
+              assert !page.has_content?('new suggestions'), "proposal should not appear to have new suggestions"
+            end
           end
         end
       end

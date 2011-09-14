@@ -23,6 +23,6 @@ class Proposal < ActiveRecord::Base
   end
 
   def new_suggestions
-    suggestions.after(self.updated_at)
+    suggestions.after([suggestions.by(proposer).maximum(:updated_at), updated_at].compact.max)
   end
 end
