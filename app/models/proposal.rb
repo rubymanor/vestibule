@@ -11,7 +11,7 @@ class Proposal < ActiveRecord::Base
   }
 
   scope :not_proposed_by, lambda { |user|
-    where('id NOT IN (?)', user.proposal_ids)
+    where('proposer_id != ?', user.id)
   }
 
   def last_modified
