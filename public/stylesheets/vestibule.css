@@ -40,3 +40,8 @@ header .background li {
 #suggestions li.suggestion {
   list-style: none;
 }
+
+#title h1 {
+  margin-left: 8px;
+  display: inline;
+}

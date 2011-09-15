@@ -1,4 +1,7 @@
-<%= page_title "#{possessive} account" %>
+<section id="title">
+  <%= image_tag(avatar_url(@user), :class => "avatar") %>
+  <%= page_title "#{possessive} account" %>
+</section>
 
 <section id="user">
   <% if @user.signup_reason.present? %>

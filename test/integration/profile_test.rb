@@ -30,6 +30,12 @@ class ProfileTest < IntegrationTestCase
       end
     end
 
+    should 'see their avatar' do
+      within('#title') do
+        i_can_see_the_avatar_for_user(@user)
+      end
+    end
+
     should 'see a list of their proposals' do
       within('#proposals') do
         assert_page_has_link_to_proposal(@proposal)
@@ -93,6 +99,12 @@ class ProfileTest < IntegrationTestCase
         end
       end
 
+      should 'see their avatar' do
+        within('#title') do
+          i_can_see_the_avatar_for_user(@user)
+        end
+      end
+
       should 'see a list of their proposals' do
         within('#proposals') do
           assert_page_has_link_to_proposal(@proposal)
@@ -137,6 +149,12 @@ class ProfileTest < IntegrationTestCase
       setup do
         sign_in @user
         visit user_path(@user)
+      end
+
+      should 'see my avatar' do
+        within('#title') do
+          i_can_see_the_avatar_for_user(@user)
+        end
       end
 
       should 'see a list of my proposals' do
