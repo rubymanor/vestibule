@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   scope :with_signup_reasons, where("signup_reason IS NOT NULL")
   scope :without_signup_reasons, where(:signup_reason => nil)
 
+  TWITTER_USERS_PER_REQUEST = 100
+
   def proposals_you_should_look_at
     Proposal.without_suggestions_from(self).not_proposed_by(self)
   end
@@ -20,6 +22,16 @@ class User < ActiveRecord::Base
       user.twitter_uid = auth["uid"]
       user.twitter_nickname = auth["user_info"]["nickname"]
       user.twitter_image = auth["user_info"]["image"]
+    end
+  end
+
+  def self.update_twitter_images
+    all.map { |user| user.twitter_uid.to_i }.each_slice(TWITTER_USERS_PER_REQUEST) do |uids|
+      Twitter.users(uids).each do |twitter_user|
+        if (user = find_by_twitter_uid(twitter_user.id)).present? && (twitter_image = twitter_user.profile_image_url).present?
+          user.update_attributes :twitter_image => twitter_image
+        end
+      end
     end
   end
 
