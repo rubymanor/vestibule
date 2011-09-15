@@ -10,6 +10,7 @@ class ProfileTest < IntegrationTestCase
     @especially_involved_proposal = Factory(:proposal, :title => 'What price modularity: a discussion on include & extend')
     Factory(:suggestion, :body => 'I do not want this to be all about rails, but will this cover ActiveSupport::Concern?', :author => @user, :proposal => @especially_involved_proposal)
     Factory(:suggestion, :body => 'Thanks for the update! This all sounds great; just what I want the guys on my team to hear!', :author => @user, :proposal => @especially_involved_proposal)
+    Factory(:suggestion, :body => 'I\'m definitely having second thoughts about this proposal.', :author => @user, :proposal => @proposal)
   end
 
   context "When viewing a user's profile when not logged in" do
@@ -52,11 +53,12 @@ class ProfileTest < IntegrationTestCase
       assert page.has_css? 'h2', :text => "#{@user.name}'s proposals"
     end
 
-    should 'see a list of other proposals, but only ones that the user is involved with via their suggestions' do
+    should 'see a list of other users\' proposals, but only ones that the user is involved with via their suggestions' do
       within('#involvement') do
         assert_page_has_link_to_proposal(@involved_proposal)
         assert_page_has_link_to_proposal(@especially_involved_proposal)
         assert_page_has_no_link_to_proposal(@uninvolved_proposal)
+        assert_page_has_no_link_to_proposal(@proposal)
       end
     end
 
@@ -115,11 +117,12 @@ class ProfileTest < IntegrationTestCase
         assert page.has_css? 'h2', :text => "Other proposals #{@user.name} is involved with"
       end
 
-      should 'see a list of other proposals, but only ones that the user is involved with via their suggestions' do
+      should 'see a list of other users\' proposals, but only ones that the user is involved with via their suggestions' do
         within('#involvement') do
           assert_page_has_link_to_proposal(@involved_proposal)
           assert_page_has_link_to_proposal(@especially_involved_proposal)
           assert_page_has_no_link_to_proposal(@uninvolved_proposal)
+          assert_page_has_no_link_to_proposal(@proposal)
         end
       end
 
@@ -160,11 +163,12 @@ class ProfileTest < IntegrationTestCase
         assert page.has_css? 'h2', :text => "Other proposals you are involved with"
       end
 
-      should 'see a list of other proposals, but only ones that I am involved with via their suggestions' do
+      should 'see a list of other users\' proposals, but only ones that I am involved with via their suggestions' do
         within('#involvement') do
           assert_page_has_link_to_proposal(@involved_proposal)
           assert_page_has_link_to_proposal(@especially_involved_proposal)
           assert_page_has_no_link_to_proposal(@uninvolved_proposal)
+          assert_page_has_no_link_to_proposal(@proposal)
         end
       end
 

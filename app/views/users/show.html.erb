@@ -34,9 +34,9 @@
 <section id="involvement" class="span-12 last">
   <h2>Other proposals <%= to_be(false) %> involved with</h2>
 
-  <% if @user.proposals_of_interest.any? %>
+  <% if (other_proposals = @user.proposals_of_interest.not_proposed_by(@user)).any? %>
     <ul>
-    <% @user.proposals_of_interest.each do |proposal| %>
+    <% other_proposals.each do |proposal| %>
       <li><%= link_to proposal.title, proposal %></li>
     <% end %>
     </ul>
