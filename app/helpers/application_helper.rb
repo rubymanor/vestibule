@@ -20,8 +20,12 @@ module ApplicationHelper
   end
 
   def avatar_url(user)
-    size = "n"
-    "http://img.tweetimag.es/i/#{user.twitter_nickname}_#{size}"
+    if user.twitter_image.present?
+      user.twitter_image
+    else
+      size = "n"
+      "http://img.tweetimag.es/i/#{user.twitter_nickname}_#{size}"
+    end
   end
 
   def markdown(text)
