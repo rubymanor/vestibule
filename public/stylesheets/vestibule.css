@@ -65,8 +65,13 @@ header .background li {
 
 #champs li .picture {
   position: relative;
-  width: 73px;
-  height: 73px;
+  width: 128px;
+  height: 128px;
+}
+
+#champs li .picture img {
+  width: 128px;
+  height: 128px;
 }
 
 #champs li .picture .score {
@@ -76,7 +81,7 @@ header .background li {
   text-shadow: #333 0px 0px 4px;
   font-weight: bold;
   color: #eee;
-  font-size: 110%;
+  font-size: 130%;
 }
 
 #scamps {

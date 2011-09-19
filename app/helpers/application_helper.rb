@@ -22,7 +22,7 @@ module ApplicationHelper
   def avatar_url(user, bigger=false)
     if user.twitter_image.present?
       if bigger
-        user.twitter_image.gsub(/_normal/, "_bigger")
+        user.twitter_image.gsub(/_normal/, "_reasonably_small")
       else
         user.twitter_image
       end
