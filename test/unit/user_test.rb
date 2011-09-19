@@ -25,10 +25,18 @@ class UserTest < ActiveSupport::TestCase
 
     context "who makes a proposal" do
       setup do
-        Factory(:proposal, :proposer => @user)
+        @proposal = Factory(:proposal, :proposer => @user)
       end
 
       should_change("their contribution_score", :from => 0, :to => 10) { @user.contribution_score }
+
+      context "that is then suggested upon" do
+        setup do
+          Factory(:suggestion, :proposal => @proposal)
+        end
+
+        should_change("their contribution_score", :from => 10, :to => 15) { @user.reload.contribution_score }
+      end
     end
   end
 

@@ -9,7 +9,7 @@ class Suggestion < ActiveRecord::Base
   validates :body, :presence => true
   validate :is_a_meaningful_contribution
 
-  after_create :update_author_score
+  after_create :update_scores
 
   private
 
@@ -21,7 +21,8 @@ class Suggestion < ActiveRecord::Base
     end
   end
 
-  def update_author_score
+  def update_scores
     author.save
+    proposal.proposer.save
   end
 end
