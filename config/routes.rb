@@ -5,6 +5,7 @@ Vestibule::Application.routes.draw do
   end
 
   match "/motivation", :to => "home#motivation", :as => "motivation"
+  match "/introspectron", :to => "home#introspectron", :as => "introspectron"
   match "/about", :to => "home#about", :as => "about"
 
   match "/dashboard", :to => "dashboard#index"

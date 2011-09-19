@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110914210706) do
+ActiveRecord::Schema.define(:version => 20110919210151) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110914210706) do
     t.string   "twitter_uid"
     t.string   "twitter_nickname"
     t.string   "twitter_image"
+    t.integer  "contribution_score"
   end
 
 end

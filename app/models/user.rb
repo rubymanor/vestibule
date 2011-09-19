@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
 
   scope :with_signup_reasons, where("signup_reason IS NOT NULL")
   scope :without_signup_reasons, where(:signup_reason => nil)
+  scope :by_contribution, order("contribution_score DESC")
+
+  before_save :update_contribution_score
 
   TWITTER_USERS_PER_REQUEST = 100
 
@@ -37,5 +40,16 @@ class User < ActiveRecord::Base
 
   def to_param
     twitter_nickname
+  end
+
+  PROPOSAL_WEIGHT = 10
+  INTERESTING_PROPOSALS_WEIGHT = 5
+  SUGGESTION_WEIGHT = 2
+
+  def update_contribution_score
+    self.contribution_score =
+      (proposals.count * PROPOSAL_WEIGHT) +
+      (proposals_of_interest.count * INTERESTING_PROPOSALS_WEIGHT) +
+      (suggestions.count * SUGGESTION_WEIGHT)
   end
 end

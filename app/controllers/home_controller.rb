@@ -12,4 +12,9 @@ class HomeController < ApplicationController
     @users = User.with_signup_reasons.shuffle
     @losers = User.without_signup_reasons.shuffle
   end
+
+  def introspectron
+    @users = User.by_contribution
+    @scorers, @nonscorers = @users.partition { |u| u.contribution_score > 0 }
+  end
 end

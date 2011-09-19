@@ -1,0 +1,33 @@
+<section id="scorers" class="scored_people">
+  <h1>Champs</h1>
+  <p>These kind folk below are the real deal, the solid gold salt-of-the-earth that keep the 'Manor ticking. They deserve your admiration, your respect, your wallet and your jewellery. 'Av a look at their rightly-<em>magnificent</em> facial topiary. Jealous?</p>
+  <ul>
+    <% @scorers.each do |user| %>
+    <li>
+      <div class="picture">
+        <%= link_to image_tag("http://mustachify.me/?src=" + avatar_url(user, bigger=true)), user %>
+        <span class="score"><%= user.contribution_score %></span>
+      </div>
+      <%= link_to user.name, user %>
+    </li>
+    <% end %>
+  </ul>
+</section>
+
+<hr />
+
+<section id="nonscorers" class="scored_people">
+  <h2>Scamps</h2>
+  <p>This sorry lot are in danger of invoking The Guv'ner wrath, unless they pull their collective finger out!</p>
+  <ul>
+    <% @nonscorers.each do |user| %>
+    <li>
+      <div class="picture">
+        <%= link_to image_tag(avatar_url(user)), user %>
+        <span class="score"><%= user.contribution_score %></span>
+      </div>
+      <%= link_to user.name, user %>
+    </li>
+    <% end %>
+  </ul>
+</section>

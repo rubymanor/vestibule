@@ -19,11 +19,15 @@ module ApplicationHelper
     current_user && !current_user.signup_reason.present? && !request.path[/user/]
   end
 
-  def avatar_url(user)
+  def avatar_url(user, bigger=false)
     if user.twitter_image.present?
-      user.twitter_image
+      if bigger
+        user.twitter_image.gsub(/_normal/, "_bigger")
+      else
+        user.twitter_image
+      end
     else
-      size = "n"
+      size = bigger ? "b" : "n"
       "http://img.tweetimag.es/i/#{user.twitter_nickname}_#{size}"
     end
   end

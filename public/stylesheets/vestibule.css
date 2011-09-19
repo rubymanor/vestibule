@@ -45,3 +45,43 @@ header .background li {
   margin-left: 8px;
   display: inline;
 }
+
+.scored_people {
+  margin-bottom: 4em;
+}
+
+.scored_people ul {
+  padding: 0;
+  overflow: hidden;
+}
+
+.scored_people li {
+  list-style: none;
+  float: left;
+  padding: 1em;
+}
+
+#scorers li .picture {
+  position: relative;
+  width: 73px;
+  height: 73px;
+}
+
+#scorers li .picture .score {
+  position: absolute;
+  bottom: 0px;
+  right: 3px;
+  text-shadow: #333 0px 0px 4px;
+  font-weight: bold;
+  color: #eee;
+  font-size: 110%;
+}
+
+#nonscorers {
+  clear: both;
+}
+
+#nonscorers img {
+  width: 48px;
+  height: 48px;
+}
