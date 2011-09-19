@@ -14,6 +14,8 @@ class Proposal < ActiveRecord::Base
     where('proposer_id != ?', user.id)
   }
 
+  after_create :update_proposer_score
+
   def last_modified
     new_suggestions.any? ? new_suggestions.maximum(:updated_at) : last_modified_by_proposer
   end
@@ -30,5 +32,9 @@ class Proposal < ActiveRecord::Base
 
   def last_modified_by_proposer
     [suggestions.by(proposer).maximum(:updated_at), updated_at].compact.max
+  end
+
+  def update_proposer_score
+    proposer.save
   end
 end

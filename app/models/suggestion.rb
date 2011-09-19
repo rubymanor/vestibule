@@ -9,6 +9,8 @@ class Suggestion < ActiveRecord::Base
   validates :body, :presence => true
   validate :is_a_meaningful_contribution
 
+  after_create :update_author_score
+
   private
 
   def is_a_meaningful_contribution
@@ -17,5 +19,9 @@ class Suggestion < ActiveRecord::Base
     elsif body.length < 50
       errors["body"] << "should be a meaningful contribution or criticism (i.e. at least 50 characters)"
     end
+  end
+
+  def update_author_score
+    author.save
   end
 end

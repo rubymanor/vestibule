@@ -3,7 +3,7 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
   context "A user" do
     setup do
-      @user = Factory(:user)
+      @user = Factory(:user, :signup_reason => nil)
     end
 
     should "be valid" do
@@ -19,6 +19,16 @@ class UserTest < ActiveSupport::TestCase
       should "have that proposal in their proposals of interest" do
         assert_equal [@proposal], @user.reload.proposals_of_interest
       end
+
+      should_change("their contribution_score", :from => 0, :to => 2) { @user.contribution_score }
+    end
+
+    context "who makes a proposal" do
+      setup do
+        Factory(:proposal, :proposer => @user)
+      end
+
+      should_change("their contribution_score", :from => 0, :to => 10) { @user.contribution_score }
     end
   end
 
