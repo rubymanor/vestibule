@@ -16,6 +16,8 @@ header .background {
 
 header .background li {
   list-style: none;
+  float: left;
+  padding-right: 0.5em;
 }
 
 #how-to-use-vestibule {
