@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
     twitter_nickname
   end
 
+  REASON_WEIGHT = 5
   PROPOSAL_WEIGHT = 10
   INTERESTING_PROPOSALS_WEIGHT = 5
   SUGGESTION_WEIGHT = 2
@@ -51,5 +52,6 @@ class User < ActiveRecord::Base
       (proposals.count * PROPOSAL_WEIGHT) +
       (proposals_of_interest.count * INTERESTING_PROPOSALS_WEIGHT) +
       (suggestions.count * SUGGESTION_WEIGHT)
+    self.contribution_score += REASON_WEIGHT if self.signup_reason.present?
   end
 end
