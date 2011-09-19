@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should "have that proposal in their proposals of interest" do
-        assert_equal [@proposal], @user.proposals_of_interest
+        assert_equal [@proposal], @user.reload.proposals_of_interest
       end
     end
   end
