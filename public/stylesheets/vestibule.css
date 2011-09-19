@@ -61,13 +61,13 @@ header .background li {
   padding: 1em;
 }
 
-#scorers li .picture {
+#champs li .picture {
   position: relative;
   width: 73px;
   height: 73px;
 }
 
-#scorers li .picture .score {
+#champs li .picture .score {
   position: absolute;
   bottom: 0px;
   right: 3px;
@@ -77,11 +77,11 @@ header .background li {
   font-size: 110%;
 }
 
-#nonscorers {
+#scamps {
   clear: both;
 }
 
-#nonscorers img {
+#scamps img {
   width: 48px;
   height: 48px;
 }
