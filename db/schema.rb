@@ -13,6 +13,21 @@
 
 ActiveRecord::Schema.define(:version => 20110924142007) do
 
+  create_table "agenda_items", :force => true do |t|
+    t.integer  "agenda_id"
+    t.integer  "proposal_id"
+    t.integer  "rank"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "agendas", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "proposals", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"

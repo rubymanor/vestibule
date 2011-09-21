@@ -10,6 +10,17 @@ class ProposalTest < ActiveSupport::TestCase
       assert @proposal.valid?
     end
 
+    context "that has been included in an agenda by a user" do
+      setup do
+        @user = Factory.create(:user)
+        Factory.create(:agenda_item, :proposal => @proposal, :user => @user)
+      end
+
+      should "be identified as such" do
+        assert @proposal.ranked_by?(@user)
+      end
+    end
+
     context "last modified" do
 
       should "be last modified when updated after last suggestion was added" do

@@ -1,7 +1,8 @@
 class Proposal < ActiveRecord::Base
   belongs_to :proposer, :class_name => 'User'
   has_many :suggestions
-
+  has_many :rankings, :class_name => 'AgendaItem'
+  has_many :rankers, :through => :rankings, :source => :user
   validates :title, :presence => true
 
   scope :without_suggestions_from, lambda { |user|
@@ -25,6 +26,10 @@ class Proposal < ActiveRecord::Base
 
   def proposed_by?(user)
     proposer == user
+  end
+
+  def ranked_by?(user)
+    rankers.include?(user)
   end
 
   def new_suggestions

@@ -10,6 +10,15 @@
     <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
     <%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal) %>
   <% end %>
+
+  <% if (user_signed_in?) %>
+    <% unless @proposal.ranked_by?(current_user) %>
+       <%= form_tag add_item_agenda_path, :method => :post %>
+         <%= hidden_field_tag "proposal_id", @proposal.id %>
+         <%= submit_tag "Add to my agenda", :id => "add_to_agenda" %>
+       </form>
+    <% end %>
+  <% end %>
 </div>
 
 <div id="suggestions" class="push-2 span-10 last">
