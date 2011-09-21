@@ -49,6 +49,7 @@ class ProposalSuggestionTest < IntegrationTestCase
         suggest %{
 1. change the title - it's not really clear
 2. put more emphasis on how you'd test your approach
+3. cover this gem: http://rubygems.org/gems/sausage-mcmuffin
 
 Other than that, sounds great!
           }
@@ -56,6 +57,8 @@ Other than that, sounds great!
         within ".suggestions" do
           assert page.has_css?("ol li", :text => "change the title - it's not really clear")
           assert page.has_css?("ol li", :text => "put more emphasis on how you'd test your approach")
+          assert page.has_css?("ol li", :text => "cover this gem: http://rubygems.org/gems/sausage-mcmuffin")
+          assert page.has_css?("ol li a[href='http://rubygems.org/gems/sausage-mcmuffin']", :text => 'http://rubygems.org/gems/sausage-mcmuffin')
           assert page.has_css?("p", :text => "Other than that, sounds great!")
         end
       end

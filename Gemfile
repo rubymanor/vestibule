@@ -5,7 +5,7 @@ gem "mysql", "2.8.1"
 gem "simple_form", "1.5.0"
 gem "omniauth", "0.2.6"
 gem "paper_trail", "1.6.4"
-gem "rdiscount", "1.6.8"
+gem "redcarpet", "~> 2.0.0b5"
 gem "twitter", "1.6.0"
 
 group :test do

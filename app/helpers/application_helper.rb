@@ -1,4 +1,4 @@
-require 'rdiscount'
+require 'redcarpet'
 
 module ApplicationHelper
   def render_page_title
@@ -34,8 +34,7 @@ module ApplicationHelper
 
   def markdown(text)
     if text
-      markdown = RDiscount.new(text)
-      markdown.to_html.html_safe
+      markdown_parser.render(text).html_safe
     else
       nil
     end
@@ -83,5 +82,12 @@ module ApplicationHelper
 
   def to_be(start_sentence = true)
     %{#{user_name(start_sentence)} #{@user == current_user ? 'are' : 'is'}}
+  end
+
+  protected
+  def markdown_parser(options = {})
+    @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+                                                 {:autolink => true}.merge(options))
+
   end
 end
