@@ -8,11 +8,11 @@ module ApplicationHelper
     %Q{#{page_title} :: Vestibule}.html_safe
   end
 
-  def page_title(new_page_title)
+  def page_title(new_page_title, no_h1 = false)
     content_for :page_title do
       new_page_title
     end
-    content_tag :h1, new_page_title
+    content_tag :h1, new_page_title unless no_h1
   end
 
   def remind_account_for_signup_reason
