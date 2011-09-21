@@ -1,6 +1,6 @@
 <div id="proposal" class="span-12">
   <div class="proposal">
-    <h1><%= @proposal.title %></h1>
+    <%= page_title @proposal.title %>
     <div class="description"><%= markdown @proposal.description %></div>
     <p class="proposer">Proposed by: <%= render 'shared/user', :user => @proposal.proposer %> <span class="age">updated <%= time_ago_in_words @proposal.updated_at %> ago</span></p>
   </div>
