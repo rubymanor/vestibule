@@ -14,6 +14,9 @@ class Proposal < ActiveRecord::Base
     where('proposer_id != ?', user.id)
   }
 
+  scope :active, where(withdrawn: false)
+  scope :withdrawn, where(withdrawn: true)
+
   after_create :update_proposer_score
 
   def last_modified

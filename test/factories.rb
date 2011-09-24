@@ -8,6 +8,7 @@ end
 Factory.define(:proposal) do |f|
   f.sequence(:title) { |n| Faker::Lorem.sentence + " #{n}" }
   f.association :proposer, :factory => :user
+  f.withdrawn false
 end
 
 Factory.define(:suggestion) do |f|

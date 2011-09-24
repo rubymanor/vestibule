@@ -10,7 +10,21 @@
 </ul>
 
 <% if user_signed_in? %>
-  <%= link_to "Propose talk", new_proposal_path %>
+  <div class="action">
+    <%= link_to "Propose talk", new_proposal_path %>
+  </div>
+<% end %>
+
+<% if @withdrawn_proposals.any? %>
+  <p>The following proposals have been withdrawn:</p>
+  <ul class="proposals">
+    <% for proposal in @withdrawn_proposals %>
+      <li>
+        <%= link_to proposal.title, proposal %>
+        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
 
 <% content_for :head do %>

@@ -48,6 +48,12 @@ header .background li {
   display: inline;
 }
 
+.action {
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 2em;
+}
+
 .scored_people {
   margin-bottom: 4em;
 }

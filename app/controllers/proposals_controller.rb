@@ -5,7 +5,8 @@ class ProposalsController < ApplicationController
   respond_to :rss, :only => [:index, :show]
 
   def index
-    respond_with @proposals = Proposal.order('created_at desc').all
+    @withdrawn_proposals = Proposal.withdrawn.all
+    respond_with @proposals = Proposal.active.order('created_at desc').all
   end
 
   def show
