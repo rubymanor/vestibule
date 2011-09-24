@@ -28,6 +28,10 @@ class Proposal < ActiveRecord::Base
     suggestions.after(last_modified_by_proposer)
   end
 
+  def withdraw!
+    update_attribute(:withdrawn, true)
+  end
+
   private
 
   def last_modified_by_proposer

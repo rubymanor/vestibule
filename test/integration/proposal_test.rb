@@ -69,6 +69,14 @@ class ProposalTest < IntegrationTestCase
           :proposer     => @user
       end
 
+      should "be able to withdraw my proposal" do
+        visit proposals_path
+        click_link "My Amazing Talk"
+        click_button "Withdraw proposal"
+
+        assert_proposal_withdrawn "My Amazing Talk"
+      end
+
       context "and then edit my proposal" do
         setup do
           visit proposals_path

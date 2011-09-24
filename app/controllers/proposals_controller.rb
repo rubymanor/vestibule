@@ -39,6 +39,12 @@ class ProposalsController < ApplicationController
     end
   end
 
+  def withdraw
+    proposal = current_user.proposals.find(params[:id])
+    proposal.withdraw!
+    redirect_to proposal_path(proposal), alert: "Your proposal has been withdrawn"
+  end
+
   private
 
   def load_proposal_for_editing

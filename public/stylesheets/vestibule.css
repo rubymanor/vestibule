@@ -92,3 +92,12 @@ header .background li {
   width: 48px;
   height: 48px;
 }
+
+.proposal.withdrawn h1 {
+  text-decoration: line-through;
+}
+
+.proposal.withdrawn .description,
+.proposal.withdrawn .proposer {
+  color: #999;
+}

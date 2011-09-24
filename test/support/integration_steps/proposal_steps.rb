@@ -43,4 +43,8 @@ module ProposalSteps
       assert page.has_content? options[:body]
     end
   end
+
+  def assert_proposal_withdrawn(name)
+    assert page.has_css?(".proposal.withdrawn")
+  end
 end

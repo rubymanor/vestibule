@@ -2,6 +2,9 @@ Vestibule::Application.routes.draw do
   resources :users, :only => [:show, :edit, :update]
   resources :proposals, :except => [:destroy] do
     resources :suggestions, :only => [:create]
+    member do
+      post :withdraw
+    end
   end
 
   match "/motivation", :to => "home#motivation", :as => "motivation"

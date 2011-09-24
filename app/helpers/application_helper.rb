@@ -84,6 +84,12 @@ module ApplicationHelper
     %{#{user_name(start_sentence)} #{@user == current_user ? 'are' : 'is'}}
   end
 
+  def proposal_div(proposal, &block)
+    class_name = "proposal"
+    class_name += " withdrawn" if proposal.withdrawn?
+    content_tag(:div, :class => class_name, &block)
+  end
+
   protected
   def markdown_parser(options = {})
     @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
