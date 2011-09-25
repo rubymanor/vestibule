@@ -16,3 +16,12 @@ Factory.define(:suggestion) do |f|
   f.association :author, :factory => :user
   f.body { Faker::Lorem.paragraph }
 end
+
+Factory.define(:agenda) do |f|
+  f.association :user
+end
+
+Factory.define(:agenda_item) do |f|
+  f.association :proposal
+  f.association :user
+end

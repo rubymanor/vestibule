@@ -1,4 +1,3 @@
-
 require "test_helper"
 
 class ProposalTest < IntegrationTestCase
@@ -55,6 +54,16 @@ class ProposalTest < IntegrationTestCase
     setup do
       @user = Factory(:user)
       sign_in @user
+    end
+
+    context "and I have not added a proposal to my agenda" do
+      setup { @proposal = Factory(:proposal, :title => "Add me to agenda") }
+
+      should "see a button for adding it to my agenda" do
+        visit proposals_path
+        click_link "Add me to agenda"
+        assert page.has_css?("input#add_to_agenda")
+      end
     end
 
     context "and I propose a talk with all the required details" do
