@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails", "3.0.10"
-gem "mysql", "2.8.1"
+gem "mysql2", "~> 0.2.1"
 gem "simple_form", "1.5.0"
 gem "omniauth", "0.2.6"
 gem "paper_trail", "1.6.4"
@@ -22,3 +22,5 @@ group :test do
   gem "launchy"
   gem "escape_utils", "0.1.9"
 end
+
+# gem "rake", "0.8.7"
