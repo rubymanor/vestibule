@@ -26,6 +26,7 @@
       <% if user_signed_in? -%>
         <%= render 'shared/user', :user => current_user %>
         <%= link_to "Dashboard", dashboard_path %>
+        <%= link_to "Selections", selections_path %>
         <%= link_to "All proposals", proposals_path %>
         <%= link_to "Sign out", logout_path %>
       <% else -%>
