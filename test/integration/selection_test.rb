@@ -15,7 +15,7 @@ class SelectionTest < IntegrationTestCase
 
       should "be able to select their preferred proposals" do
         visit "/"
-        click_link "My selections"
+        click_link "Selections"
         select_proposal "Destroy Ruby"
         select_proposal "I Miss Merb"
         assert page.has_css?("#selections a", :text => "Destroy Ruby")
@@ -26,7 +26,7 @@ class SelectionTest < IntegrationTestCase
       should "only be able to select 8 proposals" do
         proposals = (1..8).to_a.map { Factory(:proposal) }
         visit "/"
-        click_link "My selections"
+        click_link "Selections"
         8.times { |x| select_proposal proposals[x].title }
         select_proposal "Destroy Ruby"
         i_am_alerted "You can only select 8 proposals at a time"
@@ -35,7 +35,7 @@ class SelectionTest < IntegrationTestCase
       context "having selected some proposals" do
         setup do
           visit "/"
-          click_link "My selections"
+          click_link "Selections"
           select_proposal "Destroy Ruby"
         end
 
