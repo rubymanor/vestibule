@@ -23,6 +23,15 @@ class SelectionTest < IntegrationTestCase
         assert page.has_no_css?("#selections a", :text => "My Hot New Gem")
       end
 
+      should "only be able to select 8 proposals" do
+        proposals = (1..8).to_a.map { Factory(:proposal) }
+        visit "/"
+        click_link "My selections"
+        8.times { |x| select_proposal proposals[x].title }
+        select_proposal "Destroy Ruby"
+        i_am_alerted "You can only select 8 proposals at a time"
+      end
+
       context "having selected some proposals" do
         setup do
           visit "/"

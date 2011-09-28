@@ -10,7 +10,7 @@ class SelectionsController < ApplicationController
     if selection.save
       redirect_to user_selections_path(current_user)
     else
-      raise "argh"
+      redirect_to user_selections_path(current_user), alert: selection.errors.full_messages.to_sentence
     end
   end
 
