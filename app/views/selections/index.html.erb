@@ -1,0 +1,25 @@
+<h1>Your selections</h1>
+
+<ul id="selections">
+  <% current_user.selections.each do |selection| %>
+    <%= content_tag_for :li, selection.proposal do %>
+      <%= link_to selection.proposal.title, selection.proposal %>
+      <%= button_to "Deselect", user_selection_path(current_user, selection), :method => :delete %>
+    <% end %>
+  <% end %>
+</ul>
+
+
+<h2>Choose more</h2>
+
+<ul>
+<% @proposals.each do |proposal| %>
+  <%= content_tag_for :li, proposal do %>
+    <%= link_to proposal.title, proposal_path(proposal) %>
+    <%= form_for [current_user, Selection.new] do |form| %>
+      <%= form.hidden_field :proposal_id, :value => proposal.id %>
+      <%= form.submit "Select" %>
+    <% end %>
+  <% end %>
+<% end %>
+</ul>

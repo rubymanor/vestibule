@@ -1,5 +1,7 @@
 Vestibule::Application.routes.draw do
-  resources :users, :only => [:show, :edit, :update]
+  resources :users, :only => [:show, :edit, :update] do
+    resources :selections, :only => [:index, :create, :destroy]
+  end
   resources :proposals, :except => [:destroy] do
     resources :suggestions, :only => [:create]
     member do
