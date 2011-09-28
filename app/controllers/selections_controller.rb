@@ -8,15 +8,15 @@ class SelectionsController < ApplicationController
   def create
     selection = current_user.selections.build(params[:selection])
     if selection.save
-      redirect_to user_selections_path(current_user)
+      redirect_to selections_path
     else
-      redirect_to user_selections_path(current_user), alert: selection.errors.full_messages.to_sentence
+      redirect_to selections_path, alert: selection.errors.full_messages.to_sentence
     end
   end
 
   def destroy
     selection = current_user.selections.find(params[:id])
     selection.destroy
-    redirect_to user_selections_path(current_user)
+    redirect_to selections_path
   end
 end
