@@ -107,3 +107,20 @@ header .background li {
 .proposal.withdrawn .proposer {
   color: #999;
 }
+
+#selections li,
+#available_selections li {
+  clear: both;
+  list-style: none;
+  margin-bottom: 1em;
+}
+
+#selections li a,
+#available_selections li a {
+  margin-left: 1em;
+}
+
+#selections form, 
+#available_selections form {
+  float: left;
+}

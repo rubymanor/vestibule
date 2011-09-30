@@ -1,4 +1,8 @@
 <%= page_title 'Dashboard', no_h1=true %>
+
+<h2>Selections</h2>
+<p>You can now start choosing the proposals that you'd like to see on the day (or be recorded for viewing later of course). <strong><%= link_to "Make your proposal selections now", selections_path %>!</strong></p>
+
 <h2>Your proposals</h2>
 <% if @your_proposals.present? %>
   <ul id="your-proposals">

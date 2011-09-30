@@ -6,6 +6,7 @@ Vestibule::Application.routes.draw do
       post :withdraw
     end
   end
+  resources :selections, :only => [:index, :create, :destroy]
 
   match "/motivation", :to => "home#motivation", :as => "motivation"
   match "/champs", :to => "home#champs", :as => "champs"
