@@ -43,7 +43,7 @@ GEM
       ffi (~> 1.0.6)
     columnize (0.3.4)
     culerity (0.2.15)
-    database_cleaner (0.5.2)
+    database_cleaner (0.6.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     escape_utils (0.1.9)
@@ -186,14 +186,14 @@ GEM
       multi_json (~> 1.0.0)
       multi_xml (~> 0.2.0)
       simple_oauth (~> 0.1.5)
-    tzinfo (0.3.29)
+    tzinfo (0.3.30)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   capybara (= 0.3.9)
-  database_cleaner (= 0.5.2)
+  database_cleaner (= 0.6.0)
   escape_utils (= 0.1.9)
   factory_girl_rails (= 1.0)
   faker (= 0.9.5)

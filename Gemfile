@@ -12,7 +12,7 @@ group :test do
   gem "factory_girl_rails", "1.0"
   gem "shoulda", "2.11.3"
   gem "capybara", "0.3.9"
-  gem "database_cleaner", "0.5.2"
+  gem "database_cleaner", "0.6.0"
   gem "mocha", "0.9.8", :require => false
   gem "faker", "0.9.5"
   gem "timecop", "0.3.5"
