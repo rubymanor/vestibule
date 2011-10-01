@@ -1,3 +1,5 @@
+require 'uri'
+
 class ProposalsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
@@ -18,6 +20,12 @@ class ProposalsController < ApplicationController
     @proposal = Proposal.new
   end
 
+  def moot
+    @proposal = Proposal.new
+		@proposal.title = URI.unescape params[:title]
+    render :new
+  end
+
   def create
     @proposal = current_user.proposals.new(params[:proposal])
     if @proposal.save
@@ -36,7 +44,7 @@ class ProposalsController < ApplicationController
     if @proposal.update_attributes(params[:proposal])
       redirect_to proposal_path(@proposal)
     else
-      render :edit
+			render :edit
     end
   end
 

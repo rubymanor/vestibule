@@ -6,8 +6,8 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-def user(name)
-  User.create!(:name => name, :twitter_nickname => name)
+def user(name, nickname=nil)
+  User.create!(:name => name, :twitter_nickname => nickname || name)
 end
 
 def suggestions_for(proposal, suggestions)
@@ -19,10 +19,10 @@ def suggestions_for(proposal, suggestions)
   end
 end
 
-alice = user("alice")
+alice = user("Alice", "alice")
 bob = user("bob")
-charlie = user("charlie")
-daniel = user("daniel")
+charlie = user("Charlie Parker", "charlie")
+daniel = user("Daniel Boone", "daniel")
 
 a = alice.proposals.create :title => "Fake it till you make it", :description => <<-EOS
 I've written a few things recently which work against 3rd party HTTP API's recently. 
