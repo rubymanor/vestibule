@@ -18,12 +18,8 @@ class ProposalsController < ApplicationController
 
   def new
     @proposal = Proposal.new
-  end
-
-  def moot
-    @proposal = Proposal.new
-		@proposal.title = URI.unescape params[:title]
-    render :new
+		title = params[:title]
+		@proposal.title = URI.unescape title if title
   end
 
   def create
