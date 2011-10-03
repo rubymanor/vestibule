@@ -41,9 +41,9 @@ class ApplicationHelperTest < ActionView::TestCase
 
 	    should "turn into link" do
 	      assert_equal link_to("My One and Only", "/proposals/1"), wikiize("[[My One and Only]]")
-	      assert_equal link_to("Her Latest Idea", "/proposals/new?title=Her%2520Latest%2520Idea"), wikiize("[[Her Latest Idea]]")
+	      assert_equal link_to("Her Latest Idea", "/proposals/new?title=Her%2520Latest%2520Idea", :class => "New"), wikiize("[[Her Latest Idea]]")
 	      assert_equal(
-					"I prefer <a href=\"/proposals/new?title=Her%2520Latest%2520Idea\">Her Latest Idea</a> to <a href=\"/proposals/1\">My One and Only</a>.", 
+					"I prefer <a href=\"/proposals/new?title=Her%2520Latest%2520Idea\" class=\"New\">Her Latest Idea</a> to <a href=\"/proposals/1\">My One and Only</a>.", 
 					wikiize("I prefer [[Her Latest Idea]] to [[My One and Only]].")
 				)
 	    end

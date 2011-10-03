@@ -37,7 +37,7 @@ module ApplicationHelper
 		names = {}
     User.all.each {|user| names[user.name] = link_to(user.name, user) }
     Proposal.all.each {|proposal| names[proposal.title] = link_to(proposal.title, proposal) }
-		text.gsub(/\[\[(.*?)\]\]/) {|s| names[$1] || link_to($1, {:controller => "proposals", :action => "new", :title => URI.escape($1)}) }
+		text.gsub(/\[\[(.*?)\]\]/) {|s| names[$1] || link_to($1, {:controller => "proposals", :action => "new", :title => URI.escape($1)}, :class => "New") }
   end
 
   def markdown(text)
