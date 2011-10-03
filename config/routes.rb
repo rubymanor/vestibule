@@ -1,6 +1,5 @@
 Vestibule::Application.routes.draw do
   resources :users, :only => [:show, :edit, :update]
-  get "/proposals/moot"
   resources :proposals, :except => [:destroy] do
     resources :suggestions, :only => [:create]
     member do
