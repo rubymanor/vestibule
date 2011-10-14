@@ -13,7 +13,7 @@ class Selection < ActiveRecord::Base
     Selection.includes(:proposal).group_by(&:proposal).sort_by do |_, selections|
       -selections.size
     end.map do |proposal, selections|
-      [selections.size, proposal.title]
+      [selections.size, proposal]
     end
   end
 

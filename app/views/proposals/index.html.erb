@@ -9,12 +9,6 @@
   <% end %>
 </ul>
 
-<% if user_signed_in? %>
-  <div class="action">
-    <%= link_to "Propose talk", new_proposal_path %>
-  </div>
-<% end %>
-
 <% if @withdrawn_proposals.any? %>
   <p>The following proposals have been withdrawn:</p>
   <ul class="proposals">
