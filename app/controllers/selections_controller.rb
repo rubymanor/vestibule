@@ -3,7 +3,7 @@ class SelectionsController < ApplicationController
 
   def index
     popular_proposals = Selection.popular[0..9]
-    @top_proposals, @next_proposals = popular.each_with_index.partition {|p, i| i < 7}.map {|s| s.map{|p,_| p}}
+    @top_proposals, @next_proposals = popular_proposals.each_with_index.partition {|p, i| i <= 7}.map {|s| s.map{|p,_| p}}
     if current_user
       @proposals = Proposal.available_for_selection_by(current_user)
     end

@@ -1,12 +1,11 @@
 <h1>Top 10 Proposals</h1>
 
-<ul id="the_chosen_ones">
+<ol id="the_chosen_ones">
   <% @top_proposals.each do |popular_proposal|
     votes, proposal = *popular_proposal
     %>
     <%= content_tag_for :li, proposal, :class => 'top' do %>
-      <span><%= votes %></span>
-      <%= link_to proposal.title, proposal %>
+      <%= link_to proposal.title, proposal %> <span>(<%= votes %> votes)</span>
     <% end %>
   <% end %>
 
@@ -14,11 +13,10 @@
     votes, proposal = *popular_proposal
     %>
     <%= content_tag_for :li, proposal, :class => 'next' do %>
-      <span><%= votes %></span>
-      <%= link_to proposal.title, proposal %>
+      <%= link_to proposal.title, proposal %> <span>(<%= votes %> votes)</span>
     <% end %>
   <% end %>
-</ul>
+</ol>
 
 <% if user_signed_in? %>
 <h1>Your selections</h1>

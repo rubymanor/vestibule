@@ -108,6 +108,12 @@ header .background li {
   color: #999;
 }
 
+#the_chosen_ones li.next {
+  color: #999;
+}
+#the_chosen_ones li.next:before {
+  content: 'Runner up:';
+}
 #selections li,
 #available_selections li {
   clear: both;
