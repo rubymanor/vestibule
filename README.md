@@ -15,7 +15,7 @@ Fork, patch, test, send a pull request. Apologies that the code and design are b
 Build Status
 ------------
 
-[![Build Status](https://secure.travis-ci.org/h-lame/vestibule.png)](http://travis-ci.org/h-lame/vestibule)
+[![Build Status](https://secure.travis-ci.org/rubymanor/vestibule.png)](http://travis-ci.org/rubymanor/vestibule)
 
 [Ruby Manor 3]: http://rubymanor.org/3
 [plus-ones]: http://interblah.net/regarding-plus-ones
