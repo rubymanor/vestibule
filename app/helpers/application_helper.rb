@@ -1,4 +1,5 @@
 require 'redcarpet'
+require 'uri'
 
 module ApplicationHelper
   def render_page_title
@@ -32,8 +33,17 @@ module ApplicationHelper
     end
   end
 
+  def wikiize(text)
+		names = {}
+    User.all.each {|user| names[user.name] = link_to(user.name, user) }
+    Proposal.all.each {|proposal| names[proposal.title] = link_to(proposal.title, proposal) }
+		text.gsub!(/\[\[(.+?)\]\]/) {|s| names[$1] || link_to($1, {:controller => "proposals", :action => "new", :title => URI.escape($1)}, :class => "New") }
+		text.gsub(/(^|\W)(@(.+?))(\W|$)/) {|s| user = User.find_by_twitter_nickname $3; $1 + (user ? link_to($2, user) : $2) + $4 }
+  end
+
   def markdown(text)
     if text
+			text = wikiize(text)
       markdown_parser.render(text).html_safe
     else
       nil
