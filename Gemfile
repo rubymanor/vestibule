@@ -1,4 +1,5 @@
 source "http://rubygems.org"
+ruby "1.9.2"
 
 gem "rails", "3.0.10"
 gem "mysql", "2.8.1"
