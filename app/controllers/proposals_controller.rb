@@ -19,6 +19,8 @@ class ProposalsController < ApplicationController
   end
 
   def create
+    redirect_to proposals_path, alert: 'This instance of vestibule is read only, you add new proposals.'
+    return
     @proposal = current_user.proposals.new(params[:proposal])
     if @proposal.save
       redirect_to proposals_path
@@ -33,6 +35,8 @@ class ProposalsController < ApplicationController
   end
 
   def update
+    redirect_to proposal_path(@proposal), alert: 'This instance of vestibule is read only, you can\'t change proposals.'
+    return
     if @proposal.update_attributes(params[:proposal])
       redirect_to proposal_path(@proposal)
     else
@@ -41,6 +45,8 @@ class ProposalsController < ApplicationController
   end
 
   def withdraw
+    redirect_to proposal_path(@proposal), alert: 'This instance of vestibule is read only, you can\'t withdraw proposals.'
+    return
     proposal = current_user.proposals.find(params[:id])
     proposal.withdraw!
     redirect_to proposal_path(proposal), alert: "Your proposal has been withdrawn"

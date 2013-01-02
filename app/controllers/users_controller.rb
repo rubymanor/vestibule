@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    redirect_to user_path(current_user), alert: 'This instance of vestibule is read only, you can\'t change your profile.'
+    return
     if current_user.update_attributes(params[:user])
       flash[:notice] = "Successfully updated user."
     end

@@ -10,6 +10,8 @@ class SelectionsController < ApplicationController
   end
 
   def create
+    redirect_to selections_path, alert: 'This instance of vestibule is read only, you can\'t choose proposals.'
+    return
     selection = current_user.selections.build(params[:selection])
     if selection.save
       redirect_to selections_path
@@ -19,6 +21,8 @@ class SelectionsController < ApplicationController
   end
 
   def destroy
+    redirect_to selections_path, alert: 'This instance of vestibule is read only, you can\'t change your proposal selections.'
+    return
     selection = current_user.selections.find(params[:id])
     selection.destroy
     redirect_to selections_path
