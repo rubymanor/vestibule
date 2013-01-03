@@ -2,7 +2,7 @@ require 'capybara/rails'
 require 'capybara/dsl'
 
 class IntegrationTestCase < ActiveSupport::TestCase
-  include Capybara
+  include Capybara::DSL
   include ActionDispatch::Assertions
   include Rails.application.routes.url_helpers
   self.default_url_options[:host] = 'http://example.com/'
@@ -46,6 +46,6 @@ class IntegrationTestCase < ActiveSupport::TestCase
   end
 end
 
-Shoulda::Context.class_eval do
+Shoulda::Context::ClassMethods.class_eval do
   alias :scenario :should
 end

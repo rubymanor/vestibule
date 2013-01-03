@@ -4,8 +4,8 @@ class ProposalSuggestionTest < IntegrationTestCase
 
   context "Given a talk proposal" do
     setup do
-      @proposer = Factory(:user)
-      @proposal = Factory(:proposal, :proposer => @proposer)
+      @proposer = FactoryGirl.create(:user)
+      @proposal = FactoryGirl.create(:proposal, :proposer => @proposer)
     end
 
     context "a visitor viewing the proposal" do
@@ -27,7 +27,7 @@ class ProposalSuggestionTest < IntegrationTestCase
 
     context "a logged in user viewing the proposal" do
       setup do
-        @me = Factory(:user)
+        @me = FactoryGirl.create(:user)
         sign_in @me
         visit proposal_path(@proposal)
       end
@@ -65,7 +65,7 @@ Other than that, sounds great!
 
       context 'when there are some suggestions already' do
         setup do
-          @other_suggestion = Factory(:suggestion, :proposal => @proposal, :created_at => 2.days.ago, :updated_at => 2.days.ago)
+          @other_suggestion = FactoryGirl.create(:suggestion, :proposal => @proposal, :created_at => 2.days.ago, :updated_at => 2.days.ago)
         end
 
         should "be able to subscribe to the rss feed of suggestions to the proposal" do

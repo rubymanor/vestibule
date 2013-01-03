@@ -4,7 +4,7 @@ class ApplicationHelperTest < ActionView::TestCase
   context "avatar_url" do
     context "for a user without a cached Twitter image" do
       setup do
-        @user = Factory(:user, :twitter_nickname => "lazyatom")
+        @user = FactoryGirl.create(:user, :twitter_nickname => "lazyatom")
       end
 
       should "construct a URL using twitterimag.es" do
@@ -14,7 +14,7 @@ class ApplicationHelperTest < ActionView::TestCase
 
     context "for a user with a cached Twitter image" do
       setup do
-        @user = Factory(:user, :twitter_nickname => "lazyatom", :twitter_image => "https://si0.twimg.com/profile_images/16060902/872836486_m_normal.jpg")
+        @user = FactoryGirl.create(:user, :twitter_nickname => "lazyatom", :twitter_image => "https://si0.twimg.com/profile_images/16060902/872836486_m_normal.jpg")
       end
 
       should "use the cached Twitter image" do

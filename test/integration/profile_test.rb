@@ -2,15 +2,15 @@ require 'test_helper'
 
 class ProfileTest < IntegrationTestCase
   setup do
-    @user = Factory(:user, :name => "Dave Smith")
-    @proposal = Factory(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @user)
-    @involved_proposal = Factory(:proposal, :title => 'All about rubygems: what the hell is going on?')
-    Factory(:suggestion, :body => 'Can you talk about the alternatives to rubygems? Maybe even RAA, even though I know it is a blast from the past.', :author => @user, :proposal => @involved_proposal)
-    @uninvolved_proposal = Factory(:proposal, :title => 'JSON and the gem-o-nauts')
-    @especially_involved_proposal = Factory(:proposal, :title => 'What price modularity: a discussion on include & extend')
-    Factory(:suggestion, :body => 'I do not want this to be all about rails, but will this cover ActiveSupport::Concern?', :author => @user, :proposal => @especially_involved_proposal)
-    Factory(:suggestion, :body => 'Thanks for the update! This all sounds great; just what I want the guys on my team to hear!', :author => @user, :proposal => @especially_involved_proposal)
-    Factory(:suggestion, :body => 'I\'m definitely having second thoughts about this proposal.', :author => @user, :proposal => @proposal)
+    @user = FactoryGirl.create(:user, :name => "Dave Smith")
+    @proposal = FactoryGirl.create(:proposal, :title => 'Pythonizing Ruby: Getting a ruby parser with syntactical whitespace', :proposer => @user)
+    @involved_proposal = FactoryGirl.create(:proposal, :title => 'All about rubygems: what the hell is going on?')
+    FactoryGirl.create(:suggestion, :body => 'Can you talk about the alternatives to rubygems? Maybe even RAA, even though I know it is a blast from the past.', :author => @user, :proposal => @involved_proposal)
+    @uninvolved_proposal = FactoryGirl.create(:proposal, :title => 'JSON and the gem-o-nauts')
+    @especially_involved_proposal = FactoryGirl.create(:proposal, :title => 'What price modularity: a discussion on include & extend')
+    FactoryGirl.create(:suggestion, :body => 'I do not want this to be all about rails, but will this cover ActiveSupport::Concern?', :author => @user, :proposal => @especially_involved_proposal)
+    FactoryGirl.create(:suggestion, :body => 'Thanks for the update! This all sounds great; just what I want the guys on my team to hear!', :author => @user, :proposal => @especially_involved_proposal)
+    FactoryGirl.create(:suggestion, :body => 'I\'m definitely having second thoughts about this proposal.', :author => @user, :proposal => @proposal)
   end
 
   context "When viewing a user's profile when not logged in" do
@@ -78,7 +78,7 @@ class ProfileTest < IntegrationTestCase
   context 'When logged in' do
     context 'and viewing a different user profile' do
       setup do
-        @me = Factory(:user)
+        @me = FactoryGirl.create(:user)
         sign_in @me
         visit user_path(@user)
       end

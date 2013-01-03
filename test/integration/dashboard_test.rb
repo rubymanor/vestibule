@@ -4,19 +4,19 @@ class DashboardTest < IntegrationTestCase
 
   context "Given a bunch of proposals with varying amounts of feedback" do
     setup do
-      @me = Factory(:user)
+      @me = FactoryGirl.create(:user)
 
-      @proposal1 = Factory(:proposal)
-      @proposal2 = Factory(:proposal)
-      @proposal3 = Factory(:proposal)
+      @proposal1 = FactoryGirl.create(:proposal)
+      @proposal2 = FactoryGirl.create(:proposal)
+      @proposal3 = FactoryGirl.create(:proposal)
 
-      @my_proposal = Factory(:proposal, :proposer => @me)
+      @my_proposal = FactoryGirl.create(:proposal, :proposer => @me)
 
-      Factory(:suggestion, :proposal => @proposal2)
-      Factory(:suggestion, :proposal => @proposal2)
-      Factory(:suggestion, :proposal => @proposal2)
+      FactoryGirl.create(:suggestion, :proposal => @proposal2)
+      FactoryGirl.create(:suggestion, :proposal => @proposal2)
+      FactoryGirl.create(:suggestion, :proposal => @proposal2)
 
-      Factory(:suggestion, :proposal => @proposal1)
+      FactoryGirl.create(:suggestion, :proposal => @proposal1)
     end
 
     context "When I visit my dashboard" do
@@ -34,11 +34,11 @@ class DashboardTest < IntegrationTestCase
       context "and some new suggestions have been made for one of my proposals" do
         setup do
           Timecop.travel 5.minutes.from_now
-          Factory(:suggestion, :proposal => @my_proposal)
-          Factory(:suggestion, :proposal => @my_proposal, :author => @me)
+          FactoryGirl.create(:suggestion, :proposal => @my_proposal)
+          FactoryGirl.create(:suggestion, :proposal => @my_proposal, :author => @me)
           Timecop.travel 5.minutes.from_now
-          Factory(:suggestion, :proposal => @my_proposal)
-          Factory(:suggestion, :proposal => @my_proposal)
+          FactoryGirl.create(:suggestion, :proposal => @my_proposal)
+          FactoryGirl.create(:suggestion, :proposal => @my_proposal)
           visit "/dashboard"
         end
 
@@ -70,7 +70,7 @@ class DashboardTest < IntegrationTestCase
         context "but I've added a suggestion to my proposal since" do
           setup do
             Timecop.travel 5.minutes.from_now
-            Factory(:suggestion, :proposal => @my_proposal, :author => @me)
+            FactoryGirl.create(:suggestion, :proposal => @my_proposal, :author => @me)
             visit "/dashboard"
           end
 
@@ -103,7 +103,7 @@ class DashboardTest < IntegrationTestCase
 
       context "And I have made suggestions for one of the talks" do
         setup do
-          Factory(:suggestion, :proposal => @proposal1, :author => @me)
+          FactoryGirl.create(:suggestion, :proposal => @proposal1, :author => @me)
           visit '/dashboard'
         end
 
@@ -115,7 +115,7 @@ class DashboardTest < IntegrationTestCase
 
         context "and I have made suggestions for other talks with recent activity" do
           setup do
-            Factory(:suggestion, :author => @me, :proposal => @proposal2)
+            FactoryGirl.create(:suggestion, :author => @me, :proposal => @proposal2)
             Timecop.travel 10.minutes
             @proposal2.update_attributes! :description => 'Now more interesting than before.'
             visit '/dashboard'

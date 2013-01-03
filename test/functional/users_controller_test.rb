@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   def setup
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
   end
 
   context "When logged in" do
@@ -34,7 +34,7 @@ class UsersControllerTest < ActionController::TestCase
 
     context "on #PUT to update for another reason" do
       setup do
-        other_user = Factory(:user)
+        other_user = FactoryGirl.create(:user)
         put :update, :id => other_user.to_param, :user => {:signup_reason => "Haxx'd"}
       end
 

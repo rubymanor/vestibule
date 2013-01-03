@@ -16,7 +16,7 @@ class ProposalTest < IntegrationTestCase
 
     context "given a proposal already exists" do
       setup do
-        @proposal = Factory(:proposal, :title => "Ruby Muby Schmuby")
+        @proposal = FactoryGirl.create(:proposal, :title => "Ruby Muby Schmuby")
       end
 
       should "be able to see the list of proposals" do
@@ -53,7 +53,7 @@ class ProposalTest < IntegrationTestCase
 
   context "Given I am logged in" do
     setup do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
     end
 
@@ -145,7 +145,7 @@ blah blah blah
 
     context "and a proposal from another user exists" do
       setup do
-        @other_persons_proposal = Factory(:proposal, :title => "Another talk")
+        @other_persons_proposal = FactoryGirl.create(:proposal, :title => "Another talk")
       end
 
       should "not see a link to edit that proposal" do
@@ -167,7 +167,7 @@ blah blah blah
 
 blah blah blah
         }.strip
-        @other_persons_proposal = Factory(:proposal, :title => "Another talk", :created_at => 3.days.ago)
+        @other_persons_proposal = FactoryGirl.create(:proposal, :title => "Another talk", :created_at => 3.days.ago)
       end
 
       should "be able to subscribe to the rss feed of proposals" do

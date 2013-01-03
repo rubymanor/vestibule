@@ -1,25 +1,25 @@
 source "http://rubygems.org"
-ruby "1.9.2"
+ruby "1.9.3"
 
-gem "rails", "3.0.10"
-gem "mysql", "2.8.1"
-gem "simple_form", "1.5.0"
-gem "omniauth", "0.2.6"
+gem "rails", "3.2.10"
+gem "mysql2", "0.3.11"
+gem "simple_form", "2.0.4"
+gem 'omniauth-twitter', '0.0.14'
 gem "paper_trail", "1.6.4"
-gem "redcarpet", "~> 2.0.0b5"
-gem "twitter", "1.6.0"
+gem "redcarpet", "2.2.2"
+gem "twitter", "4.4.2"
 
 group :test do
-  gem "factory_girl_rails", "1.0"
-  gem "shoulda", "2.11.3"
-  gem "capybara", "0.3.9"
-  gem "database_cleaner", "0.5.2"
-  gem "mocha", "0.9.8", :require => false
-  gem "faker", "0.9.5"
-  gem "timecop", "0.3.5"
+  gem "factory_girl_rails", "4.1.0"
+  gem "shoulda", "3.3.2"
+  gem "capybara", "1.1.4"
+  gem "database_cleaner", "0.9.1"
+  gem "mocha", "0.13.1", :require => false
+  gem "faker", "1.1.2"
+  gem "timecop", "0.5.7"
 
   # Things that aren't *required*, but you might need as you go.
-  gem "ruby-debug19"
+  gem "debugger"
   gem "launchy"
   gem "escape_utils", "0.1.9"
 end

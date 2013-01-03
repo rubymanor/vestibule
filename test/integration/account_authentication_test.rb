@@ -4,7 +4,7 @@ class AccountAuthenticationTest < IntegrationTestCase
 
   context "A registered user signing in" do
     setup do
-      @user = Factory(:user)
+      @user = FactoryGirl.create(:user)
       sign_in @user
     end
 

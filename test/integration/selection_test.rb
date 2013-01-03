@@ -3,14 +3,14 @@ require "test_helper"
 class SelectionTest < IntegrationTestCase
   context "Given a bunch of proposals" do
     setup do
-      @destroy_ruby = Factory(:proposal, :title => "Destroy Ruby")
-      @hot_gem = Factory(:proposal, :title => "My Hot New Gem")
-      @merb = Factory(:proposal, :title => "I Miss Merb")
+      @destroy_ruby = FactoryGirl.create(:proposal, :title => "Destroy Ruby")
+      @hot_gem = FactoryGirl.create(:proposal, :title => "My Hot New Gem")
+      @merb = FactoryGirl.create(:proposal, :title => "I Miss Merb")
     end
     
     context "a logged in user" do
       setup do
-        sign_in Factory(:user)
+        sign_in FactoryGirl.create(:user)
       end
 
       should "be able to select their preferred proposals" do
@@ -24,7 +24,7 @@ class SelectionTest < IntegrationTestCase
       end
 
       should "only be able to select 8 proposals" do
-        proposals = (1..8).to_a.map { Factory(:proposal) }
+        proposals = (1..8).to_a.map { FactoryGirl.create(:proposal) }
         visit "/"
         click_link "Selections"
         8.times { |x| select_proposal proposals[x].title }

@@ -11,7 +11,7 @@ class NavigationTest < IntegrationTestCase
 
   context "When logged in" do
     setup do
-      sign_in Factory(:user)
+      sign_in FactoryGirl.create(:user)
     end
 
     should "be sent to your dashboard when logged in" do

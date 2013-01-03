@@ -3,7 +3,7 @@ require 'test_helper'
 class ReasonTest < IntegrationTestCase
   context "When signing in after registering without having supplied a reason" do
     setup do
-      @user = Factory(:user, :signup_reason => nil)
+      @user = FactoryGirl.create(:user, :signup_reason => nil)
       sign_in @user
     end
 
@@ -65,7 +65,7 @@ I want to make sure that the talks cover something *other* than rails!!
 
   context "When signing in after registering when they have supplied a reason" do
     setup do
-      user = Factory(:user)
+      user = FactoryGirl.create(:user)
       sign_in user
     end
 
