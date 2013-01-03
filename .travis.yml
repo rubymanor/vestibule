@@ -1,4 +1,4 @@
-rvm: 1.9.2
+rvm: 1.9.3
 before_script:
   - "cp config/database.travis.yml config/database.yml"
   - "mysql -e 'create database vestibule_development; create database vestibule_test;' >/dev/null"
