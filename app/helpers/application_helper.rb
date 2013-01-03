@@ -36,7 +36,7 @@ module ApplicationHelper
     if text
       markdown_parser.render(text).html_safe
     else
-      nil
+      ''
     end
   end
 

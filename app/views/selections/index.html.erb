@@ -23,8 +23,8 @@
 
 <ul id="selections">
   <% current_user.selections.each do |selection| %>
-    <%= content_tag_for :li, selection.proposal do %>
-      <%= button_to "Deselect", selection_path(selection), method: :delete %>
+    <%= content_tag_for :li, selection.proposal, 'selection' do %>
+      <%= button_to 'Deselect', selection, method: :delete %>
       <%= link_to selection.proposal.title, selection.proposal %>
     <% end %>
   <% end %>
@@ -37,7 +37,7 @@
 
 <ul id="available_selections">
 <% @proposals.each do |proposal| %>
-  <%= content_tag_for :li, proposal do %>
+  <%= content_tag_for :li, proposal, 'selection' do %>
     <%= form_for Selection.new do |form| %>
       <%= form.hidden_field :proposal_id, value: proposal.id %>
       <%= form.submit "Select", disabled: (remaining == 0 ? 'disabled' : nil) %>
