@@ -5,6 +5,7 @@ module BlueprintForms
     options = args.extract_options!
     options.merge!(:builder => BlueprintForms::BlueprintFormBuilder)
     options[:blueprint_size] ||= BlueprintForms::DEFAULT_SIZE
+    options[:wrapper] = :blueprint
     BlueprintForms.use_blueprint_override_or_augment_html_options_for(nil, options, "span-#{options[:blueprint_size]}")
     simple_form_for(object, *(args << options), &block)
   end
@@ -27,14 +28,6 @@ module BlueprintForms
     protected
     def blueprint_form_size
       @blueprint_form_size ||= options[:blueprint_size]
-    end
-  end
-
-  module BlueprintErrors
-    def enabled_error
-      if has_errors?
-        template.content_tag(:span, super, options[:error_wrapper_html])
-      end
     end
   end
 
@@ -72,4 +65,3 @@ module BlueprintForms
 end
 
 ActionView::Base.send :include, BlueprintForms
-SimpleForm::Inputs::Base.send :include, BlueprintForms::BlueprintErrors
