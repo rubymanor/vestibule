@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(:version => 20110928175744) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "proposer_id"
     t.text     "description"
     t.boolean  "withdrawn",   :default => false
@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(:version => 20110928175744) do
     t.text     "body"
     t.integer  "author_id"
     t.integer  "proposal_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
     t.text     "signup_reason"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "name"
     t.string   "twitter_uid"
     t.string   "twitter_nickname"
