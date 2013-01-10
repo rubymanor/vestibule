@@ -40,7 +40,9 @@ module Vestibule
     config.filter_parameters += [:password]
 
     require "oa-oauth"
-    config.middleware.use OmniAuth::Strategies::Twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+    config.middleware.use OmniAuth::Builder do
+      provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+    end
 
     require 'blueprint_forms'
   end

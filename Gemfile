@@ -3,10 +3,10 @@ source "http://rubygems.org"
 gem "rails", "3.0.19"
 gem "mysql", "2.8.1"
 gem "simple_form", "1.5.0"
-gem "omniauth", "0.2.6"
+gem "omniauth-twitter", "0.0.14"
 gem "paper_trail", "1.6.4"
 gem "redcarpet", "~> 2.0.0b5"
-gem "twitter", "1.6.0"
+gem "twitter", "4.4.2"
 
 group :test do
   gem "factory_girl_rails", "1.0"
