@@ -39,7 +39,6 @@ module Vestibule
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    require "oa-oauth"
     config.middleware.use OmniAuth::Builder do
       provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
     end
