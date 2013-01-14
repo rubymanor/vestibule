@@ -1,4 +1,5 @@
 require 'redcarpet'
+require 'digest/md5'
 
 module ApplicationHelper
   def render_page_title
@@ -20,15 +21,11 @@ module ApplicationHelper
   end
 
   def avatar_url(user, bigger=false)
-    if user.github_image.present?
-      if bigger
-        user.github_image.gsub(/_normal/, "_reasonably_small")
-      else
-        user.github_image
-      end
+    if user.email.present?
+      email_address = user.email.downcase
+      hash = Digest::MD5.hexdigest(email_address)
+      image_src = "http://www.gravatar.com/avatar/#{hash}"
     else
-      size = bigger ? "b" : "n"
-      "http://img.tweetimag.es/i/#{user.github_nickname}_#{size}"
     end
   end
 

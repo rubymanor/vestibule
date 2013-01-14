@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
       user.name = auth["info"]["name"]
       user.github_uid = auth["uid"]
       user.github_nickname = auth["info"]["nickname"]
-      user.github_image = auth["info"]["image"]
+      user.email = auth["info"]["email"]
     end
   end
 

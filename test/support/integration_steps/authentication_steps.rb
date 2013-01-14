@@ -4,7 +4,7 @@ module AuthenticationSteps
       "provider" => "github",
       "uid" => user.github_uid,
       "info" => {"name" => user.name, "nickname" => user.github_nickname,
-                 "image" => user.github_image, "email" => user.email}
+                 "email" => user.email}
     }
     visit "/auth/github"
   end

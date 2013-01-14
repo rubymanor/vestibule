@@ -1,6 +1,6 @@
 module AvatarSteps
   def i_can_see_the_avatar_for_user(user)
-    expected_img_src = "http://img.tweetimag.es/i/#{user.github_nickname}_n"
+    expected_img_src = "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}"
     assert has_css?("img.avatar[src='#{expected_img_src}']")
   end
 end
