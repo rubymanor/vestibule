@@ -3,7 +3,8 @@ module AuthenticationSteps
     OmniAuth.config.mock_auth[:github] = {
       "provider" => "github",
       "uid" => user.github_uid,
-      "info" => {"name" => user.name, "nickname" => user.github_nickname, "image" => user.github_image}
+      "info" => {"name" => user.name, "nickname" => user.github_nickname,
+                 "image" => user.github_image, "email" => user.email}
     }
     visit "/auth/github"
   end

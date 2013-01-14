@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114211144) do
+ActiveRecord::Schema.define(:version => 20130114220129) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130114211144) do
     t.string   "github_uid"
     t.string   "github_nickname"
     t.string   "github_image"
+    t.string   "email"
   end
 
 end

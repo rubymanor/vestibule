@@ -33,7 +33,7 @@ class IntegrationTestCase < ActiveSupport::TestCase
   OmniAuth.config.mock_auth[:github] = {
     "provider"=>"github",
     "uid"=>"123456",
-    "info"=>{"name"=>"Alice", "nickname"=>"a_dawg"}
+    "info"=>{"name"=>"Alice", "nickname"=>"a_dawg", "email" => "alice@example.com"}
   }
 
   def within_object(*args, &block)
