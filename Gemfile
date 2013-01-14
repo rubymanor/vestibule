@@ -2,7 +2,7 @@ source "http://rubygems.org"
 ruby "1.9.3"
 
 gem "rails", "3.2.11"
-gem "mysql2", "0.3.11"
+gem "pg", "0.14.1"
 gem "simple_form", "2.0.4"
 gem 'omniauth-github', '1.0.3'
 gem "paper_trail", "1.6.4"
