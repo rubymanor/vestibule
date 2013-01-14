@@ -29,7 +29,7 @@ class ProposalTest < IntegrationTestCase
         assert page.has_css?("link[rel='alternate'][type='application/rss+xml'][href$='#{proposals_path(:format => :rss)}']")
         visit proposals_path(:format => :rss)
         assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
-        assert page.has_xpath?('.//item/title', :text => %{"#{@proposal.title}" by #{@proposal.proposer.name} (@#{@proposal.proposer.twitter_nickname})})
+        assert page.has_xpath?('.//item/title', :text => %{"#{@proposal.title}" by #{@proposal.proposer.name} (@#{@proposal.proposer.github_nickname})})
       end
 
       should "be able to read individual proposals" do
@@ -179,8 +179,8 @@ blah blah blah
 
       should 'have my talk and the other talk in the feed, in newest first order' do
         visit proposals_path(:format => :rss)
-        assert page.has_xpath?('.//item[position() = 2]/title', :text => %{"#{@other_persons_proposal.title}" by #{@other_persons_proposal.proposer.name} (@#{@other_persons_proposal.proposer.twitter_nickname})})
-        assert page.has_xpath?('.//item[position() = 1]/title', :text => %{"My Amazing Talk" by #{@user.name} (@#{@user.twitter_nickname})})
+        assert page.has_xpath?('.//item[position() = 2]/title', :text => %{"#{@other_persons_proposal.title}" by #{@other_persons_proposal.proposer.name} (@#{@other_persons_proposal.proposer.github_nickname})})
+        assert page.has_xpath?('.//item[position() = 1]/title', :text => %{"My Amazing Talk" by #{@user.name} (@#{@user.github_nickname})})
       end
     end
   end

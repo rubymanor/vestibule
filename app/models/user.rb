@@ -22,25 +22,25 @@ class User < ActiveRecord::Base
 
   def self.create_with_omniauth(auth)
     create! do |user|
-      user.name = auth["user_info"]["name"]
-      user.twitter_uid = auth["uid"]
-      user.twitter_nickname = auth["user_info"]["nickname"]
-      user.twitter_image = auth["user_info"]["image"]
+      user.name = auth["info"]["name"]
+      user.github_uid = auth["uid"]
+      user.github_nickname = auth["info"]["nickname"]
+      user.github_image = auth["info"]["image"]
     end
   end
 
-  def self.update_twitter_images
-    all.map { |user| user.twitter_uid.to_i }.each_slice(TWITTER_USERS_PER_REQUEST) do |uids|
-      Twitter.users(uids).each do |twitter_user|
-        if (user = find_by_twitter_uid(twitter_user.id.to_s)).present? && (twitter_image = twitter_user.profile_image_url).present?
-          user.update_attributes :twitter_image => twitter_image
-        end
-      end
-    end
-  end
+  # def self.update_twitter_images
+  #   all.map { |user| user.twitter_uid.to_i }.each_slice(TWITTER_USERS_PER_REQUEST) do |uids|
+  #     Twitter.users(uids).each do |twitter_user|
+  #       if (user = find_by_twitter_uid(twitter_user.id.to_s)).present? && (twitter_image = twitter_user.profile_image_url).present?
+  #         user.update_attributes :twitter_image => twitter_image
+  #       end
+  #     end
+  #   end
+  # end
 
   def to_param
-    twitter_nickname
+    github_nickname
   end
 
   REASON_WEIGHT = 5

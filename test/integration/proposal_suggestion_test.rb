@@ -76,7 +76,7 @@ Other than that, sounds great!
 
         should 'see the existing suggestions in the feed' do
           visit proposal_path(@proposal, :format => :rss)
-          assert page.has_xpath?('.//item/title', :text => "Suggestion from #{@other_suggestion.author.name} (@#{@other_suggestion.author.twitter_nickname})")
+          assert page.has_xpath?('.//item/title', :text => "Suggestion from #{@other_suggestion.author.name} (@#{@other_suggestion.author.github_nickname})")
           assert page.has_xpath?('.//item/description', :text => @other_suggestion.body)
         end
 
@@ -85,10 +85,10 @@ Other than that, sounds great!
 
           visit proposal_path(@proposal, :format => :rss)
 
-          assert page.has_xpath?('.//item[position() = 2]/title', :text => "Suggestion from #{@other_suggestion.author.name} (@#{@other_suggestion.author.twitter_nickname})")
+          assert page.has_xpath?('.//item[position() = 2]/title', :text => "Suggestion from #{@other_suggestion.author.name} (@#{@other_suggestion.author.github_nickname})")
           assert page.has_xpath?('.//item[position() = 2]/description', :text => @other_suggestion.body)
 
-          assert page.has_xpath?('.//item[position() = 1]/title', :text => "Suggestion from #{@me.name} (@#{@me.twitter_nickname})")
+          assert page.has_xpath?('.//item[position() = 1]/title', :text => "Suggestion from #{@me.name} (@#{@me.github_nickname})")
           assert page.has_xpath?('.//item[position() = 1]/description', :text => "I think you should focus on the first bit, because that's going to be more interesting to newbies.")
         end
       end

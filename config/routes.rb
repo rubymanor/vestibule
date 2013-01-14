@@ -15,8 +15,8 @@ Vestibule::Application.routes.draw do
 
   match "/dashboard", :to => "dashboard#index"
 
-  match "/auth/twitter/callback", :to => "twitter_authentication#callback"
-  match "/logout", :to => "twitter_authentication#logout", :as => "logout"
+  match "/auth/github/callback", :to => "github_authentication#callback"
+  match "/logout", :to => "github_authentication#logout", :as => "logout"
 
   root :to => "home#index"
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110928175744) do
+ActiveRecord::Schema.define(:version => 20130114211144) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(:version => 20110928175744) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "name"
-    t.string   "twitter_uid"
-    t.string   "twitter_nickname"
-    t.string   "twitter_image"
     t.integer  "contribution_score"
+    t.string   "github_uid"
+    t.string   "github_nickname"
+    t.string   "github_image"
   end
 
 end

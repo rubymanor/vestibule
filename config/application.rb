@@ -49,7 +49,7 @@ module Vestibule
     config.assets.version = '1.0'
 
     config.middleware.use OmniAuth::Builder do
-      provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+      provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'user:email'
     end
 
     require 'blueprint_forms'

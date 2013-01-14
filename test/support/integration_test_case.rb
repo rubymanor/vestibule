@@ -30,10 +30,10 @@ class IntegrationTestCase < ActiveSupport::TestCase
   end
 
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:twitter] = {
-    "provider"=>"twitter",
+  OmniAuth.config.mock_auth[:github] = {
+    "provider"=>"github",
     "uid"=>"123456",
-    "user_info"=>{"name"=>"Alice", "nickname"=>"a_dawg"}
+    "info"=>{"name"=>"Alice", "nickname"=>"a_dawg"}
   }
 
   def within_object(*args, &block)

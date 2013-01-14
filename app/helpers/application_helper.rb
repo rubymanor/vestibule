@@ -20,15 +20,15 @@ module ApplicationHelper
   end
 
   def avatar_url(user, bigger=false)
-    if user.twitter_image.present?
+    if user.github_image.present?
       if bigger
-        user.twitter_image.gsub(/_normal/, "_reasonably_small")
+        user.github_image.gsub(/_normal/, "_reasonably_small")
       else
-        user.twitter_image
+        user.github_image
       end
     else
       size = bigger ? "b" : "n"
-      "http://img.tweetimag.es/i/#{user.twitter_nickname}_#{size}"
+      "http://img.tweetimag.es/i/#{user.github_nickname}_#{size}"
     end
   end
 
@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def user_name_for_rss(for_user)
-    %{#{h for_user.name} (@#{h for_user.twitter_nickname})}.html_safe
+    %{#{h for_user.name} (@#{h for_user.github_nickname})}.html_safe
   end
 
   def user_name(start_sentence = true)
