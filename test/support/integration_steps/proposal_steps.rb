@@ -19,8 +19,7 @@ module ProposalSteps
     within_proposal do
       assert page.has_content?(options[:title]) if options[:title]
       if options[:proposer]
-        i_can_see_the_avatar_for_user options[:proposer]
-        assert page.has_css?("a[href='#{user_path(options[:proposer])}']", :text => options[:proposer].name)
+        refute page.has_css?("a[href='#{user_path(options[:proposer])}']", :text => options[:proposer].name)
       end
       assert page.has_content?(options[:description]) if options[:description]
     end

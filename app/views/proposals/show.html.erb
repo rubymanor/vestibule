@@ -3,10 +3,10 @@
     <%= page_title @proposal.title %>
     <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
     <div class="description"><%= markdown @proposal.description %></div>
-    <p class="proposer">Proposed by: <%= render 'shared/user', :user => @proposal.proposer %> <span class="age">updated <%= time_ago_in_words @proposal.updated_at %> ago</span></p>
   <% end %>
 
   <% if @proposal.proposed_by?(current_user) %>
+    <p>(This is one of your proposals)</p>
     <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
     <%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal) %>
   <% end %>
@@ -15,7 +15,7 @@
 <div id="suggestions" class="push-2 span-10 last">
   <h2>Suggestions</h2>
   <% if user_signed_in? %>
-    <p>Help <%= @proposal.proposer.name %> develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
+    <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
 
     <%= blueprint_form_for [@proposal, @suggestion], :blueprint_size => 10 do |f| %>
       <%= f.error_notification %>
