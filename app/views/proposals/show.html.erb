@@ -1,39 +1,46 @@
-<div id="proposal" class="span-12">
-  <%= proposal_div(@proposal) do %>
-    <%= page_title @proposal.title %>
-    <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
-    <div class="description"><%= markdown @proposal.description %></div>
-  <% end %>
-
-  <% if @proposal.proposed_by?(current_user) %>
-    <p>(This is one of your proposals)</p>
-    <%= link_to "Edit proposal", edit_proposal_path(@proposal) %>
-    <%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal) %>
-  <% end %>
-</div>
-
-<div id="suggestions" class="push-2 span-10 last">
-  <h2>Suggestions</h2>
-  <% if user_signed_in? %>
-    <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
-
-    <%= blueprint_form_for [@proposal, @suggestion], :blueprint_size => 10 do |f| %>
-      <%= f.error_notification %>
-      <%= f.input :body, :label => "What would make this proposal better?", :blueprint_error_wrapper_html => {:class => 'span-10'} %>
-      <%= f.button :submit, "Make your suggestion" %>
-    <% end %>
-  <% end %>
-
-  <ul class="suggestions">
-    <% @proposal.suggestions.latest.each do |suggestion| %>
-      <%= content_tag_for(:li, suggestion) do %>
-        <p class="author"><%= render 'shared/user', :user => suggestion.author %> suggests: <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span></p>
-        <section class="body"><%= markdown suggestion.body %></section>
-      <% end %>
-    <% end %>
+<% if @proposal.proposed_by?(current_user) %>
+  <ul class="nav nav-pills">
+    <li><a href="#">Your proposal</a></li>
+    <li><%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %></li>
+    <li><%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal), class: "btn btn-danger" %></li>
   </ul>
-</div>
+<% end %>
 
+<div class="row">
+  <div class="span6">
+    <div id="proposal">
+      <%= proposal_div(@proposal) do %>
+        <%= page_title @proposal.title %>
+        <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
+        <div class="description"><%= markdown @proposal.description %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="span5 offset1">
+    <div id="suggestions">
+      <h2>Suggestions</h2>
+      <% if user_signed_in? %>
+        <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
+
+        <%= form_for [@proposal, @suggestion] do |f| %>
+          <%#= f.error_notification %>
+          <%= f.text_area :body, :label => "What would make this proposal better?" %>
+          <%= f.button "Make your suggestion", class: "btn" %>
+        <% end %>
+      <% end %>
+
+      <ul class="suggestions">
+        <% @proposal.suggestions.latest.each do |suggestion| %>
+          <%= content_tag_for(:li, suggestion) do %>
+            <p class="author"><%= render 'shared/user', :user => suggestion.author %> suggests: <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span></p>
+            <section class="body"><%= markdown suggestion.body %></section>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 <% content_for :head do %>
   <%= auto_discovery_link_tag :rss, :format => :rss %>
 <% end %>

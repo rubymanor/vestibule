@@ -2,55 +2,73 @@
 <html>
 <head>
   <title><%= render_page_title %></title>
-  <%= stylesheet_link_tag 'blueprint/screen.css', media: 'screen, projection' %>
-  <%= stylesheet_link_tag 'blueprint/print.css', media: 'print' %>
-  <!--[if lt IE 8]><%= stylesheet_link_tag 'blueprint/ie.css', media: 'screen, projection' %><![endif]-->
   <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-  <%= stylesheet_link_tag    'vestibule', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag :application %>
+  <%= javascript_include_tag :application %>
   <%= csrf_meta_tag %>
   <%= yield :head %>
   <%= render 'shared/analytics' %>
 </head>
 <body>
-
-<header>
   <div class="container">
-    <h1 class="span-7"><%= link_to "Vestibule", root_path %></h1>
-    <ul class="background span-6">
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Champs", champs_path %></li>
-      <li><%= link_to "Motivations", motivation_path %></li>
-      <li><%= link_to "Selections", selections_path %></li>
-    </ul>
-    <nav class="right">
-      <% if user_signed_in? -%>
-        <%= render 'shared/user', :user => current_user %>
-        <%= link_to "Dashboard", dashboard_path %>
-        <%= link_to "All proposals", proposals_path %>
-        <%= link_to "Sign out", logout_path %>
-      <% else -%>
-        <%= link_to "Sign in with Github", "/auth/github" %>
-      <% end -%>
-    </nav>
-  </div>
-</header>
+    <header>
+      <div class="row">
+        <div class="span12">
+          <h1><%= link_to "Vestibule", root_path %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12">
+          <ul class="nav nav-pills">
+            <li class="active"><%= link_to "About", about_path %></li>
+            <li><%#= link_to "Champs", champs_path %></li>
+            <li><%= link_to "Motivations", motivation_path %></li>
+            <li><%= link_to "Selections", selections_path %></li>
+            <% if user_signed_in? -%>
+              <li class="dropdown">
+                <a class="dropdown-toggle"
+                   data-toggle="dropdown"
+                   href="#">
+                  <%= current_user.name %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Dashboard", dashboard_path %></li>
+                  <li><%= link_to "All proposals", proposals_path %></li>
+                  <li><%= link_to "Your profile", user_path(current_user) %></li>
+                  <li><%= link_to "Sign out", logout_path %></li>
+                </ul>
+              </li>
+            <% else -%>
+              <li><%= link_to "Sign in with Github", "/auth/github" %></li>
+            <% end -%>
+          </ul>
+        </div>
+      </div>
+    </header>
 
-<section id="notices">
-  <div class="container">
-    <div class="span-24 last">
-      <%= render "shared/notices" %>
+    <div class="row">
+      <div class="span12">
+        <section id="notices">
+          <%= render "shared/notices" %>
 
-      <% if remind_account_for_signup_reason -%>
-        <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %></p>
-      <% end -%>
+          <% if remind_account_for_signup_reason -%>
+          <div class="alert">
+            You should tell people what you hope to get out of Ruby Manor.
+            <%= link_to "Tell them now", edit_user_path(current_user) %>.
+          </div>
+          <% end -%>
+        </section>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span12">
+        <section id="content">
+          <%= yield %>
+        </section>
+      </div>
     </div>
   </div>
-</section>
-
-<section id="content" class="container">
-  <%= yield %>
-</section>
-
 </body>
 </html>

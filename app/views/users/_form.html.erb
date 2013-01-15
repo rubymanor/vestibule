@@ -1,5 +1,6 @@
-<%= blueprint_form_for @user do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :signup_reason %>
-  <%= f.button :submit %>
+<%= form_for @user do |f| %>
+  <%#= f.error_notification %>
+  <%= f.label :signup_reason, "What are you hoping to get out of Ruby Manor?" %>
+  <%= f.text_area :signup_reason, rows: 3 %>
+  <%= f.button "Save", class: "btn btn-primary" %>
 <% end %>

@@ -1,6 +1,8 @@
-<%= blueprint_form_for @proposal do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.button :submit %>
+<%= form_for @proposal do |f| %>
+  <%#= f.error_notification %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.button "Submit proposal", class: "btn btn-primary" %>
 <% end %>

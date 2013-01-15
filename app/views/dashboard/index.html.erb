@@ -18,7 +18,7 @@
   </ul>
 <% end %>
 
-<p><%= link_to "Propose #{'another' if @your_proposals.present?} talk", new_proposal_path %></p>
+<p><%= link_to "Propose #{'another' if @your_proposals.present?} talk", new_proposal_path, class: "btn btn-primary" %></p>
 
 <% if @proposals_you_should_look_at.present? %>
   <h2>You should consider giving some suggestions about these proposals</h2>

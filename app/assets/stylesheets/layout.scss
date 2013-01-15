@@ -1,0 +1,34 @@
+header {
+  margin: 1em 0 0 0;
+
+  h1 {
+    line-height: 66px;
+    font-family: 'Lobster', arial, serif;
+    font-size: 4em;
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+#content {
+  section {
+    margin-bottom: 2em;
+  }
+}
+
+
+form.button_to {
+  margin-bottom: 0;
+  margin-top: 2px;
+  input {
+    padding: 5px 12px;
+  }
+}
+
+form {
+  input[type=text], textarea {
+    width: 100%;
+  }
+}

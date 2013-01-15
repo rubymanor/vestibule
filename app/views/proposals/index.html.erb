@@ -1,21 +1,24 @@
-<%= page_title 'Talk proposals' %>
+<section>
+  <%= page_title 'Talk proposals' %>
 
-<ul class="proposals">
-  <% for proposal in @proposals %>
-    <li>
-      <%= link_to proposal.title, proposal %>
-      <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
-    </li>
+  <ul class="proposals">
+    <% for proposal in @proposals %>
+      <li>
+        <%= link_to proposal.title, proposal %>
+        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if user_signed_in? %>
+    <div class="action">
+      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary btn-large" %>
+    </div>
   <% end %>
-</ul>
-
-<% if user_signed_in? %>
-  <div class="action">
-    <%= link_to "Propose talk", new_proposal_path %>
-  </div>
-<% end %>
+</section>
 
 <% if @withdrawn_proposals.any? %>
+<section>
   <p>The following proposals have been withdrawn:</p>
   <ul class="proposals">
     <% for proposal in @withdrawn_proposals %>
@@ -25,6 +28,7 @@
       </li>
     <% end %>
   </ul>
+</section>
 <% end %>
 
 <% content_for :head do %>

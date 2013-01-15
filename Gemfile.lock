@@ -30,6 +30,8 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.2)
     arel (3.0.2)
+    bootstrap-sass (2.2.2.0)
+      sass (~> 3.2)
     builder (3.0.4)
     capybara (1.1.4)
       mime-types (>= 1.16)
@@ -184,6 +186,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   capybara (= 1.1.4)
   database_cleaner (= 0.9.1)
   debugger
