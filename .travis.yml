@@ -1,5 +1,6 @@
 rvm: 1.9.3
 before_script:
   - "cp config/database.travis.yml config/database.yml"
-  - "psql -c 'create database vestibule_development; create database vestibule_test;' -U postgres"
+  - "psql -c 'create database vestibule_development;' -U postgres"
+  - "psql -c 'create database vestibule_test;' -U postgres"
   - "bundle exec rake db:schema:load"
