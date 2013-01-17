@@ -12,6 +12,7 @@ Vestibule::Application.routes.draw do
   match "/champs", :to => "home#champs", :as => "champs"
   match "/about", :to => "home#about", :as => "about"
   match "/my_motivation", :to => "home#my_motivation", :as => "complete_motivation"
+  match "/anonymous_proposals", :to => "home#anonymous_proposals", :as => "anonymous_proposals"
 
   match "/dashboard", :to => "dashboard#index"
 
