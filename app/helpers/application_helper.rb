@@ -42,11 +42,15 @@ module ApplicationHelper
   end
 
   def proposal_title_for_rss(for_proposal)
-    %{"#{h for_proposal.title}" by #{user_name_for_rss(for_proposal.proposer)}}.html_safe
+    h(for_proposal.title)
   end
 
   def suggestion_title_for_rss(for_suggestion)
-    %{Suggestion from #{user_name_for_rss(for_suggestion.author)}}.html_safe
+    if for_suggestion.author == for_suggestion.proposal.proposer
+      %{Suggestion from the proposer}
+    else
+      %{Suggestion from #{user_name_for_rss(for_suggestion.author)}}.html_safe
+    end
   end
 
   def user_name_for_rss(for_user)
