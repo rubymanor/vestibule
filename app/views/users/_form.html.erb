@@ -1,5 +1,13 @@
 <%= form_for @user do |f| %>
-  <%#= f.error_notification %>
+  <% if f.object.errors.any? %>
+    <div class="alert alert-error">
+      <ul class="errors">
+        <% f.object.errors.full_messages.each do |msg| %>
+          <li class="error"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= f.label :signup_reason, "What are you hoping to get out of Ruby Manor?" %>
   <%= f.text_area :signup_reason, rows: 3 %>
   <%= f.button "Save", class: "btn btn-primary" %>

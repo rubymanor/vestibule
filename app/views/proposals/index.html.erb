@@ -1,5 +1,10 @@
 <section>
   <%= page_title 'Talk proposals' %>
+  <% if user_signed_in? %>
+    <div class="action">
+      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary btn-large" %>
+    </div>
+  <% end %>
 
   <ul class="proposals">
     <% for proposal in @proposals %>
@@ -9,12 +14,6 @@
       </li>
     <% end %>
   </ul>
-
-  <% if user_signed_in? %>
-    <div class="action">
-      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary btn-large" %>
-    </div>
-  <% end %>
 </section>
 
 <% if @withdrawn_proposals.any? %>

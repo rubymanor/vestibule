@@ -22,8 +22,8 @@ class ReasonTest < IntegrationTestCase
 
       context "be able to provide their sign up reason" do
         setup do
-          fill_in "About you", :with => "I have signed up because I want to help shape the content"
-          click_button "Update User"
+          fill_in "user_signup_reason", :with => "I have signed up because I want to help shape the content"
+          click_button "Save"
         end
 
         should "show new sign up reason" do
@@ -33,7 +33,7 @@ class ReasonTest < IntegrationTestCase
 
       context "be able to provide their sign up reason and preserve markdown syntax" do
         setup do
-          fill_in "About you", :with => %{
+          fill_in "user_signup_reason", :with => %{
 ## Me
 
 I like hacking on non-rails ruby stuff
@@ -42,7 +42,7 @@ I like hacking on non-rails ruby stuff
 
 I want to make sure that the talks cover something *other* than rails!!
 }
-          click_button "Update User"
+          click_button "Save"
         end
 
         should "show new sign up reason" do

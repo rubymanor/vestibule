@@ -36,10 +36,8 @@ class ProfileTest < IntegrationTestCase
       end
     end
 
-    should 'see a list of their proposals' do
-      within('#proposals') do
-        assert_page_has_link_to_proposal(@proposal)
-      end
+    should 'not see a list of their proposals' do
+      assert !page.has_css?('#proposals')
     end
 
     should 'see their reason for signing up' do
@@ -55,8 +53,7 @@ class ProfileTest < IntegrationTestCase
     end
 
     should 'put the user name into the heading text' do
-      assert page.has_css? 'h1', :text => "#{@user.name}'s account"
-      assert page.has_css? 'h2', :text => "#{@user.name}'s proposals"
+      assert page.has_css? 'h1', :text => "#{@user.name}'s profile"
     end
 
     should 'see a list of other users\' proposals, but only ones that the user is involved with via their suggestions' do
@@ -105,10 +102,8 @@ class ProfileTest < IntegrationTestCase
         end
       end
 
-      should 'see a list of their proposals' do
-        within('#proposals') do
-          assert_page_has_link_to_proposal(@proposal)
-        end
+      should 'not see a list of their proposals' do
+        assert !page.has_css?('#proposals')
       end
 
       should 'see their reason for signing up' do
@@ -124,9 +119,7 @@ class ProfileTest < IntegrationTestCase
       end
 
       should 'put the user name into the heading text' do
-        assert page.has_css? 'h1', :text => "#{@user.name}'s account"
-        assert page.has_css? 'h2', :text => "#{@user.name}'s proposals"
-        assert page.has_css? 'h2', :text => "Other proposals #{@user.name} is involved with"
+        assert page.has_css? 'h1', :text => "#{@user.name}'s profile"
       end
 
       should 'see a list of other users\' proposals, but only ones that the user is involved with via their suggestions' do
@@ -176,9 +169,9 @@ class ProfileTest < IntegrationTestCase
       end
 
       should 'refer to the user as "you" in the heading text' do
-        assert page.has_css? 'h1', :text => "Your account"
+        assert page.has_css? 'h1', :text => "Your profile"
         assert page.has_css? 'h2', :text => "Your proposals"
-        assert page.has_css? 'h2', :text => "Other proposals you are involved with"
+        assert page.has_css? 'h2', :text => "Proposals you are involved with"
       end
 
       should 'see a list of other users\' proposals, but only ones that I am involved with via their suggestions' do

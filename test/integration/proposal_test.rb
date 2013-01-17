@@ -88,7 +88,7 @@ class ProposalTest < IntegrationTestCase
           setup do
             fill_in "Title", :with => "My Even More Amazing Talk"
             fill_in "Description", :with => "This talk is wildly amazing."
-            click_button "Update Proposal"
+            click_button "Update proposal"
           end
 
           should "update the proposal" do
@@ -104,7 +104,7 @@ class ProposalTest < IntegrationTestCase
         context "and remove the title" do
           setup do
             fill_in "Title", :with => ""
-            click_button "Update Proposal"
+            click_button "Update proposal"
           end
 
           should "alert me that the title is required" do

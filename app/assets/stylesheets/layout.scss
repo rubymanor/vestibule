@@ -1,18 +1,25 @@
 header {
   margin: 1em 0 0 0;
 
-  h1 {
-    line-height: 66px;
-    font-family: 'Lobster', arial, serif;
-    font-size: 4em;
+  .brand {
+    margin-bottom: 30px;
 
-    a:hover {
-      text-decoration: none;
+    h1 {
+      line-height: 90px;
+      font-family: 'Lobster', arial, serif;
+      font-size: 90px;
+      margin: 0;
+
+      a:hover {
+        text-decoration: none;
+      }
     }
   }
 }
 
 #content {
+  margin-bottom: 4em;
+
   section {
     margin-bottom: 2em;
   }
@@ -30,5 +37,9 @@ form.button_to {
 form {
   input[type=text], textarea {
     width: 100%;
+  }
+
+  .errors {
+    margin: 0 0 0 20px;
   }
 }

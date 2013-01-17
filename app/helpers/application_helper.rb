@@ -2,6 +2,10 @@ require 'redcarpet'
 require 'digest/md5'
 
 module ApplicationHelper
+  def body_class
+    params[:controller]
+  end
+
   def render_page_title
     page_title = content_for(:page_title)
     page_title = 'Welcome' if page_title.blank?

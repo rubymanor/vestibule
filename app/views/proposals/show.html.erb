@@ -1,16 +1,17 @@
-<% if @proposal.proposed_by?(current_user) %>
-  <ul class="nav nav-pills">
-    <li><a href="#">Your proposal</a></li>
-    <li><%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %></li>
-    <li><%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal), class: "btn btn-danger" %></li>
-  </ul>
-<% end %>
-
 <div class="row">
   <div class="span6">
     <div id="proposal">
       <%= proposal_div(@proposal) do %>
         <%= page_title @proposal.title %>
+
+        <% if @proposal.proposed_by?(current_user) %>
+          <ul class="nav nav-pills">
+            <li><%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %></li>
+            <li><%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal), class: "btn btn-danger" %></li>
+          </ul>
+        <% end %>
+        <p class="age">updated <%= time_ago_in_words @proposal.updated_at %> ago</p>
+
         <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
         <div class="description"><%= markdown @proposal.description %></div>
       <% end %>
@@ -24,8 +25,16 @@
         <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
 
         <%= form_for [@proposal, @suggestion] do |f| %>
-          <%#= f.error_notification %>
-          <%= f.text_area :body, :label => "What would make this proposal better?" %>
+          <% if f.object.errors.any? %>
+            <div class="alert alert-error">
+              <ul class="errors">
+                <% f.object.errors.full_messages.each do |msg| %>
+                  <li class="error"><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= f.text_area :body, :label => "What would make this proposal better?", rows: 10 %>
           <%= f.button "Make your suggestion", class: "btn" %>
         <% end %>
       <% end %>
@@ -33,7 +42,15 @@
       <ul class="suggestions">
         <% @proposal.suggestions.latest.each do |suggestion| %>
           <%= content_tag_for(:li, suggestion) do %>
-            <p class="author"><%= render 'shared/user', :user => suggestion.author %> suggests: <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span></p>
+            <p class="author">
+              <% if suggestion.author == @proposal.proposer && current_user != @proposal.proposer %>
+                The proposal author
+              <% else %>
+                <%= render 'shared/user', :user => suggestion.author %>
+              <% end %>
+              suggests
+              <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span>
+            </p>
             <section class="body"><%= markdown suggestion.body %></section>
           <% end %>
         <% end %>

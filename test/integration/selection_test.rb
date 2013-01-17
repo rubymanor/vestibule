@@ -1,13 +1,16 @@
 require "test_helper"
 
 class SelectionTest < IntegrationTestCase
+end
+__END__
+# Disabled because we're not in 'selection' mode right now.
   context "Given a bunch of proposals" do
     setup do
       @destroy_ruby = FactoryGirl.create(:proposal, :title => "Destroy Ruby")
       @hot_gem = FactoryGirl.create(:proposal, :title => "My Hot New Gem")
       @merb = FactoryGirl.create(:proposal, :title => "I Miss Merb")
     end
-    
+
     context "a logged in user" do
       setup do
         sign_in FactoryGirl.create(:user)

@@ -1,47 +1,46 @@
 <section id="title">
-  <div class="row">
-    <div class="span2">
-      <%= image_tag(avatar_url(@user), :class => "avatar pull-right") %>
-    </div>
-    <div class="span10">
-      <%= page_title "#{possessive} profile" %>
-      <section id="user">
-        <% if @user.signup_reason.present? %>
-        <article id="signup_reason">
-          <%= markdown @user.signup_reason %>
-          <% if @user == current_user %><aside><%= link_to 'Edit your reason', edit_user_path(current_user) %></aside><% end %>
-        </article>
-        <% else %>
-          <% if @user == current_user %>
-            <p>Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %>.</p>
-          <% else %>
-            <p><%= user_name %> hasn't said what they hope to get out of Ruby Manor yet.</p>
-          <% end %>
-        <% end %>
-      </section>
-    </div>
-  </div>
+  <%= image_tag(avatar_url(@user), :class => "avatar") %>
+  <%= page_title "#{possessive} profile" %>
+  <section id="user">
+    <% if @user.signup_reason.present? %>
+    <article id="signup_reason">
+      <%= markdown @user.signup_reason %>
+      <% if @user == current_user %><aside><%= link_to 'Edit your reason', edit_user_path(current_user) %></aside><% end %>
+    </article>
+    <% else %>
+      <% if @user == current_user %>
+        <p class="well">Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %>.</p>
+      <% else %>
+        <p><%= user_name %> hasn't said what they hope to get out of Ruby Manor yet.</p>
+      <% end %>
+    <% end %>
+  </section>
 </section>
 
 <div class="row">
-  <div class="span6">
-    <section id="proposals">
-      <h2><%= possessive %> proposals</h2>
+  <% if current_user == @user %>
+    <div class="span6">
+      <section id="proposals">
+        <h2><%= possessive %> proposals</h2>
+        <p>Because proposals are anonymised, other users will not see this information on your profile.</p>
 
-      <% if @user.proposals.any? %>
-        <ul>
-        <% @user.proposals.each do |proposal| %>
-          <li><%= link_to proposal.title, proposal %></li>
+        <% if @user.proposals.any? %>
+          <ul>
+          <% @user.proposals.each do |proposal| %>
+            <li><%= link_to proposal.title, proposal %></li>
+          <% end %>
+          </ul>
+        <% else %>
+          <p><%= to_have %> no proposals.</p>
         <% end %>
-        </ul>
-      <% else %>
-        <p><%= to_have %> no proposals.</p>
-      <% end %>
-    </section>
-  </div>
-  <div class="span6">
+      </section>
+    </div>
+    <div class="span6">
+  <% else %>
+    <div class="span12"%>
+  <% end %>
     <section id="involvement">
-      <h2>Other proposals <%= to_be(false) %> involved with</h2>
+      <h2>Proposals <%= to_be(false) %> involved with</h2>
 
       <% if (other_proposals = @user.proposals_of_interest.not_proposed_by(@user)).any? %>
         <ul>

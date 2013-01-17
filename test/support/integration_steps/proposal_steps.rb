@@ -7,7 +7,7 @@ module ProposalSteps
 
     fill_in "Title", :with => options[:title]
     fill_in "Description", :with => options[:description]
-    click_button "Create Proposal"
+    click_button "Submit proposal"
   end
 
   def within_proposal(&block)

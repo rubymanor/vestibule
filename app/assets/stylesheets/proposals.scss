@@ -1,0 +1,44 @@
+.proposals {
+  .action {
+    margin: 1em 0 2em 0;
+  }
+
+  .proposals {
+    li {
+      font-size: 26px;
+      line-height: 32px;
+      margin-bottom: 10px;
+
+      .age {
+        color: #ccc;
+        margin-left: 0.5em;
+      }
+    }
+  }
+}
+
+.proposal {
+  h1 {
+    line-height: 50px;
+  }
+  .age {
+    color: #ccc;
+  }
+}
+
+.suggestions {
+  list-style: none;
+  margin-left: 0;
+
+  .suggestion {
+    .author {
+      img {
+        float: left;
+        margin-right: 10px;
+      }
+    }
+    .age {
+      color: #ccc;
+    }
+  }
+}
