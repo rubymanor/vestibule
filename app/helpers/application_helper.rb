@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def proposal_title_for_rss(for_proposal)
-    h(for_proposal.title)
+    %{"#{h for_proposal.title}"}.html_safe
   end
 
   def suggestion_title_for_rss(for_suggestion)
