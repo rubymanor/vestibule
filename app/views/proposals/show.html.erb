@@ -34,7 +34,10 @@
               </ul>
             </div>
           <% end %>
-          <%= f.text_area :body, :label => "What would make this proposal better?", rows: 10 %>
+          <%= f.label :body do %>
+            What would make this proposal better? <span class="help-inline">You can use <%= link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank' %>.</span>
+          <% end %>
+          <%= f.text_area :body, rows: 10 %>
           <%= f.button "Make your suggestion", class: "btn" %>
         <% end %>
       <% end %>

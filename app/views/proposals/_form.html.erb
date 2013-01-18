@@ -10,7 +10,9 @@
   <% end %>
   <%= f.label :title %>
   <%= f.text_field :title %>
-  <%= f.label :description %>
+  <%= f.label :description, class: 'control-label' do %>
+    Description <span class="help-inline">You can use <%= link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank' %>.</span>
+  <% end %>
   <%= f.text_area :description %>
   <% if f.object.new_record? %>
     <%= f.button "Submit proposal", class: "btn btn-primary" %>
