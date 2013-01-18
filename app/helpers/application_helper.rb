@@ -6,6 +6,14 @@ module ApplicationHelper
     params[:controller]
   end
 
+  def active_nav?(*path_fragments)
+    path_fragments.any? { |pf| request.fullpath =~ /\A#{Regexp.escape(pf)}/ }
+  end
+
+  def active_nav_class(*path_fragments)
+    %{ class="active"}.html_safe if active_nav?(*path_fragments)
+  end
+
   def render_page_title
     page_title = content_for(:page_title)
     page_title = 'Welcome' if page_title.blank?
