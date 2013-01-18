@@ -1,22 +1,10 @@
-<%= form_for @proposal do |f| %>
-  <% if f.object.errors.any? %>
-    <div class="alert alert-error">
-      <ul class="errors">
-        <% f.object.errors.full_messages.each do |msg| %>
-          <li class="error"><%= msg %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for @proposal do |f| %>
+  <% if notification = f.error_notification %>
+    <div class="alert alert-error fade in">
+      <%= notification %>
     </div>
   <% end %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :description, class: 'control-label' do %>
-    Description <span class="help-inline">You can use <%= link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank' %>.</span>
-  <% end %>
-  <%= f.text_area :description %>
-  <% if f.object.new_record? %>
-    <%= f.button "Submit proposal", class: "btn btn-primary" %>
-  <% else %>
-    <%= f.button "Update proposal", class: "btn btn-primary" %>
-  <% end %>
+  <%= f.input :title %>
+  <%= f.input :description, label: %{Description <span class="help-inline">You can use #{link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank'}.</span>}.html_safe %>
+  <%= f.button :submit, "#{f.object.new_record? ? "Submit" : "Update"} proposal", class: "btn btn-primary" %>
 <% end %>

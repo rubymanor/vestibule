@@ -1,14 +1,9 @@
-<%= form_for @user do |f| %>
-  <% if f.object.errors.any? %>
-    <div class="alert alert-error">
-      <ul class="errors">
-        <% f.object.errors.full_messages.each do |msg| %>
-          <li class="error"><%= msg %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for @user do |f| %>
+  <% if notification = f.error_notification %>
+    <div class="alert alert-error fade in">
+      <%= notification %>
     </div>
   <% end %>
-  <%= f.label :signup_reason, "What are you hoping to get out of Ruby Manor?" %>
-  <%= f.text_area :signup_reason, rows: 3 %>
-  <%= f.button "Save", class: "btn btn-primary" %>
+  <%= f.input :signup_reason, input_html: {rows: 3} %>
+  <%= f.button :submit, "Save", class: "btn btn-primary" %>
 <% end %>

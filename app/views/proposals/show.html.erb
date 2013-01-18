@@ -24,21 +24,15 @@
       <% if user_signed_in? %>
         <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
 
-        <%= form_for [@proposal, @suggestion] do |f| %>
-          <% if f.object.errors.any? %>
-            <div class="alert alert-error">
-              <ul class="errors">
-                <% f.object.errors.full_messages.each do |msg| %>
-                  <li class="error"><%= msg %></li>
-                <% end %>
-              </ul>
+        <%= simple_form_for [@proposal, @suggestion] do |f| %>
+          <% if notification = f.error_notification %>
+            <div class="alert alert-error fade in">
+              <%= notification %>
             </div>
           <% end %>
-          <%= f.label :body do %>
-            What would make this proposal better? <span class="help-inline">You can use <%= link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank' %>.</span>
-          <% end %>
-          <%= f.text_area :body, rows: 10 %>
-          <%= f.button "Make your suggestion", class: "btn" %>
+
+          <%= f.input :body, label: %{What would make this proposal better? <span class="help-inline">You can use #{link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank'}.</span>}.html_safe, input_html: {rows: 10} %>
+          <%= f.button :submit, "Make your suggestion", class: "btn" %>
         <% end %>
       <% end %>
 

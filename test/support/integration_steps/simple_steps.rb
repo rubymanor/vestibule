@@ -18,7 +18,8 @@ module SimpleSteps
   end
 
   def i_am_warned_about(klass, attribute, message)
-    within ".error" do
+    id = [klass.name.underscore, attribute].join("_")
+    within ".error \##{id} ~ .help-inline" do
       assert page.has_content?(message)
     end
   end
