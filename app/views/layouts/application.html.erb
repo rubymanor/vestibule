@@ -23,7 +23,7 @@
         <div class="span6">
           <ul class="nav nav-pills pull-right">
             <li<%= active_nav_class(about_path, anonymous_proposals_path) %>><%= link_to "About", about_path %></li>
-            <li<%= active_nav_class(champs_path) %>><%#= link_to "Champs", champs_path %></li>
+            <li<%= active_nav_class(champs_path) %>><%= link_to "Champs", champs_path %></li>
             <li<%= active_nav_class(proposals_path) %>><%= link_to "Proposals", proposals_path %></li>
             <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to "Motivations", motivation_path %></li>
             <% if user_signed_in? -%>
