@@ -29,16 +29,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  # def self.update_twitter_images
-  #   all.map { |user| user.twitter_uid.to_i }.each_slice(TWITTER_USERS_PER_REQUEST) do |uids|
-  #     Twitter.users(uids).each do |twitter_user|
-  #       if (user = find_by_twitter_uid(twitter_user.id.to_s)).present? && (twitter_image = twitter_user.profile_image_url).present?
-  #         user.update_attributes :twitter_image => twitter_image
-  #       end
-  #     end
-  #   end
-  # end
-
   def to_param
     github_nickname
   end
