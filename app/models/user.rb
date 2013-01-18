@@ -43,10 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def update_contribution_score
-    self.contribution_score =
-      (proposals.count * PROPOSAL_WEIGHT) +
-      (proposals_with_interest.count * INTERESTING_PROPOSALS_WEIGHT) +
-      (suggestions.count * SUGGESTION_WEIGHT)
+    self.contribution_score = (suggestions.not_on_proposals_by(self).count * SUGGESTION_WEIGHT)
     self.contribution_score += REASON_WEIGHT if self.signup_reason.present?
   end
 end

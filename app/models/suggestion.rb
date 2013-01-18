@@ -6,6 +6,10 @@ class Suggestion < ActiveRecord::Base
   scope :latest, order('updated_at DESC')
   scope :after, lambda { |timestamp| where('updated_at > ?', timestamp) }
 
+  scope :not_on_proposals_by, lambda { |user|
+    joins(:proposal).merge(Proposal.not_proposed_by(user))
+  }
+
   validates :body, :presence => true
   validate :is_a_meaningful_contribution
 
