@@ -34,8 +34,6 @@ class User < ActiveRecord::Base
   end
 
   REASON_WEIGHT = 5
-  PROPOSAL_WEIGHT = 10
-  INTERESTING_PROPOSALS_WEIGHT = 5
   SUGGESTION_WEIGHT = 2
 
   def proposals_with_interest
