@@ -5,6 +5,6 @@
     </div>
   <% end %>
   <%= f.input :title %>
-  <%= f.input :description, label: %{Description <span class="help-inline">You can use #{link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank'}.</span>}.html_safe %>
+  <%= f.input :description, as: :markdown %>
   <%= f.button :submit, "#{f.object.new_record? ? "Submit" : "Update"} proposal", class: "btn btn-primary" %>
 <% end %>

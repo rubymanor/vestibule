@@ -4,6 +4,6 @@
       <%= notification %>
     </div>
   <% end %>
-  <%= f.input :signup_reason, input_html: {rows: 3} %>
+  <%= f.input :signup_reason, input_html: {rows: 3}, as: :markdown %>
   <%= f.button :submit, "Save", class: "btn btn-primary" %>
 <% end %>

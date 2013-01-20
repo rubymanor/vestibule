@@ -25,7 +25,7 @@ en:
     #     password: 'No special characters, please.'
     labels:
       suggestion:
-        body: 'Suggestion'
+        body: 'What would make this proposal better?'
       user:
         signup_reason: 'About you'
     hints:

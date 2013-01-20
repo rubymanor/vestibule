@@ -43,3 +43,10 @@ form {
     margin-bottom: 0;
   }
 }
+
+label {
+  .markdown-note {
+    font-size: $fontSizeSmall;
+    color: lighten($grayDark, 15%);
+  }
+}

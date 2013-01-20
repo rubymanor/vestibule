@@ -31,7 +31,7 @@
             </div>
           <% end %>
 
-          <%= f.input :body, label: %{What would make this proposal better? <span class="help-inline">You can use #{link_to 'Markdown', "http://daringfireball.net/projects/markdown/syntax", target: '_blank'}.</span>}.html_safe, input_html: {rows: 10} %>
+          <%= f.input :body, as: :markdown, input_html: {rows: 10} %>
           <%= f.button :submit, "Make your suggestion", class: "btn" %>
         <% end %>
       <% end %>
