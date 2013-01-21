@@ -50,3 +50,8 @@ label {
     color: lighten($grayDark, 15%);
   }
 }
+
+.the-process {
+  h1 { font-size: $baseFontSize * 2; }
+  h2 { font-size: $baseFontSize * 1.75; }
+}
