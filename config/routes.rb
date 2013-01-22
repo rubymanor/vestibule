@@ -9,7 +9,6 @@ Vestibule::Application.routes.draw do
   #resources :selections, :only => [:index, :create, :destroy]
 
   match "/motivation", :to => "home#motivation", :as => "motivation"
-  match "/champs", :to => "home#champs", :as => "champs"
   match "/about", :to => "home#about", :as => "about"
   match "/my-motivation", :to => "home#my_motivation", :as => "complete_motivation"
   match "/anonymous-proposals", :to => "home#anonymous_proposals", :as => "anonymous_proposals"
