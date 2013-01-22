@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     unless current_user
       flash[:alert] = "You need to sign in or sign up before continuing."
+      session[:user_id] = nil
       redirect_to root_url
     end
   end
