@@ -1,15 +1,15 @@
 <%= page_title 'Motivations', no_h1=true %>
 <h2>Why do you care about Ruby Manor?</h2>
-<p>We're interested in what <em>you</em> are hoping to get out of Ruby Manor, so that we - and that's everyone else, from speakers to other attendees - can help <em>you</em> achieve that.</p>
+<p>We&rsquo;re interested in what <em>you</em> are hoping to get out of Ruby Manor, so that we - and that&rsquo;s everyone else, from speakers to other attendees - can help <em>you</em> achieve that.</p>
 
-<p>Here's a sampling:</p>
+<p>Here&rsquo;s a sampling:</p>
 
 <% @users.each do |user| %>
-  <blockquote><cite><%= link_to user.name, user %>:</cite><%= markdown user.signup_reason %></blockquote> 
+  <blockquote><cite><%= link_to user.name, user %>:</cite><%= markdown user.signup_reason %></blockquote>
 <% end %>
 
 <hr />
 
-<h2>These people haven't told you what they care about yet...</h2>
+<h2>These people haven&rsquo;t told you what they care about yet...</h2>
 
 <%= @losers.map { |l| link_to(l.name, l) }.to_sentence.html_safe %>
