@@ -4,7 +4,7 @@ xml.rss :version => "2.0", 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
     xml.title "Vestibule :: All Proposals "
     xml.description "A list of all talk proposals made to the vestibule system"
     xml.link proposals_url
-    xml.tag!('atom:link', href: proposals_url, rel: 'self', type: 'application/rss+xml')
+    xml.tag!('atom:link', href: proposals_url(format: 'rss'), rel: 'self', type: 'application/rss+xml')
 
     @proposals.each do |proposal|
       xml.item do
