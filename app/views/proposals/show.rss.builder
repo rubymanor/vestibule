@@ -1,9 +1,10 @@
 xml.instruct! :xml, :version => "1.0"
-xml.rss :version => "2.0" do
+xml.rss :version => "2.0", 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
   xml.channel do
     xml.title "Vestibule :: Suggestions for #{proposal_title_for_rss(@proposal)}"
     xml.description "A list of all suggestions made for #{proposal_title_for_rss(@proposal)}"
     xml.link proposal_url(@proposal)
+    xml.tag('atom:link', href: proposal_url(@proposal), rel: 'self', type: 'application/rss+xml')
 
     @proposal.suggestions.latest.each do |suggestion|
       xml.item do
