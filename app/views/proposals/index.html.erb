@@ -8,10 +8,10 @@
 
   <ul class="proposals">
     <% for proposal in @proposals %>
-      <li>
+      <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
         <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
-      </li>
+      <% end %>
     <% end %>
   </ul>
 </section>
@@ -21,10 +21,10 @@
   <p>The following proposals have been withdrawn:</p>
   <ul class="proposals">
     <% for proposal in @withdrawn_proposals %>
-      <li>
+      <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
         <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
-      </li>
+      <% end %>
     <% end %>
   </ul>
 </section>

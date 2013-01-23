@@ -3,16 +3,14 @@
     margin: 1em 0 2em 0;
   }
 
-  .proposals {
-    li {
-      font-size: 26px;
-      line-height: 32px;
-      margin-bottom: 10px;
+  li.proposal {
+    font-size: 26px;
+    line-height: 32px;
+    margin-bottom: 10px;
 
-      .age {
-        color: #ccc;
-        margin-left: 0.5em;
-      }
+    .age {
+      color: #ccc;
+      margin-left: 0.5em;
     }
   }
 }

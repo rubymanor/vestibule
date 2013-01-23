@@ -3,7 +3,7 @@
 <h2>Your proposals</h2>
 <p>(Because they are anonymised, other users will not see that you are the author of these proposals. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.)</p>
 <% if @your_proposals.present? %>
-  <ul id="your-proposals">
+  <ul id="your-proposals" class="proposals">
     <% @your_proposals.each do |proposal| %>
       <%= content_tag_for(:li, proposal) do%>
         <%= link_to proposal.title, proposal %>
@@ -20,24 +20,24 @@
 
 <% if @proposals_you_should_look_at.present? %>
   <h2>You should consider giving some suggestions about these proposals</h2>
-  <ul id="you-should-look-at-these">
+  <ul id="you-should-look-at-these" class="proposals">
     <% @proposals_you_should_look_at.each do |proposal| %>
-      <li>
+      <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
         <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
-      </li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>
 
 <% if @proposals_that_have_changed.present? %>
   <h2>These proposals have been updated since you last made a suggestion</h2>
-  <ul id="things-have-changed">
+  <ul id="things-have-changed" class="proposals">
     <% @proposals_that_have_changed.each do |proposal| %>
-      <li>
+      <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
         <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
-      </li>
+      <% end %>
     <% end %>
   </ul>
 <% end %>
