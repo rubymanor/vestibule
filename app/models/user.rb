@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   def self.create_with_omniauth(auth)
     create! do |user|
-      user.name = auth["info"]["name"]
+      user.name = auth["info"]["name"] || auth['info']['nickname']
       user.github_uid = auth["uid"]
       user.github_nickname = auth["info"]["nickname"]
       user.email = auth["info"]["email"]
