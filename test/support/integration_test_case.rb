@@ -10,6 +10,7 @@ class IntegrationTestCase < ActiveSupport::TestCase
   self.use_transactional_fixtures = false
 
   setup do
+    Vestibule::Application.config.secret_token = '1234567890abcdefabcd1234567890'
     ActionMailer::Base.deliveries.clear
     Capybara.default_selector = :css
     Capybara.save_and_open_page_path = File.join(Rails.root, 'tmp')
