@@ -41,3 +41,15 @@
     <% end %>
   </ul>
 <% end %>
+
+<% if @proposals_that_have_been_withdrawn.present? %>
+  <h2>These proposals you made suggestions on have been withdrawn</h3>
+  <ul id="things-have-ended" class="proposals">
+    <% @proposals_that_have_been_withdrawn.each do |proposal| %>
+      <%= content_tag_for :li, proposal do %>
+        <%= link_to proposal.title, proposal %>
+        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

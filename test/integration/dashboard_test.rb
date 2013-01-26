@@ -10,6 +10,8 @@ class DashboardTest < IntegrationTestCase
       @proposal2 = FactoryGirl.create(:proposal)
       @proposal3 = FactoryGirl.create(:proposal)
 
+      @withdrawn_proposal = FactoryGirl.create(:proposal, withdrawn: true)
+
       @my_proposal = FactoryGirl.create(:proposal, :proposer => @me)
 
       FactoryGirl.create(:suggestion, :proposal => @proposal2)
@@ -90,6 +92,12 @@ class DashboardTest < IntegrationTestCase
         end
       end
 
+      should 'not be prompted to look at a withdrawn proposal I haven\'t been involved with' do
+        within('#you-should-look-at-these') do
+          assert page.has_no_content?(@withdrawn_proposal.title), 'withdrawn_proposal is present, should be missing'
+        end
+      end
+
       should "link to individual suggestions" do
         click_link @proposal1.title
         assert_equal proposal_path(@proposal1), current_path
@@ -142,6 +150,32 @@ class DashboardTest < IntegrationTestCase
           should "see that talk in my list of proposals with recent activity" do
             within('#things-have-changed') do
               assert page.has_content?(@proposal1.title), "proposal1 should be in the changed list"
+            end
+          end
+        end
+
+        context 'And the talk is then withdrawn by the proposer' do
+          setup do
+            Timecop.travel 10.minutes.from_now
+            FactoryGirl.create(:suggestion, :author => @me, :proposal => @proposal2)
+            @proposal1.withdraw!
+
+            Timecop.travel 10.minutes
+            @proposal2.update_attributes! :description => 'Now more interesting than before.'
+
+            Timecop.travel 1.minute.from_now
+            visit '/dashboard'
+          end
+
+          should 'not see that talk in my list of propopsals with recent activity' do
+            within('#things-have-changed') do
+              assert page.has_no_content?(@proposal1.title), "proposal1 should not be in the changed list"
+            end
+          end
+
+          should 'see that talk in my list of withdrawn propopsals' do
+            within('#things-have-ended') do
+              assert page.has_content?(@proposal1.title), "proposal1 should be in the withdrawn list"
             end
           end
         end
