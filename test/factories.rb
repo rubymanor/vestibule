@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
 
   factory :proposal do |f|
-    f.sequence(:title) { |n| Faker::Lorem.sentence + " #{n}" }
+    f.sequence(:title) { |n| Faker::Lorem.sentence(3, true) + " #{n}" }
     f.association :proposer, :factory => :user
     f.withdrawn false
   end
@@ -16,6 +16,6 @@ FactoryGirl.define do
   factory :suggestion do |f|
     f.association :proposal
     f.association :author, :factory => :user
-    f.body { Faker::Lorem.paragraph }
+    f.body { Faker::Lorem.paragraph(3, true) }
   end
 end
