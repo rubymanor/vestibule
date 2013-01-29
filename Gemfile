@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.19"
+gem "rails", "3.0.20"
 gem "mysql", "2.8.1"
 gem "simple_form", "1.5.0"
 gem "omniauth-twitter", "0.0.14"
