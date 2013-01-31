@@ -22,7 +22,11 @@
     <div id="suggestions">
       <h2>Suggestions</h2>
       <% if user_signed_in? %>
-        <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
+        <% if current_user == @proposal.proposer %>
+          <p>You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.</p>
+        <% else %>
+          <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
+        <% end %>
 
         <%= simple_form_for [@proposal, @suggestion] do |f| %>
           <% if notification = f.error_notification %>
