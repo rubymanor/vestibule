@@ -97,6 +97,14 @@ Other than that, sounds great!
         end
       end
 
+      should "anonymise suggestions by the proposer" do
+        suggestion = FactoryGirl.create(:suggestion, :proposal => @proposal, :author => @proposer)
+        visit proposal_path(@proposal)
+
+        assert page.has_no_content?(@proposer.name)
+        assert page.has_content?("The proposal author")
+      end
+
       should "not be able to make an empty suggestion" do
         suggest ""
         i_am_warned_about Suggestion, :body, "can't be blank"
@@ -127,6 +135,14 @@ Other than that, sounds great!
       should "see a call to action explaining anonymisation" do
         assert page.has_content?("your identity will be masked from other visitors")
       end
+
+      should "see their suggestions identified as their own" do
+        suggestion = FactoryGirl.create(:suggestion, :proposal => @proposal, :author => @proposer)
+        visit proposal_path(@proposal)
+
+        assert page.has_content?("You suggest")
+      end
+
     end
 
   end

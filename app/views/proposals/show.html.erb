@@ -44,12 +44,15 @@
         <% @proposal.suggestions.latest.each do |suggestion| %>
           <%= content_tag_for(:li, suggestion) do %>
             <p class="author">
-              <% if suggestion.author == @proposal.proposer && current_user != @proposal.proposer %>
-                The proposal author
+              <% if suggestion.author == @proposal.proposer %>
+                <% if current_user == @proposal.proposer %>
+                  You suggest
+                <% else %>
+                  The proposal author suggests
+                <% end %>
               <% else %>
-                <%= render 'shared/user', :user => suggestion.author %>
+                <%= render 'shared/user', :user => suggestion.author %> suggests
               <% end %>
-              suggests
               <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span>
             </p>
             <section class="body"><%= markdown suggestion.body %></section>
