@@ -46,9 +46,9 @@
             <p class="author">
               <% if suggestion.author == @proposal.proposer %>
                 <% if current_user == @proposal.proposer %>
-                  You suggest
+                  You respond
                 <% else %>
-                  The proposal author suggests
+                  The proposal author responds
                 <% end %>
               <% else %>
                 <%= render 'shared/user', :user => suggestion.author %> suggests

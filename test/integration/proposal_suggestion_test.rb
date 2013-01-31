@@ -140,7 +140,7 @@ Other than that, sounds great!
         suggestion = FactoryGirl.create(:suggestion, :proposal => @proposal, :author => @proposer)
         visit proposal_path(@proposal)
 
-        assert page.has_content?("You suggest")
+        assert page.has_content?("You respond")
       end
 
     end
