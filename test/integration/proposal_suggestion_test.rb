@@ -38,6 +38,10 @@ class ProposalSuggestionTest < IntegrationTestCase
         assert_match %r{application/rss\+xml}, page.response_headers['Content-Type']
       end
 
+      should "see a call to action asking for help to develop the proposal" do
+        assert page.has_content?("Help develop this into a good proposal")
+      end
+
       should "be able to make a suggestion about the proposal" do
         suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
 
@@ -93,6 +97,14 @@ Other than that, sounds great!
         end
       end
 
+      should "anonymise suggestions by the proposer" do
+        suggestion = FactoryGirl.create(:suggestion, :proposal => @proposal, :author => @proposer)
+        visit proposal_path(@proposal)
+
+        assert page.has_no_content?(@proposer.name)
+        assert page.has_content?("The proposal author")
+      end
+
       should "not be able to make an empty suggestion" do
         suggest ""
         i_am_warned_about Suggestion, :body, "can't be blank"
@@ -113,6 +125,26 @@ Other than that, sounds great!
         i_am_warned_about Suggestion, :body, "should contain some concrete suggestions about how to develop this proposal"
       end
     end
+
+    context "a proposer viewing their proposal" do
+      setup do
+        sign_in @proposer
+        visit proposal_path(@proposal)
+      end
+
+      should "see a call to action explaining anonymisation" do
+        assert page.has_content?("your identity will be masked from other visitors")
+      end
+
+      should "see their suggestions identified as their own" do
+        suggestion = FactoryGirl.create(:suggestion, :proposal => @proposal, :author => @proposer)
+        visit proposal_path(@proposal)
+
+        assert page.has_content?("You respond")
+      end
+
+    end
+
   end
 
   def suggest(body)
