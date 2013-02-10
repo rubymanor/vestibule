@@ -8,7 +8,7 @@ This app is build on top of [Ruby Manor 3][] [original Vestibule app][] and we t
 Getting started
 -----------------
 
-1. Setup a Postgres server
+1. Setup a Postgres server. The simplest thing to do is to download the [Turnkey Postgres Appliance][] in the OVF format and run it with [VirtualBox][].
 2. Copy config/database.example.yml to config/database.yml and update it appropriately
 3. Set the following environment variable: `COOKIE_SECRET` with a lengthy key
 4. Run the tests: `rake`
@@ -28,3 +28,5 @@ Build Status
 [Euruko 2013]: http://euruko2013.org/
 [Ruby Manor 3]: http://rubymanor.org/3
 [original Vestibule app]: https://github.com/rubymanor/vestibule
+[Turnkey Postgres Appliance OVF]: http://www.turnkeylinux.org/postgresql
+[VirtualBox]:https://www.virtualbox.org/
