@@ -9,6 +9,7 @@ gem "paper_trail", "1.6.4"
 gem "redcarpet", "2.2.2"
 gem "twitter", "4.4.2"
 gem "bootstrap-sass"
+gem "unicorn"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,3 +39,5 @@ group :test do
   gem "launchy"
   gem "escape_utils", "0.1.9"
 end
+
+gem "newrelic_rpm"
