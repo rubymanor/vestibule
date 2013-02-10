@@ -20,6 +20,24 @@ How to contribute
 
 Fork, patch, test, send a pull request.
 
+Deploying on Heroku (non official site)
+-----------------
+
+1. Sign up on [Heroku][]
+2. Download the [Heroku toolbelt][]
+3. Login from the command line: `heroku login`
+4. Create your heroku app: `heroku create`
+5. Add the New Relic add on (requires credit card information): `heroku addons:add newrelic:standard`
+6. Deploy: `git push heroku master`
+7. Check the app: `heroku open`
+
+For more info, checkout the [official heroku guide][]
+
+Deploying the official site
+-----------------
+
+Contact @nikosd
+
 Build Status
 ------------
 
@@ -28,5 +46,8 @@ Build Status
 [Euruko 2013]: http://euruko2013.org/
 [Ruby Manor 3]: http://rubymanor.org/3
 [original Vestibule app]: https://github.com/rubymanor/vestibule
-[Turnkey Postgres Appliance OVF]: http://www.turnkeylinux.org/postgresql
-[VirtualBox]:https://www.virtualbox.org/
+[Turnkey Postgres Appliance]: http://www.turnkeylinux.org/postgresql
+[VirtualBox]: https://www.virtualbox.org/
+[Heroku]: http://www.heroku.com/
+[Heroku toolbelt]: https://toolbelt.heroku.com/
+[official heroku guide]: https://devcenter.heroku.com/articles/rails3
