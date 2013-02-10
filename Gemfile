@@ -38,3 +38,5 @@ group :test do
   gem "launchy"
   gem "escape_utils", "0.1.9"
 end
+
+gem "newrelic_rpm"
