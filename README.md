@@ -10,6 +10,7 @@ Getting started
 
 1. Setup a Postgres server. The simplest thing to do is to download the [Turnkey Postgres Appliance][] in the OVF format and run it with [VirtualBox][].
 2. Copy config/database.example.yml to config/database.yml and update it appropriately
+2. Copy config/application.example.yml to config/application.yml and customize it to fit your needs
 3. Set the following environment variable: `COOKIE_SECRET` with a lengthy key
 4. Run the tests: `rake`
 5. Register the app for the "social login" thing. See section below for more info.

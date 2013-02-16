@@ -5,5 +5,6 @@ log/*.log
 tmp/**/*
 vendor/bundle
 config/database.yml
+config/application.yml
 .env
 Procfile.local

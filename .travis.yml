@@ -2,6 +2,7 @@ rvm: 1.9.3
 env: COOKIE_SECRET=162199e7942048b797dae9b929214a4bc0fcb7f3b84e95ae5a892514e112fdc32fdbf51a1e8b26603c628a07437ae7132ac8e1932fd62036a7f407a69dbb4007
 before_script:
   - "cp config/database.travis.yml config/database.yml"
+  - "cp config/application.example.yml config/application.yml"
   - "psql -c 'create database vestibule_development;' -U postgres"
   - "psql -c 'create database vestibule_test;' -U postgres"
   - "bundle exec rake db:schema:load"
