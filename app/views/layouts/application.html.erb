@@ -16,7 +16,7 @@
         <div class="span5">
           <div class="brand">
             <h1><%= link_to "Vestibule", root_path %></h1>
-            <p>Building <a href="http://rubymanor.org">Ruby Manor</a> as a community</p>
+            <p><%= Settings.main_slogan.html_safe %></p>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
 
           <% if remind_account_for_signup_reason -%>
           <div class="alert">
-            Other attendees are wondering what you hope to get out of Ruby Manor.
+            Other attendees are wondering what you hope to get out of <%= Settings.event_name %>.
             <%= link_to "Tell them now", edit_user_path(current_user) %>.
           </div>
           <% end -%>

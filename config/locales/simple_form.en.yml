@@ -30,7 +30,7 @@ en:
         signup_reason: 'About you'
     hints:
       user:
-        signup_reason: Tell everyone a little bit about what you are looking to get out of Ruby Manor. What interests you? What doesn't interest you?
+        signup_reason: Tell everyone a little bit about what you are looking to get out of the event. What interests you? What doesn't interest you?
       proposal:
         title: 'This is all we need from you for your suggestion.  Think of something snappy.'
         description: 'Tell everyone a bit more about what your talk is about. The community will help you develop this into a description of exactly what to expect from your talk.'
