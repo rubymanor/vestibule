@@ -65,18 +65,32 @@ Vestibule::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => 'vestibule.heroku.com' }
+  config.action_mailer.default_url_options = { :host => ENV['DEFAULT_MAILER_HOST'] }
   
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => 'rubymanor.org',
-    :user_name            => ENV['GMAIL_SMTP_USER'],
-    :password             => ENV['GMAIL_SMTP_PASSWORD'],
-    :authentication       => 'plain',
-    :enable_starttls_auto => true  }
-  
+  if ENV['GMAIL_SMTP_USER'].present? && ENV['GMAIL_SMTP_PASSWORD'].present?
+    config.action_mailer.smtp_settings = {
+        :address              => 'smtp.gmail.com',
+        :port                 => 587,
+        :domain               => ENV['SMTP_DOMAIN'],
+        :user_name            => ENV['GMAIL_SMTP_USER'],
+        :password             => ENV['GMAIL_SMTP_PASSWORD'],
+        :authentication       => 'plain',
+        :enable_starttls_auto => true
+    }
+  elsif ENV['MANDRILL_USER'].present? && ENV['MANDRILL_APIKEY'].present?
+    # This allows automatic configuration if Mandrill plugin is enabled on Heroku.
+    config.action_mailer.smtp_settings = {
+        :address              => 'smtp.mandrillapp.com',
+        :port                 => 587,
+        :domain               => ENV['SMTP_DOMAIN'],
+        :user_name            => ENV['MANDRILL_USER'],
+        :password             => ENV['MANDRILL_APIKEY'],
+        :authentication       => 'plain',
+        :enable_starttls_auto => true
+    }
+  end
+
   # heroku logging will log anything spat to STDOUT so let's do that  
   config.action_controller.logger = Logger.new(STDOUT)
 end

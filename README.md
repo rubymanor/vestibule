@@ -14,7 +14,7 @@ Getting started
 3. Set the following environment variable: `COOKIE_SECRET` with a lengthy key
 4. Run the tests: `rake`
 5. Register the app for the "social login" thing. See section below for more info.
-4. Start a server: `rails server`
+7. Start a server: `rails server`
 
 You should be ready :)
 
@@ -24,7 +24,7 @@ Social login setup
 Github:
 
 1. Go to settings/applications and add a new application
-2. Set URL to whatever makes sense (for example `http://localhost:3000` if it's for your dev environement)
+2. Set URL to whatever makes sense (for example `http://localhost:3000` if it's for your dev environment)
 3. Set Callback URL to `<base_url>/auth/github/callback` (so for this example it would be `http://localhost:3000/auth/github/callback`)
 4. Set the `GITHUB_KEY` and the `GITHUB_SECRET` to the `Client ID` and the `Client Secret` respectively
 5. (Optional) Set these for heroku (after having completed the heroku setup) by running `heroku config:add GITHUB_KEY=<the Client ID>` and `heroku config:add GITHUB_SECRET=<the Client Secret>`
@@ -42,6 +42,28 @@ Deploying on Heroku (non official site)
 8. Check the app: `heroku open`
 
 For more info, checkout the [official heroku guide][]
+
+Sending emails
+-----------------
+
+There are two ways to send emails out of the box: Gmail and Mandrill. The first is pretty much ubiquitous, the latter is the easiest to setup on Heroku.
+In any case you have to set first the following environment variables:
+
+* `DEFAULT_MAILER_HOST` which will be used as the `:host` option for the `action_mailer.default_url_options`
+* `SMTP_DOMAIN` which will be used as the `:domain` option for the `action_mailer.smtp_settings`
+
+**Setup Gmail**
+
+Set up the additional two environment variables:
+
+* `GMAIL_SMTP_USER`
+* `GMAIL_SMTP_PASSWORD`
+
+**Setup Mandrill**
+
+Just add the [Mandrill Heroku Addon](https://addons.heroku.com/mandrill) and you should be ready to go.
+
+Keep in mind that this will work only on production environment.
 
 Deploying the official site
 -----------------
