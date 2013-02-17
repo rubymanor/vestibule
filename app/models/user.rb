@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
 
   before_save :update_contribution_score
 
-  TWITTER_USERS_PER_REQUEST = 100
-
   def proposals_you_should_look_at
     Proposal.active.without_suggestions_from(self).not_proposed_by(self)
   end

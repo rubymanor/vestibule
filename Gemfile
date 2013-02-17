@@ -7,7 +7,6 @@ gem "simple_form", "2.0.4"
 gem 'omniauth-github', '1.0.3'
 gem "paper_trail", "1.6.4"
 gem "redcarpet", "2.2.2"
-gem "twitter", "4.4.2"
 gem "bootstrap-sass"
 gem "unicorn"
 gem "settingslogic"
