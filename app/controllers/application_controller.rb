@@ -2,7 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :user_signed_in?
 
+  before_filter :reload_settings if Rails.env.development?
+
   private
+
+  def reload_settings
+    Settings.reload!
+  end
 
   def authenticate_user!
     unless current_user
