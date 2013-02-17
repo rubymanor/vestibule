@@ -5,14 +5,25 @@ header {
     margin-bottom: 30px;
 
     h1 {
-      line-height: 90px;
-      font-family: 'Lobster', arial, serif;
-      font-size: 90px;
+      line-height: 20px;
+      font-size: 20px;
       margin: 0;
+
+      a {
+        display: inline-block;
+        width: 116px;
+        height: 20px;
+        background: image-url("sprite.png") 196px -75px;
+        text-indent: -9999px;
+      }
 
       a:hover {
         text-decoration: none;
       }
+    }
+
+    p {
+      font-size: 14px;
     }
   }
 }

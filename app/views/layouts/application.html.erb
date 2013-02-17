@@ -2,7 +2,6 @@
 <html>
 <head>
   <title><%= render_page_title %></title>
-  <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag :application %>
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tag %>
@@ -17,7 +16,7 @@
       <div class="row">
         <div class="span5">
           <div class="brand">
-            <h1><%= link_to "Vestibule", root_path %></h1>
+            <h1><%= link_to "#{Settings.event_name} Call for Presentations", root_path %></h1>
             <p><%= Settings.main_slogan.html_safe %></p>
           </div>
         </div>
