@@ -43,6 +43,28 @@ Deploying on Heroku (non official site)
 
 For more info, checkout the [official heroku guide][]
 
+Sending emails
+-----------------
+
+There are two ways to send emails out of the box: Gmail and Mandrill. The first is pretty much ubiquitous, the latter is the easiest to setup on Heroku.
+In any case you have to set first the following environment variables:
+
+* `DEFAULT_MAILER_HOST` which will be used as the `:host` option for the `action_mailer.default_url_options`
+* `SMTP_DOMAIN` which will be used as the `:domain` option for the `action_mailer.smtp_settings`
+
+**Setup Gmail**
+
+Set up the additional two environment variables:
+
+* `GMAIL_SMTP_USER`
+* `GMAIL_SMTP_PASSWORD`
+
+**Setup Mandrill**
+
+Just add the [Mandrill Heroku Addon](https://addons.heroku.com/mandrill) and you should be ready to go.
+
+Keep in mind that this will work only on production environment.
+
 Deploying the official site
 -----------------
 
