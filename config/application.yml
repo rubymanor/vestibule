@@ -1,0 +1,26 @@
+defaults: &defaults
+  event_name: 'EuRuKo 2013'
+  main_slogan: 'Community powered Call for Presentations for <a href="http://euruko2013.org">EuRuKo 2013</a>'
+  event_description: |
+    <p>EuRuKo (the European Ruby Conference) is an annual conference which focuses on the Ruby programming language, with an informal atmosphere and lots of opportunities to listen, to talk, to hack, to have fun and where delegates experience distinct and insightful content from speakers of the highest calibre.</p>
+    <p>EuRuKo is being organised for the past 10 years in cities around Europe by Ruby developers for Ruby developers. It’s a truly volunteer-based event and like Ruby it is fostered by the community. Each year a different european city and its local community of Ruby enthusiasts are tasked to host the event and that’s what makes EuRuKo one of a kind.<p>
+    <p>This summer EuRuKo comes to Athens for two days on the 28th and 29th of June.</p>
+    <p>Visit <a href="http://euruko2013.org">the main site</a> for more information or <a href="http://en.wikipedia.org/wiki/EuRuKo">Wikipedia</a> for a historical overview.</p>
+  event_audience: |
+    <p>Your audience will consist of people who are interested in coming to EuRuKo 2013: this mostly means Ruby programmers from around Europe, but there will also be many people who come from much further away.  There may be people who don&rsquo;t use Ruby, or aren&rsquo;t programmers, or both.  Primarily however, it&rsquo;s a Ruby-focussed and deeply-technical crowd.</p>
+  proposals_topics: |
+    <p>Euruko 2013 celebrates Ruby’s 20 years and the newest 2.0 version. We ask you to submit original talks about the beauty and elegance this jewel of a language brings in our daily programming lives. Come and talk about Ruby’s unique features, best practices and your experiences with the language in all aspects of programming.  That being said, we're open to original mind-blowing proposals but the committee keeps the right to disqualify off-topic or irrelevant ones.</p>
+    <p>The <a href="http://euruko2013.org/#contributors">EuRuKo 2013 team</a> will be actively <a href="#suggestions">leaving suggestions</a> on each talk proposal to help get the ball rolling.  However, if you&rsquo;re not quite sure your idea is ready for public feedback yet, or just want some reassurance that you&rsquo;re on the right track, <a href="mailto:info@rubymanor.org?subject=Can+I+get+some+help+coming+up+with+my+proposal%3F">please do get in touch with us</a> and we&rsquo;ll give you some pointers.</p>
+  proposals_duration: |
+    <p>Talks should be around 30 minutes + 15 minutes for Q&A.</p>
+  why_submit_a_proposal: |
+    <p>It&rsquo;s a good opportunity to be heard by a large slice of the Ruby community, and we&rsquo;ll put together a high-quality video of your talk that you can share with everyone who couldn&rsquo;t get there on the day.</p>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
