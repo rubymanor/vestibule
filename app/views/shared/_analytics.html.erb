@@ -1,7 +1,13 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-573082-9']);
+  _gaq.push(['_setAccount', '<%= Settings.google_analytics.account %>']);
+  <% if Settings.google_analytics.domain.present? %>
+  _gaq.push(['_setDomainName', '<%= Settings.google_analytics.domain %>']);
+  <% end %>
+  <% if Settings.google_analytics.allow_linker %>
+  _gaq.push(['_setAllowLinker', true]);
+  <% end %>
   _gaq.push(['_trackPageview']);
 
   (function() {
