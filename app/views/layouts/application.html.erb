@@ -7,7 +7,9 @@
   <%= javascript_include_tag :application %>
   <%= csrf_meta_tag %>
   <%= yield :head %>
+  <% if Settings.google_analytics.enabled %>
   <%= render 'shared/analytics' %>
+  <% end %>
 </head>
 <body class="<%= body_class %>">
   <div class="container">

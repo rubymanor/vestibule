@@ -14,6 +14,11 @@ defaults: &defaults
     <p>Talks will be a maximum of 30 minutes + 10 minutes Q&A, but if you have something interesting that can be said in less time, that&rsquo;s great too. We&rsquo;ll build the schedule around the best proposals chosen by the community.</p>
   why_submit_a_proposal: |
     <p>It&rsquo;s a good opportunity to be heard by a large slice of the Ruby community, and we&rsquo;ll put together a high-quality video of your talk that you can share with everyone who couldn&rsquo;t get there on the day.</p>
+  google_analytics:
+    enabled: false
+    account: ''
+    domain: ''
+    allow_linker: false
 
 development:
   <<: *defaults
@@ -23,3 +28,8 @@ test:
 
 production:
   <<: *defaults
+  google_analytics:
+    enabled: true
+    account: 'UA-XXXXXX-X'
+    domain: 'rubymanor.org'
+    allow_linker: true
