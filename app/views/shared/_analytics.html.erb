@@ -1,19 +1,28 @@
 <script type="text/javascript">
+    var _gas = _gas || [];
+    _gas.push(['_setAccount', '<%= Settings.google_analytics.account %>']);
+    <% if Settings.google_analytics.domain.present? %>
+    _gas.push(['_setDomainName', '<%= Settings.google_analytics.domain %>']);
+    <% end %>
+    <% if Settings.google_analytics.allow_linker %>
+    _gas.push(['_setAllowLinker', true]);
+    <% end %>
+    _gas.push(['_trackPageview']);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', '<%= Settings.google_analytics.account %>']);
-  <% if Settings.google_analytics.domain.present? %>
-  _gaq.push(['_setDomainName', '<%= Settings.google_analytics.domain %>']);
-  <% end %>
-  <% if Settings.google_analytics.allow_linker %>
-  _gaq.push(['_setAllowLinker', true]);
-  <% end %>
-  _gaq.push(['_trackPageview']);
+    _gas.push(['_gasTrackForms']);
+    _gas.push(['_gasTrackOutboundLinks']);
+    _gas.push(['_gasTrackMaxScroll']);
+    _gas.push(['_gasTrackDownloads']);
+    _gas.push(['_gasTrackYoutube', {force: true}]);
+    _gas.push(['_gasTrackVimeo', {force: true}]);
+    _gas.push(['_gasTrackMailto']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = '<%= asset_path 'gas.js' %>';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
 </script>
