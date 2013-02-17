@@ -15,6 +15,11 @@ defaults: &defaults
     <p>Talks should be around 30 minutes + 15 minutes for Q&A.</p>
   why_submit_a_proposal: |
     <p>It&rsquo;s a good opportunity to be heard by a large slice of the Ruby community, and we&rsquo;ll put together a high-quality video of your talk that you can share with everyone who couldn&rsquo;t get there on the day.</p>
+  google_analytics:
+    enabled: false
+    account: ''
+    domain: ''
+    allow_linker: false
 
 development:
   <<: *defaults
@@ -24,3 +29,8 @@ test:
 
 production:
   <<: *defaults
+  google_analytics:
+    enabled: true
+    account: 'UA-36907690-1'
+    domain: 'euruko2013.org'
+    allow_linker: true
