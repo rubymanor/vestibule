@@ -13,15 +13,15 @@ class User < ActiveRecord::Base
   TWITTER_USERS_PER_REQUEST = 100
 
   def proposals_you_should_look_at
-    Proposal.active.without_suggestions_from(self).not_proposed_by(self)
+    Proposal.active.in_modification_order.without_suggestions_from(self).not_proposed_by(self).all
   end
 
   def proposals_that_have_changed
-    proposals_of_interest.active.not_proposed_by(self).select { |p| p.updated_at > p.suggestions.by(self).maximum(:updated_at) }
+    proposals_of_interest.active.not_proposed_by(self).in_modification_order.select { |p| p.updated_at > p.suggestions.by(self).maximum(:updated_at) }
   end
 
   def proposals_that_have_been_withdrawn
-    proposals_of_interest.withdrawn
+    proposals_of_interest.withdrawn.in_modification_order.all
   end
 
   def self.create_with_omniauth(auth)

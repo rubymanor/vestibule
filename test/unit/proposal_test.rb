@@ -43,6 +43,37 @@ class ProposalTest < ActiveSupport::TestCase
       end
     end
 
+    context 'in modification order' do
+      should 'be the same as updated at order when no suggestions have been made' do
+        Timecop.freeze(Time.parse("Sep 1 2011")) { @proposal.title = 'Meh'; @proposal.save }
+        Timecop.freeze(Time.parse("Sep 1 2012")) { @proposal_2 = FactoryGirl.create(:proposal) }
+        Timecop.freeze(Time.parse("Sep 1 2010")) { @proposal_3 = FactoryGirl.create(:proposal) }
+
+        assert_equal [@proposal_2, @proposal, @proposal_3], Proposal.in_modification_order
+      end
+
+      should 'use the latest suggestion time to influence sorting' do
+        Timecop.freeze(Time.parse("Sep 1 2011")) { @proposal.title = 'Meh'; @proposal.save }
+        Timecop.freeze(Time.parse("Sep 1 2012")) { @proposal_2 = FactoryGirl.create(:proposal) }
+        Timecop.freeze(Time.parse("Sep 1 2010")) { @proposal_3 = FactoryGirl.create(:proposal) }
+        Timecop.freeze(Time.parse("Sep 1 2012")) { FactoryGirl.create(:suggestion, :proposal => @proposal_3) }
+        Timecop.freeze(Time.parse("Sep 2 2012")) { FactoryGirl.create(:suggestion, :proposal => @proposal) }
+        Timecop.freeze(Time.parse("Sep 3 2012")) { FactoryGirl.create(:suggestion, :proposal => @proposal_3) }
+
+        assert_equal [@proposal_3, @proposal, @proposal_2], Proposal.in_modification_order
+      end
+
+      should 'prefer proposal updated time to a suggestion time to influence sorting' do
+        Timecop.freeze(Time.parse("Sep 1 2011")) { @proposal.title = 'Meh'; @proposal.save }
+        Timecop.freeze(Time.parse("Sep 1 2012")) { @proposal_2 = FactoryGirl.create(:proposal) }
+        Timecop.freeze(Time.parse("Sep 1 2010")) { @proposal_3 = FactoryGirl.create(:proposal) }
+        Timecop.freeze(Time.parse("Sep 2 2012")) { FactoryGirl.create(:suggestion, :proposal => @proposal) }
+        Timecop.freeze(Time.parse("Sep 3 2012")) { FactoryGirl.create(:suggestion, :proposal => @proposal_3) }
+        Timecop.freeze(Time.parse("Sep 3 2012")) { @proposal.title = 'Meh heh!'; @proposal.save }
+
+        assert_equal [@proposal, @proposal_3, @proposal_2], Proposal.in_modification_order
+      end
+    end
   end
 
 end

@@ -6,16 +6,25 @@ class Proposal < ActiveRecord::Base
 
   scope :without_suggestions_from, lambda { |user|
     if user.suggestions.any?
-      where('id NOT IN (?)', user.suggestions.map{ |s| s.proposal_id }.uniq)
+      where('proposals.id NOT IN (?)', user.suggestions.map{ |s| s.proposal_id }.uniq)
     end
   }
 
   scope :not_proposed_by, lambda { |user|
-    where('proposer_id != ?', user.id)
+    where('proposals.proposer_id != ?', user.id)
   }
 
   scope :active, where(withdrawn: false)
   scope :withdrawn, where(withdrawn: true)
+
+  scope :in_modification_order, ->() {
+    # select proposals.id, greatest(proposals.updated_at, max(suggestions.updated_at)) from proposals left outer join
+    # suggestions on suggestions.proposal_id = proposals.id group by proposals.id order by greatest(proposals.updated_at, max(suggestions.updated_at));
+    joins('LEFT OUTER JOIN suggestions AS suggestions_for_modification_time ON suggestions_for_modification_time.proposal_id = proposals.id')
+      .group('proposals.id')
+      .select('proposals.*, greatest(proposals.updated_at, max(suggestions_for_modification_time.updated_at)) as last_modified_at')
+      .order('last_modified_at desc')
+  }
 
   def self.available_for_selection_by(user)
     active.reject { |p| Selection.where(proposal_id: p.id, user_id: user.id).exists? }
@@ -24,7 +33,12 @@ class Proposal < ActiveRecord::Base
   after_create :update_proposer_score
 
   def last_modified
-    new_suggestions.any? ? new_suggestions.maximum(:updated_at) : last_modified_by_proposer
+    last_modified = read_attribute(:last_modified_at)
+    if last_modified.nil?
+      new_suggestions.any? ? new_suggestions.maximum(:updated_at) : last_modified_by_proposer
+    else
+      last_modified
+    end
   end
 
   def proposed_by?(user)
