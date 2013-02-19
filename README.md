@@ -1,7 +1,7 @@
 Vestibule
 =========
 
-This is the simple application that we're using to build [Ruby Manor 3][]. It's simple purpose is to collect talk proposals, and try to channel feedback and suggestions on those proposals into *useful forms*.
+This is the simple application that we used to build [Ruby Manor](http://rubymanor.org/) numbers [3](http://rubymanor.org/3/) and [4](http://rubymanor.org/4/). It's simple purpose is to collect talk proposals, and try to channel feedback and suggestions on those proposals into *useful forms*.
 
 What do we consider to be *non-useful forms*? Any feedback that hasn't thoughtfully considered the proposal and tried to improve it. To put it bluntly, ["+1" is the Anti-Christ][plus-ones].
 
