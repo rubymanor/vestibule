@@ -24,7 +24,7 @@
     <% @proposals_you_should_look_at.each do |proposal| %>
       <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
-        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+        <span class="age">updated <%= time_ago_in_words proposal.last_modified %> ago</span>
       <% end %>
     <% end %>
   </ul>
@@ -36,7 +36,7 @@
     <% @proposals_that_have_changed.each do |proposal| %>
       <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
-        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+        <span class="age">updated <%= time_ago_in_words proposal.last_modified %> ago</span>
       <% end %>
     <% end %>
   </ul>
@@ -48,7 +48,7 @@
     <% @proposals_that_have_been_withdrawn.each do |proposal| %>
       <%= content_tag_for :li, proposal do %>
         <%= link_to proposal.title, proposal %>
-        <span class="age"><%= time_ago_in_words proposal.last_modified %> old</span>
+        <span class="age">updated <%= time_ago_in_words proposal.last_modified %> ago</span>
       <% end %>
     <% end %>
   </ul>

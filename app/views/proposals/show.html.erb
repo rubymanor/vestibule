@@ -10,7 +10,7 @@
             <li><%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal), class: "btn btn-danger" %></li>
           </ul>
         <% end %>
-        <p class="age">updated <%= time_ago_in_words @proposal.updated_at %> ago</p>
+        <p class="age"><%= proposal_update_information @proposal %></p>
 
         <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
         <div class="description"><%= markdown @proposal.description %></div>
