@@ -16,7 +16,7 @@
   <div class="span5 offset1">
     <div id="suggestions">
       <h2>Suggestions</h2>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && can?(:make, :suggestion) %>
         <% if current_user == @proposal.proposer %>
           <p>You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.</p>
         <% else %>
