@@ -50,7 +50,6 @@ class Modality
     [:make, :suggestion],
     [:withdraw, :proposal],
     [:make, :selection],
-    [:withdraw, :selection]
   )
 
   AgendaRules = make_rules_for_ruleset(

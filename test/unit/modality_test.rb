@@ -61,8 +61,7 @@ class ModalityTest < ActiveSupport::TestCase
     i_can 'change my proposal', [:change, :proposal]
     i_can 'withdraw my proposal', [:withdraw, :proposal]
 
-    i_cant 'vote for a proposal', [:make, :selection]
-    i_cant 'remove my vote for a proposal', [:withdraw, :selection]
+    i_cant 'participate in voting for proposals', [:make, :selection]
     i_cant 'see the aggregate votes', [:see, :agenda]
   end
 
@@ -73,8 +72,7 @@ class ModalityTest < ActiveSupport::TestCase
     i_can 'make a suggestion on a proposal', [:make, :suggestion]
     i_can 'change my proposal', [:change, :proposal]
     i_can 'withdraw my proposal', [:withdraw, :proposal]
-    i_can 'vote for a proposal', [:make, :selection]
-    i_can 'remove my vote for a proposal', [:withdraw, :selection]
+    i_can 'participate in voting for proposals', [:make, :selection]
 
     i_cant 'create a proposal', [:create, :proposal]
     i_cant 'see the aggregate votes', [:see, :agenda]
@@ -89,8 +87,7 @@ class ModalityTest < ActiveSupport::TestCase
     i_can 'withdraw my proposal', [:withdraw, :proposal]
     i_can 'see the aggregate votes', [:see, :agenda]
 
-    i_cant 'vote for a proposal', [:make, :selection]
-    i_cant 'remove my vote for a proposal', [:withdraw, :selection]
+    i_cant 'participate in voting for proposals', [:make, :selection]
     i_cant 'create a proposal', [:make, :proposal]
   end
 
@@ -104,8 +101,7 @@ class ModalityTest < ActiveSupport::TestCase
     i_cant 'make a suggestion on a proposal', [:make, :suggestion]
     i_cant 'change my proposal', [:change, :proposal]
     i_cant 'withdraw my proposal', [:withdraw, :proposal]
-    i_cant 'vote for a proposal', [:make, :selection]
-    i_cant 'remove my vote for a proposal', [:withdraw, :selection]
+    i_cant 'participate in voting for proposals', [:make, :selection]
   end
 
 end
