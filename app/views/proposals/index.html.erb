@@ -1,6 +1,6 @@
 <section>
   <%= page_title 'Talk proposals' %>
-  <% if user_signed_in? %>
+  <% if user_signed_in? && can?(:make, :proposal) %>
     <div class="action">
       <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary btn-large" %>
     </div>

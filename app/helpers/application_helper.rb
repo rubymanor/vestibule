@@ -114,6 +114,17 @@ module ApplicationHelper
     result
   end
 
+  def proposal_manipulation_actions(proposal, user)
+    if proposal.proposed_by?(user) && (can?(:change, :proposal) || can?(:withdraw, :proposal))
+      content_tag(:ul, class: 'nav nav-pills') do
+        out = []
+        out << content_tag(:li, link_to('Edit proposal', edit_proposal_path(@proposal), class: 'btn btn-primary')) if can?(:change, :proposal)
+        out << content_tag(:li, button_to('Withdraw proposal', withdraw_proposal_path(@proposal), class: 'btn btn-danger')) if can?(:withdraw, :proposal)
+        out.join("\n").html_safe
+      end
+    end
+  end
+
   protected
   def markdown_parser(options = {})
     @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,

@@ -4,12 +4,7 @@
       <%= proposal_div(@proposal) do %>
         <%= page_title @proposal.title %>
 
-        <% if @proposal.proposed_by?(current_user) %>
-          <ul class="nav nav-pills">
-            <li><%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %></li>
-            <li><%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal), class: "btn btn-danger" %></li>
-          </ul>
-        <% end %>
+        <%= proposal_manipulation_actions(@proposal, current_user) %>
         <p class="age"><%= proposal_update_information @proposal %></p>
 
         <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
