@@ -25,8 +25,6 @@ module SimpleSteps
   end
 
   def i_am_alerted(message)
-    within ".alert" do
-      assert page.has_content?(message)
-    end
+    assert page.has_css?('.alert', text: message)
   end
 end
