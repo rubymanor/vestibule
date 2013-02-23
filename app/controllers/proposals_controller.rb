@@ -14,6 +14,8 @@ class ProposalsController < ApplicationController
     respond_with @proposal = Proposal.find(params[:id])
   end
 
+  before_filter :check_mode_of_operation, except: [:index, :show]
+
   def new
     @proposal = Proposal.new
   end
@@ -53,6 +55,24 @@ class ProposalsController < ApplicationController
     if @proposal.nil?
       flash[:alert] = "You cannot edit proposals that are owned by other users"
       redirect_to :action => :show
+    end
+  end
+
+  def requested_action
+    case action_name
+    when 'new', 'create'
+      :make
+    when 'edit', 'update'
+      :change
+    else
+      action_name.to_sym
+    end
+  end
+
+  def check_mode_of_operation
+    unless can?(requested_action, :proposal)
+      flash[:alert] = "In #{Vestibule.mode_of_operation.mode} mode you cannot #{requested_action} a proposal."
+      redirect_to action: :index
     end
   end
 end
