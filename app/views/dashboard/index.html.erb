@@ -1,5 +1,13 @@
 <%= page_title 'Dashboard', no_h1=true %>
 
+<% if can?(:make, :selection) %>
+<h2>Selections</h2>
+<p>It is time for you to <%= link_to 'choose the talks you want to see on the day', selections_path %>.</p>
+<% elsif can?(:see, :agenda) %>
+<h2>Selections</h2>
+<p>The community has spoken; <%= link_to 'take a look at the agenda they have generated', selections_path %>.</p>
+<% end %>
+
 <h2>Your proposals</h2>
 <p>(Because they are anonymised, other users will not see that you are the author of these proposals. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.)</p>
 <% if @your_proposals.present? %>
