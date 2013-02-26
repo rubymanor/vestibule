@@ -25,6 +25,7 @@
             <li<%= active_nav_class(about_path, anonymous_proposals_path, the_vestibule_process_path) %>><%= link_to "About", about_path %></li>
             <li<%= active_nav_class(proposals_path) %>><%= link_to "Proposals", proposals_path %></li>
             <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to "Motivations", motivation_path %></li>
+            <% if can?(:see, :agenda) %><li<%= active_nav_class(selections_path) %>><%= link_to 'Agenda', selections_path %></li><% end %>
             <% if user_signed_in? -%>
               <li class="dropdown <%= 'active' if active_nav?(dashboard_path, user_path(current_user)) %>">
                 <a class="dropdown-toggle"
@@ -37,6 +38,7 @@
                   <li<%= active_nav_class(dashboard_path) %>><%= link_to "Dashboard", dashboard_path %></li>
                   <li><%= link_to "All proposals", proposals_path %></li>
                   <li<%= active_nav_class(user_path(current_user)) %>><%= link_to "Your profile", user_path(current_user) %></li>
+                  <% if can?(:make, :selection) %><li<%= active_nav_class(selections_path) %>><%= link_to 'Selections', selections_path %></li><% end %>
                   <li><%= link_to "Sign out", logout_path %></li>
                 </ul>
               </li>

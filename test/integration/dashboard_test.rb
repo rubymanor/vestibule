@@ -181,6 +181,33 @@ class DashboardTest < IntegrationTestCase
         end
       end
 
+      context 'and the app is in cfp mode' do
+        setup { Vestibule.mode_of_operation = :cfp; visit "/dashboard" }
+        should 'see a call to action to propose a talk' do
+          assert page.has_link?('Propose another talk')
+        end
+      end
+
+      context 'and the app is in voting mode' do
+        setup { Vestibule.mode_of_operation = :voting; visit "/dashboard" }
+        should 'not see a call to action to propose a talk' do
+          refute page.has_link?('Propose another talk')
+        end
+      end
+
+      context 'and the app is in agenda mode' do
+        setup { Vestibule.mode_of_operation = :agenda; visit "/dashboard" }
+        should 'not see a call to action to propose a talk' do
+          refute page.has_link?('Propose another talk')
+        end
+      end
+
+      context 'and the app is in archive mode' do
+        setup { Vestibule.mode_of_operation = :archive; visit "/dashboard" }
+        should 'not see a call to action to propose a talk' do
+          refute page.has_link?('Propose another talk')
+        end
+      end
     end
 
   end
