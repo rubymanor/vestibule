@@ -1,0 +1,20 @@
+ul#selections, ul#available_selections {
+  list-style: none;
+  margin-left: 0;
+}
+
+form.new_selection {
+  display: inline;
+
+  div {
+    display: inline;
+  }
+}
+
+.selection_proposal {
+  margin-bottom: 10px;
+
+  a {
+    margin-left: 5px;
+  }
+}

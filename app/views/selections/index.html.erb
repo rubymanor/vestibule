@@ -26,30 +26,29 @@
   <ul id="selections">
     <% current_user.selections.each do |selection| %>
       <%= content_tag_for :li, selection.proposal, 'selection' do %>
-        <%= button_to('Deselect', selection, method: :delete) if can?(:make, :selection) %>
+        <%= button_to('Deselect', selection, method: :delete, class: "btn") if can?(:make, :selection) %>
         <%= link_to selection.proposal.title, selection.proposal %>
       <% end %>
     <% end %>
   </ul>
+
   <% if can?(:make, :selection) %>
     <% if (remaining = (Selection.limit_per_user - current_user.selections.count)) > 0 %>
       <h2><%= pluralize remaining, "Selection" %> left!</h2>
     <% else %>
       <h2>Deselect some above to choose others</h2>
     <% end %>
-  <% end %>
-<% end %>
 
-<% if user_signed_in? && can?(:make, :selection) %>
-  <ul id="available_selections">
-  <% @proposals.each do |proposal| %>
-    <%= content_tag_for :li, proposal, 'selection' do %>
-      <%= form_for Selection.new do |form| %>
-        <%= form.hidden_field :proposal_id, value: proposal.id %>
-        <%= form.submit "Select", disabled: (remaining == 0 ? 'disabled' : nil) %>
+    <ul id="available_selections">
+    <% @proposals.each do |proposal| %>
+      <%= content_tag_for :li, proposal, 'selection' do %>
+        <%= form_for Selection.new do |form| %>
+          <%= form.hidden_field :proposal_id, value: proposal.id %>
+          <%= form.submit "Select", disabled: (remaining == 0 ? 'disabled' : nil), class: "btn" %>
+        <% end %>
+        <%= link_to proposal.title, proposal_path(proposal) %>
       <% end %>
-      <%= link_to proposal.title, proposal_path(proposal) %>
     <% end %>
+    </ul>
   <% end %>
-  </ul>
 <% end %>
