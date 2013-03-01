@@ -131,6 +131,24 @@ Other than that, sounds great!
         end
       end
 
+      context 'when the app is in review mode' do
+        setup do
+          Vestibule.mode_of_operation = :review
+          visit proposal_path(@proposal)
+        end
+
+        should "see a call to action asking for help to develop the proposal" do
+          assert page.has_content?("Help develop this into a good proposal")
+        end
+
+        should "be able to make a suggestion about the proposal" do
+          suggest "I think you should focus on the first bit, because that's going to be more interesting to newbies."
+
+          assert_page_has_suggestion :body => "I think you should focus on the first bit, because that's going to be more interesting to newbies.",
+                                     :author => @me
+        end
+      end
+
       context 'when the app is in voting mode' do
         setup do
           Vestibule.mode_of_operation = :voting

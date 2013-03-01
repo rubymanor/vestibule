@@ -188,6 +188,13 @@ class DashboardTest < IntegrationTestCase
         end
       end
 
+      context 'and the app is in review mode' do
+        setup { Vestibule.mode_of_operation = :review; visit "/dashboard" }
+        should 'not see a call to action to propose a talk' do
+          refute page.has_link?('Propose another talk')
+        end
+      end
+
       context 'and the app is in voting mode' do
         setup { Vestibule.mode_of_operation = :voting; visit "/dashboard" }
         should 'not see a call to action to propose a talk' do

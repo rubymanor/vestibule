@@ -39,6 +39,30 @@ class SelectionTest < IntegrationTestCase
         end
       end
 
+      context 'when the app is in review mode' do
+        setup { Vestibule.mode_of_operation = :review }
+
+        should 'not see a menu item for selections or agenda' do
+          visit '/'
+          within 'header' do
+            refute page.has_link?('Selections')
+            refute page.has_link?('Agenda')
+          end
+        end
+
+        should 'not see a call to action on their dashboard asking them to make selections' do
+          visit '/'
+          within '#content' do
+            refute page.has_link?('Choose the talks you want to see on the day')
+          end
+        end
+
+        should 'not be able to make any selections' do
+          visit selections_path
+          i_am_alerted 'In review mode you cannot vote for proposals'
+        end
+      end
+
       context 'when the app is in voting mode' do
         setup { Vestibule.mode_of_operation = :voting }
 

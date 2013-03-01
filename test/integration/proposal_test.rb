@@ -188,6 +188,47 @@ class ProposalTest < IntegrationTestCase
       end
     end
 
+    context 'and the app is in "review mode"' do
+      setup { Vestibule.mode_of_operation = :review }
+
+      should "not see a link to propose a talk" do
+        visit proposals_path
+        assert !page.has_content?("Propose talk"), "link to propose talk should not be present!"
+      end
+
+      should "not be able to propose a talk" do
+        visit new_proposal_path
+        i_am_alerted("In review mode you cannot make a proposal")
+      end
+
+      context 'and I have a proposal of my own' do
+        setup { FactoryGirl.create(:proposal, title: 'My Amazing Talk', proposer: @user) }
+
+        should "be able to withdraw my proposal" do
+          visit proposals_path
+          click_link "My Amazing Talk"
+          click_button "Withdraw proposal"
+
+          assert_proposal_withdrawn "My Amazing Talk"
+        end
+
+        should "be able to edit my proposal" do
+          visit proposals_path
+          click_link "My Amazing Talk"
+          click_link "Edit proposal"
+          fill_in "Title", :with => "My Even More Amazing Talk"
+          fill_in "Description", :with => "This talk is wildly amazing."
+          click_button "Update proposal"
+          visit proposals_path
+          click_link "My Even More Amazing Talk"
+          assert_page_has_proposal \
+            :title        => "My Even More Amazing Talk",
+            :description  => 'This talk is wildly amazing.',
+            :proposer     => @user
+        end
+      end
+    end
+
     context 'and the app is in "voting mode"' do
       setup { Vestibule.mode_of_operation = :voting }
 

@@ -30,8 +30,8 @@ class ModalityTest < ActiveSupport::TestCase
       m = Modality.new(:cfp)
       assert_equal :cfp, m.mode
     end
-    should 'treat "cfp", "voting", "agenda", "archive" as valid modes' do
-      ["cfp", "voting", "agenda", "archive"].each do |mode|
+    should 'treat "cfp", "review", "voting", "agenda", "archive" as valid modes' do
+      ["cfp", "review", "voting", "agenda", "archive"].each do |mode|
         m = Modality.new(mode)
         assert_equal mode.to_sym, m.mode
       end
@@ -61,6 +61,19 @@ class ModalityTest < ActiveSupport::TestCase
     i_can 'change my proposal', [:change, :proposal]
     i_can 'withdraw my proposal', [:withdraw, :proposal]
 
+    i_cant 'participate in voting for proposals', [:make, :selection]
+    i_cant 'see the aggregate votes', [:see, :agenda]
+  end
+
+  context 'in review mode' do
+    setup do
+      @modality = Modality.new(:review)
+    end
+    i_can 'make a suggestion on a proposal', [:make, :suggestion]
+    i_can 'change my proposal', [:change, :proposal]
+    i_can 'withdraw my proposal', [:withdraw, :proposal]
+
+    i_cant 'create a proposal', [:make, :proposal]
     i_cant 'participate in voting for proposals', [:make, :selection]
     i_cant 'see the aggregate votes', [:see, :agenda]
   end
