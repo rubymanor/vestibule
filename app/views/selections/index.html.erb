@@ -1,3 +1,7 @@
+<% if !can?(:see, :agenda) && user_signed_in? %>
+  <p>The agenda isn't visible yet; why not <%= link_to "sign in", "/auth/github" %> to cast your votes?</p>
+<% end %>
+
 <% if can?(:see, :agenda) %>
   <h1>Top 10 Proposals</h1>
 
