@@ -23,16 +23,31 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
+    auth = auth.with_indifferent_access
+
     create! do |user|
-      user.name = auth["info"]["name"] || auth['info']['nickname']
-      user.github_uid = auth["uid"]
-      user.github_nickname = auth["info"]["nickname"]
-      user.email = auth["info"]["email"]
+      user.name = auth[:info][:name] || auth[:info][:nickname]
+      user.send(:"#{auth[:provider]}_uid=", auth[:uid])
+      user.send(:"#{auth[:provider]}_nickname=", auth[:info][:nickname])
+      user.email = auth[:info][:email]
     end
   end
 
-  def to_param
-    github_nickname
+  def self.find_or_create_with_omniauth(auth)
+    auth = auth.with_indifferent_access
+
+    self.where("#{auth[:provider]}_uid = ? OR email =?",
+               auth[:uid],
+               auth[:info][:email]).first ||
+        self.create_with_omniauth(auth)
+  end
+
+  def update_provider_details(auth)
+    auth = auth.with_indifferent_access
+
+    self.send(:"#{auth[:provider]}_uid=", auth[:uid]) if self.send(:"#{auth[:provider]}_uid").blank?
+    self.send(:"#{auth[:provider]}_nickname=", auth[:info][:nickname]) if self.send(:"#{auth[:provider]}_nickname").blank?
+    self.save
   end
 
   REASON_WEIGHT = 5

@@ -49,8 +49,14 @@ module Vestibule
     config.assets.enabled = true
     config.assets.version = '1.0'
 
+    require 'omniauth-openid'
+    require 'openid/store/filesystem'
+
     config.middleware.use OmniAuth::Builder do
       provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'user:email'
+      provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET'], scope: 'user:email'
+      provider :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
+      provider :open_id, :name => 'google', :identifier => 'https://www.google.com/accounts/o8/id'
     end
   end
 end

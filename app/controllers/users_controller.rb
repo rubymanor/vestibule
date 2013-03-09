@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   private
 
   def load_user
-    @user = User.find_by_github_nickname(params[:id])
+    @user = User.find(params[:id])
   end
 
   def restrict_editing

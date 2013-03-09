@@ -66,6 +66,162 @@ class UserTest < ActiveSupport::TestCase
         assert_equal 5, @user.reload.contribution_score
       end
     end
+
+    context 'who wants to signs up' do
+      context 'with github' do
+        setup do
+          @user = User.create_with_omniauth(:info => {:name => 'User name',
+                                                      :nickname => 'Nickname',
+                                                      :email => 'email@example.com'},
+                                            :provider => 'github',
+                                            :uid => 'uid')
+        end
+
+        should 'should have the name set' do
+          assert_equal 'User name', @user.name
+        end
+
+        should 'should have the email set' do
+          assert_equal 'email@example.com', @user.email
+        end
+
+        should 'should have the github uid set' do
+          assert_equal 'uid', @user.github_uid
+        end
+
+        should 'should have the github nickname set' do
+          assert_equal 'Nickname', @user.github_nickname
+        end
+      end
+
+      context 'with facebook' do
+        setup do
+          @user = User.create_with_omniauth(:info => {:name => 'User name',
+                                                      :nickname => 'Nickname',
+                                                      :email => 'email@example.com'},
+                                            :provider => 'facebook',
+                                            :uid => 'uid')
+        end
+
+        should 'should have the name set' do
+          assert_equal 'User name', @user.name
+        end
+
+        should 'should have the email set' do
+          assert_equal 'email@example.com', @user.email
+        end
+
+        should 'should have the facebook uid set' do
+          assert_equal 'uid', @user.facebook_uid
+        end
+
+        should 'should have the facebook nickname set' do
+          assert_equal 'Nickname', @user.facebook_nickname
+        end
+      end
+
+      context 'with twitter' do
+        setup do
+          @user = User.create_with_omniauth(:info => {:name => 'User name',
+                                                      :nickname => 'Nickname',
+                                                      :email => 'email@example.com'},
+                                            :provider => 'twitter',
+                                            :uid => 'uid')
+        end
+
+        should 'should have the name set' do
+          assert_equal 'User name', @user.name
+        end
+
+        should 'should have the email set' do
+          assert_equal 'email@example.com', @user.email
+        end
+
+        should 'should have the twitter uid set' do
+          assert_equal 'uid', @user.twitter_uid
+        end
+
+        should 'should have the twitter nickname set' do
+          assert_equal 'Nickname', @user.twitter_nickname
+        end
+      end
+
+      context 'with google' do
+        setup do
+          @user = User.create_with_omniauth(:info => {:name => 'User name',
+                                                      :nickname => 'Nickname',
+                                                      :email => 'email@example.com'},
+                                            :provider => 'google',
+                                            :uid => 'uid')
+        end
+
+        should 'should have the name set' do
+          assert_equal 'User name', @user.name
+        end
+
+        should 'should have the email set' do
+          assert_equal 'email@example.com', @user.email
+        end
+
+        should 'should have the google uid set' do
+          assert_equal 'uid', @user.google_uid
+        end
+
+        should 'should have the google nickname set' do
+          assert_equal 'Nickname', @user.google_nickname
+        end
+      end
+    end
+
+    context 'who has already signed up' do
+      context 'with github' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :github_uid => 'GITHUB_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'GITHUB_ID', :provider => 'github', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+
+      context 'with facebook' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :facebook_uid => 'FACEBOOK_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'FACEBOOK_ID', :provider => 'facebook', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+
+      context 'with twitter' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :twitter_uid => 'TWITTER_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'TWITTER_ID', :provider => 'twitter', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+
+      context 'with google' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :twitter_uid => 'GOOGLE_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'GOOGLE_ID', :provider => 'google', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+    end
   end
 
 end
