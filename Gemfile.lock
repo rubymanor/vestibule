@@ -29,6 +29,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
+    ansi (1.4.3)
     arel (3.0.2)
     bootstrap-sass (2.2.2.0)
       sass (~> 3.2)
@@ -88,6 +89,12 @@ GEM
       treetop (~> 1.4.8)
     metaclass (0.0.1)
     mime-types (1.21)
+    minitest (4.6.2)
+    minitest-reporters (0.14.7)
+      ansi
+      builder
+      minitest (>= 2.12, < 5.0)
+      powerbar
     mocha (0.13.1)
       metaclass (~> 0.0.1)
     multi_json (1.5.1)
@@ -114,6 +121,9 @@ GEM
       activerecord (>= 2.3)
     pg (0.14.1)
     polyglot (0.3.3)
+    powerbar (1.0.11)
+      ansi (~> 1.4.0)
+      hashie (>= 1.1.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -198,6 +208,7 @@ DEPENDENCIES
   faker (= 1.1.2)
   jquery-rails
   launchy
+  minitest-reporters (>= 0.5.0)
   mocha (= 0.13.1)
   newrelic_rpm
   omniauth-github (= 1.0.3)
