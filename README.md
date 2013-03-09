@@ -29,6 +29,26 @@ Github:
 4. Set the `GITHUB_KEY` and the `GITHUB_SECRET` to the `Client ID` and the `Client Secret` respectively
 5. (Optional) Set these for heroku (after having completed the heroku setup) by running `heroku config:add GITHUB_KEY=<the Client ID>` and `heroku config:add GITHUB_SECRET=<the Client Secret>`
 
+Twitter:
+
+1. Go to ["create a new application"](https://dev.twitter.com/apps/new)
+2. Set the Website to whatever makes sense (as with Github)
+3. Set Callback URL to `<base_url>/auth/twitter/callback` (so for this example it would be `http://localhost:3000/auth/twitter/callback`)
+4. Set the `TWITTER_KEY` and the `TWITTER_SECRET` to the `Consumer key` and the `Consumer secret` respectively
+5. (Optional) Set these for heroku (after having completed the heroku setup) by running `heroku config:add TWITTER_KEY=<the Consumer key>` and `heroku config:add TWITTER_SECRET=<the Consumer secret>`
+
+Google:
+
+Nothing to do, it should just work :)
+
+Facebook:
+
+1. Go to create a new application
+2. Set the Website with Facebook Login -> `Site URL` to `<base_url>/auth/facebook/callback` (so for this example it would be `http://localhost:3000/auth/facebook/callback`)
+4. Set the `FACEBOOK_KEY` and the `FACEBOOK_SECRET` to the `App ID` and the `App Secret` respectively
+5. (Optional) Set these for heroku (after having completed the heroku setup) by running `heroku config:add FACEBOOK_KEY=<the App ID>` and `heroku config:add FACEBOOK_SECRET=<the App Secret>`
+
+
 Deploying on Heroku (non official site)
 -----------------
 
