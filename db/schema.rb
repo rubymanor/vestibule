@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130114221114) do
+ActiveRecord::Schema.define(:version => 20130224151751) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(:version => 20130114221114) do
     t.string   "github_uid"
     t.string   "github_nickname"
     t.string   "email"
+    t.string   "twitter_uid"
+    t.string   "twitter_nickname"
+    t.string   "facebook_uid"
+    t.string   "facebook_nickname"
+    t.string   "google_uid"
+    t.string   "google_nickname"
   end
 
 end
