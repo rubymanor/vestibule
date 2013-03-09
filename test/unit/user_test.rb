@@ -172,6 +172,56 @@ class UserTest < ActiveSupport::TestCase
         end
       end
     end
+
+    context 'who has already signed up' do
+      context 'with github' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :github_uid => 'GITHUB_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'GITHUB_ID', :provider => 'github', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+
+      context 'with facebook' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :facebook_uid => 'FACEBOOK_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'FACEBOOK_ID', :provider => 'facebook', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+
+      context 'with twitter' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :twitter_uid => 'TWITTER_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'TWITTER_ID', :provider => 'twitter', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+
+      context 'with google' do
+        setup do
+          @existing_user = FactoryGirl.create(:user, :twitter_uid => 'GOOGLE_ID')
+        end
+
+        should 'be able to login' do
+          logged_in_user = User.find_or_create_with_omniauth(:uid => 'GOOGLE_ID', :provider => 'google', :info => {:email => @existing_user.email})
+          assert_not_nil logged_in_user
+          assert_equal logged_in_user.id, @existing_user.id
+        end
+      end
+    end
   end
 
 end
