@@ -43,7 +43,20 @@
                 </ul>
               </li>
             <% else -%>
-              <li><%= link_to "Sign in with Github", "/auth/github" %></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle"
+                   data-toggle="dropdown"
+                   href="#">
+                  Sign in
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Google", "/auth/google" %></li>
+                  <li><%= link_to "Twitter", "/auth/twitter" %></li>
+                  <li><%= link_to "Github", "/auth/github" %></li>
+                  <li><%= link_to "Facebook", "/auth/facebook" %></li>
+                </ul>
+              </li>
             <% end -%>
           </ul>
         </div>

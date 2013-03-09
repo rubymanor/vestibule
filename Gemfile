@@ -4,12 +4,17 @@ ruby "1.9.3"
 gem "rails", "3.2.12"
 gem "pg", "0.14.1"
 gem "simple_form", "2.0.4"
-gem 'omniauth-github', '1.0.3'
 gem "paper_trail", "1.6.4"
 gem "redcarpet", "2.2.2"
 gem "bootstrap-sass"
 gem "unicorn"
 gem "settingslogic"
+
+## omniauth Strategies
+gem 'omniauth-github', '1.0.3'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-openid'
 
 # Gems used only for assets and not required
 # in production environments by default.
