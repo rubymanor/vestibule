@@ -23,11 +23,13 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
+    auth = auth.with_indifferent_access
+
     create! do |user|
-      user.name = auth["info"]["name"] || auth['info']['nickname']
-      user.github_uid = auth["uid"]
-      user.github_nickname = auth["info"]["nickname"]
-      user.email = auth["info"]["email"]
+      user.name = auth[:info][:name] || auth[:info][:nickname]
+      user.send(:"#{auth[:provider]}_uid=", auth[:uid])
+      user.send(:"#{auth[:provider]}_nickname=", auth[:info][:nickname])
+      user.email = auth[:info][:email]
     end
   end
 
