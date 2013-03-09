@@ -33,10 +33,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def to_param
-    github_nickname
-  end
-
   REASON_WEIGHT = 5
   SUGGESTION_WEIGHT = 2
 
