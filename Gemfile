@@ -10,6 +10,9 @@ gem "bootstrap-sass"
 gem "unicorn"
 gem "settingslogic"
 
+# Gem for tracking pageviews and stuff
+gem 'impressionist'
+
 ## omniauth Strategies
 gem 'omniauth-github', '1.0.3'
 gem 'omniauth-twitter'

@@ -48,6 +48,12 @@ class ProposalTest < IntegrationTestCase
         visit edit_proposal_path(@proposal)
         i_am_asked_to_sign_in
       end
+
+      should "my page view be tracked" do
+        assert_difference(lambda { @proposal.impressionist_count }, 1) do
+          visit proposal_path(@proposal)
+        end
+      end
     end
   end
 
@@ -181,6 +187,14 @@ blah blah blah
         visit proposals_path(:format => :rss)
         assert page.has_xpath?('.//item[position() = 2]/title', :text => @other_persons_proposal.title)
         assert page.has_xpath?('.//item[position() = 1]/title', :text => "My Amazing Talk")
+      end
+
+      should "be able to see other persons proposal and my page view be tracked" do
+        assert_difference(lambda { @other_persons_proposal.impressionist_count }, 1) do
+          visit proposal_path(@other_persons_proposal)
+        end
+
+        assert_equal 1, @other_persons_proposal.impressionist_count(user_id: @user.id)
       end
     end
   end
