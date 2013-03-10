@@ -1,8 +1,8 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0", 'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
   xml.channel do
-    xml.title "Vestibule :: All Proposals "
-    xml.description "A list of all talk proposals made to the vestibule system"
+    xml.title "#{Settings.event_name} Talk Proposals "
+    xml.description "A list of all talk proposals made to the vestibule system for #{Settings.event_name}"
     xml.link proposals_url
     xml.tag!('atom:link', href: proposals_url(format: 'rss'), rel: 'self', type: 'application/rss+xml')
 
