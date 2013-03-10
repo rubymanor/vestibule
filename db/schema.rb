@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310095140) do
+ActiveRecord::Schema.define(:version => 20130310095748) do
 
   create_table "impressions", :force => true do |t|
     t.string   "impressionable_type"
@@ -40,11 +40,12 @@ ActiveRecord::Schema.define(:version => 20130310095140) do
 
   create_table "proposals", :force => true do |t|
     t.string   "title"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.integer  "proposer_id"
     t.text     "description"
-    t.boolean  "withdrawn",   :default => false
+    t.boolean  "withdrawn",                 :default => false
+    t.integer  "impressions_counter_cache"
   end
 
   create_table "selections", :force => true do |t|

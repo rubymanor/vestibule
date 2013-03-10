@@ -4,6 +4,10 @@ class Proposal < ActiveRecord::Base
 
   validates :title, :presence => true
 
+  # This allows us to do @proposal.impression_count
+  # and other stuff from the 'impressionist' gem.
+  is_impressionable counter_cache: { column_name: :impressions_counter_cache }
+
   scope :without_suggestions_from, lambda { |user|
     if user.suggestions.any?
       where('id NOT IN (?)', user.suggestions.map{ |s| s.proposal_id }.uniq)
