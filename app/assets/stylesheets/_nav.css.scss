@@ -1,0 +1,112 @@
+#nav {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  z-index:10;
+  background-color:rgb(255,255,255);
+  background-color:rgba(255,255,255,0.4);
+  padding:$hr 0;
+  @include box-shadow(0px 5px 10px 0px rgba(0,0,0,0.1));
+
+
+  .centered {
+    position:relative;
+    overflow:hidden;
+    max-width:1180px;
+    margin:0 auto;
+    width: 98%;
+    @include box-sizing(border-box);
+  }
+
+
+
+  ul {
+
+   list-style: none;
+
+   li {
+      float:right;
+      margin:0 $hr/2;
+      padding:0 $hr/2;
+
+      a {
+        font:normal 14px $ubuntu;
+        color:$light_grey;
+        text-decoration:none;
+      }
+
+      a:hover {
+        color:$dark_grey;
+      }
+    }
+
+    li:after {
+      content:"|";
+      padding-left:$vr;
+    }
+
+    li:first-child {
+      float:left;
+      height:20px;
+
+      a {
+        display:block;
+        height:20px;
+        width:120px;
+        text-indent:-9999px;
+        background-image:image-url("sprite.png");
+        background-position:-305px -70px;
+      }
+    }
+
+    li:first-child:after,
+    li:nth-child(2):after {
+      content:"";
+    }
+  }
+}
+
+
+/* Media Queries: Tablet devices overwrite 641px...960px */
+
+@media only screen and (max-width:960px) {
+
+  #nav .centered {
+    min-width: 0;
+  }
+}
+
+
+/* Media Queries: Mobile devices overwrite 320px...640px */
+
+@media only screen and (max-width:640px) {
+
+  #nav ul {
+
+    li {
+      margin: 0;
+      padding: 0 4px 0 0;
+      margin-left: 4px;
+
+      &:after {
+        padding-left: 10px;
+      }
+
+      a {
+        // font-size: 13px;
+      }
+    }
+
+    li:first-child {
+      margin-bottom: 10px;
+    }
+
+    li:first-child + li {
+      clear: left;
+    }
+
+    li:last-child {
+    }
+  }
+}

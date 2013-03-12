@@ -10,16 +10,23 @@
   <%= render 'shared/analytics' %>
   <% end %>
 </head>
-<body class="<%= body_class %>">
-  <div class="container">
-    <header>
+<body class="">
+  <div class="">
+
+    <div id="nav">
+      <ul class="centered clearfix">
+        <li><a class="ir" href="/">Euruko 2013</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li><a href="/#sponsors">Sponsors</a></li>
+        <li><a href="/#venue">Venue</a></li>
+        <li><a href="/#tickets">Tickets</a></li>
+        <li><a href="/#speakers">Speakers</a></li>
+        <li><a href="/#about">About</a></li>
+       </ul>
+    </div>
+
+    <header style ='display:none'>
       <div class="row">
-        <div class="span5">
-          <div class="brand">
-            <h1><%= link_to "#{Settings.event_name} Call for Presentations", root_path %></h1>
-            <p><%= Settings.main_slogan.html_safe %></p>
-          </div>
-        </div>
 
         <div class="span7">
           <ul class="nav nav-pills pull-right">
@@ -62,8 +69,8 @@
       </div>
     </header>
 
-    <div class="row">
-      <div class="span12">
+    <div id="cfp">
+      <div class="section">
         <section id="notices">
           <%= render "shared/notices" %>
 
@@ -74,15 +81,12 @@
           </div>
           <% end -%>
         </section>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="span12">
-        <section id="content">
-          <%= yield %>
-        </section>
+        <%= yield %>
       </div>
+      <footer>
+        <p><a href='/codeofconduct'>Code of condct</a></p>
+      </footer>
     </div>
   </div>
 </body>
