@@ -46,13 +46,13 @@
 
 
 
-        <li><a href="/#contact">Contact</a></li>
+        <li><%= link_to "Contact", 'http://euruko2013.org/#contact' %></li>
         <li><%= link_to "Proposals", proposals_path %></li>
-        <li><a href="/#sponsors">Sponsors</a></li>
-        <li><a href="/#venue">Venue</a></li>
-        <li><a href="/#tickets">Tickets</a></li>
-        <li><a href="/#speakers">Speakers</a></li>
-        <li><a href="/#about">About</a></li>
+        <li><%= link_to "Sponsors", 'http://euruko2013.org/#sponsors' %></li>
+        <li><%= link_to "Venue", 'http://euruko2013.org/#venue' %></li>
+        <li><%= link_to "Tickets", 'http://euruko2013.org/#tickets' %></li>
+        <li><%= link_to "Speakers", 'http://euruko2013.org/#speakers' %></li>
+        <li><%= link_to "About", 'http://euruko2013.org/#about' %></li>
        </ul>
     </div>
 
@@ -73,7 +73,7 @@
         <%= yield %>
       </div>
       <footer>
-        <p><a href='/codeofconduct'>Code of conduct</a></p>
+        <p><%= link_to "Code of conduct", 'http://euruko2013.org/codeofconduct' %></p>
         <p><%= link_to "About the CfP process", about_path %></li> </p>
         <p><%= link_to "Motivations", motivation_path %></p>
         <p><%= link_to "Anonymity", anonymous_proposals_path %></p>
