@@ -35,7 +35,7 @@
     <% current_user.selections.each do |selection| %>
       <%= content_tag_for :li, selection.proposal, 'selection' do %>
         <% if can?(:make, :selection) %>
-          <%= button_to('Deselect', selection, method: :delete, class: "btn") if can?(:make, :selection) %>
+          <%= button_to('Deselect', selection, method: :delete, class: "btn") %>
         <% end %>
         <%= link_to selection.proposal.title, selection.proposal %>
       <% end %>
