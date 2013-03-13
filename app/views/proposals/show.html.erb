@@ -5,10 +5,10 @@
         <%= page_title @proposal.title %>
 
         <% if @proposal.proposed_by?(current_user) %>
-          <ul class="nav nav-pills">
-            <li><%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %></li>
-            <li><%= change_proposal_state_button(@proposal) %></li>
-          </ul>
+          <p>
+            <%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %>
+            <%= change_proposal_state_button(@proposal) %>
+            </p>
         <% end %>
         <p class="age">updated <%= time_ago_in_words @proposal.updated_at %> ago</p>
 
