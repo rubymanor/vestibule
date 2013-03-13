@@ -48,6 +48,12 @@ class ProposalsController < ApplicationController
     redirect_to proposal_path(proposal), alert: "Your proposal has been withdrawn"
   end
 
+  def republish
+    proposal = current_user.proposals.find(params[:id])
+    proposal.republish!
+    redirect_to proposal_path(proposal), notice: "Your proposal has been republished"
+  end
+
   private
 
   def load_proposal_for_editing

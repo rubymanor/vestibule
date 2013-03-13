@@ -103,6 +103,13 @@ module ApplicationHelper
     content_tag(:div, :class => class_name, &block)
   end
 
+  def change_proposal_state_button(proposal)
+    if proposal.withdrawn?
+      button_to "Re-publish proposal", republish_proposal_path(proposal), class: "btn"
+    else
+      button_to "Withdraw proposal", withdraw_proposal_path(proposal), class: "btn btn-danger"
+    end
+  end
   protected
   def markdown_parser(options = {})
     @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,

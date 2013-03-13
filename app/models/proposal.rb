@@ -43,6 +43,10 @@ class Proposal < ActiveRecord::Base
     update_attribute(:withdrawn, true)
   end
 
+  def republish!
+    update_attribute(:withdrawn, false)
+  end
+
   private
 
   def last_modified_by_proposer
