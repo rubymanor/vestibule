@@ -1,5 +1,5 @@
 class Modality
-  MODES = %w(cfp review voting agenda archive)
+  MODES = %w(cfp review voting holding agenda archive)
   attr_reader :mode
   def initialize(mode = :cfp)
     @mode =
@@ -56,23 +56,34 @@ class Modality
     [:make, :suggestion],
     [:withdraw, :proposal],
     [:make, :selection],
+    [:see, :selection]
+  )
+
+  HoldingRules = make_rules_for_ruleset(
+    [:change, :proposal],
+    [:make, :suggestion],
+    [:withdraw, :proposal],
+    [:see, :selection]
   )
 
   AgendaRules = make_rules_for_ruleset(
     [:change, :proposal],
     [:make, :suggestion],
     [:withdraw, :proposal],
+    [:see, :selection],
     [:see, :agenda]
   )
 
   ArchiveRules = make_rules_for_ruleset(
-    [:see, :agenda]
+    [:see, :agenda],
+    [:see, :selection]
   )
 
   RULES = {
     cfp: CfpRules,
     review: ReviewRules,
     voting: VotingRules,
+    holding: HoldingRules,
     agenda: AgendaRules,
     archive: ArchiveRules
   }

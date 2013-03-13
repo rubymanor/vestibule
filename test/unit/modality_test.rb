@@ -86,9 +86,24 @@ class ModalityTest < ActiveSupport::TestCase
     i_can 'change my proposal', [:change, :proposal]
     i_can 'withdraw my proposal', [:withdraw, :proposal]
     i_can 'participate in voting for proposals', [:make, :selection]
+    i_can 'see my votes', [:see, :selection]
 
     i_cant 'create a proposal', [:create, :proposal]
     i_cant 'see the aggregate votes', [:see, :agenda]
+  end
+
+  context 'in holding mode' do
+    setup do
+      @modality = Modality.new(:holding)
+    end
+    i_can 'make a suggestion on a proposal', [:make, :suggestion]
+    i_can 'change my proposal', [:change, :proposal]
+    i_can 'withdraw my proposal', [:withdraw, :proposal]
+    i_can 'see my votes', [:see, :selection]
+
+    i_cant 'participate in voting for proposals', [:make, :selection]
+    i_cant 'see the aggregate votes', [:see, :agenda]
+    i_cant 'create a proposal', [:make, :proposal]
   end
 
   context 'in agenda mode' do
@@ -99,6 +114,7 @@ class ModalityTest < ActiveSupport::TestCase
     i_can 'change my proposal', [:change, :proposal]
     i_can 'withdraw my proposal', [:withdraw, :proposal]
     i_can 'see the aggregate votes', [:see, :agenda]
+    i_can 'see my votes', [:see, :selection]
 
     i_cant 'participate in voting for proposals', [:make, :selection]
     i_cant 'create a proposal', [:make, :proposal]
@@ -109,6 +125,7 @@ class ModalityTest < ActiveSupport::TestCase
       @modality = Modality.new(:archive)
     end
     i_can 'see the aggregate votes', [:see, :agenda]
+    i_can 'see my votes', [:see, :selection]
 
     i_cant 'create a proposal', [:make, :proposal]
     i_cant 'make a suggestion on a proposal', [:make, :suggestion]

@@ -30,7 +30,7 @@ class SelectionsController < ApplicationController
 
   private
   def check_mode_of_operation_for_viewing
-    unless can?(:make, :selection) || can?(:see, :agenda)
+    unless can?(:see, :selection) || can?(:see, :agenda)
       flash[:alert] = "In #{Vestibule.mode_of_operation.mode} mode you cannot vote for proposals or see the generated agenda."
       redirect_to dashboard_path
     end
