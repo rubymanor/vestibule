@@ -4,6 +4,7 @@ Vestibule::Application.routes.draw do
     resources :suggestions, :only => [:create]
     member do
       post :withdraw
+      post :republish
     end
   end
   #resources :selections, :only => [:index, :create, :destroy]

@@ -7,7 +7,7 @@
         <% if @proposal.proposed_by?(current_user) %>
           <ul class="nav nav-pills">
             <li><%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %></li>
-            <li><%= button_to "Withdraw proposal", withdraw_proposal_path(@proposal), class: "btn btn-danger" %></li>
+            <li><%= change_proposal_state_button(@proposal) %></li>
           </ul>
         <% end %>
         <p class="age"><%= proposal_update_information @proposal %></p>

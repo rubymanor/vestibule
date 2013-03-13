@@ -46,4 +46,9 @@ module ProposalSteps
   def assert_proposal_withdrawn(name)
     assert page.has_css?(".proposal.withdrawn")
   end
+
+  def assert_proposal_republished
+    assert page.has_no_css?(".proposal.withdrawn")
+  end
+
 end
