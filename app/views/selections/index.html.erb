@@ -27,10 +27,16 @@
 <% if user_signed_in? %>
   <h1>Your selections</h1>
 
+  <% unless can?(:make, :selection) %>
+    <p>Here are the selections you made:</p>
+  <% end %>
+
   <ul id="selections">
     <% current_user.selections.each do |selection| %>
       <%= content_tag_for :li, selection.proposal, 'selection' do %>
-        <%= button_to('Deselect', selection, method: :delete, class: "btn") if can?(:make, :selection) %>
+        <% if can?(:make, :selection) %>
+          <%= button_to('Deselect', selection, method: :delete, class: "btn") if can?(:make, :selection) %>
+        <% end %>
         <%= link_to selection.proposal.title, selection.proposal %>
       <% end %>
     <% end %>

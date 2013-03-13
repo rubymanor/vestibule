@@ -6,6 +6,9 @@
 <% elsif can?(:see, :agenda) %>
 <h2>Selections</h2>
 <p>The community has spoken; <%= link_to 'take a look at the agenda they have generated', selections_path %>.</p>
+<% elsif can?(:see, :selection) %>
+<h2>Selections</h2>
+<p>The time for voting is over! We're collating all the selections and preparing the agenda. You can still <%= link_to 'view selections you made', selections_path %>.</p>
 <% end %>
 
 <h2>Your proposals</h2>
