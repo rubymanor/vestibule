@@ -16,7 +16,38 @@
     <div id="nav">
       <ul class="centered clearfix">
         <li><a class="ir" href="/">Euruko 2013</a></li>
+        <% if user_signed_in? -%>
+          <li class="dropdown <%= 'active' if active_nav?(dashboard_path, user_path(current_user)) %>">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= current_user.name %>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu sign-in">
+              <p><%= link_to "Dashboard", dashboard_path %></p>
+              <p><%= link_to "All proposals", proposals_path %></p>
+              <p><%= link_to "Your profile", user_path(current_user) %></p>
+              <p><%= link_to "Sign out", logout_path %></p>
+            </ul>
+          </li>
+        <% else -%>
+          <li class="dropdown sign-in">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Sign in
+              <b class="caret"></b>
+            </a>
+            <div class="dropdown-menu">
+              <p><%= link_to "Google", "/auth/google" %></p>
+              <p><%= link_to "Twitter", "/auth/twitter" %></p>
+              <p><%= link_to "Github", "/auth/github" %></p>
+              <p><%= link_to "Facebook", "/auth/facebook" %></p>
+            </div>
+          </li>
+        <% end -%>
+
+
+
         <li><a href="/#contact">Contact</a></li>
+        <li><%= link_to "Proposals", proposals_path %></li>
         <li><a href="/#sponsors">Sponsors</a></li>
         <li><a href="/#venue">Venue</a></li>
         <li><a href="/#tickets">Tickets</a></li>
@@ -25,49 +56,6 @@
        </ul>
     </div>
 
-    <header style ='display:none'>
-      <div class="row">
-
-        <div class="span7">
-          <ul class="nav nav-pills pull-right">
-            <li<%= active_nav_class(about_path, anonymous_proposals_path, the_vestibule_process_path) %>><%= link_to "About", about_path %></li>
-            <li<%= active_nav_class(proposals_path) %>><%= link_to "Proposals", proposals_path %></li>
-            <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to "Motivations", motivation_path %></li>
-            <% if user_signed_in? -%>
-              <li class="dropdown <%= 'active' if active_nav?(dashboard_path, user_path(current_user)) %>">
-                <a class="dropdown-toggle"
-                   data-toggle="dropdown"
-                   href="#">
-                  <%= current_user.name %>
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li<%= active_nav_class(dashboard_path) %>><%= link_to "Dashboard", dashboard_path %></li>
-                  <li><%= link_to "All proposals", proposals_path %></li>
-                  <li<%= active_nav_class(user_path(current_user)) %>><%= link_to "Your profile", user_path(current_user) %></li>
-                  <li><%= link_to "Sign out", logout_path %></li>
-                </ul>
-              </li>
-            <% else -%>
-              <li class="dropdown">
-                <a class="dropdown-toggle"
-                   data-toggle="dropdown"
-                   href="#">
-                  Sign in
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Google", "/auth/google" %></li>
-                  <li><%= link_to "Twitter", "/auth/twitter" %></li>
-                  <li><%= link_to "Github", "/auth/github" %></li>
-                  <li><%= link_to "Facebook", "/auth/facebook" %></li>
-                </ul>
-              </li>
-            <% end -%>
-          </ul>
-        </div>
-      </div>
-    </header>
 
     <div id="cfp">
       <div class="section">
@@ -85,7 +73,11 @@
         <%= yield %>
       </div>
       <footer>
-        <p><a href='/codeofconduct'>Code of condct</a></p>
+        <p><a href='/codeofconduct'>Code of conduct</a></p>
+        <p><%= link_to "About the CfP process", about_path %></li> </p>
+        <p><%= link_to "Motivations", motivation_path %></p>
+        <p><%= link_to "Anonymity", anonymous_proposals_path %></p>
+        <p><%= link_to "The vestibule process", the_vestibule_process_path %></p>
       </footer>
     </div>
   </div>

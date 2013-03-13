@@ -1,4 +1,12 @@
-#cfp {
+#nav .sign-in{
+  p {
+    margin: 0 20px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
   .section {
     margin: 0 auto;
     padding: 80px 0 0;
@@ -27,22 +35,8 @@
       font-style: italic;
       font-weight: 600;
     }
-  }
 
-  ul {
-    padding-left: 20px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    list-style: disc;
-
-    li {
-      margin: 5px 0;
-    }
-
-    em {
-      font-weight: 600;
-    }
-  }
+}
 
   footer {
     padding: 40px 0;
@@ -59,21 +53,27 @@
 
     a {
       color: blue;
+      text-decoration: underline;
     }
   }
-}
+
+   .age {
+    color: #ccc;
+  }
+
+
 
 /* Media Queries: Tablet devices overwrite 641px...960px */
 
 @media only screen and (max-width:960px) {
-  #codeofconduct {
+  #cfp {
   }
 }
 
 /* Media Queries: Mobile devices overwrite 320px...640px */
 
 @media only screen and (max-width:640px) {
-  #codeofconduct {
+  #cfp {
     h1 {
       font-size: 24px;
     }

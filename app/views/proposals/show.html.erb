@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="span6">
+  <div class="span5">
     <div id="proposal">
       <%= proposal_div(@proposal) do %>
         <%= page_title @proposal.title %>
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="span5 offset1">
+  <div class="span3 pull-right">
     <div id="suggestions">
       <h2>Suggestions</h2>
       <% if user_signed_in? %>

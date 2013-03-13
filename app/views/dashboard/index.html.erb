@@ -1,7 +1,7 @@
 <%= page_title 'Dashboard', no_h1=true %>
 
 <h2>Your proposals</h2>
-<p>(Because they are anonymised, other users will not see that you are the author of these proposals. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.)</p>
+<p class='alert'>Since they are anonymised, other users will not see that you are the author of these proposals. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.</p>
 <% if @your_proposals.present? %>
   <ul id="your-proposals" class="proposals">
     <% @your_proposals.each do |proposal| %>

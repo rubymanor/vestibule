@@ -1,36 +1,17 @@
 .proposals {
-  .action {
-    margin: 1em 0 2em 0;
-  }
-
+  margin-top: 8px;
   li.proposal {
-    font-size: 26px;
-    line-height: 32px;
-    margin-bottom: 10px;
-
-    .age {
-      color: #ccc;
-      margin-left: 0.5em;
-    }
+    margin-bottom: 8px;
   }
 }
 
-.proposal {
-  h1 {
-    line-height: 50px;
-  }
-  .age {
-    color: #ccc;
-  }
-  p {
-    line-height: 24px;
-    margin-bottom: 24px;
-  }
-}
 
 .suggestions {
   list-style: none;
   margin-left: 0;
+  p {
+    text-align: left;
+  }
 
   .suggestion {
     .author {
@@ -38,9 +19,6 @@
         float: left;
         margin-right: 10px;
       }
-    }
-    .age {
-      color: #ccc;
     }
   }
 }

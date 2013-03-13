@@ -1,5 +1,11 @@
 <% if flash[:notice] -%>
-  <p class="notice"><%= notice %></p>
+  <p class="alert alert-success">
+  	<button type="button" class="close" data-dismiss="alert">&times;</button>
+  	<%= notice %>
+  </p>
 <% elsif flash[:alert] -%>
-  <p class="alert"><%= alert %></p>
+  <p class="alert">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+  	<%= alert %>
+  </p>
 <% end -%>

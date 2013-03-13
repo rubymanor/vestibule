@@ -22,7 +22,7 @@
     <div class="span6">
       <section id="proposals">
         <h2><%= possessive %> proposals</h2>
-        <p>(Because proposals are anonymised, other users will not see this information on your profile. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.)</p>
+        <p class='alert'>Since proposals are anonymised, other users will not see your profile information. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.</p>
         <% if @user.proposals.any? %>
           <ul>
           <% @user.proposals.each do |proposal| %>

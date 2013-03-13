@@ -27,7 +27,7 @@ $vr: 20px;
 $hr: 12px;
 
 @import 'bootstrap_import';
-// @import 'layout';
-// @import 'proposals';
+@import 'layout';
+@import 'proposals';
 @import 'nav';
 @import 'cfp';
