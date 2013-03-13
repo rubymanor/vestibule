@@ -1,16 +1,16 @@
 <section>
   <%= page_title "#{Settings.event_name} Talk proposals", true %>
 
-  <h2>
+  <h1>
     Talk proposals
     <%= link_to :format => :rss do %>
       <%= image_tag 'feed-icon-14x14.png' %>
     <% end %>
-  </h2>
+  </h1>
 
   <% if user_signed_in? %>
     <div class="action">
-      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary btn-large" %>
+      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary" %>
     </div>
   <% end %>
 

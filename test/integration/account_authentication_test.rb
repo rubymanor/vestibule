@@ -10,7 +10,7 @@ class AccountAuthenticationTest < IntegrationTestCase
 
     should "sign in and tell the user" do
       assert has_content?("Signed in successfully.")
-      assert has_css?("header .nav a", :text => "Sign out")
+      assert has_css?("#nav a", :text => "Sign out")
     end
 
     # should "show the user a 50x50 version of their avatar in the main user area" do
@@ -22,7 +22,7 @@ class AccountAuthenticationTest < IntegrationTestCase
     should "be able to sign out" do
       visit "/"
       click_link "Sign out"
-      assert page.has_css?("header .nav", :text => "Sign in")
+      assert page.has_css?("#nav", :text => "Sign in")
     end
   end
 
