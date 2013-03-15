@@ -125,6 +125,16 @@ module ApplicationHelper
     end
   end
 
+  def show_proposal_author_if_allowed(proposal)
+    if can_show_proposal_author_information?(proposal)
+      " by #{link_to proposal.proposer.name, proposal.proposer}".html_safe
+    end
+  end
+
+  def can_show_proposal_author_information?(proposal)
+    can?(:see, :agenda) && proposal.confirmed?
+  end
+
   protected
   def markdown_parser(options = {})
     @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,

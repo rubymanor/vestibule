@@ -10,7 +10,7 @@
       votes, proposal = *popular_proposal
       %>
       <%= content_tag_for :li, proposal, :class => 'top' do %>
-        <%= link_to proposal.title, proposal %> <span>(<%= votes %> votes)</span>
+        <%= link_to proposal.title, proposal %><%= show_proposal_author_if_allowed(proposal) %> <span>(<%= votes %> votes)</span>
       <% end %>
     <% end %>
 
@@ -18,7 +18,7 @@
       votes, proposal = *popular_proposal
       %>
       <%= content_tag_for :li, proposal, :class => 'next' do %>
-        <%= link_to proposal.title, proposal %> <span>(<%= votes %> votes)</span>
+        <%= link_to proposal.title, proposal %><%= show_proposal_author_if_allowed(proposal) %> <span>(<%= votes %> votes)</span>
       <% end %>
     <% end %>
   </ol>
@@ -37,7 +37,7 @@
         <% if can?(:make, :selection) %>
           <%= button_to('Deselect', selection, method: :delete, class: "btn") %>
         <% end %>
-        <%= link_to selection.proposal.title, selection.proposal %>
+        <%= link_to selection.proposal.title, selection.proposal %><%= show_proposal_author_if_allowed(selection.proposal) %>
       <% end %>
     <% end %>
   </ul>
@@ -56,7 +56,7 @@
           <%= form.hidden_field :proposal_id, value: proposal.id %>
           <%= form.submit "Select", disabled: (remaining == 0 ? 'disabled' : nil), class: "btn" %>
         <% end %>
-        <%= link_to proposal.title, proposal_path(proposal) %>
+        <%= link_to proposal.title, proposal_path(proposal) %><%= show_proposal_author_if_allowed(proposal) %>
       <% end %>
     <% end %>
     </ul>
