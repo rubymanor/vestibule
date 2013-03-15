@@ -3,23 +3,15 @@
 <% end %>
 
 <% if can?(:see, :agenda) %>
-  <h1>Top 10 Proposals</h1>
+  <h1>Chosen Proposals</h1>
 
-  <p>There will be <strong>8</strong> talks given at Ruby Manor 4.  The top 10 as chosen by the community are listed below, and if the proposer has confirmed they are happy to give the talk we reveal who they are.</p>
+  <p>There will be <strong>8</strong> talks given at Ruby Manor 4.  The choice made by the community is listed below, and if the proposer has confirmed they are happy to give the talk we reveal who they are.</p>
 
   <ol id="the_chosen_ones">
     <% @top_proposals.each do |popular_proposal|
       votes, proposal = *popular_proposal
       %>
       <%= content_tag_for :li, proposal, :class => 'top' do %>
-        <%= link_to proposal.title, proposal %><%= show_proposal_author_if_allowed(proposal) %> <span>(<%= votes %> votes)</span>
-      <% end %>
-    <% end %>
-
-    <% @next_proposals.each do |popular_proposal|
-      votes, proposal = *popular_proposal
-      %>
-      <%= content_tag_for :li, proposal, :class => 'next' do %>
         <%= link_to proposal.title, proposal %><%= show_proposal_author_if_allowed(proposal) %> <span>(<%= votes %> votes)</span>
       <% end %>
     <% end %>
