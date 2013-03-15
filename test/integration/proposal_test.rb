@@ -283,6 +283,19 @@ class ProposalTest < IntegrationTestCase
         i_am_alerted("In agenda mode you cannot make a proposal")
       end
 
+      should 'see the author details for a talk that has been confirmed' do
+        p = FactoryGirl.create(:proposal)
+        visit proposal_path(p)
+        within '.proposal' do
+          refute page.has_content?(p.proposer.name)
+        end
+        p.confirm!
+        visit proposal_path(p)
+        within '.proposal' do
+          assert page.has_content?(p.proposer.name)
+        end
+      end
+
       context 'and I have a proposal of my own' do
         setup { FactoryGirl.create(:proposal, title: 'My Amazing Talk', proposer: @user) }
 
