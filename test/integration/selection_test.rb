@@ -166,6 +166,15 @@ class SelectionTest < IntegrationTestCase
             assert page.has_css?('#the_chosen_ones')
           end
 
+          should 'see the proposer name only for the talks in the agenda that have been confirmed' do
+            @destroy_ruby.confirm!
+            visit selections_path
+            within '#the_chosen_ones' do
+              assert page.has_content?(@destroy_ruby.proposer.name)
+              refute page.has_content?(@merb.proposer.name)
+            end
+          end
+
           should 'be able to see their own selections' do
             visit selections_path
             within '#selections' do
