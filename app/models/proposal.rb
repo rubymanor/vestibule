@@ -53,6 +53,10 @@ class Proposal < ActiveRecord::Base
     update_attribute(:withdrawn, true)
   end
 
+  def confirm!
+    update_attribute(:confirmed, true)
+  end
+
   private
 
   def last_modified_by_proposer
