@@ -2,6 +2,9 @@ ul#selections, ul#available_selections {
   list-style: none;
   margin-left: 0;
 }
+ol#the_chosen_ones li {
+  margin-bottom: 10px;
+}
 
 form.new_selection {
   display: inline;
