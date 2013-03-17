@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :proposals_of_interest, :through => :suggestions, :source => :proposal, :uniq => true
   has_many :selections
 
+  acts_as_voter
+  has_karma(:proposals, :as => :proposer)
+
   scope :with_signup_reasons, where("signup_reason IS NOT NULL")
   scope :without_signup_reasons, where(:signup_reason => nil)
   scope :by_contribution, order("contribution_score DESC")

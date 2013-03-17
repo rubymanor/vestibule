@@ -9,6 +9,7 @@ gem "redcarpet", "2.2.2"
 gem "bootstrap-sass"
 gem "unicorn"
 gem "settingslogic"
+gem "thumbs_up"
 
 # Gem for tracking pageviews and stuff
 gem 'impressionist'

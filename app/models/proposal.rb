@@ -2,6 +2,8 @@ class Proposal < ActiveRecord::Base
   belongs_to :proposer, :class_name => 'User'
   has_many :suggestions
 
+  acts_as_voteable
+
   validates :title, :presence => true
 
   # This allows us to do @proposal.impression_count
