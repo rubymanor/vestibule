@@ -125,6 +125,13 @@ module ApplicationHelper
     end
   end
 
+  def authentication_links(container = :p)
+    [['Google', '/auth/google'],
+     ['Twitter', '/auth/twitter'],
+     ['Github', '/auth/github'],
+     ['Facebook', '/auth/facebook']].map { |name, url| content_tag container, link_to(name, url) }.join("\n").html_safe
+  end
+
   protected
   def markdown_parser(options = {})
     @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,

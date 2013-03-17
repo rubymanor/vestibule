@@ -36,10 +36,7 @@
               <b class="caret"></b>
             </a>
             <div class="dropdown-menu">
-              <p><%= link_to "Google", "/auth/google" %></p>
-              <p><%= link_to "Twitter", "/auth/twitter" %></p>
-              <p><%= link_to "Github", "/auth/github" %></p>
-              <p><%= link_to "Facebook", "/auth/facebook" %></p>
+              <%= authentication_links :p %>
             </div>
           </li>
         <% end -%>
