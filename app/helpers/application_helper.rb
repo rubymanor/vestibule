@@ -33,12 +33,17 @@ module ApplicationHelper
   end
 
   def avatar_url(user, bigger=false)
-    if user.email.present?
-      email_address = user.email.downcase
-      hash = Digest::MD5.hexdigest(email_address)
-      image_src = "http://www.gravatar.com/avatar/#{hash}"
-    else
-    end
+    hash =
+      if user.email.present?
+        email_address = user.email.downcase
+        Digest::MD5.hexdigest(email_address)
+      else
+        '00000000000000000000000000000000'
+      end
+
+    # `d` parameter is for custom fallback.
+    # See https://en.gravatar.com/site/implement/images/ for more info.
+    "http://www.gravatar.com/avatar/#{hash}?d=retro"
   end
 
   def markdown(text)
