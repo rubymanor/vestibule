@@ -38,9 +38,12 @@ module ApplicationHelper
         email_address = user.email.downcase
         Digest::MD5.hexdigest(email_address)
       else
-        '0'
+        '00000000000000000000000000000000'
       end
-    "http://www.gravatar.com/avatar/#{hash}"
+
+    # `d` parameter is for custom fallback.
+    # See https://en.gravatar.com/site/implement/images/ for more info.
+    "http://www.gravatar.com/avatar/#{hash}?d=retro"
   end
 
   def markdown(text)
