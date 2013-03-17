@@ -78,7 +78,7 @@ class ProposalTest < IntegrationTestCase
       should "be able to withdraw my proposal" do
         visit proposals_path
         click_link "My Amazing Talk"
-        click_link "Withdraw proposal"
+        click_button "Withdraw proposal"
 
         assert_proposal_withdrawn "My Amazing Talk"
       end
