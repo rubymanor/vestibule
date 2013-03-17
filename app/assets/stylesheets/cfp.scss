@@ -15,12 +15,12 @@
 
 h1 {
   margin-top: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   font: 300 32px/42px $ubuntu;
 }
 
 h2 {
-  margin-top: 48px;
+  margin-top: 24px;
   font: 300 26px/32px $ubuntu;
 }
 
@@ -59,6 +59,7 @@ footer {
 
 .age {
   color: #ccc;
+  margin-top: 0px;
 }
 
 /* Media Queries: Tablet devices overwrite 641px...960px */

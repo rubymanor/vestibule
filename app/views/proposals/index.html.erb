@@ -1,18 +1,39 @@
-<section>
-  <%= page_title "#{Settings.event_name} Talk proposals", true %>
+<div class="hero-unit">
+    <%= page_title "#{Settings.event_name} Call for Presentations" %>
 
-  <h1>
-    Talk proposals
-    <%= link_to :format => :rss do %>
-      <%= image_tag 'feed-icon-14x14.png' %>
+    <p>
+        Be part of <%= Settings.event_name %>:
+        we highly encourage you to submit as many proposals as you want,
+        help the authors make theirs better
+        and finally select the most interesting ones for the final agenda!
+        What are you waiting for?
+    </p>
+
+    <p>
+    <% if user_signed_in? %>
+        <%= link_to "Propose a talk", new_proposal_path, :class => 'btn btn-primary' %>
+    <% else %>
+        <div class="btn-group">
+            <%= link_to 'Join the party', '#', :class => 'btn btn-primary dropdown-toggle', :data => {:toggle => 'dropdown'} %>
+            <ul class="dropdown-menu">
+                <li><span style="padding-left: 10px;">Sign in with...</span></li>
+                <li class="divider"></li>
+                <%= authentication_links :li %>
+            </ul>
+        </div>
     <% end %>
-  </h1>
 
-  <% if user_signed_in? %>
-    <div class="action">
-      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary" %>
-    </div>
-  <% end %>
+    or <%= link_to 'read more about our process', about_path %>.
+    </p>
+</div>
+
+<section>
+    <h2>
+        Talk proposals
+        <%= link_to :format => :rss do %>
+            <%= image_tag 'feed-icon-14x14.png' %>
+        <% end %>
+    </h2>
 
   <ul class="proposals">
     <% for proposal in @proposals %>

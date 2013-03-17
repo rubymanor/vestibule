@@ -3,7 +3,7 @@ module ProposalSteps
     options = options.reverse_merge(:title => 'A talk', :description => 'A great talk')
 
     visit proposals_path
-    click_link "Propose talk"
+    click_link "Propose a talk"
 
     fill_in "Title", :with => options[:title]
     fill_in "Description", :with => options[:description]
