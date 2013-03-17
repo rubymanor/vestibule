@@ -5,14 +5,28 @@
   }
 }
 
+#suggestions {
+  h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+}
+
+.add-suggestion {
+  //margin-top: 64px;
+}
+
 .suggestions {
   list-style: none;
   margin-left: 0;
+  margin-bottom: 64px;
+
   p {
     text-align: left;
   }
 
   .suggestion {
+    margin-bottom: 30px;
     .author {
       img {
         float: left;
