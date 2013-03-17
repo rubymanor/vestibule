@@ -108,13 +108,23 @@ module ApplicationHelper
     content_tag(:div, :class => class_name, &block)
   end
 
+  def proposal_update_information(proposal)
+    result = "updated #{time_ago_in_words proposal.updated_at} ago"
+    if proposal.suggestions.any?
+      suggestion = proposal.suggestions.latest.first
+      result += "; latest suggestion #{time_ago_in_words(suggestion.updated_at)} ago"
+    end
+    result
+  end
+
   def change_proposal_state_button(proposal)
     if proposal.withdrawn?
-      link_to "Re-publish proposal", republish_proposal_path(proposal), class: "btn", method: :put
+      button_to "Re-publish proposal", republish_proposal_path(proposal), class: "btn"
     else
-      link_to "Withdraw proposal", withdraw_proposal_path(proposal), class: "btn btn-danger", method: :put
+      button_to "Withdraw proposal", withdraw_proposal_path(proposal), class: "btn btn-danger"
     end
   end
+
   protected
   def markdown_parser(options = {})
     @markdown_parser ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML,
