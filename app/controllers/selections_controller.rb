@@ -5,7 +5,7 @@ class SelectionsController < ApplicationController
 
   def index
     if can?(:see, :agenda)
-      @top_proposals = Selection.popular.take(8)
+      @top_proposals = Selection.popular.select { |count, proposal| proposal.confirmed? }.take(8)
     end
     if current_user && can?(:make, :selection)
       @proposals = Proposal.available_for_selection_by(current_user)
