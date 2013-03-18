@@ -14,6 +14,58 @@
             <h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2>
         <% end %>
         <div class="description"><%= markdown @proposal.description %></div>
+
+        <% if current_user && !@proposal.proposed_by?(current_user) %>
+            <% if current_user.voted_on?(@proposal) %>
+                <br>
+
+                <small class="text-info">
+                    <em>You have already voted <strong><em><%= current_user.voted_for?(@proposal) ? 'up' : 'down' %></em></strong> this proposal.</em>
+                </small>
+
+                <div class="btn-group">
+                    <%= link_to 'Changed your mind?', '#', :class => 'btn btn-small dropdown-toggle', :data => {:toggle => 'dropdown'} %>
+                    &nbsp;
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <%= link_to vote_proposal_path(@proposal, :vote => 'up'), :method => :post do %>
+                                <i class="icon-thumbs-up"></i> I would like to see this!
+                            <% end %>
+                        </li>
+
+                        <li>
+                            <%= link_to vote_proposal_path(@proposal, :vote => 'down'), :method => :post do %>
+                                <i class="icon-thumbs-down"></i> Not really interested...
+                            <% end %>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li>
+                            <%= link_to vote_proposal_path(@proposal, :vote => 'clear'), :method => :post do %>
+                                Not sure yet (clear my vote)
+                            <% end %>
+                        </li>
+                    </ul>
+                </div>
+
+            <% else %>
+                <br>
+
+                <small class="text-info">
+                    <em>What do you think about this proposal?</em>
+                </small>
+                &nbsp;
+
+                <%= link_to vote_proposal_path(@proposal, :vote => 'up'), :method => :post, :class => 'btn btn-success' do %>
+                    <i class="icon-thumbs-up icon-white"></i> I would like to see this!
+                <% end %>
+
+                <%= link_to vote_proposal_path(@proposal, :vote => 'down'), :method => :post, :class => 'btn btn-inverse' do %>
+                    <i class="icon-thumbs-down icon-white"></i> Not really interested...
+                <% end %>
+            <% end %>
+        <% end %>
     <% end %>
 </div>
 

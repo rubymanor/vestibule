@@ -54,6 +54,24 @@ class ProposalsController < ApplicationController
     redirect_to proposal_path(proposal), notice: "Your proposal has been republished"
   end
 
+  def vote
+    @proposal = Proposal.find(params[:id])
+
+    if @proposal.proposed_by?(current_user)
+      redirect_to proposal_path(@proposal), :flash => {:alert => "You can't vote for your own proposal!"}
+    else
+      if params[:vote] == 'clear'
+        current_user.unvote_for(@proposal)
+        flash[:notice] = 'Your vote has been cleared. Remember to come back to vote again once you are sure!'
+      else
+        current_user.vote(@proposal, :direction => params[:vote], :exclusive => true )
+        flash[:notice] = 'Thank you for casting your vote. Your vote has been captured!'
+      end
+
+      redirect_to proposal_path(@proposal)
+    end
+  end
+
   private
 
   def load_proposal_for_editing

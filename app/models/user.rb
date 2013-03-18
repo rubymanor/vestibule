@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :proposals_of_interest, :through => :suggestions, :source => :proposal, :uniq => true
   has_many :selections
 
+  acts_as_voter
+  has_karma(:proposals, :as => :proposer)
+
   scope :with_signup_reasons, where("signup_reason IS NOT NULL")
   scope :without_signup_reasons, where(:signup_reason => nil)
   scope :by_contribution, order("contribution_score DESC")
@@ -11,7 +14,7 @@ class User < ActiveRecord::Base
   before_save :update_contribution_score
 
   def proposals_you_should_look_at
-    Proposal.active.without_suggestions_from(self).not_proposed_by(self)
+    Proposal.active.without_suggestions_from(self).without_votes_from(self).not_proposed_by(self)
   end
 
   def proposals_that_have_changed

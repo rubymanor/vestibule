@@ -2,6 +2,8 @@ class Proposal < ActiveRecord::Base
   belongs_to :proposer, :class_name => 'User'
   has_many :suggestions
 
+  acts_as_voteable
+
   validates :title, :presence => true
 
   # This allows us to do @proposal.impression_count
@@ -11,6 +13,13 @@ class Proposal < ActiveRecord::Base
   scope :without_suggestions_from, lambda { |user|
     if user.suggestions.any?
       where('id NOT IN (?)', user.suggestions.map{ |s| s.proposal_id }.uniq)
+    end
+  }
+
+  scope :without_votes_from, lambda { |user|
+    voted_by_user = user.votes.where(voteable_type: 'Proposal')
+    if voted_by_user.any?
+      where('id NOT IN (?)', voted_by_user.map{ |s| s.voteable_id }.uniq)
     end
   }
 
