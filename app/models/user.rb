@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   before_save :update_contribution_score
 
   def proposals_you_should_look_at
-    Proposal.active.without_suggestions_from(self).not_proposed_by(self)
+    Proposal.active.without_suggestions_from(self).without_votes_from(self).not_proposed_by(self)
   end
 
   def proposals_that_have_changed

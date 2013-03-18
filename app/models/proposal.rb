@@ -16,6 +16,13 @@ class Proposal < ActiveRecord::Base
     end
   }
 
+  scope :without_votes_from, lambda { |user|
+    voted_by_user = user.votes.where(voteable_type: 'Proposal')
+    if voted_by_user.any?
+      where('id NOT IN (?)', voted_by_user.map{ |s| s.voteable_id }.uniq)
+    end
+  }
+
   scope :not_proposed_by, lambda { |user|
     where('proposer_id != ?', user.id)
   }
