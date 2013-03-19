@@ -10,6 +10,7 @@ gem "bootstrap-sass"
 gem "unicorn"
 gem "settingslogic"
 gem "thumbs_up"
+gem "cancan"
 
 # Gem for tracking pageviews and stuff
 gem 'impressionist'
