@@ -1,13 +1,13 @@
 <div id="proposal" class="hero-unit">
     <%= proposal_div(@proposal) do %>
         <%= page_title @proposal.title %>
-
-        <% if @proposal.proposed_by?(current_user) %>
             <p>
+                <% if can? :edit, @proposal %>
                 <%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %>
+                <% end %>
+
                 <%= change_proposal_state_button(@proposal) %>
             </p>
-        <% end %>
         <p class="age muted"><%= proposal_update_information @proposal %></p>
 
         <% if @proposal.withdrawn? %>
@@ -15,7 +15,7 @@
         <% end %>
         <div class="description"><%= markdown @proposal.description %></div>
 
-        <% if current_user && !@proposal.proposed_by?(current_user) %>
+        <% if can? :vote, @proposal %>
             <% if current_user.voted_on?(@proposal) %>
                 <br>
 
@@ -94,7 +94,7 @@
         </ul>
     <% end %>
 
-    <% if user_signed_in? %>
+    <% if @suggestion && can?(:create, Suggestion) %>
         <div class="add-suggestion">
             <% if current_user == @proposal.proposer %>
                 <p class="">You can respond to suggestions here. As the proposer of the talk, your identity will be

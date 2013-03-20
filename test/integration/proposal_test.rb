@@ -11,7 +11,7 @@ class ProposalTest < IntegrationTestCase
 
     should "not be able to propose a talk" do
       visit new_proposal_path
-      i_am_asked_to_sign_in
+      i_am_not_authorized
     end
 
     context "given a proposal already exists" do
@@ -46,7 +46,7 @@ class ProposalTest < IntegrationTestCase
 
       should "not be able to edit a proposal" do
         visit edit_proposal_path(@proposal)
-        i_am_asked_to_sign_in
+        i_am_not_authorized
       end
 
       should "my page view be tracked" do
@@ -176,7 +176,7 @@ blah blah blah
 
       should "not be able to edit that proposal" do
         visit edit_proposal_path(@other_persons_proposal)
-        i_am_alerted "You cannot edit proposals that are owned by other users"
+        i_am_not_authorized
       end
     end
 

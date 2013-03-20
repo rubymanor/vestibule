@@ -8,10 +8,17 @@ class Ability
 
     # Everyone
     can :read, User
+    can :read, Proposal
 
     # Registered users
     if user.persisted?
       can [:update], User, :id => user.id
+
+      can [:update, :create, :withdraw, :republish], Proposal, :proposer_id => user.id
+
+      can [:create], Suggestion, :author_id => user.id
+      can [:vote], Proposal
+      cannot [:vote], Proposal, :proposer_id => user.id
     end
   end
 end

@@ -11,6 +11,12 @@ module SimpleSteps
     end
   end
 
+  def i_am_not_authorized
+    within ".alert" do
+      assert page.has_content?("You are not authorized to access this page.")
+    end
+  end
+
   def i_am_asked_to_sign_in
     within ".alert" do
       assert page.has_content?("You need to sign in or sign up before continuing.")
