@@ -48,6 +48,10 @@ class Proposal < ActiveRecord::Base
     suggestions.after(last_modified_by_proposer)
   end
 
+  def published?
+    !withdrawn
+  end
+
   def withdraw!
     update_attribute(:withdrawn, true)
   end
