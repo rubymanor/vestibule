@@ -35,7 +35,8 @@ end
 gem 'jquery-rails'
 
 group :test do
-  gem "minitest-reporters", '>= 0.5.0'
+  gem "minitest"
+  gem "minitest-reporters", '>= 0.8.0'
   gem "factory_girl_rails", "4.1.0"
   gem "shoulda", "3.3.2"
   gem "capybara", "1.1.4"
