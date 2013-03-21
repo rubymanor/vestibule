@@ -12,6 +12,7 @@ class Ability
 
     # Registered users
     if user.persisted?
+      can :see, :dashboard
       can [:update], User, :id => user.id
 
       can [:update, :create, :withdraw, :republish], Proposal, :proposer_id => user.id
