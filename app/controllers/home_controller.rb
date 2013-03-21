@@ -10,7 +10,7 @@ class HomeController < ApplicationController
 
   def motivation
     @users = User.with_signup_reasons.shuffle
-    @losers = User.without_signup_reasons.shuffle
+    @slackers = User.without_signup_reasons.shuffle
   end
 
   def my_motivation
