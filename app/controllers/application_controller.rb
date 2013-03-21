@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       flash[:alert] = "You need to sign in or sign up before continuing."
       session[:user_id] = nil
-      redirect_to root_url
+      redirect_to(request.referer.presence || root_url)
     end
   end
 
