@@ -79,7 +79,7 @@ class UsersControllerTest < ActionController::TestCase
 
       should assign_to(:user) { @user }
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
     end
 
     context "on #PUT to update a user" do
@@ -89,7 +89,7 @@ class UsersControllerTest < ActionController::TestCase
 
       should assign_to(:user) { @user }
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
       should "not update the signup reason" do
         assert_not_equal "Haxx'd", @user.reload.signup_reason
       end

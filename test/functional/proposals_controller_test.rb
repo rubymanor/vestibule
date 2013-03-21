@@ -37,7 +37,7 @@ class ProposalsControllerTest < ActionController::TestCase
       end
 
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
     end
 
     context 'on #POST to create' do
@@ -46,7 +46,7 @@ class ProposalsControllerTest < ActionController::TestCase
       end
 
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
 
       should "not save proposal" do
         assert !assigns(:proposal).persisted?
@@ -60,7 +60,7 @@ class ProposalsControllerTest < ActionController::TestCase
 
       should assign_to(:proposal) { @proposal }
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
     end
 
     context 'on #PUT to update' do
@@ -70,7 +70,7 @@ class ProposalsControllerTest < ActionController::TestCase
 
       should assign_to(:proposal) { @proposal }
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
 
       should "not update proposal" do
         assert_not_equal 'Title Updated', @proposal.reload.title
@@ -84,7 +84,7 @@ class ProposalsControllerTest < ActionController::TestCase
 
       should assign_to(:proposal) { @proposal }
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
 
       should "not withdraw proposal" do
         assert !@proposal.withdrawn?
@@ -99,7 +99,7 @@ class ProposalsControllerTest < ActionController::TestCase
 
       should assign_to(:proposal) { @proposal }
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
 
       should "not republish proposal" do
         assert @proposal.withdrawn?
@@ -115,7 +115,7 @@ class ProposalsControllerTest < ActionController::TestCase
 
           should assign_to(:proposal) { @proposal }
           should respond_with(:redirect)
-          should set_the_flash.to(/You are not authorized to access this page/)
+          should set_the_flash.to(/You need to sign in or sign up before continuing/)
 
           should "not count a vote" do
             assert_equal 0, @proposal.votes_for

@@ -5,8 +5,12 @@ class ApplicationController < ActionController::Base
   before_filter :reload_settings if Rails.env.development?
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
-    redirect_to(request.referer.presence || root_url)
+    if user_signed_in?
+      flash[:alert] = exception.message
+      redirect_to(request.referer.presence || root_url)
+    else
+      authenticate_user!
+    end
   end
 
   private

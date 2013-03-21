@@ -16,7 +16,7 @@ class SuggestionsControllerTest < ActionController::TestCase
       should assign_to(:proposal) { @proposal }
       should assign_to(:suggestion)
       should respond_with(:redirect)
-      should set_the_flash.to(/You are not authorized to access this page/)
+      should set_the_flash.to(/You need to sign in or sign up before continuing/)
 
       should "save suggestion" do
         assert !assigns(:suggestion).persisted?
