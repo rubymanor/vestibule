@@ -27,13 +27,13 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu sign-in">
-              <p><%= link_to "Dashboard", dashboard_path %></p>
-              <p><%= link_to "All proposals", proposals_path %></p>
-              <p><%= link_to "Your profile", user_path(current_user) %></p>
-              <p><%= link_to "Sign out", logout_path %></p>
+                <% if can?(:see, :dashboard) -%><p><%= link_to "Dashboard", dashboard_path %></p><% end -%>
+                <% if can?(:read, Proposal) -%><p><%= link_to "All proposals", proposals_path %></p><% end -%>
+                <% if can?(:read, current_user) -%><p><%= link_to "Your profile", user_path(current_user) %></p><% end -%>
+                <% if can?(:destroy, :session) -%><p><%= link_to "Sign out", logout_path %></p><% end -%>
             </ul>
           </li>
-        <% else -%>
+        <% elsif can?(:create, :session) -%>
           <li class="dropdown sign-in">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               Sign in
@@ -46,7 +46,7 @@
         <% end -%>
 
         <li><%= link_to "Contact", 'http://euruko2013.org/#contact' %></li>
-        <li><%= link_to "Proposals", proposals_path %></li>
+        <% if can?(:read, Proposal) -%><p><%= link_to "Proposals", proposals_path %></p><% end -%>
         <li><%= link_to "Sponsors", 'http://euruko2013.org/#sponsors' %></li>
         <li><%= link_to "Venue", 'http://euruko2013.org/#venue' %></li>
         <li><%= link_to "Tickets", 'http://euruko2013.org/#tickets' %></li>
