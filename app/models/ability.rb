@@ -7,11 +7,14 @@ class Ability
     user ||= User.new
 
     # Everyone
+    can :create, :session
     can :read, User
     can :read, Proposal
 
     # Registered users
     if user.persisted?
+      can :destroy, :session
+
       can :see, :dashboard
       can [:update], User, :id => user.id
 
