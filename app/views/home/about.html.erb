@@ -1,6 +1,24 @@
+<div class="container">
+<div class="row">
+<div class="span3" id="sidenav">
+    <ul data-spy="affix" class="nav nav-list">
+        <li class="active"><a href="#about">About</a></li>
+        <li class="nav-header">The CfP Process</li>
+        <li><a href="#rationale">Rationale</a></li>
+        <li><a href="#process-overview">Process overview</a></li>
+        <li><a href="#dates">Dates</a></li>
+        <li><a href="#rules">Rules</a></li>
+        <li class="nav-header">FAQ</li>
+        <li><a href="#faq-submissions">Submissions</a></li>
+        <li><a href="#faq-suggestions">Suggestions</a></li>
+        <li><a href="#faq-selection">Selection</a></li>
+    </ul>
+</div>
+
+<div class="span7" style="margin-top: -35px;">
 <%= page_title 'About the Cfp Process', no_h1=true %>
 
-<section>
+<section id="about">
     <h1>What is this?</h1>
 
     <p>
@@ -11,7 +29,7 @@
     </p>
 
     <p>
-        <strong><%= Settings.event_name %> is nothing without your talk proposals</strong>.
+        <strong><%= Settings.event_name %> would be a lesser conference without your talk proposals</strong>.
         We think that almost everyone has something interesting to talk about,
         so please think about that fun or unusual or difficult or surprising thing
         you&rsquo;ve done recently and submit a talk (or several!) so everyone can hear about it.
@@ -29,7 +47,7 @@
 <section>
     <h1>The CfP process</h1>
 
-    <section>
+    <section id="rationale">
         <h2>Rationale</h2>
         <p>
             The CfP was designed with the following goals in mind:
@@ -43,7 +61,7 @@
         </ul>
     </section>
 
-    <section>
+    <section id="process-overview">
         <h2>The process overview</h2>
         <p>
             The process is an amalgamation of
@@ -79,7 +97,7 @@
         </p>
         <p>
             We want to encourage <strong>everyone</strong> to participate in <%= Settings.event_name %>
-            as fully as possible, and one of the ways we can ensure that everyone is treated equally
+            as fully as possible and one of the ways we can ensure that everyone is treated equally
             is by not revealing who is behind each proposal.
         </p>
 
@@ -104,7 +122,7 @@
         </p>
     </section>
 
-    <section>
+    <section id="dates">
         <h2>Dates</h2>
         <table class="table table-bordered">
             <tbody>
@@ -142,12 +160,12 @@
         </table>
     </section>
 
-    <section>
+    <section id="rules">
         <h2>Rules</h2>
         <ul>
-            <li>Your talk must follow our <a href="http://euruko2013.org/codeofconduct/">code of conduct</a>.</li>
+            <li>Your proposal must follow our <a href="http://euruko2013.org/codeofconduct/">code of conduct</a>.</li>
             <li>Offensive or spamming submissions will not be tolerated <strong>(and we mean it!)</strong>.</li>
-            <li>Talks used to sell a product, company or service will be discarded.</li>
+            <li>Proposals promoting a product, a company or a service will be discarded.</li>
             <li>If you submit a proposal you agree that your talk will be recorded and published online, in case you get selected.</li>
             <li>Only one proposal per author can make it in the shortlist.</li>
         </ul>
@@ -157,7 +175,7 @@
 <section>
     <h1>FAQ</h1>
 
-    <section>
+    <section id="faq-submissions">
         <h2>Submissions</h2>
 
         <% if Settings.why_submit_a_proposal.present? %>
@@ -176,7 +194,10 @@
         <h3>What can I talk about?</h3>
 
         <%= Settings.proposals_topics.html_safe %>
-        <p>You should take a look at <%= link_to "list of things people are hoping to get out of #{Settings.event_name}", motivation_path %> for some inspiration.</p>
+        <p>
+            You should take a look at <%= link_to "list of things people are hoping to get out of #{Settings.event_name}", motivation_path %>
+            for some inspiration.
+        </p>
         <% end %>
 
         <% if Settings.proposals_duration.present? %>
@@ -191,13 +212,13 @@
             Although the proposal system is completely anonymous during Phase 1 of the process,
             we can&rsquo;t prevent you from including identifying information either within the proposal itself
             or on the wider internet. Sometimes this is inevitable: if you want to give a talk about this
-            great programming language called Ruby that you developed in 1995, it&rsquo;s not going to take
+            great programming language called Ruby that you developed in 1993, it&rsquo;s not going to take
             too much detective work to reveal your identity.
 
             That&rsquo;s fine, and there&rsquo;s no need to go to ridiculous lengths to conceal your identity
             if it makes the proposal more difficult to write, but just respect the spirit of the process:
             as far as is sensible and practical, we would like for talks to be chosen because of what
-            they&rsquo;re about, not because of who is giving them.
+            they&rsquo;re about, not because of who's presenting.
         </p>
 
         <h3>Do I have to go through with it if I propose something?</h3>
@@ -215,10 +236,10 @@
         </p>
     </section>
 
-    <section>
+    <section id="faq-suggestions">
         <h2>Suggestions</h2>
 
-        <h3>Why should I give suggestions?</h3>
+        <h3>Why should I participate?</h3>
 
         <p>
             As mentioned before the goals of the process are, among others, to choose the best
@@ -257,7 +278,7 @@
         </p>
     </section>
 
-    <section>
+    <section id="faq-selection">
         <h2>Selection</h2>
 
         <h3>How is the "shortlist" decided?</h3>
@@ -294,19 +315,16 @@
             and 1 strictly by the <a href="http://euruko2013.org/#contributors">committee</a>.
         </p>
 
-        <h3>What happens if my talk does get chosen?</h3>
+        <h3>What happens if my proposal makes it to <%= Settings.event_name %>?</h3>
 
         <p>
             We&rsquo;ll be in touch to confirm that you really are happy to give the talk.
             It&rsquo;s fine if you&rsquo;re not, there&rsquo;ll be no hard feelings.
-            Assuming that you are we&rsquo;ll arrange some rehearsal time with you
-            at least a week before the event. We&rsquo;ll be as flexible as you need with this;
-            if you&rsquo;re in Athens we can meet in an office to do a run-through,
-            if you&rsquo;re further afield, or don&rsquo;t have much flexible free-time
-            we can arrange something over skype.
-
-            We know that you want your talk to be great and you know we want your talk to be great,
-            so let&rsquo;s work together to achieve that.
+            Assuming that you are we&rsquo;ll arrange the final details and announce it officially!
         </p>
     </section>
 </section>
+</div>
+</div>
+
+</div>
