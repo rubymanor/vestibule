@@ -17,7 +17,4 @@ class HomeController < ApplicationController
     authenticate_user!
     redirect_to edit_user_path(current_user) if current_user
   end
-
-  def anonymous_proposals
-  end
 end

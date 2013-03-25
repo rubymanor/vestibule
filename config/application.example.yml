@@ -1,5 +1,6 @@
 defaults: &defaults
   event_name: 'Ruby Manor'
+  main_site: 'http://rubymanor.org'
   main_slogan: 'Building <a href="http://rubymanor.org">Ruby Manor</a> as a community'
   event_description: |
     <p>Ruby Manor is a one-day, zero-bullshit fully-fledged conference about Ruby, the programming language.<p>
