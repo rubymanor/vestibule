@@ -85,6 +85,11 @@ Just add the [Mandrill Heroku Addon](https://addons.heroku.com/mandrill) and you
 
 Keep in mind that this will work only on production environment.
 
+Exceptions & Errors tracking
+-----------------
+
+Sign up for a free account [bugsnag account](http://bugsnag.com) and set the appropriate env variable: `heroku config:add BUGSNAG_API_KEY=XXXXXXXXXXXXXXXXXXXXXX`
+
 Deploying the official site
 -----------------
 

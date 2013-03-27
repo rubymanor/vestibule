@@ -51,4 +51,5 @@ group :test do
   gem "escape_utils", "0.1.9"
 end
 
+gem "bugsnag"
 gem "newrelic_rpm"
