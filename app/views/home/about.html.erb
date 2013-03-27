@@ -21,17 +21,27 @@
     <h1>What is this?</h1>
 
     <p>
-        This app is a tool to help us &mdash; the community &mdash; generate and prepare
-        the actual presentations of <a href="<%= Settings.main_site %>"><%= Settings.event_name %></a>.
-        It's strongly based on <a href="http://rubymanor.org/">Ruby Manor's</a> original
-        <a href="http://vestibule.rubymanor.org/proposals">vestibule app</a>, and we really thank them for that!
+        This application is a tool to help us &mdash; the community &mdash; record, improve and select
+        the actual presentations for <a href="<%= Settings.main_site %>"><%= Settings.event_name %></a>.
+        The code is based on <a href="http://rubymanor.org/">Ruby Manor's</a> original
+        <a href="http://vestibule.rubymanor.org/proposals">vestibule app</a>, and we are really thankful for that!
+        With this tool we will be able to have our conference the way we want it - at least as far as the presentations go :-)
     </p>
 
     <p>
-        <strong><%= Settings.event_name %> would be a lesser conference without your talk proposals</strong>.
-        We think that almost everyone has something interesting to talk about,
+        <strong><%= Settings.event_name %> would be a lesser conference without your presentations</strong>.
+        We think that almost everyone has something interesting to say,
         so please think about that fun or unusual or difficult or surprising thing
-        you&rsquo;ve done recently and submit a talk (or several!) so everyone can hear about it.
+        you&rsquo;ve done recently and submit a talk (or several!) so that everyone can hear about it.
+    </p>
+
+    <p>
+        We welcome all kinds of engaging Ruby related presentations,
+        however we will be even happier if you propose an original presentation which
+        will not appear in any other conference prior to EuRuKo 2013.
+        Ruby was first coded in 1993 and so this summer we'd like to celebrate its 20th birthday
+        by having the plethora of presentations focused mostly on the language,
+        its evolution, its future and its internals wherever possible.
     </p>
 </section>
 
@@ -44,7 +54,7 @@
 <% end %>
 
 <section>
-    <h1>The CfP process</h1>
+    <h1>The <%= Settings.event_name %> CfP process</h1>
 
     <section id="rationale">
         <h2>Rationale</h2>
@@ -79,45 +89,56 @@
 
         <h3>Phase 1: Submission and discussion</h3>
         <p>
-            The CfP platform opens for submissions and everyone can submit unlimited number of proposals.
-            During this period everyone can interact with the proposals which means:
+            During Phase 1 the CfP platform will be open to submissions by everyone.
+            Authors may submit an unlimited number of proposals.
+            During this period everyone will be able to interact with the submitted proposals.
+            This means that anyone can:
         </p>
         <ul>
             <li>Discuss</li>
             <li>Promote/Demote</li>
             <li>Share on social media</li>
-            <li>Refine</li>
-            <li>Withdraw</li>
         </ul>
         <p>
-            During Phase 1 proposals show up <strong>without revealing the name of the submitter or any other
-            “interestingness” information</strong>. This is in order to avoid any bias and to help people
-            focus on the content of the proposal.
+            Authors may therefore:
+        </p>
+        <ul>
+            <li>Refine their proposals</li>
+            <li>Withdraw their proposals</li>
+            <li>Add more proposals</li>
+        </ul>
+        <p>
+            <strong>During this phase, all proposals will appear anonymised to the public.</strong>
+            Author names as well as any other information that may give away the identity of the author
+            will be redacted at this phase. The rationale is that at this point the audience should be focusing
+            on the content rather than the author.
         </p>
         <p>
-            We want to encourage <strong>everyone</strong> to participate in <%= Settings.event_name %>
-            as fully as possible and one of the ways we can ensure that everyone is treated equally
-            is by not revealing who is behind each proposal.
+            With this 'blind' submission, we want to encourage <strong>everyone</strong> to participate
+            in <%= Settings.event_name %> and have the chance to have their proposal discussed online
+            without prejudice.
         </p>
 
         <h3>Interlude: Submissions freeze &amp; final call for shortlist selection</h3>
         <p>
-            At a certain date (TBA) submissions close and everyone can interact with the proposals only
-            for the purpose of making a final shortlist on which the final voting will take place.
-            "Interacting" means:
+            Following the end of Phase 1 <em>(see below for exact dates)</em>, the platform will close for further submissions.
+            Consequently the audience may interact with the proposals only for the purpose of making a final shortlist.
+            This shortlist will be the one used for the final voting. "Interacting" during this phase means:
         </p>
         <ul>
             <li>Promote/Demote</li>
             <li>Share on social media</li>
+        </ul>
+        <p>Authors at this stage may only:</p>
+        <ul>
             <li>Withdraw</li>
         </ul>
 
         <h3>Phase 2: Final voting &amp; selection</h3>
         <p>
-            A formal second round of voting then takes place on the proposals that made it into the shortlist.
-            The main difference with Phase 1 is that now <strong>there is no commenting</strong>
-            and that the proposals are <strong>de-anonymized</strong>
-            (this is also true for proposals that didn’t make the cut).
+            During phase 2 the audience will be called to vote on the proposals that have at this point
+            made it into the shortlist. At this phase <strong>all proposals will be named and the authors
+            will be identified, including the ones that didn't make it to the shortlist</strong>.
         </p>
     </section>
 
@@ -127,7 +148,7 @@
             <tbody>
             <tr class="info bold">
                 <td>Phase 1: Proposal submissions</td>
-                <td>March 26th - April 23rd</td>
+                <td>March 28th - April 23rd</td>
                 <td>In progress</td>
             </tr>
             <tr>
@@ -243,9 +264,9 @@
         <p>
             As mentioned before the goals of the process are, among others, to choose the best
             proposals and also to help them improve. This way, we can enjoy the most interesting
-            talks during <%= Settings.event_name %>. To convince you to get engaged, we are planning
-            to reserve tickets for <%= Settings.event_name %> for those who have contributed
-            positively in the proposals suggestion and selection process.
+            talks during <%= Settings.event_name %>. To convince you to get engaged, <strong>we have reserved
+            a certain amount of tickets for <%= Settings.event_name %> for those who have contributed
+            positively in the proposals suggestion and selection process.</strong>
         </p>
 
         <h3>What sort of suggestions should I make about a proposal?</h3>
