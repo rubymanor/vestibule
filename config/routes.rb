@@ -8,7 +8,6 @@ Vestibule::Application.routes.draw do
       post :vote
     end
   end
-  #resources :selections, :only => [:index, :create, :destroy]
 
   match "/motivation", :to => "home#motivation", :as => "motivation"
   match "/about", :to => "home#about", :as => "about"

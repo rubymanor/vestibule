@@ -30,10 +30,6 @@ class Proposal < ActiveRecord::Base
   scope :active, where(withdrawn: false)
   scope :withdrawn, where(withdrawn: true)
 
-  def self.available_for_selection_by(user)
-    active.reject { |p| Selection.where(proposal_id: p.id, user_id: user.id).exists? }
-  end
-
   after_create :update_proposer_score
 
   def last_modified
