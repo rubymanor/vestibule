@@ -1,18 +1,19 @@
 <div id="proposal" class="hero-unit">
     <%= proposal_div(@proposal) do %>
         <%= page_title @proposal.title %>
-            <p>
-                <% if can? :edit, @proposal %>
+        <p>
+            <% if can? :edit, @proposal %>
                 <%= link_to "Edit proposal", edit_proposal_path(@proposal), class: "btn btn-primary" %>
-                <% end %>
+            <% end %>
 
-                <%= change_proposal_state_button(@proposal) %>
-            </p>
+            <%= change_proposal_state_button(@proposal) %>
+        </p>
 
-            <p class="age muted"><%= proposal_update_information @proposal %>
-                <span class='st_facebook_hcount' displayText='Facebook'></span>
-                <span class='st_twitter_hcount' st_via="euruko" displayText='Tweet'></span>
-            </p>
+        <p class="age muted">
+            <%= proposal_update_information @proposal %>
+            <span class='st_facebook_hcount' displayText='Facebook'></span>
+            <span class='st_twitter_hcount' st_via="euruko" displayText='Tweet'></span>
+        </p>
 
         <% if @proposal.withdrawn? %>
             <h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2>
@@ -24,7 +25,7 @@
                 <br>
 
                 <small class="text-info">
-                    <em>You have already voted <strong><em><%= current_user.voted_for?(@proposal) ? 'up' : 'down' %></em></strong> this proposal.</em>
+                    <em>You have already voted <strong><%= current_user.voted_for?(@proposal) ? 'up' : 'down' %></strong> this proposal.</em>
                 </small>
 
                 <div class="btn-group">
