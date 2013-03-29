@@ -119,9 +119,9 @@ module ApplicationHelper
 
   def change_proposal_state_button(proposal)
     if proposal.withdrawn? && can?(:republish, proposal)
-      button_to "Re-publish proposal", republish_proposal_path(proposal), class: "btn"
+      link_to "Re-publish proposal", republish_proposal_path(proposal), class: "btn", method: :post
     elsif proposal.published? && can?(:withdraw, proposal)
-      button_to "Withdraw proposal", withdraw_proposal_path(proposal), class: "btn btn-danger"
+      link_to "Withdraw proposal", withdraw_proposal_path(proposal), class: "btn btn-danger", method: :post
     end
   end
 

@@ -1,16 +1,352 @@
-<section id="how-to-use-vestibule">
-  <%= page_title 'What is Vestibule?' %>
+<div class="container">
+<div class="row">
+<div class="span3" id="sidenav">
+    <ul data-spy="affix" class="nav nav-tabs nav-stacked">
+        <li class="nav-header">About the CfP Process</li>
+        <li><a href="#rationale">Rationale</a></li>
+        <li><a href="#process-overview">Process overview</a></li>
+        <li><a href="#dates">Dates</a></li>
+        <li><a href="#rules">Rules</a></li>
+        <li class="nav-header">FAQ</li>
+        <li><a href="#faq-submissions">Submissions</a></li>
+        <li><a href="#faq-suggestions">Suggestions</a></li>
+        <li><a href="#faq-selection">Selection</a></li>
+    </ul>
+</div>
 
-  <p>Vestibule is a tool to help us &mdash; the community &mdash; generate and prepare the contents of the day.</p>
+<div class="span7" style="margin-top: -35px;">
+<%= page_title 'About the Cfp Process', no_h1=true %>
 
-  <p>The idea is simple. You propose a presentation. Others will help you refine and focus it by making <em>suggestions</em>. You keep updating your proposal bearing those suggestions in mind.</p>
+<section id="about">
+    <h1>What is this?</h1>
 
-  <p>At some point (yet to be determined), we&rsquo;ll then collectively whittle down the set of proposals to those that have been selected for the day.</p>
+    <p>
+        This application is a tool to help us &mdash; the community &mdash; record, improve and select
+        the actual presentations for <a href="<%= Settings.main_site %>"><%= Settings.event_name %></a>.
+        The code is based on <a href="http://rubymanor.org/">Ruby Manor's</a> original
+        <a href="http://vestibule.rubymanor.org/proposals">vestibule app</a>, and we are really thankful for that!
+        With this tool we will be able to have our conference the way we want it - at least as far as the presentations go :-)
+    </p>
 
-  <p><%= link_to "Read more about the Vestibule process", the_vestibule_process_path, class: "btn btn-primary" %></p>
+    <p>
+        <strong><%= Settings.event_name %> would be a lesser conference without your presentations</strong>.
+        We think that almost everyone has something interesting to say,
+        so please think about that fun or unusual or difficult or surprising thing
+        you&rsquo;ve done recently and submit a talk (or several!) so that everyone can hear about it.
+    </p>
+
+    <p>
+        We welcome all kinds of engaging Ruby related presentations,
+        however we will be even happier if you propose an original presentation which
+        will not appear in any other conference prior to EuRuKo 2013.
+        Ruby was first coded in 1993 and so this summer we'd like to celebrate its 20th birthday
+        by having the plethora of presentations focused mostly on the language,
+        its evolution, its future and its internals wherever possible.
+    </p>
+</section>
+
+<% if Settings.event_description %>
+<section>
+    <h2>What is <%= Settings.event_name %>?</h2>
+
+    <%= Settings.event_description.html_safe %>
+</section>
+<% end %>
+
+<section>
+    <h1>The <%= Settings.event_name %> CfP process</h1>
+
+    <section id="rationale">
+        <h2>Rationale</h2>
+        <p>
+            The CfP was designed with the following goals in mind:
+        </p>
+
+        <ul>
+            <li>Encourage proposal submissions by everyone (irrespective of publicity, gender, race, domain etc).</li>
+            <li>Encourage refinements on proposals.</li>
+            <li>Make sure that the selection process is neutral and unbiased.</li>
+            <li>Make sure that the most interesting proposals are actually selected by the community.</li>
+        </ul>
+    </section>
+
+    <section id="process-overview">
+        <h2>The process overview</h2>
+        <p>
+            The process is an amalgamation of
+            <a href="http://vestibule.rubymanor.org/the-vestibule-process" target="_blank">Ruby Manor's ‘Vestibule’ process</a>,
+            <a href="https://github.com/euruko2012/call-for-proposals" target="_blank">last year’s EuRuKo</a>
+            and our own ideas and favourite picks from various conferences we have attended ourselves in the past.
+
+            The main ideas are rather simple:
+        </p>
+        <ul>
+            <li>Make it safe and easy for everyone to submit their proposal.</li>
+            <li>Gather, discuss and refine a lot of ideas in an anonymous (blind) way without prejudice.</li>
+            <li>Make a shortlist of the best proposals using some “interestingness” criteria.</li>
+            <li>Publicly vote for the presentations that you want to see.</li>
+        </ul>
+
+        <h3>Phase 1: Submission and discussion</h3>
+        <p>
+            During Phase 1 the CfP platform will be open to submissions by everyone.
+            Authors may submit an unlimited number of proposals.
+            During this period everyone will be able to interact with the submitted proposals.
+            This means that anyone can:
+        </p>
+        <ul>
+            <li>Discuss</li>
+            <li>Promote/Demote</li>
+            <li>Share on social media</li>
+        </ul>
+        <p>
+            Authors may therefore:
+        </p>
+        <ul>
+            <li>Refine their proposals</li>
+            <li>Withdraw their proposals</li>
+            <li>Add more proposals</li>
+        </ul>
+        <p>
+            <strong>During this phase, all proposals will appear anonymised to the public.</strong>
+            Author names as well as any other information that may give away the identity of the author
+            will be redacted at this phase. The rationale is that at this point the audience should be focusing
+            on the content rather than the author.
+        </p>
+        <p>
+            With this 'blind' submission, we want to encourage <strong>everyone</strong> to participate
+            in <%= Settings.event_name %> and have the chance to have their proposal discussed online
+            without prejudice.
+        </p>
+
+        <h3>Interlude: Submissions freeze &amp; final call for shortlist selection</h3>
+        <p>
+            Following the end of Phase 1 <em>(see below for exact dates)</em>, the platform will close for further submissions.
+            Consequently the audience may interact with the proposals only for the purpose of making a final shortlist.
+            This shortlist will be the one used for the final voting. "Interacting" during this phase means:
+        </p>
+        <ul>
+            <li>Promote/Demote</li>
+            <li>Share on social media</li>
+        </ul>
+        <p>Authors at this stage may only:</p>
+        <ul>
+            <li>Withdraw</li>
+        </ul>
+
+        <h3>Phase 2: Final voting &amp; selection</h3>
+        <p>
+            During phase 2 the audience will be called to vote on the proposals that have at this point
+            made it into the shortlist. At this phase <strong>all proposals will be named and the authors
+            will be identified, including the ones that didn't make it to the shortlist</strong>.
+        </p>
+    </section>
+
+    <section id="dates">
+        <h2>Dates</h2>
+        <table class="table table-bordered">
+            <tbody>
+            <tr class="info bold">
+                <td>Phase 1: Proposal submissions</td>
+                <td>March 28th - April 23rd</td>
+                <td>In progress</td>
+            </tr>
+            <tr>
+                <td>Interlude: Final call for shortlist selection</td>
+                <td>April 24th - April 30th</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Phase 2: Final voting & selection</td>
+                <td>May 1st - May 7th</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Speakers confirmation</td>
+                <td>May 8th - May 14th</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Final lineup announcement</td>
+                <td>May 15th</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Conference</td>
+                <td>June 28th - June 29th</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="rules">
+        <h2>Rules</h2>
+        <ul>
+            <li>Your proposal must follow our <a href="http://euruko2013.org/codeofconduct/">code of conduct</a>.</li>
+            <li>Offensive or spamming submissions will not be tolerated <strong>(and we mean it!)</strong>.</li>
+            <li>Proposals promoting a product, a company or a service will be discarded.</li>
+            <li>If you submit a proposal you agree that your talk will be recorded and published online, in case you get selected.</li>
+            <li>Only one proposal per author can make it in the shortlist.</li>
+        </ul>
+    </section>
 </section>
 
 <section>
-  <h2>What is <%= Settings.event_name %>?</h2>
-  <%= Settings.event_description.html_safe %>
+    <h1>FAQ</h1>
+
+    <section id="faq-submissions">
+        <h2>Submissions</h2>
+
+        <% if Settings.why_submit_a_proposal.present? %>
+        <h3>Why should I give a talk?</h3>
+
+        <%= Settings.why_submit_a_proposal.html_safe %>
+        <% end %>
+
+        <% if Settings.event_audience.present? %>
+        <h3>Who will I be talking to?</h3>
+
+        <%= Settings.event_audience.html_safe %>
+        <% end %>
+
+        <% if Settings.proposals_topics.present? %>
+        <h3>What can I talk about?</h3>
+
+        <%= Settings.proposals_topics.html_safe %>
+        <p>
+            You should take a look at <%= link_to "list of things people are hoping to get out of #{Settings.event_name}", motivation_path %>
+            for some inspiration.
+        </p>
+        <% end %>
+
+        <% if Settings.proposals_duration.present? %>
+        <h3>How long should my talk be?</h3>
+
+        <%= Settings.proposals_duration.html_safe %>
+        <% end %>
+
+        <h3>How anonymous does my proposal have to be?</h3>
+
+        <p>
+            Although the proposal system is completely anonymous during Phase 1 of the process,
+            we can&rsquo;t prevent you from including identifying information either within the proposal itself
+            or on the wider internet. Sometimes this is inevitable: if you want to give a talk about this
+            great programming language called Ruby that you developed in 1993, it&rsquo;s not going to take
+            too much detective work to reveal your identity.
+
+            That&rsquo;s fine, and there&rsquo;s no need to go to ridiculous lengths to conceal your identity
+            if it makes the proposal more difficult to write, but just respect the spirit of the process:
+            as far as it is sensible and practical, we would like for talks to be chosen because of what
+            they&rsquo;re about, not because of who's presenting.
+        </p>
+
+        <h3>Do I have to go through with it if I propose something?</h3>
+
+        <p>
+            Of course not! No one is going to force you to give a talk just because you proposed it!
+            You always have the option to withdraw your proposal if you change your mind or discover you
+            can&rsquo;t make it to the conference.
+        </p>
+
+        <p>
+            That being said, after the final selection is completed (Phase 2), we <strong>will</strong>
+            require commitment from your side after having confirmed with you that you are indeed interested
+            in attending and presenting at EuRuKo 2013.
+        </p>
+    </section>
+
+    <section id="faq-suggestions">
+        <h2>Suggestions</h2>
+
+        <h3>Why should I participate?</h3>
+
+        <p>
+            As mentioned before the goals of the process are, among others, to choose the best
+            proposals and also to help them improve. This way, we can enjoy the most interesting
+            talks during <%= Settings.event_name %>. To convince you to get engaged, <strong>we have reserved
+            a certain amount of tickets for <%= Settings.event_name %> for those who have contributed
+            positively in the proposals suggestion and selection process.</strong>
+        </p>
+
+        <h3>What sort of suggestions should I make about a proposal?</h3>
+
+        <p>
+            Read the proposal in detail and provide feedback about how you think
+            it could be clarified or improved. Ask questions about what it will involve.
+            Be constructive and explain what needs to happen in order for the proposal
+            to become something you&rsquo;re willing to vote for.
+        </p>
+
+        <p>
+            Try to avoid simple &ldquo;+1&rdquo; or &ldquo;Yes, sounds good.&rdquo; style suggestions.
+
+            Say <em>why</em> you&rsquo;re &ldquo;+1&rdquo;-ing the proposal -
+            there&rsquo;s got to be a reason and it&rsquo;s possible that you&rsquo;ve assumed
+            they&rsquo;ll cover something that they weren&rsquo;t planning to.
+        </p>
+
+        <h3>What do I do with suggestions on my proposals?</h3>
+
+        <p>
+            There are many ways to deal with suggestions.
+            You <em>can</em> simply ignore them - but we think you&rsquo;ll write a better talk
+            and get more out of the process if you actively engage with them.
+
+            You can respond with your own comments (which will remain anonymous),
+            you can tweak your proposal to accommodate them, or to explicitly rule them out.
+        </p>
+    </section>
+
+    <section id="faq-selection">
+        <h2>Selection</h2>
+
+        <h3>How is the "shortlist" decided?</h3>
+
+        <p>
+            The shortlist will be decided based on “interestingness” factors some of which may be:
+        </p>
+        <ul>
+            <li>Number of votes</li>
+            <li>Number of views</li>
+            <li>Number of comments</li>
+        </ul>
+        <p>
+            We will also monitor for:
+        </p>
+        <ul>
+            <li>Mentions on social networks</li>
+            <li>Number of refinements</li>
+        </ul>
+
+        <h3>How many proposals will make it into the shortlist?</h3>
+
+        <p>There will be 30 slots for the shortlist.</p>
+
+        <h3>How will proposals be chosen from the shortlist?</h3>
+        <p>
+            During Phase 2 the audience will be called to vote among the entries which made it into the shortlist.
+            Once the votes are in, the proposals with the most votes will be selected
+            and we will inform the authors in order to confirm their availability.
+        </p>
+
+        <h3>How many proposals will be selected?</h3>
+
+        <p>
+            10 proposals will be selected from the community (a.k.a. by voting)
+            and 1 strictly by the <a href="http://euruko2013.org/#contributors">committee</a>.
+        </p>
+
+        <h3>What happens if my proposal makes it to <%= Settings.event_name %>?</h3>
+
+        <p>
+            We&rsquo;ll be in touch to confirm that you really are happy to present.
+            It&rsquo;s fine if you&rsquo;re not, there&rsquo;ll be no hard feelings.
+            Assuming that you are we&rsquo;ll arrange the final details and announce it officially!
+        </p>
+    </section>
 </section>
+</div>
+</div>
+
+</div>

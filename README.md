@@ -58,7 +58,7 @@ Deploying on Heroku (non official site)
 4. Create your heroku app: `heroku create`
 5. Add the New Relic add on (requires credit card information): `heroku addons:add newrelic:standard`
 6. Switch to your own branch (or in EuRuKo 2013 case, the `euruko2013` branch) and un-ignore the `config/application.yml` since heroku needs this
-7. Deploy: `git push heroku your-branch:master`
+7. Deploy: `rake release`
 8. Check the app: `heroku open`
 
 For more info, checkout the [official heroku guide][]
@@ -84,6 +84,11 @@ Set up the additional two environment variables:
 Just add the [Mandrill Heroku Addon](https://addons.heroku.com/mandrill) and you should be ready to go.
 
 Keep in mind that this will work only on production environment.
+
+Exceptions & Errors tracking
+-----------------
+
+Sign up for a free account [bugsnag account](http://bugsnag.com) and set the appropriate env variable: `heroku config:add BUGSNAG_API_KEY=XXXXXXXXXXXXXXXXXXXXXX`
 
 Deploying the official site
 -----------------

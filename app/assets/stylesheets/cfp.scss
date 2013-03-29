@@ -1,3 +1,7 @@
+body, button, input, select, textarea {
+  color: $dark_grey;
+}
+
 #nav .sign-in {
   p {
     margin: 0 20px;
@@ -22,6 +26,12 @@ h1 {
 h2 {
   margin-top: 24px;
   font: 300 26px/32px $ubuntu;
+}
+
+h3 {
+  margin-top: 24px;
+  font: 300 22px/26px $ubuntu;
+  text-decoration: underline;
 }
 
 p {
@@ -50,6 +60,10 @@ footer {
     text-align: left;
     font-size: 14px;
   }
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .age {

@@ -8,7 +8,11 @@
 
                 <%= change_proposal_state_button(@proposal) %>
             </p>
-        <p class="age muted"><%= proposal_update_information @proposal %></p>
+
+            <p class="age muted"><%= proposal_update_information @proposal %>
+                <span class='st_facebook_hcount' displayText='Facebook'></span>
+                <span class='st_twitter_hcount' st_via="euruko" displayText='Tweet'></span>
+            </p>
 
         <% if @proposal.withdrawn? %>
             <h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2>

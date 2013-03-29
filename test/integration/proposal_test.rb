@@ -78,7 +78,7 @@ class ProposalTest < IntegrationTestCase
       should "be able to withdraw my proposal" do
         visit proposals_path
         click_link "My Amazing Talk"
-        click_button "Withdraw proposal"
+        click_link "Withdraw proposal"
 
         assert_proposal_withdrawn "My Amazing Talk"
       end
@@ -87,13 +87,13 @@ class ProposalTest < IntegrationTestCase
         setup do
           visit proposals_path
           click_link "My Amazing Talk"
-          click_button "Withdraw proposal"
+          click_link "Withdraw proposal"
         end
 
         should "be able to re-publish my withdrawn proposal" do
           visit proposals_path
           click_link "My Amazing Talk"
-          click_button "Re-publish proposal"
+          click_link "Re-publish proposal"
           assert_proposal_republished
         end
       end

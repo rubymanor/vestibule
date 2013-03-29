@@ -14,7 +14,7 @@
   <%= render 'shared/analytics' %>
   <% end %>
 </head>
-<body class="">
+<body class="" data-spy="scroll" data-target="#sidenav">
   <div class="">
 
     <div id="nav">
@@ -45,6 +45,7 @@
           </li>
         <% end -%>
 
+        <li><%= link_to "Blog", 'http://euruko2013.org/blog/' %></li>
         <li><%= link_to "Contact", 'http://euruko2013.org/#contact' %></li>
         <% if can?(:read, Proposal) -%><p><%= link_to "Proposals", proposals_path %></p><% end -%>
         <li><%= link_to "Sponsors", 'http://euruko2013.org/#sponsors' %></li>
@@ -75,10 +76,10 @@
         <p><%= link_to "Code of conduct", 'http://euruko2013.org/codeofconduct' %></p>
         <p><%= link_to "About the CfP process", about_path %></p>
         <p><%= link_to "Motivations", motivation_path %></p>
-        <p><%= link_to "Anonymity", anonymous_proposals_path %></p>
-        <p><%= link_to "The vestibule process", the_vestibule_process_path %></p>
       </footer>
     </div>
   </div>
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "a4771cba-dcbc-4ec6-9e9c-4abbf20f04c1", doNotHash: false, doNotCopy: false, hashAddressBar: false, servicePopup:true});</script>
 </body>
 </html>
