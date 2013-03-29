@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  check_authorization
+
   helper_method :current_user, :user_signed_in?
 
   before_filter :reload_settings if Rails.env.development?
