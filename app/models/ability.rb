@@ -7,6 +7,8 @@ class Ability
     user ||= User.new
 
     # Everyone
+    can :see, :index
+    can :see, :motivation
     can :create, :session
     can :read, User
     can :read, Proposal
@@ -16,6 +18,7 @@ class Ability
       can :destroy, :session
 
       can :see, :dashboard
+      can :see, :my_motivation
       can [:update], User, :id => user.id
 
       can [:update, :create, :withdraw, :republish], Proposal, :proposer_id => user.id
