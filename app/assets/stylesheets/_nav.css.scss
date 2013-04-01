@@ -7,7 +7,7 @@
   background-color: rgb(255, 255, 255);
   background-color: rgba(255, 255, 255, 0.4);
   padding: $hr 0;
-  @include box-shadow(0px 5px 10px 0px rgba(0, 0, 0, 0.1));
+//  @include box-shadow(0px 5px 10px 0px rgba(0, 0, 0, 0.1));
 
   .centered {
     position: relative;
@@ -31,16 +31,12 @@
         font: normal 14px $ubuntu;
         color: $light_grey;
         text-decoration: none;
+        text-transform: uppercase;
       }
 
       a:hover {
         color: $dark_grey;
       }
-    }
-
-    li:after {
-      content: "|";
-      padding-left: $vr;
     }
 
     li:first-child {
