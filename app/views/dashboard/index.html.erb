@@ -1,18 +1,19 @@
 <%= page_title 'Dashboard', no_h1=true %>
 
 <% if can?(:make, :selection) %>
-<h2>Selections</h2>
-<p>It is time for you to <%= link_to 'choose the talks you want to see on the day', selections_path %>.</p>
+<h2><%=t "vestibule.dashboard.selections.title" %></h2>
+<p><%=t "vestibule.dashboard.selections.vote.html", :link => link_to(t("vestibule.dashboard.selection.vote.link"), selections_path) %></p>
 <% elsif can?(:see, :agenda) %>
-<h2>Selections</h2>
+<h2><%=t "vestibule.dashboard.selections.title" %></h2>
+<p><%=t "vestibule.dashboard.selections.agenda.html", :link => link_to(t("vestibule.dashboard.selections.agenda.link"), selections_path) %></p>
 <p>The community has spoken; <%= link_to 'take a look at the agenda they have generated', selections_path %>.</p>
 <% elsif can?(:see, :selection) %>
-<h2>Selections</h2>
-<p>The time for voting is over! We're collating all the selections and preparing the agenda. You can still <%= link_to 'view selections you made', selections_path %>.</p>
+<h2><%=t "vestibule.dashboard.selections.title" %></h2>
+<p><%=t "vestibule.dashboard.selections.holding.html", :link => link_to(t("vestibule.dashboard.selections.holding.link"), selections_path) %></p>
 <% end %>
 
-<h2>Your proposals</h2>
-<p>(Because they are anonymised, other users will not see that you are the author of these proposals. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.)</p>
+<h2><%=t "vestibule.dashboard.your_proposals.title" %></h2>
+<p><%=t "vestibule.dashboard.your_proposals.html", :link => link_to(t("vestibule.dashboard.your_proposals.link"), anonymous_proposals_path) %></p>
 <% if @your_proposals.present? %>
   <ul id="your-proposals" class="proposals">
     <% @your_proposals.each do |proposal| %>
@@ -28,11 +29,11 @@
 <% end %>
 
 <% if can?(:make, :proposal) %>
-<p><%= link_to "Propose #{'another' if @your_proposals.present?} talk", new_proposal_path, class: "btn btn-primary" %></p>
+<p><%= link_to t(@your_proposals.present? ? "vestibule.dashboard.your_proposals.propose.another" : "vestibule.dashboard.your_proposals.propose.one"), new_proposal_path, class: "btn btn-primary" %></p>
 <% end %>
 
 <% if @proposals_you_should_look_at.present? %>
-  <h2>You should consider giving some suggestions about these proposals</h2>
+  <h2><%=t "vestibule.dashboard.suggestions.consider_suggesting" %></h2>
   <ul id="you-should-look-at-these" class="proposals">
     <% @proposals_you_should_look_at.each do |proposal| %>
       <%= content_tag_for :li, proposal do %>
@@ -44,7 +45,7 @@
 <% end %>
 
 <% if @proposals_that_have_changed.present? %>
-  <h2>These proposals have been updated since you last made a suggestion</h2>
+  <h2><%=t "vestibule.dashboard.suggestions.updated_proposals" %></h2>
   <ul id="things-have-changed" class="proposals">
     <% @proposals_that_have_changed.each do |proposal| %>
       <%= content_tag_for :li, proposal do %>
@@ -56,7 +57,7 @@
 <% end %>
 
 <% if @proposals_that_have_been_withdrawn.present? %>
-  <h2>These proposals you made suggestions on have been withdrawn</h3>
+  <h2><%=t "vestibule.dashboard.suggestions.withdrawn_proposals" %></h2>
   <ul id="things-have-ended" class="proposals">
     <% @proposals_that_have_been_withdrawn.each do |proposal| %>
       <%= content_tag_for :li, proposal do %>

@@ -5,3 +5,27 @@ en:
     attributes:
   helpers:
     submit:
+  vestibule:
+    dashboard:
+      your_proposals:
+        title: "Your proposals"
+        html: (Because they are anonymised, other users will not see that you are the author of these proposals. %{link}.)
+        link: Read more about anonymisation
+        propose:
+          one: Propose talk
+          another: Propose another talk
+      selections:
+        title: Selections
+        vote:
+          html: It is time for you to %{link}.
+          link: choose the talks you want to see on the day
+        agenda:
+          html: The community has spoken; %{link}.
+          link: take a look at the agenda they have generated
+        holding:
+          html: The time for voting is over! We're collating all the selections and preparing the agenda. You can still %{link}.
+          link: view selections you made
+      suggestions:
+        consider_suggesting: You should consider giving some suggestions about these proposals
+        updated_proposals: These proposals have been updated since you last made a suggestion
+        withdrawn_proposals: These proposals you made suggestions on have been withdrawn
