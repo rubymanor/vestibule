@@ -7,6 +7,7 @@ en:
     submit:
   vestibule:
     dashboard:
+      title: Dashboard
       your_proposals:
         title: "Your proposals"
         html: (Because they are anonymised, other users will not see that you are the author of these proposals. %{link}.)

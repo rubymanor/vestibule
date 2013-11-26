@@ -1,12 +1,11 @@
-<%= page_title 'Dashboard', no_h1=true %>
+<%= page_title t("vestibule.dashboard.title"), no_h1=true %>
 
 <% if can?(:make, :selection) %>
 <h2><%=t "vestibule.dashboard.selections.title" %></h2>
-<p><%=t "vestibule.dashboard.selections.vote.html", :link => link_to(t("vestibule.dashboard.selection.vote.link"), selections_path) %></p>
+<p><%=t "vestibule.dashboard.selections.vote.html", :link => link_to(t("vestibule.dashboard.selections.vote.link"), selections_path) %></p>
 <% elsif can?(:see, :agenda) %>
 <h2><%=t "vestibule.dashboard.selections.title" %></h2>
 <p><%=t "vestibule.dashboard.selections.agenda.html", :link => link_to(t("vestibule.dashboard.selections.agenda.link"), selections_path) %></p>
-<p>The community has spoken; <%= link_to 'take a look at the agenda they have generated', selections_path %>.</p>
 <% elsif can?(:see, :selection) %>
 <h2><%=t "vestibule.dashboard.selections.title" %></h2>
 <p><%=t "vestibule.dashboard.selections.holding.html", :link => link_to(t("vestibule.dashboard.selections.holding.link"), selections_path) %></p>
