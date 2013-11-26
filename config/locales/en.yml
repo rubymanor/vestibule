@@ -95,4 +95,6 @@ en:
         involved:
           title: Proposals %{name_is_or_are} involved with
           none: "%{name_is_or_are} not involved with anybody else's proposals."
+      edit:
+        title: Update your information
 
