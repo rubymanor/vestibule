@@ -30,7 +30,7 @@ group :test do
   gem "database_cleaner", "0.9.1"
   gem "mocha", "0.13.1", :require => false
   gem "faker", "1.1.2"
-  gem "timecop", "0.5.7"
+  gem "timecop", "~> 0.6.0"
 
   # Things that aren't *required*, but you might need as you go.
   gem "debugger"
