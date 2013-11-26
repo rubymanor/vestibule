@@ -77,4 +77,22 @@ en:
         selection: Selection
         remaining: "%{quantity} left!"
         all_selections_used: Deselect some above to choose others
+    user:
+      motivation:
+        actions:
+          edit: Edit your reason
+        missing:
+          your: Other attendees are wondering what you hope to get out of Ruby Manor. %{link}.
+          link: Tell them now
+          other: "%{name} hasn't said what they hope to get out of Ruby Manor yet."
+      proposals:
+        your:
+          title: "Your proposals"
+          anonymised:
+            html: "(Because proposals are anonymised, other users will not see this information on your profile. %{link}.)"
+            link: Read more about anonymisation
+          none: "%{name_or_pronoun} no proposals."
+        involved:
+          title: Proposals %{name_is_or_are} involved with
+          none: "%{name_is_or_are} not involved with anybody else's proposals."
 

@@ -5,13 +5,13 @@
     <% if @user.signup_reason.present? %>
     <article id="signup_reason">
       <%= markdown @user.signup_reason %>
-      <% if @user == current_user %><aside><%= link_to 'Edit your reason', edit_user_path(current_user) %></aside><% end %>
+      <% if @user == current_user %><aside><%= link_to t("vestibule.user.motivation.actions.edit"), edit_user_path(current_user) %></aside><% end %>
     </article>
     <% else %>
       <% if @user == current_user %>
-        <p class="well">Other attendees are wondering what you hope to get out of Ruby Manor. <%= link_to "Tell them now", edit_user_path(current_user) %>.</p>
+      <p class="well"><%=t "vestibule.user.motivation.missing.your", :link => link_to(t("vestibule.user.motivation.missing.link"), edit_user_path(current_user)) %></p>
       <% else %>
-        <p><%= user_name %> hasn't said what they hope to get out of Ruby Manor yet.</p>
+      <p><%=t "vestibule.users.motivation.missing.other", :name => user_name %></p>
       <% end %>
     <% end %>
   </section>
@@ -21,8 +21,8 @@
   <% if current_user == @user %>
     <div class="span6">
       <section id="proposals">
-        <h2><%= possessive %> proposals</h2>
-        <p>(Because proposals are anonymised, other users will not see this information on your profile. <%= link_to "Read more about anonymisation", anonymous_proposals_path %>.)</p>
+        <h2><%=t "vestibule.user.proposals.your.title" %></h2>
+        <p><%=t "vestibule.user.proposals.your.anonymised.html", :link => link_to(t("vestibule.user.proposals.your.anonymised.link"), anonymous_proposals_path) %>.)</p>
         <% if @user.proposals.any? %>
           <ul>
           <% @user.proposals.each do |proposal| %>
@@ -30,7 +30,7 @@
           <% end %>
           </ul>
         <% else %>
-          <p><%= to_have %> no proposals.</p>
+          <p><%=t "vestibule.user.proposals.your.none", :name_or_pronoun => to_have %></p>
         <% end %>
       </section>
     </div>
@@ -39,7 +39,7 @@
     <div class="span12"%>
   <% end %>
     <section id="involvement">
-      <h2>Proposals <%= to_be(false) %> involved with</h2>
+      <h2><%=t "vestibule.user.proposals.involved.title", :name_is_or_are => to_be(false) %></h2>
 
       <% if (other_proposals = @user.proposals_of_interest.not_proposed_by(@user)).any? %>
         <ul>
@@ -48,7 +48,7 @@
         <% end %>
         </ul>
       <% else %>
-        <p><%= to_be %> not involved with anybody else's proposals.</p>
+        <p><%=t "vestibule.user.proposals.involved.none", :name_is_or_are => to_be %></p>
       <% end %>
     </section>
   </div>
