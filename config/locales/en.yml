@@ -33,4 +33,15 @@ en:
         one: Propose talk
         another: Propose another talk
       withdrawn: "The following proposals have been withdrawn:"
-
+    proposal:
+      chosen: This proposal by %{link} has been chosen by the community to be given at Ruby Manor 4.
+      withdrawn: This proposal has been withdrawn...
+      suggestions:
+        title: Suggestions
+        your: You respond
+        proposal_author: The proposal author responds
+        other: "%{suggestor} suggests"
+        make:
+          title: Make your suggestion
+          your: You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.
+          other: Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.
