@@ -1,12 +1,12 @@
 <% if !can?(:see, :agenda) && !user_signed_in? %>
-  <p>The agenda isn't visible yet; why not <%= link_to "sign in", "/auth/github" %> to cast your votes?</p>
+<p><%=t "vestibule.selections.agenda.not_visible.html", :link => link_to(t("vestibule.selections.agenda.not_visible.link"), "/auth/github") %></p>
 <% end %>
 
 <% if can?(:see, :agenda) %>
   <div class="agenda">
-    <h1>Chosen Proposals</h1>
+    <h1><%=t "vestibule.selections.agenda.title" %></h1>
 
-    <p>There will be <strong>8</strong> talks given at Ruby Manor 4.</p>
+    <p><%= t("vestibule.selections.agenda.description").html_safe %></p>
 
     <ol id="the_chosen_ones">
       <% @top_proposals.each do |popular_proposal|
@@ -21,17 +21,17 @@
 <% end %>
 
 <% if user_signed_in? %>
-  <h1>Your selections</h1>
+  <h1><%=t "vestibule.selections.yours.title" %></h1>
 
   <% unless can?(:make, :selection) %>
-    <p>Here are the selections you made:</p>
+    <p><%=t "vestibule.selections.yours.description" %></p>
   <% end %>
 
   <ul id="selections">
     <% current_user.selections.each do |selection| %>
       <%= content_tag_for :li, selection.proposal, 'selection' do %>
         <% if can?(:make, :selection) %>
-          <%= button_to('Deselect', selection, method: :delete, class: "btn") %>
+        <%= button_to(t("vestibule.selections.yours.actions.deselect"), selection, method: :delete, class: "btn") %>
         <% end %>
         <%= link_to selection.proposal.title, selection.proposal %><%= show_proposal_author_if_allowed(selection.proposal) %>
       <% end %>
@@ -40,9 +40,9 @@
 
   <% if can?(:make, :selection) %>
     <% if (remaining = (Selection.limit_per_user - current_user.selections.count)) > 0 %>
-      <h2><%= pluralize remaining, "Selection" %> left!</h2>
+      <h2><%=t "vestibule.selections.yours.remaining", :quantity => pluralize(remaining, t("vestibule.selections.yours.selection")) %></h2>
     <% else %>
-      <h2>Deselect some above to choose others</h2>
+      <h2><%=t "vestibule.selections.yours.all_selections_used" %></h2>
     <% end %>
 
     <ul id="available_selections">
@@ -50,7 +50,7 @@
       <%= content_tag_for :li, proposal, 'selection' do %>
         <%= form_for Selection.new do |form| %>
           <%= form.hidden_field :proposal_id, value: proposal.id %>
-          <%= form.submit "Select", disabled: (remaining == 0 ? 'disabled' : nil), class: "btn" %>
+          <%= form.submit t("vestibule.selections.yours.actions.select"), disabled: (remaining == 0 ? 'disabled' : nil), class: "btn" %>
         <% end %>
         <%= link_to proposal.title, proposal_path(proposal) %><%= show_proposal_author_if_allowed(proposal) %>
       <% end %>

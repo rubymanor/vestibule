@@ -61,4 +61,20 @@ en:
       feed:
         title: "Vestibule :: Suggestions for %{proposal_title}"
         description: A list of all suggestions made for %{proposal_title}
+    selections:
+      agenda:
+        title: Chosen Proposals
+        description: There will be <strong>8</strong> talks given at Ruby Manor 4.
+        not_visible:
+          html: The agenda isn't visible yet; why not %{link} to cast your votes?
+          link: sign in
+      yours:
+        title: Your selections
+        description: "Here are the selections you made:"
+        actions:
+          select: Select
+          deselect: Deselect
+        selection: Selection
+        remaining: "%{quantity} left!"
+        all_selections_used: Deselect some above to choose others
 
