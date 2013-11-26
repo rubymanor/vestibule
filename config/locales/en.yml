@@ -37,6 +37,7 @@ en:
       title: Propose a talk
       chosen: This proposal by %{link} has been chosen by the community to be given at Ruby Manor 4.
       withdrawn: This proposal has been withdrawn...
+      edit: Edit your proposal
       submit: Submit proposal
       update: Update proposal
       pitch:
