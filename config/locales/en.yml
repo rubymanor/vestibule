@@ -33,6 +33,9 @@ en:
         one: Propose talk
         another: Propose another talk
       withdrawn: "The following proposals have been withdrawn:"
+      feed:
+        title: "Vestibule :: All Proposals"
+        description: A list of all talk proposals made to the vestibule system
     proposal:
       title: Propose a talk
       chosen: This proposal by %{link} has been chosen by the community to be given at Ruby Manor 4.
@@ -55,4 +58,7 @@ en:
           title: Make your suggestion
           your: You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.
           other: Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.
+      feed:
+        title: "Vestibule :: Suggestions for %{proposal_title}"
+        description: A list of all suggestions made for %{proposal_title}
 
