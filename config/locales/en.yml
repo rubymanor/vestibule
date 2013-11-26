@@ -12,9 +12,6 @@ en:
         title: "Your proposals"
         html: (Because they are anonymised, other users will not see that you are the author of these proposals. %{link}.)
         link: Read more about anonymisation
-        propose:
-          one: Propose talk
-          another: Propose another talk
       selections:
         title: Selections
         vote:
@@ -30,3 +27,10 @@ en:
         consider_suggesting: You should consider giving some suggestions about these proposals
         updated_proposals: These proposals have been updated since you last made a suggestion
         withdrawn_proposals: These proposals you made suggestions on have been withdrawn
+    proposals:
+      title: Talk proposals
+      propose:
+        one: Propose talk
+        another: Propose another talk
+      withdrawn: "The following proposals have been withdrawn:"
+

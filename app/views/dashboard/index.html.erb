@@ -28,7 +28,7 @@
 <% end %>
 
 <% if can?(:make, :proposal) %>
-<p><%= link_to t(@your_proposals.present? ? "vestibule.dashboard.your_proposals.propose.another" : "vestibule.dashboard.your_proposals.propose.one"), new_proposal_path, class: "btn btn-primary" %></p>
+<p><%= link_to t(@your_proposals.present? ? "vestibule.proposals.propose.another" : "vestibule.proposals.propose.one"), new_proposal_path, class: "btn btn-primary" %></p>
 <% end %>
 
 <% if @proposals_you_should_look_at.present? %>
