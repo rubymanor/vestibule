@@ -34,8 +34,17 @@ en:
         another: Propose another talk
       withdrawn: "The following proposals have been withdrawn:"
     proposal:
+      title: Propose a talk
       chosen: This proposal by %{link} has been chosen by the community to be given at Ruby Manor 4.
       withdrawn: This proposal has been withdrawn...
+      submit: Submit proposal
+      update: Update proposal
+      pitch:
+        html: So you want to talk at Ruby Manor? That's great! If you haven't already, you may wish to %{link} to find out how everything works.
+        link: read about the vestibule process
+      anonymous:
+        html: "<strong>NOTE:</strong> proposals are anonymous — %{link}."
+        link: read more about anonymisation
       suggestions:
         title: Suggestions
         your: You respond
@@ -45,3 +54,4 @@ en:
           title: Make your suggestion
           your: You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.
           other: Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.
+
