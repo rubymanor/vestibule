@@ -9,7 +9,7 @@
     </article>
     <% else %>
       <% if @user == current_user %>
-      <p class="well"><%=t "vestibule.user.motivation.missing.your", :link => link_to(t("vestibule.user.motivation.missing.link"), edit_user_path(current_user)) %></p>
+      <p class="well"><%=t("vestibule.user.motivation.missing.your", :link => link_to(t("vestibule.user.motivation.missing.link"), edit_user_path(current_user))).html_safe %></p>
       <% else %>
       <p><%=t "vestibule.users.motivation.missing.other", :name => user_name %></p>
       <% end %>
@@ -22,7 +22,7 @@
     <div class="span6">
       <section id="proposals">
         <h2><%=t "vestibule.user.proposals.your.title" %></h2>
-        <p><%=t "vestibule.user.proposals.your.anonymised.html", :link => link_to(t("vestibule.user.proposals.your.anonymised.link"), anonymous_proposals_path) %>.)</p>
+        <p><%=t "vestibule.user.proposals.your.anonymised.html", :link => link_to(t("vestibule.user.proposals.your.anonymised.link"), anonymous_proposals_path) %></p>
         <% if @user.proposals.any? %>
           <ul>
           <% @user.proposals.each do |proposal| %>
