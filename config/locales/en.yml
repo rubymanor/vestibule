@@ -6,6 +6,8 @@ en:
   helpers:
     submit:
   vestibule:
+    title: Vestibule
+    strapline: Building <a href="http://rubymanor.org">Ruby Manor</a> as a community
     dashboard:
       title: Dashboard
       your_proposals:
@@ -63,7 +65,9 @@ en:
         title: "Vestibule :: Suggestions for %{proposal_title}"
         description: A list of all suggestions made for %{proposal_title}
     selections:
+      title: Selections
       agenda:
+        nav_title: Agenda
         title: Chosen Proposals
         description: There will be <strong>8</strong> talks given at Ruby Manor 4.
         not_visible:
@@ -80,9 +84,11 @@ en:
           several: "%{quantity} selections left!"
           none: Deselect some above to choose others
     user:
+      title: Your profile
       edit:
         title: Update your information
       motivation:
+        title: "Motivations"
         actions:
           edit: Edit your reason
         missing:
