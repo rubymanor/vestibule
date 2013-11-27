@@ -40,9 +40,9 @@
 
   <% if can?(:make, :selection) %>
     <% if (remaining = (Selection.limit_per_user - current_user.selections.count)) > 0 %>
-      <h2><%=t "vestibule.selections.yours.remaining", :quantity => pluralize(remaining, t("vestibule.selections.yours.selection")) %></h2>
+    <h2><%= remaining == 1 ? t("vestibule.selections.yours.remaining.one") : t("vestibule.selections.yours.remaining.several", :quantity => remaining) %></h2>
     <% else %>
-      <h2><%=t "vestibule.selections.yours.all_selections_used" %></h2>
+      <h2><%=t "vestibule.selections.yours.remaining.none" %></h2>
     <% end %>
 
     <ul id="available_selections">

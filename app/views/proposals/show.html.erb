@@ -44,12 +44,12 @@
             <p class="author">
               <% if suggestion.author == @proposal.proposer %>
                 <% if current_user == @proposal.proposer %>
-                  <%=t "vestibule.proposal.suggestions.your" %>
+                  <%=t "vestibule.proposal.suggestions.attribution.your" %>
                 <% else %>
-                  <%=t "vestibule.proposal.suggestions.proposal_author" %>
+                  <%=t "vestibule.proposal.suggestions.attribution.proposal_author" %>
                 <% end %>
               <% else %>
-                <%=t("vestibule.proposal.suggestions.other", :suggestor => render('shared/user', :user => suggestion.author)).html_safe %>
+                <%=t("vestibule.proposal.suggestions.attribution.other", :suggestor => render('shared/user', :user => suggestion.author)).html_safe %>
               <% end %>
               <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span>
             </p>

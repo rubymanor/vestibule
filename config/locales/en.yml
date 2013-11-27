@@ -51,9 +51,10 @@ en:
         link: read more about anonymisation
       suggestions:
         title: Suggestions
-        your: You respond
-        proposal_author: The proposal author responds
-        other: "%{suggestor} suggests"
+        attribution:
+          your: You respond
+          proposal_author: The proposal author responds
+          other: "%{suggestor} suggests"
         make:
           title: Make your suggestion
           your: You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.
@@ -74,10 +75,13 @@ en:
         actions:
           select: Select
           deselect: Deselect
-        selection: Selection
-        remaining: "%{quantity} left!"
-        all_selections_used: Deselect some above to choose others
+        remaining:
+          one: "1 selection left!"
+          several: "%{quantity} selections left!"
+          none: Deselect some above to choose others
     user:
+      edit:
+        title: Update your information
       motivation:
         actions:
           edit: Edit your reason
@@ -95,6 +99,4 @@ en:
         involved:
           title: Proposals %{name_is_or_are} involved with
           none: "%{name_is_or_are} not involved with anybody else's proposals."
-      edit:
-        title: Update your information
 
