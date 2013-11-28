@@ -16,6 +16,6 @@ class Modes
   private
 
   def mode(name, &block)
-    @rules[name] = true
+    @rules[name] = Modality::Rules.new([])
   end
 end
