@@ -11,7 +11,7 @@ class Modes
   end
 
   def rules(mode)
-    @rule_sets[mode.to_sym]
+    @rule_sets.fetch(mode.to_sym, Modality::NoRules.new)
   end
 
   private

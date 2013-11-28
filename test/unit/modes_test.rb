@@ -51,6 +51,10 @@ class ModesTest < ActiveSupport::TestCase
 
       assert @modes.rules("test_mode").can?(:see, :stuff)
     end
+
+    should "return NoRules if asked for a non-existing rule set" do
+      refute @modes.rules(:test_mode).can?(:see, :stuff)
+    end
   end
 end
 
