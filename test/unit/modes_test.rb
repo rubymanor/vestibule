@@ -31,6 +31,16 @@ class ModesTest < ActiveSupport::TestCase
 
       assert modes.rules(:test_mode).can?(:see, :stuff)
     end
+
+    should "return nil from the define method" do
+      modes = Modes.new
+      assert_nil modes.define { mode :test_mode }
+    end
+
+    should "not explode if no block is passed" do
+      modes = Modes.new
+      assert_nil modes.define
+    end
   end
 end
 

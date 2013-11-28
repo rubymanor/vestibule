@@ -6,7 +6,8 @@ class Modes
   end
 
   def define(&block)
-    instance_exec(&block)
+    instance_exec(&block) if block
+    nil
   end
 
   def rules(mode)
@@ -17,7 +18,7 @@ class Modes
 
   def mode(name, &block)
     rules = Modality::Rules.new([])
-    rules.define(&block)
+    rules.define(&block) if block
     @rule_sets[name] = rules
   end
 end

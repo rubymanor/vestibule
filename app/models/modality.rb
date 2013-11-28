@@ -28,7 +28,8 @@ class Modality
     end
 
     def define(&block)
-      instance_exec(&block) if block_given?
+      instance_exec(&block) if block
+      nil
     end
 
     private
