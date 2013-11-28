@@ -11,7 +11,7 @@ class Modes
   end
 
   def rules(mode)
-    @rule_sets[mode]
+    @rule_sets[mode.to_sym]
   end
 
   private
@@ -19,6 +19,6 @@ class Modes
   def mode(name, &block)
     rules = Modality::Rules.new([])
     rules.define(&block) if block
-    @rule_sets[name] = rules
+    @rule_sets[name.to_sym] = rules
   end
 end
