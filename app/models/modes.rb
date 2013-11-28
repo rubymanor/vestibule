@@ -2,20 +2,22 @@ class Modes
   attr_reader :config_file_path
 
   def initialize()
-    @rules = {}
+    @rule_sets = {}
   end
 
   def define(&block)
-    instance_exec(&block) if block_given?
+    instance_exec(&block)
   end
 
   def rules(mode)
-    @rules[mode]
+    @rule_sets[mode]
   end
 
   private
 
   def mode(name, &block)
-    @rules[name] = Modality::Rules.new([])
+    rules = Modality::Rules.new([])
+    rules.define(&block)
+    @rule_sets[name] = rules
   end
 end

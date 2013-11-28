@@ -5,8 +5,7 @@ class ModesTest < ActiveSupport::TestCase
     should "define a mode correctly" do
       modes = Modes.new
       modes.define do
-        mode :test_mode do
-        end
+        mode :test_mode
       end
 
       refute modes.rules(:test_mode).nil?
@@ -23,7 +22,6 @@ class ModesTest < ActiveSupport::TestCase
     end
 
     should "allow the Rules to define rules" do
-      skip "WIP"
       modes = Modes.new
       modes.define do
         mode :test_mode do
