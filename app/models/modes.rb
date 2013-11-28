@@ -14,6 +14,10 @@ class Modes
     @rule_sets.fetch(mode.to_sym, Modality::NoRules.new)
   end
 
+  def clear!
+    @rule_sets = {}
+  end
+
   private
 
   def mode(name, &block)

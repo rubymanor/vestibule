@@ -5,6 +5,7 @@ class ModesTest < ActiveSupport::TestCase
     setup do
       @modes = Modes.new
     end
+
     should "define a mode correctly" do
       @modes.define do
         mode :test_mode
@@ -55,6 +56,13 @@ class ModesTest < ActiveSupport::TestCase
     should "return NoRules if asked for a non-existing rule set" do
       refute @modes.rules(:test_mode).can?(:see, :stuff)
     end
+  end
+
+  should "support clear! so that it can be safely reloaded" do
+    modes = Modes.new
+    modes.define { mode(:test_mode) { can(:see, :stuff) } }
+    modes.clear!
+    refute modes.rules(:test_mode).can?(:see, :stuff)
   end
 end
 
