@@ -21,6 +21,18 @@ class ModesTest < ActiveSupport::TestCase
 
       assert modes.rules(:test_mode).respond_to?(:can?)
     end
+
+    should "allow the Rules to define rules" do
+      skip "WIP"
+      modes = Modes.new
+      modes.define do
+        mode :test_mode do
+          can :see, :stuff
+        end
+      end
+
+      assert modes.rules(:test_mode).can?(:see, :stuff)
+    end
   end
 end
 

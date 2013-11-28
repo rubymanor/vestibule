@@ -26,6 +26,16 @@ class Modality
       rule = request_to_rule(action, object)
       ruleset.include?(rule)
     end
+
+    def define(&block)
+      instance_exec(&block) if block_given?
+    end
+
+    private
+
+    def can(action, object)
+      @ruleset << [action, object]
+    end
   end
 
   class NoRules
