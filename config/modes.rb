@@ -39,4 +39,6 @@ Vestibule::Application.modes.define do
     can :see, :agenda
     can :see, :selection
   end
+
+  default :cfp
 end
