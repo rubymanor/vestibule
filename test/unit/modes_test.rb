@@ -144,6 +144,7 @@ class ModesTest < ActiveSupport::TestCase
       end
     end
   end
+
   should "support clear! so that it can be safely reloaded" do
     modes = Modes.new
     modes.define { mode(:test_mode) { can(:see, :stuff) } }

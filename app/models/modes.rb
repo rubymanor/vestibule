@@ -55,7 +55,7 @@ class Modes
 
     def mode(name, &block)
       name = name.to_sym
-      rules = Modality::Rules.new([], name)
+      rules = Modality.new([], name)
       rules.define(&block) if block
       @modes.add_mode(name, rules)
       @default = name unless @default
