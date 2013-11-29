@@ -7,10 +7,9 @@ class ModalityTest < ActiveSupport::TestCase
     end
   end
 
-  context "defining modality" do
+  context "defining modality with the DSL" do
     should "define a rule correctly" do
-      modality = Modality.new(:name)
-      modality.define do
+      modality = Modality::DSL.define(:name) do
         can :see, :stuff
       end
 
@@ -18,15 +17,17 @@ class ModalityTest < ActiveSupport::TestCase
     end
 
     should "not explode if the modality block has no rules" do
-      modality = Modality.new(:name)
-      modality.define
+      modality = Modality::DSL.define(:name)
 
       refute modality.can?(:see, :stuff)
     end
 
-    should "return nil from the define method" do
-      modality = Modality.new(:name)
-      assert_nil modality.define { can :see, :stuff }
+    should "return nil from the can method" do
+      result = true
+      Modality::DSL.define(:name) do
+        result = can(:see, :stuff)
+      end
+      assert_nil result
     end
   end
 

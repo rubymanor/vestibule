@@ -56,8 +56,7 @@ class Modes
 
     def mode(name, &block)
       name = name.to_sym
-      modality = Modality.new(name)
-      modality.define(&block) if block
+      modality = Modality::DSL.define(name, &block)
       @modes.add_mode(name, modality)
       @default = name unless @default
       nil

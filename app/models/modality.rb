@@ -11,9 +11,13 @@ class Modality
 
   attr_reader :ruleset, :mode
 
-  def initialize(mode)
+  def initialize(name)
     @ruleset = []
-    @mode = mode
+    @mode = name
+  end
+
+  def add_rule(action, object)
+    @ruleset << [action, object]
   end
 
   def request_to_rule(action, object)
@@ -25,14 +29,21 @@ class Modality
     ruleset.include?(rule)
   end
 
-  def define(&block)
-    instance_exec(&block) if block
-    nil
-  end
+  class DSL
+    def self.define(name, &block)
+      modality = Modality.new(name)
+      new(modality, block)
+      modality
+    end
 
-  private
+    def initialize(modality, block)
+      @modality = modality
+      instance_exec(&block) if block
+    end
 
-  def can(action, object)
-    @ruleset << [action, object]
+    def can(action, object)
+      @modality.add_rule(action, object)
+      nil
+    end
   end
 end
