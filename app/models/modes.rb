@@ -8,7 +8,7 @@ class Modes
   end
 
   def define(&block)
-    DSL.new(self).define(&block) if block
+    DSL.define(self, &block) if block
     raise NonExistentMode, "mode #{@default.inspect} does not exist" if @default && !modality_for?(@default)
     nil
   end
@@ -40,11 +40,12 @@ class Modes
   end
 
   class DSL
-    def initialize(modes)
-      @modes = modes
+    def self.define(modes, &block)
+      new(modes, &block)
     end
 
-    def define(&block)
+    def initialize(modes, &block)
+      @modes = modes
       instance_exec(&block) if block
       @modes.set_default(@default) if @default
     end
