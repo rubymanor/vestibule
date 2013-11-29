@@ -14,6 +14,14 @@ class ModesTest < ActiveSupport::TestCase
       refute @modes.rules(:test_mode).nil?
     end
 
+    should "set the name of the mode correctly" do
+      @modes.define do
+        mode :test_mode
+      end
+
+      assert_equal :test_mode, @modes.rules(:test_mode).mode
+    end
+
     should "define a mode which acts like a Rules" do
       @modes.define do
         mode :test_mode do

@@ -15,9 +15,10 @@ class Modality
   end
 
   class Rules
-    attr_reader :ruleset
-    def initialize(ruleset)
+    attr_reader :ruleset, :mode
+    def initialize(ruleset, mode = nil)
       @ruleset = ruleset
+      @mode = mode
     end
     def request_to_rule(action, object)
       [action.to_sym, object.to_sym]
