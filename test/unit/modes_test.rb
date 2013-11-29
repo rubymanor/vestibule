@@ -119,6 +119,31 @@ class ModesTest < ActiveSupport::TestCase
     end
   end
 
+  context "fetching rulesets" do
+    setup do
+      @modes = Modes.new
+    end
+
+    context "with defined modes" do
+      should 'treat any unrecognized mode as the default' do
+        @modes.define do
+          mode(:test_mode) { can(:see, :stuff) }
+          default :test_mode
+        end
+        ['meh', '', 1, {}, [], nil].each do |unknown_mode|
+          assert_equal :test_mode, @modes.rules(unknown_mode).mode
+        end
+      end
+    end
+
+    context "without defined modes" do
+      should 'treat any unrecognized mode as NoRules' do
+        ['meh', '', 1, {}, [], nil].each do |unknown_mode|
+          assert Modality::NoRules === @modes.rules(unknown_mode)
+        end
+      end
+    end
+  end
   should "support clear! so that it can be safely reloaded" do
     modes = Modes.new
     modes.define { mode(:test_mode) { can(:see, :stuff) } }

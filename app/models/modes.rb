@@ -14,7 +14,8 @@ class Modes
   end
 
   def rules(mode)
-    rulesets.fetch(mode.to_sym, Modality::NoRules.new)
+    return default unless mode.respond_to?(:to_sym)
+    rulesets.fetch(mode.to_sym) { default }
   end
 
   def rules_for?(mode)
@@ -34,6 +35,7 @@ class Modes
   end
 
   def default
+    return Modality::NoRules.new unless rules_for?(@default)
     rules(@default)
   end
 
