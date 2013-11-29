@@ -29,4 +29,14 @@ class ModalityTest < ActiveSupport::TestCase
       assert_nil rules.define { can :see, :stuff }
     end
   end
+
+  context "NoRules" do
+    should "report that no-one can do anything" do
+      refute Modality::NoRules.new.can?(:do, :something)
+    end
+
+    should "report its name" do
+      assert_equal :no_rules, Modality::NoRules.new.mode
+    end
+  end
 end

@@ -3,6 +3,10 @@ class Modality
     def can?(action, object)
       false
     end
+
+    def mode
+      :no_rules
+    end
   end
 
   attr_reader :ruleset, :mode
