@@ -1,44 +1,63 @@
 class Modes
   class NonExistentMode < StandardError; end
 
-  attr_reader :config_file_path
+  attr_reader :rulesets
 
   def initialize()
-    @rule_sets = {}
+    @rulesets = {}
   end
 
   def define(&block)
-    instance_exec(&block) if block
+    DSL.new(self).define(&block) if block
+    raise NonExistentMode, "mode #{@default.inspect} does not exist" if @default && !rules_for?(@default)
     nil
   end
 
   def rules(mode)
-    @rule_sets.fetch(mode.to_sym, Modality::NoRules.new)
+    rulesets.fetch(mode.to_sym, Modality::NoRules.new)
   end
 
   def rules_for?(mode)
-    @rule_sets.has_key?(mode)
+    rulesets.has_key?(mode)
   end
 
   def clear!
-    @rule_sets = {}
+    @rulesets = {}
   end
 
-  def default(name = nil)
-    if name.nil?
-      raise NonExistentMode, "mode #{@default.inspect} does not exist" if @default && !rules_for?(@default)
-      return rules(@default)
-    end
+  def add_mode(name, rules)
+    rulesets[name] = rules
+  end
+
+  def set_default(name)
     @default = name.to_sym
   end
 
-  private
+  def default
+    rules(@default)
+  end
 
-  def mode(name, &block)
-    rules = Modality::Rules.new([])
-    rules.define(&block) if block
-    @rule_sets[name.to_sym] = rules
-    @default = name.to_sym unless @default
-    nil
+  class DSL
+    def initialize(modes)
+      @modes = modes
+    end
+
+    def define(&block)
+      instance_exec(&block) if block
+      @modes.set_default(@default) if @default
+    end
+
+    def default(name)
+      @default = name.to_sym
+    end
+
+    def mode(name, &block)
+      name = name.to_sym
+      rules = Modality::Rules.new([])
+      rules.define(&block) if block
+      @modes.add_mode(name, rules)
+      @default = name unless @default
+      nil
+    end
   end
 end
