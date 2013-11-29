@@ -1,32 +1,32 @@
 require 'test_helper'
 
 class ModalityTest < ActiveSupport::TestCase
-  context "creating the Rules" do
+  context "creating the Modality" do
     should "report its mode name" do
       assert_equal :name, Modality.new(:name).mode
     end
   end
 
-  context "defining rules" do
+  context "defining modality" do
     should "define a rule correctly" do
-      rules = Modality.new(:name)
-      rules.define do
+      modality = Modality.new(:name)
+      modality.define do
         can :see, :stuff
       end
 
-      assert rules.can?(:see, :stuff)
+      assert modality.can?(:see, :stuff)
     end
 
-    should "not explode if the rules block has no rules" do
-      rules = Modality.new(:name)
-      rules.define
+    should "not explode if the modality block has no rules" do
+      modality = Modality.new(:name)
+      modality.define
 
-      refute rules.can?(:see, :stuff)
+      refute modality.can?(:see, :stuff)
     end
 
     should "return nil from the define method" do
-      rules = Modality.new(:name)
-      assert_nil rules.define { can :see, :stuff }
+      modality = Modality.new(:name)
+      assert_nil modality.define { can :see, :stuff }
     end
   end
 
