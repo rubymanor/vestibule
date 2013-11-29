@@ -90,6 +90,13 @@ class ModesTest < ActiveSupport::TestCase
         end
         assert @modes.default.can?(:see, :stuff)
       end
+
+      should "explode if an explicit but non-existent default is set" do
+        @modes.define do
+          default :test_mode
+        end
+        assert_raises(Modes::NonExistentMode) { @modes.default }
+      end
     end
   end
 
