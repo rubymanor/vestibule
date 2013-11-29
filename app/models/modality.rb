@@ -1,19 +1,4 @@
 class Modality
-  MODES = %w(cfp review voting holding agenda archive)
-  attr_reader :mode
-  def initialize(mode = :cfp)
-    @mode =
-      if MODES.include? mode.to_s
-        mode.to_s.to_sym
-      else
-        :cfp
-      end
-  end
-
-  def can?(action, object)
-    rules.can?(action, object)
-  end
-
   class Rules
     attr_reader :ruleset, :mode
     def initialize(ruleset, mode = nil)
@@ -45,62 +30,4 @@ class Modality
       false
     end
   end
-
-  def self.make_rules_for_ruleset(*rules)
-    Modality::Rules.new(rules)
-  end
-
-  CfpRules = make_rules_for_ruleset(
-    [:make, :proposal],
-    [:change, :proposal],
-    [:make, :suggestion],
-    [:withdraw, :proposal]
-  )
-
-  ReviewRules = make_rules_for_ruleset(
-    [:change, :proposal],
-    [:make, :suggestion],
-    [:withdraw, :proposal]
-  )
-
-  VotingRules = make_rules_for_ruleset(
-    [:change, :proposal],
-    [:make, :suggestion],
-    [:withdraw, :proposal],
-    [:make, :selection],
-    [:see, :selection]
-  )
-
-  HoldingRules = make_rules_for_ruleset(
-    [:change, :proposal],
-    [:make, :suggestion],
-    [:withdraw, :proposal],
-    [:see, :selection]
-  )
-
-  AgendaRules = make_rules_for_ruleset(
-    [:change, :proposal],
-    [:make, :suggestion],
-    [:withdraw, :proposal],
-    [:see, :selection],
-    [:see, :agenda]
-  )
-
-  ArchiveRules = make_rules_for_ruleset(
-    [:see, :agenda],
-    [:see, :selection]
-  )
-
-  RULES = {
-    cfp: CfpRules,
-    review: ReviewRules,
-    voting: VotingRules,
-    holding: HoldingRules,
-    agenda: AgendaRules,
-    archive: ArchiveRules
-  }
-  def rules
-    RULES.fetch(mode, NoRules)
-  end
-
 end
