@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ModesTest < ActiveSupport::TestCase
-  context "defining rulesets" do
+  context "defining modes" do
     setup do
       @modes = Modes.new
     end
@@ -11,7 +11,7 @@ class ModesTest < ActiveSupport::TestCase
         mode :test_mode
       end
 
-      refute @modes.rules(:test_mode).nil?
+      refute @modes.fetch(:test_mode).nil?
     end
 
     should "set the name of the mode correctly" do
@@ -19,26 +19,26 @@ class ModesTest < ActiveSupport::TestCase
         mode :test_mode
       end
 
-      assert_equal :test_mode, @modes.rules(:test_mode).mode
+      assert_equal :test_mode, @modes.fetch(:test_mode).mode
     end
 
-    should "define a mode which acts like a Rules" do
+    should "define a mode which acts like a Modality" do
       @modes.define do
         mode :test_mode do
         end
       end
 
-      assert @modes.rules(:test_mode).respond_to?(:can?)
+      assert @modes.fetch(:test_mode).respond_to?(:can?)
     end
 
-    should "allow the Rules to define rules" do
+    should "allow the Modality to define rules" do
       @modes.define do
         mode :test_mode do
           can :see, :stuff
         end
       end
 
-      assert @modes.rules(:test_mode).can?(:see, :stuff)
+      assert @modes.fetch(:test_mode).can?(:see, :stuff)
     end
 
     should "allow the definition of multiple modes" do
@@ -52,8 +52,8 @@ class ModesTest < ActiveSupport::TestCase
         end
       end
 
-      assert @modes.rules(:m1).can?(:see, :stuff)
-      assert @modes.rules(:m2).can?(:do, :stuff)
+      assert @modes.fetch(:m1).can?(:see, :stuff)
+      assert @modes.fetch(:m2).can?(:do, :stuff)
     end
 
     should "return nil from the define method" do
@@ -67,17 +67,17 @@ class ModesTest < ActiveSupport::TestCase
     should "normalise the input to #mode" do
       @modes.define { mode("test_mode") { can(:see, :stuff) } }
 
-      assert @modes.rules(:test_mode).can?(:see, :stuff)
+      assert @modes.fetch(:test_mode).can?(:see, :stuff)
     end
 
-    should "normalise the input to #rules" do
+    should "normalise the input to #fetch" do
       @modes.define { mode(:test_mode) { can(:see, :stuff) } }
 
-      assert @modes.rules("test_mode").can?(:see, :stuff)
+      assert @modes.fetch("test_mode").can?(:see, :stuff)
     end
 
     should "return NoRules if asked for a non-existing rule set" do
-      refute @modes.rules(:test_mode).can?(:see, :stuff)
+      refute @modes.fetch(:test_mode).can?(:see, :stuff)
     end
 
     context "default mode" do
@@ -119,7 +119,7 @@ class ModesTest < ActiveSupport::TestCase
     end
   end
 
-  context "fetching rulesets" do
+  context "fetching a Modality" do
     setup do
       @modes = Modes.new
     end
@@ -131,7 +131,7 @@ class ModesTest < ActiveSupport::TestCase
           default :test_mode
         end
         ['meh', '', 1, {}, [], nil].each do |unknown_mode|
-          assert_equal :test_mode, @modes.rules(unknown_mode).mode
+          assert_equal :test_mode, @modes.fetch(unknown_mode).mode
         end
       end
     end
@@ -139,7 +139,7 @@ class ModesTest < ActiveSupport::TestCase
     context "without defined modes" do
       should 'treat any unrecognized mode as NoRules' do
         ['meh', '', 1, {}, [], nil].each do |unknown_mode|
-          assert Modality::NoRules === @modes.rules(unknown_mode)
+          assert Modality::NoRules === @modes.fetch(unknown_mode)
         end
       end
     end
@@ -149,7 +149,7 @@ class ModesTest < ActiveSupport::TestCase
     modes = Modes.new
     modes.define { mode(:test_mode) { can(:see, :stuff) } }
     modes.clear!
-    refute modes.rules(:test_mode).can?(:see, :stuff)
+    refute modes.fetch(:test_mode).can?(:see, :stuff)
   end
 end
 
