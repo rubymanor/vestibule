@@ -20,7 +20,7 @@ class ModeLoadingTest < ActionController::TestCase
     end
   end
 
-  context 'the cfp mode' do
+  context 'in cfp mode' do
     setup do
       @rules = Vestibule::Application.modes.rules(:cfp)
     end
@@ -32,5 +32,79 @@ class ModeLoadingTest < ActionController::TestCase
 
     i_cant 'participate in voting for proposals', [:make, :selection]
     i_cant 'see the aggregate votes', [:see, :agenda]
+  end
+
+  context 'in review mode' do
+    setup do
+      @rules = Vestibule::Application.modes.rules(:review)
+    end
+
+    i_can 'make a suggestion on a proposal', [:make, :suggestion]
+    i_can 'change my proposal', [:change, :proposal]
+    i_can 'withdraw my proposal', [:withdraw, :proposal]
+
+    i_cant 'create a proposal', [:make, :proposal]
+    i_cant 'participate in voting for proposals', [:make, :selection]
+    i_cant 'see the aggregate votes', [:see, :agenda]
+  end
+
+  context 'in voting mode' do
+    setup do
+      @rules = Vestibule::Application.modes.rules(:voting)
+    end
+
+    i_can 'make a suggestion on a proposal', [:make, :suggestion]
+    i_can 'change my proposal', [:change, :proposal]
+    i_can 'withdraw my proposal', [:withdraw, :proposal]
+    i_can 'participate in voting for proposals', [:make, :selection]
+    i_can 'see my votes', [:see, :selection]
+
+    i_cant 'create a proposal', [:create, :proposal]
+    i_cant 'see the aggregate votes', [:see, :agenda]
+  end
+
+  context 'in holding mode' do
+    setup do
+      @rules = Vestibule::Application.modes.rules(:holding)
+    end
+
+    i_can 'make a suggestion on a proposal', [:make, :suggestion]
+    i_can 'change my proposal', [:change, :proposal]
+    i_can 'withdraw my proposal', [:withdraw, :proposal]
+    i_can 'see my votes', [:see, :selection]
+
+    i_cant 'participate in voting for proposals', [:make, :selection]
+    i_cant 'see the aggregate votes', [:see, :agenda]
+    i_cant 'create a proposal', [:make, :proposal]
+  end
+
+  context 'in agenda mode' do
+    setup do
+      @rules = Vestibule::Application.modes.rules(:agenda)
+    end
+
+    i_can 'make a suggestion on a proposal', [:make, :suggestion]
+    i_can 'change my proposal', [:change, :proposal]
+    i_can 'withdraw my proposal', [:withdraw, :proposal]
+    i_can 'see the aggregate votes', [:see, :agenda]
+    i_can 'see my votes', [:see, :selection]
+
+    i_cant 'participate in voting for proposals', [:make, :selection]
+    i_cant 'create a proposal', [:make, :proposal]
+  end
+
+  context 'in archive mode' do
+    setup do
+      @rules = Vestibule::Application.modes.rules(:archive)
+    end
+
+    i_can 'see the aggregate votes', [:see, :agenda]
+    i_can 'see my votes', [:see, :selection]
+
+    i_cant 'create a proposal', [:make, :proposal]
+    i_cant 'make a suggestion on a proposal', [:make, :suggestion]
+    i_cant 'change my proposal', [:change, :proposal]
+    i_cant 'withdraw my proposal', [:withdraw, :proposal]
+    i_cant 'participate in voting for proposals', [:make, :selection]
   end
 end
