@@ -32,7 +32,6 @@ module Vestibule
       provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'user:email'
     end
 
-
     def modes
       @modes ||= Modes.new
     end
@@ -51,5 +50,7 @@ module Vestibule
         reloader.execute
       end
     end
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'vestibule', '*.{rb,yml}')]
   end
 end

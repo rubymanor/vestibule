@@ -1,0 +1,104 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+en:
+  vestibule:
+    title: Vestibule
+    strapline: Building <a href="http://rubymanor.org">Ruby Manor</a> as a community
+    dashboard:
+      title: Dashboard
+      your_proposals:
+        title: "Your proposals"
+        html: (Because they are anonymised, other users will not see that you are the author of these proposals. %{link}.)
+        link: Read more about anonymisation
+      selections:
+        title: Selections
+        vote:
+          html: It is time for you to %{link}.
+          link: choose the talks you want to see on the day
+        agenda:
+          html: The community has spoken; %{link}.
+          link: take a look at the agenda they have generated
+        holding:
+          html: The time for voting is over! We're collating all the selections and preparing the agenda. You can still %{link}.
+          link: view selections you made
+      suggestions:
+        consider_suggesting: You should consider giving some suggestions about these proposals
+        updated_proposals: These proposals have been updated since you last made a suggestion
+        withdrawn_proposals: These proposals you made suggestions on have been withdrawn
+    proposals:
+      title: Talk proposals
+      propose:
+        one: Propose talk
+        another: Propose another talk
+      withdrawn: "The following proposals have been withdrawn:"
+      feed:
+        title: "Vestibule :: All Proposals"
+        description: A list of all talk proposals made to the vestibule system
+    proposal:
+      title: Propose a talk
+      chosen: This proposal by %{link} has been chosen by the community to be given at Ruby Manor 4.
+      withdrawn: This proposal has been withdrawn...
+      edit: Edit your proposal
+      submit: Submit proposal
+      update: Update proposal
+      pitch:
+        html: So you want to talk at Ruby Manor? That's great! If you haven't already, you may wish to %{link} to find out how everything works.
+        link: read about the vestibule process
+      anonymous:
+        html: "<strong>NOTE:</strong> proposals are anonymous — %{link}."
+        link: read more about anonymisation
+      suggestions:
+        title: Suggestions
+        attribution:
+          your: You respond
+          proposal_author: The proposal author responds
+          other: "%{suggestor} suggests"
+        make:
+          title: Make your suggestion
+          your: You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.
+          other: Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.
+      feed:
+        title: "Vestibule :: Suggestions for %{proposal_title}"
+        description: A list of all suggestions made for %{proposal_title}
+    selections:
+      title: Selections
+      agenda:
+        nav_title: Agenda
+        title: Chosen Proposals
+        description: There will be <strong>8</strong> talks given at Ruby Manor 4.
+        not_visible:
+          html: The agenda isn't visible yet; why not %{link} to cast your votes?
+          link: sign in
+      yours:
+        title: Your selections
+        description: "Here are the selections you made:"
+        actions:
+          select: Select
+          deselect: Deselect
+        remaining:
+          one: "1 selection left!"
+          several: "%{quantity} selections left!"
+          none: Deselect some above to choose others
+    user:
+      title: Your profile
+      edit:
+        title: Update your information
+      motivation:
+        title: "Motivations"
+        actions:
+          edit: Edit your reason
+        missing:
+          your: Other attendees are wondering what you hope to get out of Ruby Manor. %{link}.
+          link: Tell them now
+          other: "%{name} hasn't said what they hope to get out of Ruby Manor yet."
+      proposals:
+        your:
+          title: "Your proposals"
+          anonymised:
+            html: "(Because proposals are anonymised, other users will not see this information on your profile. %{link}.)"
+            link: Read more about anonymisation
+          none: "%{name_or_pronoun} no proposals."
+        involved:
+          title: Proposals %{name_is_or_are} involved with
+          none: "%{name_is_or_are} not involved with anybody else's proposals."
+
