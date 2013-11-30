@@ -1,137 +1,43 @@
 require 'test_helper'
 
 class ModalityTest < ActiveSupport::TestCase
-  def self.i_can(do_a_thing, with_rule = nil)
-    if with_rule.nil?
-      should('be possible to '+do_a_thing)
-    else
-      should('be possible to '+do_a_thing) do
-        assert @modality.can?(*with_rule), 'expected to be able to '+do_a_thing+', but I can\'t.'
+  context "creating the Modality" do
+    should "report its mode name" do
+      assert_equal :name, Modality.new(:name).mode
+    end
+  end
+
+  context "defining modality with the DSL" do
+    should "define a rule correctly" do
+      modality = Modality::DSL.define(:name) do
+        can :see, :stuff
       end
-    end
-  end
 
-  def self.i_cant(do_a_thing, with_rule= nil)
-    if with_rule.nil?
-      should('not be possible to '+do_a_thing)
-    else
-      should('not be possible to '+do_a_thing) do
-        refute @modality.can?(*with_rule), 'expected to not be able to '+do_a_thing+', but I can.'
+      assert modality.can?(:see, :stuff)
+    end
+
+    should "not explode if the modality block has no rules" do
+      modality = Modality::DSL.define(:name)
+
+      refute modality.can?(:see, :stuff)
+    end
+
+    should "return nil from the can method" do
+      result = true
+      Modality::DSL.define(:name) do
+        result = can(:see, :stuff)
       end
+      assert_nil result
     end
   end
 
-  context 'setting the mode' do
-    should 'take a string' do
-      m = Modality.new('cfp')
-      assert_equal :cfp, m.mode
+  context "NoRules" do
+    should "report that no-one can do anything" do
+      refute Modality::NoRules.new.can?(:do, :something)
     end
-    should 'take a symbol' do
-      m = Modality.new(:cfp)
-      assert_equal :cfp, m.mode
-    end
-    should 'treat "cfp", "review", "voting", "agenda", "archive" as valid modes' do
-      ["cfp", "review", "voting", "agenda", "archive"].each do |mode|
-        m = Modality.new(mode)
-        assert_equal mode.to_sym, m.mode
-      end
-    end
-    should 'be cfp if not told otherwise' do
-      m = Modality.new
-      assert_equal :cfp, m.mode
-    end
-    should 'treat nil as cfp' do
-      m = Modality.new(nil)
-      assert_equal :cfp, m.mode
-    end
-    should 'treat any unrecognized mode as cfp' do
-      ['meh', '', 1, {}, []].each do |unknown_mode|
-        m = Modality.new(unknown_mode)
-        assert_equal :cfp, m.mode
-      end
+
+    should "report its name" do
+      assert_equal :no_rules, Modality::NoRules.new.mode
     end
   end
-
-  context 'in cfp mode' do
-    setup do
-      @modality = Modality.new(:cfp)
-    end
-    i_can 'create a proposal', [:make, :proposal]
-    i_can 'make a suggestion on a proposal', [:make, :suggestion]
-    i_can 'change my proposal', [:change, :proposal]
-    i_can 'withdraw my proposal', [:withdraw, :proposal]
-
-    i_cant 'participate in voting for proposals', [:make, :selection]
-    i_cant 'see the aggregate votes', [:see, :agenda]
-  end
-
-  context 'in review mode' do
-    setup do
-      @modality = Modality.new(:review)
-    end
-    i_can 'make a suggestion on a proposal', [:make, :suggestion]
-    i_can 'change my proposal', [:change, :proposal]
-    i_can 'withdraw my proposal', [:withdraw, :proposal]
-
-    i_cant 'create a proposal', [:make, :proposal]
-    i_cant 'participate in voting for proposals', [:make, :selection]
-    i_cant 'see the aggregate votes', [:see, :agenda]
-  end
-
-  context 'in voting mode' do
-    setup do
-      @modality = Modality.new(:voting)
-    end
-    i_can 'make a suggestion on a proposal', [:make, :suggestion]
-    i_can 'change my proposal', [:change, :proposal]
-    i_can 'withdraw my proposal', [:withdraw, :proposal]
-    i_can 'participate in voting for proposals', [:make, :selection]
-    i_can 'see my votes', [:see, :selection]
-
-    i_cant 'create a proposal', [:create, :proposal]
-    i_cant 'see the aggregate votes', [:see, :agenda]
-  end
-
-  context 'in holding mode' do
-    setup do
-      @modality = Modality.new(:holding)
-    end
-    i_can 'make a suggestion on a proposal', [:make, :suggestion]
-    i_can 'change my proposal', [:change, :proposal]
-    i_can 'withdraw my proposal', [:withdraw, :proposal]
-    i_can 'see my votes', [:see, :selection]
-
-    i_cant 'participate in voting for proposals', [:make, :selection]
-    i_cant 'see the aggregate votes', [:see, :agenda]
-    i_cant 'create a proposal', [:make, :proposal]
-  end
-
-  context 'in agenda mode' do
-    setup do
-      @modality = Modality.new(:agenda)
-    end
-    i_can 'make a suggestion on a proposal', [:make, :suggestion]
-    i_can 'change my proposal', [:change, :proposal]
-    i_can 'withdraw my proposal', [:withdraw, :proposal]
-    i_can 'see the aggregate votes', [:see, :agenda]
-    i_can 'see my votes', [:see, :selection]
-
-    i_cant 'participate in voting for proposals', [:make, :selection]
-    i_cant 'create a proposal', [:make, :proposal]
-  end
-
-  context 'in archive mode' do
-    setup do
-      @modality = Modality.new(:archive)
-    end
-    i_can 'see the aggregate votes', [:see, :agenda]
-    i_can 'see my votes', [:see, :selection]
-
-    i_cant 'create a proposal', [:make, :proposal]
-    i_cant 'make a suggestion on a proposal', [:make, :suggestion]
-    i_cant 'change my proposal', [:change, :proposal]
-    i_cant 'withdraw my proposal', [:withdraw, :proposal]
-    i_cant 'participate in voting for proposals', [:make, :selection]
-  end
-
 end

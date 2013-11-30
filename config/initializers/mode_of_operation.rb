@@ -1,14 +1,13 @@
 module Vestibule
   def self.mode_of_operation
-    @mode_of_operation ||= Modality.new()
+    @mode_of_operation ||= Vestibule::Application.modes.fetch(ENV['VESTIBULE_MODE'])
   end
   def self.mode_of_operation=(new_mode)
     @mode_of_operation =
-      if new_mode.is_a? Modality
+      if new_mode.respond_to?(:can?)
         new_mode
       else
-        Modality.new(new_mode)
+        Vestibule::Application.modes.fetch(new_mode)
       end
   end
 end
-Vestibule.mode_of_operation = ENV['VESTIBULE_MODE']

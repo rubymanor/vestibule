@@ -31,5 +31,25 @@ module Vestibule
     config.middleware.use OmniAuth::Builder do
       provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'user:email'
     end
+
+
+    def modes
+      @modes ||= Modes.new
+    end
+
+    # Set modes reload after the finisher hook, because that's what
+    # Routes reloading does
+    initializer :set_modes_reloader_hook do
+      reloader = ModesReloader.new(root.join('config/modes.rb'), modes)
+      reloader.execute_if_updated
+      self.reloaders << reloader
+      ActionDispatch::Reloader.to_prepare do
+        # We configure #execute rather than #execute_if_updated because if
+        # autoloaded constants are cleared we need to reload modes
+        # This is all cribbed from how Routes reloading is done
+        # but seems plausible
+        reloader.execute
+      end
+    end
   end
 end
