@@ -1,7 +1,7 @@
-<p class="well">So you want to talk at Ruby Manor? That's great! If you haven't already, you may wish to <%= link_to "read about the vestibule process", the_vestibule_process_path %> to find out how everything works.</p>
+<p class="well"><%=t "vestibule.proposal.pitch.html", :link => link_to(t("vestibule.proposal.pitch.link"), the_vestibule_process_path) %></p>
 
-<%= page_title 'Propose a talk' %>
+<%= page_title t("vestibule.proposal.title") %>
 
-<p><strong>NOTE:</strong> proposals are anonymous &mdash; <%= link_to "read more about anonymisation", anonymous_proposals_path %>.</p>
+<p><%=t "vestibule.proposal.anonymous.html", :link => link_to(t("vestibule.proposal.anonymous.link"), anonymous_proposals_path) %></p>
 
 <%= render "form" %>

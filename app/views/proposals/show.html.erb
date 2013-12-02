@@ -4,13 +4,13 @@
       <%= proposal_div(@proposal) do %>
         <%= page_title @proposal.title %>
         <% if can_show_proposal_author_information?(@proposal) %>
-          <p class="alert alert-notice">This proposal by <%= link_to @proposal.proposer.name, @proposal.proposer %> has been chosen by the community to be given at Ruby Manor 4.</p>
+          <p class="alert alert-notice"><%=t "vestibule.proposal.chosen", link: link_to(@proposal.proposer.name, @proposal.proposer) %></p>
         <% end %>
 
         <%= proposal_manipulation_actions(@proposal, current_user) %>
         <p class="age"><%= proposal_update_information @proposal %></p>
 
-        <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation">This proposal has been withdrawn...</h2><% end %>
+        <% if @proposal.withdrawn? %><h2 class="withdrawl_explanation"><%=t "vestibule.proposal.withdrawn" %></h2><% end %>
         <div class="description"><%= markdown @proposal.description %></div>
       <% end %>
     </div>
@@ -18,12 +18,12 @@
 
   <div class="span5 offset1">
     <div id="suggestions">
-      <h2>Suggestions</h2>
+      <h2><%=t "vestibule.proposal.suggestions.title" %></h2>
       <% if user_signed_in? && can?(:make, :suggestion) %>
         <% if current_user == @proposal.proposer %>
-          <p>You can respond to suggestions here. As the proposer of the talk, your identity will be masked from other visitors.</p>
+          <p><%=t "vestibule.proposal.suggestions.make.your" %></p>
         <% else %>
-          <p>Help develop this into a good proposal by asking questions about anything that isn't clear, making suggestions about what to include or avoid, and asking for more detail or clarifications.</p>
+          <p><%=t "vestibule.proposal.suggestions.make.other" %></p>
         <% end %>
 
         <%= simple_form_for [@proposal, @suggestion] do |f| %>
@@ -34,7 +34,7 @@
           <% end %>
 
           <%= f.input :body, as: :markdown, input_html: {rows: 10} %>
-          <%= f.button :submit, "Make your suggestion", class: "btn" %>
+          <%= f.button :submit, t("vestibule.proposal.suggestions.make.title"), class: "btn" %>
         <% end %>
       <% end %>
 
@@ -44,12 +44,12 @@
             <p class="author">
               <% if suggestion.author == @proposal.proposer %>
                 <% if current_user == @proposal.proposer %>
-                  You respond
+                  <%=t "vestibule.proposal.suggestions.attribution.your" %>
                 <% else %>
-                  The proposal author responds
+                  <%=t "vestibule.proposal.suggestions.attribution.proposal_author" %>
                 <% end %>
               <% else %>
-                <%= render 'shared/user', :user => suggestion.author %> suggests
+                <%=t("vestibule.proposal.suggestions.attribution.other", :suggestor => render('shared/user', :user => suggestion.author)).html_safe %>
               <% end %>
               <span class="age"><%= time_ago_in_words suggestion.updated_at %> ago</span>
             </p>

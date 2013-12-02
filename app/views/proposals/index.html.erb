@@ -1,8 +1,8 @@
 <section>
-  <%= page_title 'Talk proposals' %>
+  <%= page_title t("vestibule.proposals.title") %>
   <% if user_signed_in? && can?(:make, :proposal) %>
     <div class="action">
-      <%= link_to "Propose talk", new_proposal_path, class: "btn btn-primary btn-large" %>
+      <%= link_to t("vestibule.proposals.propose.one"), new_proposal_path, class: "btn btn-primary btn-large" %>
     </div>
   <% end %>
 
@@ -18,7 +18,7 @@
 
 <% if @withdrawn_proposals.any? %>
 <section>
-  <p>The following proposals have been withdrawn:</p>
+  <p><%= t "vestibule.proposals.withdrawn" %></p>
   <ul class="proposals">
     <% for proposal in @withdrawn_proposals %>
       <%= content_tag_for :li, proposal do %>

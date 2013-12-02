@@ -15,17 +15,17 @@
       <div class="row">
         <div class="span5">
           <div class="brand">
-            <h1><%= link_to "Vestibule", root_path %></h1>
-            <p>Building <a href="http://rubymanor.org">Ruby Manor</a> as a community</p>
+            <h1><%= link_to t("vestibule.title"), root_path %></h1>
+            <p><%= t("vestibule.strapline").html_safe %></p>
           </div>
         </div>
 
         <div class="span7">
           <ul class="nav nav-pills pull-right">
             <li<%= active_nav_class(about_path, anonymous_proposals_path, the_vestibule_process_path) %>><%= link_to "About", about_path %></li>
-            <li<%= active_nav_class(proposals_path) %>><%= link_to "Proposals", proposals_path %></li>
-            <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to "Motivations", motivation_path %></li>
-            <% if can?(:see, :agenda) %><li<%= active_nav_class(selections_path) %>><%= link_to 'Agenda', selections_path %></li><% end %>
+            <li<%= active_nav_class(proposals_path) %>><%= link_to t("vestibule.proposals.title"), proposals_path %></li>
+            <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to t("vestibule.user.motivation.title"), motivation_path %></li>
+            <% if can?(:see, :agenda) %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.agenda.nav_title"), selections_path %></li><% end %>
             <% if user_signed_in? -%>
               <li class="dropdown <%= 'active' if active_nav?(dashboard_path, user_path(current_user)) %>">
                 <a class="dropdown-toggle"
@@ -35,10 +35,9 @@
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu pull-right">
-                  <li<%= active_nav_class(dashboard_path) %>><%= link_to "Dashboard", dashboard_path %></li>
-                  <li><%= link_to "All proposals", proposals_path %></li>
-                  <li<%= active_nav_class(user_path(current_user)) %>><%= link_to "Your profile", user_path(current_user) %></li>
-                  <% if can?(:make, :selection) %><li<%= active_nav_class(selections_path) %>><%= link_to 'Selections', selections_path %></li><% end %>
+                  <li<%= active_nav_class(dashboard_path) %>><%= link_to t("vestibule.dashboard.title"), dashboard_path %></li>
+                  <li<%= active_nav_class(user_path(current_user)) %>><%= link_to t("vestibule.user.title"), user_path(current_user) %></li>
+                  <% if can?(:make, :selection) %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.title"), selections_path %></li><% end %>
                   <li><%= link_to "Sign out", logout_path %></li>
                 </ul>
               </li>
@@ -57,8 +56,7 @@
 
           <% if remind_account_for_signup_reason -%>
           <div class="alert">
-            Other attendees are wondering what you hope to get out of Ruby Manor.
-            <%= link_to "Tell them now", edit_user_path(current_user) %>.
+            <%=t("vestibule.user.motivation.missing.your", :link => link_to(t("vestibule.user.motivation.missing.link"), edit_user_path(current_user))).html_safe %>
           </div>
           <% end -%>
         </section>
