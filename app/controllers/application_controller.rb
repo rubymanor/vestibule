@@ -1,4 +1,6 @@
+require 'feature'
 class ApplicationController < ActionController::Base
+  include Feature
   protect_from_forgery
   helper_method :current_user, :user_signed_in?, :can?
   before_filter :set_archive_mode_warning_if_required
