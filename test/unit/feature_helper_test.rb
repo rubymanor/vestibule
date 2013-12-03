@@ -4,13 +4,16 @@ class FeatureHelperTest < ActionView::TestCase
   include FeatureHelper
 
   context "rendering a switched-on feature" do
-    setup do
+    should "correctly render a switched-on feature" do
       Vestibule::Application.config.features.test_feature = true
+      result = feature(:test_feature) { "Hello" }
+      assert_equal "Hello", result
     end
 
-    should "correctly render the feature" do
+    should "correctly render nothing for a switched-off feature" do
+      Vestibule::Application.config.features.test_feature = false
       result = feature(:test_feature) { "Hello" }
-      assert_equal "hello", result
+      assert_equal "", result
     end
   end
 end

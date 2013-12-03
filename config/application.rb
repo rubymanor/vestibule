@@ -52,5 +52,8 @@ module Vestibule
     end
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', 'vestibule', '*.{rb,yml}')]
+
+    config.features = ActiveSupport::OrderedOptions.new
+    config.features.motivation = true
   end
 end
