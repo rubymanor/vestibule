@@ -1,12 +1,12 @@
 require 'test_helper'
-require 'feature'
+require 'feature_flag'
 
 class FeatureFlagTest < ActiveSupport::TestCase
   should "define a method if a feature is switched on" do
     Vestibule::Application.config.features.test_feature = true
 
     klass = Class.new do
-      include Feature
+      include FeatureFlag
       feature :test_feature do
         def my_method
         end
@@ -20,7 +20,7 @@ class FeatureFlagTest < ActiveSupport::TestCase
     Vestibule::Application.config.features.test_feature = false
 
     klass = Class.new do
-      include Feature
+      include FeatureFlag
       feature :test_feature do
         def my_method
         end
@@ -33,7 +33,7 @@ class FeatureFlagTest < ActiveSupport::TestCase
   context "within a method" do
     setup do
       @klass = Class.new do
-        include Feature
+        include FeatureFlag
         def my_method
           result = false
           feature :test_feature do

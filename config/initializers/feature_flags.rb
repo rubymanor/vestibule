@@ -1,5 +1,5 @@
-require 'feature_routing'
+require 'feature_flag'
 
 class ActionDispatch::Routing::Mapper
-  include FeatureRouting
+  include FeatureFlag
 end

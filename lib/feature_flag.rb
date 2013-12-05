@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module Feature
+module FeatureFlag
   extend ActiveSupport::Concern
 
   def feature(name, &block)
