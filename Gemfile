@@ -1,7 +1,8 @@
 source "http://rubygems.org"
+ruby '1.9.2'
 
 gem "rails", "3.0.20"
-gem "mysql", "2.8.1"
+gem "pg"
 gem "simple_form", "1.5.0"
 gem "omniauth-twitter", "0.0.14"
 gem "paper_trail", "1.6.4"
