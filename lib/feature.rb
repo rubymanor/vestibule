@@ -3,10 +3,16 @@ require 'active_support/concern'
 module Feature
   extend ActiveSupport::Concern
 
+  def feature(name, &block)
+    if Vestibule::Application.config.features[name]
+      instance_exec(&block)
+    end
+  end
+
   module ClassMethods
     def feature(name, &block)
       if Vestibule::Application.config.features[name]
-        class_eval(&block)
+        class_exec(&block)
       end
     end
   end
