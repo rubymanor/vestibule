@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    unless current_user
+    unless current_user.known?
       flash[:alert] = "You need to sign in or sign up before continuing."
       session[:user_id] = nil
       redirect_to root_url
@@ -16,11 +16,11 @@ class ApplicationController < ActionController::Base
   end
 
   def user_signed_in?
-    current_user.present?
+    current_user.known?
   end
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+    @current_user ||= session[:user_id] ? User.find(session[:user_id]) : AnonymousUser.new
   end
 
   def can?(action, object)

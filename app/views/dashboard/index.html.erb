@@ -1,14 +1,18 @@
 <%= page_title t("vestibule.dashboard.title"), no_h1=true %>
 
-<% if can?(:make, :selection) %>
+<%= user_can(:make, :selection) do %>
 <h2><%=t "vestibule.dashboard.selections.title" %></h2>
 <p><%=t "vestibule.dashboard.selections.vote.html", :link => link_to(t("vestibule.dashboard.selections.vote.link"), selections_path) %></p>
-<% elsif can?(:see, :agenda) %>
+<% end %>
+<%= user_can(:see, :agenda) do %>
 <h2><%=t "vestibule.dashboard.selections.title" %></h2>
 <p><%=t "vestibule.dashboard.selections.agenda.html", :link => link_to(t("vestibule.dashboard.selections.agenda.link"), selections_path) %></p>
-<% elsif can?(:see, :selection) %>
+<% end %>
+<%= user_cannot(:see, :agenda) do %>
+<%= user_can(:see, :selection) do %>
 <h2><%=t "vestibule.dashboard.selections.title" %></h2>
 <p><%=t "vestibule.dashboard.selections.holding.html", :link => link_to(t("vestibule.dashboard.selections.holding.link"), selections_path) %></p>
+<% end %>
 <% end %>
 
 <h2><%=t "vestibule.dashboard.your_proposals.title" %></h2>
@@ -27,7 +31,7 @@
   </ul>
 <% end %>
 
-<% if can?(:make, :proposal) %>
+<%= user_can(:make, :proposal) do %>
 <p><%= link_to t(@your_proposals.present? ? "vestibule.proposals.propose.another" : "vestibule.proposals.propose.one"), new_proposal_path, class: "btn btn-primary" %></p>
 <% end %>
 

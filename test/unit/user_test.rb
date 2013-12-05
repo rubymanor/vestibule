@@ -66,6 +66,11 @@ class UserTest < ActiveSupport::TestCase
         assert_equal 5, @user.reload.contribution_score
       end
     end
+
+    should "not be thought anonymous" do
+      refute @user.anonymous?
+      assert @user.known?
+    end
   end
 
 end

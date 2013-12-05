@@ -1,8 +1,8 @@
-<% if !can?(:see, :agenda) && !user_signed_in? %>
+<%= anonymous_cannot(:see, :agenda) do %>
 <p><%=t "vestibule.selections.agenda.not_visible.html", :link => link_to(t("vestibule.selections.agenda.not_visible.link"), "/auth/github") %></p>
 <% end %>
 
-<% if can?(:see, :agenda) %>
+<%= anyone_can(:see, :agenda) do %>
   <div class="agenda">
     <h1><%=t "vestibule.selections.agenda.title" %></h1>
 
@@ -20,17 +20,17 @@
   </div>
 <% end %>
 
-<% if user_signed_in? %>
+<%= user_can(:see, :selection) do %>
   <h1><%=t "vestibule.selections.yours.title" %></h1>
 
-  <% unless can?(:make, :selection) %>
+  <%= user_cannot(:make, :selection) do %>
     <p><%=t "vestibule.selections.yours.description" %></p>
   <% end %>
 
   <ul id="selections">
     <% current_user.selections.each do |selection| %>
       <%= content_tag_for :li, selection.proposal, 'selection' do %>
-        <% if can?(:make, :selection) %>
+        <%= user_can(:make, :selection) do %>
         <%= button_to(t("vestibule.selections.yours.actions.deselect"), selection, method: :delete, class: "btn") %>
         <% end %>
         <%= link_to selection.proposal.title, selection.proposal %><%= show_proposal_author_if_allowed(selection.proposal) %>
@@ -38,7 +38,7 @@
     <% end %>
   </ul>
 
-  <% if can?(:make, :selection) %>
+  <%= user_can(:make, :selection) do %>
     <% if (remaining = (Selection.limit_per_user - current_user.selections.count)) > 0 %>
     <h2><%= remaining == 1 ? t("vestibule.selections.yours.remaining.one") : t("vestibule.selections.yours.remaining.several", :quantity => remaining) %></h2>
     <% else %>

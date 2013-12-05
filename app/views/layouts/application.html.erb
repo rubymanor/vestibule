@@ -27,7 +27,7 @@
             <%= if_feature :motivation do %>
             <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to t("vestibule.user.motivation.title"), motivation_path %></li>
             <% end %>
-            <% if can?(:see, :agenda) %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.agenda.nav_title"), selections_path %></li><% end %>
+            <%= anyone_can(:see, :agenda) do %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.agenda.nav_title"), selections_path %></li><% end %>
             <% if user_signed_in? -%>
               <li class="dropdown <%= 'active' if active_nav?(dashboard_path, user_path(current_user)) %>">
                 <a class="dropdown-toggle"
@@ -39,7 +39,7 @@
                 <ul class="dropdown-menu pull-right">
                   <li<%= active_nav_class(dashboard_path) %>><%= link_to t("vestibule.dashboard.title"), dashboard_path %></li>
                   <li<%= active_nav_class(user_path(current_user)) %>><%= link_to t("vestibule.user.title"), user_path(current_user) %></li>
-                  <% if can?(:make, :selection) %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.title"), selections_path %></li><% end %>
+                  <%= user_can(:make, :selection) do %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.title"), selections_path %></li><% end %>
                   <li><%= link_to "Sign out", logout_path %></li>
                 </ul>
               </li>

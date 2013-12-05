@@ -15,7 +15,7 @@ class HomeController < ApplicationController
 
   def my_motivation
     authenticate_user!
-    redirect_to edit_user_path(current_user) if current_user
+    redirect_to edit_user_path(current_user) if current_user.known?
   end
 
   def anonymous_proposals
