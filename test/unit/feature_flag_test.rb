@@ -1,10 +1,12 @@
 require 'test_helper'
+require 'feature'
 
-class ControllerFeatureTest < ActionController::TestCase
+class FeatureFlagTest < ActiveSupport::TestCase
   should "define a method if a feature is switched on" do
     Vestibule::Application.config.features.test_feature = true
 
-    klass = Class.new(ApplicationController) do
+    klass = Class.new do
+      include Feature
       feature :test_feature do
         def my_method
         end
@@ -17,7 +19,8 @@ class ControllerFeatureTest < ActionController::TestCase
   should "not define a method if a feature is switched off" do
     Vestibule::Application.config.features.test_feature = false
 
-    klass = Class.new(ApplicationController) do
+    klass = Class.new do
+      include Feature
       feature :test_feature do
         def my_method
         end
@@ -29,7 +32,8 @@ class ControllerFeatureTest < ActionController::TestCase
 
   context "within a method" do
     setup do
-      @klass = Class.new(ApplicationController) do
+      @klass = Class.new do
+        include Feature
         def my_method
           result = false
           feature :test_feature do
