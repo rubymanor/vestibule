@@ -7,7 +7,7 @@ class FeatureFlagTest < ActiveSupport::TestCase
 
     klass = Class.new do
       include FeatureFlag
-      feature :test_feature do
+      if_feature :test_feature do
         def my_method
         end
       end
@@ -21,7 +21,7 @@ class FeatureFlagTest < ActiveSupport::TestCase
 
     klass = Class.new do
       include FeatureFlag
-      feature :test_feature do
+      if_feature :test_feature do
         def my_method
         end
       end
@@ -36,7 +36,7 @@ class FeatureFlagTest < ActiveSupport::TestCase
         include FeatureFlag
         def my_method
           result = false
-          feature :test_feature do
+          if_feature :test_feature do
             result = true
           end
           result

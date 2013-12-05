@@ -1,18 +1,18 @@
 require 'test_helper'
 
-class FeatureHelperTest < ActionView::TestCase
-  include FeatureHelper
+class FeatureFlagHelperTest < ActionView::TestCase
+  include FeatureFlagHelper
 
   context "rendering a switched-on feature" do
     should "correctly render a switched-on feature" do
       Vestibule::Application.config.features.test_feature = true
-      result = feature(:test_feature) { "Hello" }
+      result = if_feature(:test_feature) { "Hello" }
       assert_equal "Hello", result
     end
 
     should "correctly render nothing for a switched-off feature" do
       Vestibule::Application.config.features.test_feature = false
-      result = feature(:test_feature) { "Hello" }
+      result = if_feature(:test_feature) { "Hello" }
       assert_equal "", result
     end
   end

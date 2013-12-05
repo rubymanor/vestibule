@@ -8,7 +8,7 @@ Vestibule::Application.routes.draw do
   end
   resources :selections, :only => [:index, :create, :destroy]
 
-  feature :motivation do
+  if_feature :motivation do
     match "/motivation", :to => "home#motivation", :as => "motivation"
     match "/my-motivation", :to => "home#my_motivation", :as => "complete_motivation"
   end
