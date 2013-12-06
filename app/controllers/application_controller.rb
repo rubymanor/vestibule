@@ -2,7 +2,7 @@ require 'feature_flag'
 class ApplicationController < ActionController::Base
   include FeatureFlag
   protect_from_forgery
-  helper_method :current_user, :user_signed_in?, :can?
+  helper_method :current_user, :user_signed_in?
   before_filter :set_archive_mode_warning_if_required
 
   private
@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= session[:user_id] ? User.find(session[:user_id]) : AnonymousUser.new
-  end
-
-  def can?(action, object)
-    Vestibule.mode_of_operation.can?(action, object)
   end
 
   def set_archive_mode_warning_if_required

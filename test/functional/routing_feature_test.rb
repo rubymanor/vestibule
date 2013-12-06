@@ -2,10 +2,10 @@ require 'test_helper'
 
 class RoutingFeatureTest < ActionController::TestCase
   should "set a route for a switched-on feature" do
-    Vestibule::Application.config.features.test_feature = true
+    Vestibule.mode_of_operation = :cfp
     with_routing do |set|
       set.draw do
-        feature :test_feature do
+        anyone_can :make, :proposal do
           resources :users
         end
       end
@@ -17,7 +17,7 @@ class RoutingFeatureTest < ActionController::TestCase
     Vestibule::Application.config.features.test_feature = false
     with_routing do |set|
       set.draw do
-        feature :test_feature do
+        anyone_can :see, :agenda do
           resources :users
         end
       end

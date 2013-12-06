@@ -1,7 +1,7 @@
 <section id="title">
   <%= image_tag(avatar_url(@user), :class => "avatar") %>
   <%= page_title "#{possessive} profile" %>
-  <%= feature(:motivation) do %>
+  <%= anyone_can :see, :motivation do %>
   <section id="user">
     <% if @user.signup_reason.present? %>
     <article id="signup_reason">
