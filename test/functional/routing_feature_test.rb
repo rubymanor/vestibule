@@ -5,7 +5,7 @@ class RoutingFeatureTest < ActionController::TestCase
     Vestibule::Application.config.features.test_feature = true
     with_routing do |set|
       set.draw do
-        if_feature :test_feature do
+        feature :test_feature do
           resources :users
         end
       end
@@ -17,7 +17,7 @@ class RoutingFeatureTest < ActionController::TestCase
     Vestibule::Application.config.features.test_feature = false
     with_routing do |set|
       set.draw do
-        if_feature :test_feature do
+        feature :test_feature do
           resources :users
         end
       end

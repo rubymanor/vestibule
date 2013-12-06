@@ -59,13 +59,13 @@ class ModeHelperTest < ActionView::TestCase
       should "render its block for a mode operation which is disabled for everyone" do
         Vestibule.mode_of_operation = :cfp
 
-        assert_equal "a", anyone_cannot(:see, :agenda) { "a" }
+        assert_equal "a", no_one_can(:see, :agenda) { "a" }
       end
 
       should "not render its block for a mode operation which is not disabled for everyone" do
         Vestibule.mode_of_operation = :agenda
 
-        assert_equal "", anyone_cannot(:see, :agenda) { "a" }
+        assert_equal "", no_one_can(:see, :agenda) { "a" }
       end
     end
   end
@@ -117,13 +117,13 @@ class ModeHelperTest < ActionView::TestCase
       should "render its block for a mode operation which is disabled for everyone" do
         Vestibule.mode_of_operation = :cfp
 
-        assert_equal "a", anyone_cannot(:see, :agenda) { "a" }
+        assert_equal "a", no_one_can(:see, :agenda) { "a" }
       end
 
       should "not render its block for a mode operation which is not disabled for everyone" do
         Vestibule.mode_of_operation = :agenda
 
-        assert_equal "", anyone_cannot(:see, :agenda) { "a" }
+        assert_equal "", no_one_can(:see, :agenda) { "a" }
       end
     end
   end

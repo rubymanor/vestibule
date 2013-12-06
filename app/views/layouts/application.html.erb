@@ -24,7 +24,7 @@
           <ul class="nav nav-pills pull-right">
             <li<%= active_nav_class(about_path, anonymous_proposals_path, the_vestibule_process_path) %>><%= link_to "About", about_path %></li>
             <li<%= active_nav_class(proposals_path) %>><%= link_to t("vestibule.proposals.title"), proposals_path %></li>
-            <%= if_feature :motivation do %>
+            <%= feature :motivation do %>
             <li<%= active_nav_class(motivation_path, complete_motivation_path) %>><%= link_to t("vestibule.user.motivation.title"), motivation_path %></li>
             <% end %>
             <%= anyone_can(:see, :agenda) do %><li<%= active_nav_class(selections_path) %>><%= link_to t("vestibule.selections.agenda.nav_title"), selections_path %></li><% end %>
@@ -56,7 +56,7 @@
         <section id="notices">
           <%= render "shared/notices" %>
 
-          <%= if_feature :motivation do %>
+          <%= feature :motivation do %>
           <% if remind_account_for_signup_reason -%>
           <div class="alert">
             <%=t("vestibule.user.motivation.missing.your", :link => link_to(t("vestibule.user.motivation.missing.link"), edit_user_path(current_user))).html_safe %>

@@ -19,7 +19,7 @@ module ModeHelper
     capture(&block)
   end
 
-  def anyone_cannot(action, object, &block)
+  def no_one_can(action, object, &block)
     return "" if can?(action, object)
     capture(&block)
   end
