@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def remind_account_for_signup_reason
-    current_user && !current_user.signup_reason.present? && !request.path[/user/]
+    current_user.known? && !current_user.signup_reason.present? && !request.path[/user/]
   end
 
   def avatar_url(user, bigger=false)

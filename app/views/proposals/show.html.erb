@@ -19,7 +19,7 @@
   <div class="span5 offset1">
     <div id="suggestions">
       <h2><%=t "vestibule.proposal.suggestions.title" %></h2>
-      <% if user_signed_in? && can?(:make, :suggestion) %>
+      <%= user_can(:make, :suggestion) do %>
         <% if current_user == @proposal.proposer %>
           <p><%=t "vestibule.proposal.suggestions.make.your" %></p>
         <% else %>
