@@ -14,7 +14,7 @@ class RoutingFeatureTest < ActionController::TestCase
   end
 
   should "not set a route for a switched-off feature" do
-    Vestibule::Application.config.features.test_feature = false
+    Vestibule.mode_of_operation = :cfp
     with_routing do |set|
       set.draw do
         anyone_can :see, :agenda do
