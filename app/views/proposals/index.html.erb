@@ -1,6 +1,6 @@
 <section>
   <%= page_title t("vestibule.proposals.title") %>
-  <% if user_signed_in? && can?(:make, :proposal) %>
+  <%= user_can(:make, :proposal) do %>
     <div class="action">
       <%= link_to t("vestibule.proposals.propose.one"), new_proposal_path, class: "btn btn-primary btn-large" %>
     </div>
